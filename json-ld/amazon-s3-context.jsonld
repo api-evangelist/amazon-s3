@@ -1,0 +1,297 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "s3": "https://docs.aws.amazon.com/AmazonS3/latest/API/",
+    "aws": "https://aws.amazon.com/",
+    "iam": "https://docs.aws.amazon.com/IAM/latest/UserGuide/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+
+    "Bucket": {
+      "@id": "s3:API_Types_Amazon_Simple_Storage_Service.html#Bucket",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "CreationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "Region": {
+          "@id": "s3:BucketRegion",
+          "@type": "xsd:string"
+        },
+        "ARN": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "Owner": {
+          "@id": "schema:owner",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "S3Object": {
+      "@id": "s3:API_Types_Amazon_Simple_Storage_Service.html#Object",
+      "@context": {
+        "Key": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Size": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:long"
+        },
+        "ETag": {
+          "@id": "s3:ETag",
+          "@type": "xsd:string"
+        },
+        "LastModified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "ContentType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "ContentLength": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:long"
+        },
+        "StorageClass": {
+          "@id": "s3:StorageClass",
+          "@type": "xsd:string"
+        },
+        "VersionId": {
+          "@id": "schema:version",
+          "@type": "xsd:string"
+        },
+        "BucketName": {
+          "@id": "s3:BucketName",
+          "@type": "xsd:string"
+        },
+        "Owner": {
+          "@id": "schema:owner",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Owner": {
+      "@id": "s3:API_Types_Amazon_Simple_Storage_Service.html#Owner",
+      "@context": {
+        "DisplayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "ID": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AccessPoint": {
+      "@id": "s3:API_Types_AWS_S3_Control.html#AccessPoint",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Bucket": {
+          "@id": "s3:BucketName",
+          "@type": "xsd:string"
+        },
+        "NetworkOrigin": {
+          "@id": "s3:NetworkOrigin",
+          "@type": "xsd:string"
+        },
+        "AccessPointArn": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "Alias": {
+          "@id": "schema:alternateName",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "BatchJob": {
+      "@id": "s3:API_Types_AWS_S3_Control.html#JobDescriptor",
+      "@context": {
+        "JobId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "Description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "Status": {
+          "@id": "s3:JobStatus",
+          "@type": "xsd:string"
+        },
+        "Priority": {
+          "@id": "s3:JobPriority",
+          "@type": "xsd:integer"
+        },
+        "CreationTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "TerminationDate": {
+          "@id": "s3:TerminationDate",
+          "@type": "xsd:dateTime"
+        },
+        "RoleArn": {
+          "@id": "iam:RoleArn",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "TableBucket": {
+      "@id": "s3:API_Operations_Amazon_S3_Tables.html#TableBucket",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "ARN": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "CreatedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "OwnerAccountId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Table": {
+      "@id": "s3:API_Operations_Amazon_S3_Tables.html#Table",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "TableARN": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "Namespace": {
+          "@id": "s3:Namespace",
+          "@type": "xsd:string"
+        },
+        "Format": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "CreatedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "ModifiedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "MetadataLocation": {
+          "@id": "s3:MetadataLocation",
+          "@type": "@id"
+        },
+        "WarehouseLocation": {
+          "@id": "s3:WarehouseLocation",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Tag": {
+      "@id": "s3:Tag",
+      "@context": {
+        "Key": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Value": {
+          "@id": "schema:value",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Grant": {
+      "@id": "s3:Grant",
+      "@context": {
+        "Grantee": {
+          "@id": "s3:Grantee",
+          "@type": "@id"
+        },
+        "Permission": {
+          "@id": "s3:Permission",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "StorageLensConfiguration": {
+      "@id": "s3:API_Types_AWS_S3_Control.html#StorageLensConfiguration",
+      "@context": {
+        "Id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "StorageLensArn": {
+          "@id": "aws:arn",
+          "@type": "@id"
+        },
+        "IsEnabled": {
+          "@id": "s3:IsEnabled",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "MultiRegionAccessPoint": {
+      "@id": "s3:API_Types_AWS_S3_Control.html#MultiRegionAccessPoint",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Alias": {
+          "@id": "schema:alternateName",
+          "@type": "xsd:string"
+        },
+        "Status": {
+          "@id": "s3:Status",
+          "@type": "xsd:string"
+        },
+        "CreatedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+    "url": "schema:url",
+    "dateCreated": "dcterms:created",
+    "dateModified": "dcterms:modified",
+    "contentType": "schema:encodingFormat",
+    "contentSize": "schema:contentSize",
+    "owner": "schema:owner",
+    "version": "schema:version"
+  }
+}

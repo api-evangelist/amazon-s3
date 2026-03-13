@@ -1,0 +1,496 @@
+{
+  "$id": "https://schema.api.io/amazon-s3/amazon-s3-bucket-schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amazon S3 Bucket",
+  "description": "Schema representing an Amazon S3 bucket resource. A bucket is a container for objects stored in Amazon S3. Every object is contained in a bucket. Buckets serve as the top-level namespace for S3 and provide mechanisms for controlling access, aggregating usage, and reporting.",
+  "type": "object",
+  "required": [
+    "Name"
+  ],
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the bucket. Bucket names must be between 3 (min) and 63 (max) characters long, can consist only of lowercase letters, numbers, hyphens (-), and periods (.), and must begin and end with a letter or number.",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9][a-z0-9.\\-]{1,61}[a-z0-9]$"
+    },
+    "CreationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the bucket was created, in ISO 8601 format."
+    },
+    "Region": {
+      "type": "string",
+      "description": "The AWS Region where the bucket is located.",
+      "examples": [
+        "us-east-1",
+        "eu-west-1",
+        "ap-northeast-1"
+      ]
+    },
+    "Owner": {
+      "$ref": "#/$defs/Owner"
+    },
+    "ARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the bucket.",
+      "pattern": "^arn:aws:s3:::[a-z0-9][a-z0-9.\\-]{1,61}[a-z0-9]$",
+      "examples": [
+        "arn:aws:s3:::my-bucket"
+      ]
+    },
+    "VersioningConfiguration": {
+      "$ref": "#/$defs/VersioningConfiguration"
+    },
+    "Encryption": {
+      "$ref": "#/$defs/ServerSideEncryptionConfiguration"
+    },
+    "PublicAccessBlockConfiguration": {
+      "$ref": "#/$defs/PublicAccessBlockConfiguration"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A set of tags associated with the bucket.",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      },
+      "maxItems": 50
+    },
+    "LoggingConfiguration": {
+      "type": "object",
+      "description": "Server access logging configuration for the bucket.",
+      "properties": {
+        "TargetBucket": {
+          "type": "string",
+          "description": "Specifies the bucket where server access logs are stored."
+        },
+        "TargetPrefix": {
+          "type": "string",
+          "description": "A prefix for all log object keys."
+        },
+        "TargetGrants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Grantee": {
+                "type": "object",
+                "properties": {
+                  "Type": {
+                    "type": "string",
+                    "enum": ["CanonicalUser", "AmazonCustomerByEmail", "Group"]
+                  },
+                  "ID": {
+                    "type": "string"
+                  },
+                  "URI": {
+                    "type": "string"
+                  }
+                }
+              },
+              "Permission": {
+                "type": "string",
+                "enum": ["FULL_CONTROL", "READ", "WRITE"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "LifecycleConfiguration": {
+      "type": "object",
+      "description": "Lifecycle configuration for objects in the bucket.",
+      "properties": {
+        "Rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LifecycleRule"
+          },
+          "maxItems": 1000
+        }
+      }
+    },
+    "CORSConfiguration": {
+      "type": "object",
+      "description": "Cross-Origin Resource Sharing (CORS) configuration for the bucket.",
+      "properties": {
+        "CORSRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CORSRule"
+          },
+          "maxItems": 100
+        }
+      }
+    },
+    "WebsiteConfiguration": {
+      "type": "object",
+      "description": "Website hosting configuration for the bucket.",
+      "properties": {
+        "IndexDocument": {
+          "type": "object",
+          "properties": {
+            "Suffix": {
+              "type": "string",
+              "description": "A suffix that is appended to a request for a directory."
+            }
+          }
+        },
+        "ErrorDocument": {
+          "type": "object",
+          "properties": {
+            "Key": {
+              "type": "string",
+              "description": "The object key name to use when a 4XX class error occurs."
+            }
+          }
+        },
+        "RedirectAllRequestsTo": {
+          "type": "object",
+          "properties": {
+            "HostName": {
+              "type": "string"
+            },
+            "Protocol": {
+              "type": "string",
+              "enum": ["http", "https"]
+            }
+          }
+        }
+      }
+    },
+    "ObjectLockConfiguration": {
+      "type": "object",
+      "description": "Object Lock configuration for the bucket.",
+      "properties": {
+        "ObjectLockEnabled": {
+          "type": "string",
+          "enum": ["Enabled"],
+          "description": "Indicates whether this bucket has an Object Lock configuration enabled."
+        },
+        "Rule": {
+          "type": "object",
+          "properties": {
+            "DefaultRetention": {
+              "type": "object",
+              "properties": {
+                "Mode": {
+                  "type": "string",
+                  "enum": ["GOVERNANCE", "COMPLIANCE"],
+                  "description": "The default Object Lock retention mode."
+                },
+                "Days": {
+                  "type": "integer",
+                  "description": "The number of days for the default retention period."
+                },
+                "Years": {
+                  "type": "integer",
+                  "description": "The number of years for the default retention period."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AccelerateConfiguration": {
+      "type": "object",
+      "description": "Transfer Acceleration configuration for the bucket.",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "enum": ["Enabled", "Suspended"],
+          "description": "The transfer acceleration state of the bucket."
+        }
+      }
+    },
+    "IntelligentTieringConfiguration": {
+      "type": "array",
+      "description": "S3 Intelligent-Tiering configurations for the bucket.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Status": {
+            "type": "string",
+            "enum": ["Enabled", "Disabled"]
+          },
+          "Filter": {
+            "type": "object",
+            "properties": {
+              "Prefix": {
+                "type": "string"
+              },
+              "Tag": {
+                "$ref": "#/$defs/Tag"
+              }
+            }
+          },
+          "Tierings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "AccessTier": {
+                  "type": "string",
+                  "enum": ["ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"]
+                },
+                "Days": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Owner": {
+      "type": "object",
+      "description": "Container for the bucket owner's display name and ID.",
+      "properties": {
+        "DisplayName": {
+          "type": "string",
+          "description": "Container for the display name of the owner."
+        },
+        "ID": {
+          "type": "string",
+          "description": "Container for the canonical user ID of the owner."
+        }
+      }
+    },
+    "VersioningConfiguration": {
+      "type": "object",
+      "description": "Versioning state configuration for the bucket.",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "enum": ["Enabled", "Suspended"],
+          "description": "The versioning state of the bucket."
+        },
+        "MFADelete": {
+          "type": "string",
+          "enum": ["Enabled", "Disabled"],
+          "description": "Specifies whether MFA delete is enabled in the bucket versioning configuration."
+        }
+      }
+    },
+    "ServerSideEncryptionConfiguration": {
+      "type": "object",
+      "description": "Default encryption configuration for the bucket.",
+      "properties": {
+        "Rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ApplyServerSideEncryptionByDefault": {
+                "type": "object",
+                "properties": {
+                  "SSEAlgorithm": {
+                    "type": "string",
+                    "enum": ["AES256", "aws:kms", "aws:kms:dsse"],
+                    "description": "Server-side encryption algorithm to use."
+                  },
+                  "KMSMasterKeyID": {
+                    "type": "string",
+                    "description": "AWS KMS key ID to use for default encryption."
+                  }
+                }
+              },
+              "BucketKeyEnabled": {
+                "type": "boolean",
+                "description": "Whether S3 Bucket Key is enabled for SSE-KMS."
+              }
+            }
+          }
+        }
+      }
+    },
+    "PublicAccessBlockConfiguration": {
+      "type": "object",
+      "description": "Public access block configuration for the bucket.",
+      "properties": {
+        "BlockPublicAcls": {
+          "type": "boolean",
+          "description": "Specifies whether Amazon S3 should block public ACLs for this bucket."
+        },
+        "IgnorePublicAcls": {
+          "type": "boolean",
+          "description": "Specifies whether Amazon S3 should ignore public ACLs for this bucket."
+        },
+        "BlockPublicPolicy": {
+          "type": "boolean",
+          "description": "Specifies whether Amazon S3 should block public bucket policies for this bucket."
+        },
+        "RestrictPublicBuckets": {
+          "type": "boolean",
+          "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair tag associated with the resource.",
+      "required": ["Key", "Value"],
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "maxLength": 256
+        }
+      }
+    },
+    "LifecycleRule": {
+      "type": "object",
+      "description": "A lifecycle rule for objects in the bucket.",
+      "required": ["Status"],
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "Unique identifier for the rule.",
+          "maxLength": 255
+        },
+        "Status": {
+          "type": "string",
+          "enum": ["Enabled", "Disabled"],
+          "description": "Whether the rule is enabled or disabled."
+        },
+        "Filter": {
+          "type": "object",
+          "properties": {
+            "Prefix": {
+              "type": "string"
+            },
+            "Tag": {
+              "$ref": "#/$defs/Tag"
+            },
+            "ObjectSizeGreaterThan": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "ObjectSizeLessThan": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "Expiration": {
+          "type": "object",
+          "properties": {
+            "Date": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "Days": {
+              "type": "integer"
+            },
+            "ExpiredObjectDeleteMarker": {
+              "type": "boolean"
+            }
+          }
+        },
+        "Transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Date": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Days": {
+                "type": "integer"
+              },
+              "StorageClass": {
+                "type": "string",
+                "enum": [
+                  "GLACIER",
+                  "STANDARD_IA",
+                  "ONEZONE_IA",
+                  "INTELLIGENT_TIERING",
+                  "DEEP_ARCHIVE",
+                  "GLACIER_IR"
+                ]
+              }
+            }
+          }
+        },
+        "NoncurrentVersionExpiration": {
+          "type": "object",
+          "properties": {
+            "NoncurrentDays": {
+              "type": "integer"
+            },
+            "NewerNoncurrentVersions": {
+              "type": "integer"
+            }
+          }
+        },
+        "AbortIncompleteMultipartUpload": {
+          "type": "object",
+          "properties": {
+            "DaysAfterInitiation": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "CORSRule": {
+      "type": "object",
+      "description": "A rule that identifies a cross-origin request allowed by the bucket.",
+      "required": ["AllowedMethods", "AllowedOrigins"],
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "Unique identifier for the rule.",
+          "maxLength": 255
+        },
+        "AllowedHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Headers that are specified in the Access-Control-Request-Headers header."
+        },
+        "AllowedMethods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["GET", "PUT", "HEAD", "POST", "DELETE"]
+          },
+          "description": "An HTTP method that you allow the origin to execute."
+        },
+        "AllowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "One or more origins you want customers to be able to access the bucket from."
+        },
+        "ExposeHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "One or more headers in the response that you want customers to be able to access."
+        },
+        "MaxAgeSeconds": {
+          "type": "integer",
+          "description": "The time in seconds that your browser is to cache the preflight response."
+        }
+      }
+    }
+  }
+}

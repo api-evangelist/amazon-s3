@@ -1,0 +1,1418 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control API
+  description: >-
+    Amazon S3 Control provides API operations for managing S3 account-level
+    settings, access points, Batch Operations jobs, S3 Access Grants,
+    Multi-Region Access Points, and Storage Lens configurations. The S3 Control
+    API uses a separate endpoint from the standard S3 API and requires an
+    account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+servers:
+  - url: https://s3-control.{region}.amazonaws.com
+    description: Amazon S3 Control regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-north-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+security:
+  - sigv4: []
+tags:
+  - name: Access Points
+    description: Operations for creating and managing S3 access points
+  - name: Batch Operations
+    description: Operations for creating and managing S3 Batch Operations jobs
+  - name: Storage Lens
+    description: Operations for S3 Storage Lens configurations
+  - name: Access Grants
+    description: Operations for S3 Access Grants management
+  - name: Multi-Region Access Points
+    description: Operations for Multi-Region Access Points
+  - name: Public Access Block
+    description: Operations for managing public access block settings
+  - name: Bucket Policy
+    description: Operations for managing S3 on Outposts bucket policies
+paths:
+  /v20180820/accesspoint/{name}:
+    get:
+      operationId: GetAccessPoint
+      summary: Get Access Point
+      description: >-
+        Returns configuration information about the specified access point. All
+        Amazon S3 on Outposts REST API requests for this action require an
+        additional parameter of x-amz-outpost-id to be passed with the request.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the access point, or the ARN of the access point for
+            S3 on Outposts.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned access point configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GetAccessPointResult'
+        '404':
+          description: The specified access point does not exist.
+    put:
+      operationId: CreateAccessPoint
+      summary: Create Access Point
+      description: >-
+        Creates an access point and associates it with the specified bucket. You
+        can use access points to manage access to shared data sets. Access points
+        simplify managing data access at scale for applications using shared data
+        sets on S3.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: The name you want to assign to this access point.
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 50
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateAccessPointRequest'
+      responses:
+        '200':
+          description: Access point created successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  AccessPointArn:
+                    type: string
+                  Alias:
+                    type: string
+        '409':
+          description: An access point with this name already exists.
+    delete:
+      operationId: DeleteAccessPoint
+      summary: Delete Access Point
+      description: >-
+        Deletes the specified access point. All Amazon S3 on Outposts REST API
+        requests for this action require an additional parameter of
+        x-amz-outpost-id.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point you want to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Access point deleted successfully.
+        '404':
+          description: The specified access point does not exist.
+  /v20180820/accesspoint:
+    get:
+      operationId: ListAccessPoints
+      summary: List Access Points
+      description: >-
+        Returns a list of the access points that are associated with the
+        specified bucket. You can retrieve up to 1000 access points per call.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: bucket
+          in: query
+          description: >-
+            The name of the bucket whose associated access points you want to
+            list.
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: >-
+            A continuation token. If a previous call produced a truncated list,
+            pass this value to get the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: The maximum number of access points to return (1-1000).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Successfully returned list of access points.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListAccessPointsResult'
+  /v20180820/accesspoint/{name}/policy:
+    get:
+      operationId: GetAccessPointPolicy
+      summary: Get Access Point Policy
+      description: >-
+        Returns the access point policy associated with the specified access
+        point.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned access point policy.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  Policy:
+                    type: string
+        '404':
+          description: The access point policy does not exist.
+    put:
+      operationId: PutAccessPointPolicy
+      summary: Put Access Point Policy
+      description: >-
+        Associates an access policy with the specified access point. Each access
+        point can have only one policy, so a request made to this API replaces
+        any existing policy associated with the specified access point.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  type: string
+                  description: The policy that you want to apply to the specified access point.
+      responses:
+        '200':
+          description: Access point policy updated successfully.
+    delete:
+      operationId: DeleteAccessPointPolicy
+      summary: Delete Access Point Policy
+      description: >-
+        Deletes the access point policy for the specified access point.
+      tags:
+        - Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: name
+          in: path
+          required: true
+          description: The name of the access point.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Access point policy deleted successfully.
+  /v20180820/jobs:
+    get:
+      operationId: ListJobs
+      summary: List Batch Operations Jobs
+      description: >-
+        Lists current S3 Batch Operations jobs as well as the jobs that have
+        ended within the last 30 days for the AWS account making the request.
+      tags:
+        - Batch Operations
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: jobStatuses
+          in: query
+          description: The List Jobs request returns jobs that match the statuses listed.
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - Active
+                - Cancelled
+                - Cancelling
+                - Complete
+                - Completing
+                - Failed
+                - Failing
+                - New
+                - Paused
+                - Pausing
+                - Preparing
+                - Ready
+                - Suspended
+        - name: nextToken
+          in: query
+          description: A pagination token to request the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: The maximum number of jobs to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Successfully returned list of jobs.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListJobsResult'
+    post:
+      operationId: CreateJob
+      summary: Create Batch Operations Job
+      description: >-
+        Creates an S3 Batch Operations job to perform the specified operation on
+        every object in the specified manifest. You can create a job that
+        performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier
+        restore, replace tagging, delete objects, or replicate objects.
+      tags:
+        - Batch Operations
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+      responses:
+        '200':
+          description: Job created successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                    description: The ID for this job.
+        '400':
+          description: Bad request. Invalid job configuration.
+  /v20180820/jobs/{id}:
+    get:
+      operationId: DescribeJob
+      summary: Describe Batch Operations Job
+      description: >-
+        Retrieves the configuration parameters and status for a Batch Operations
+        job. For more information, see S3 Batch Operations in the Amazon S3 User
+        Guide.
+      tags:
+        - Batch Operations
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: id
+          in: path
+          required: true
+          description: The ID for the job whose information you want to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned job details.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobDescriptor'
+        '404':
+          description: The specified job does not exist.
+  /v20180820/jobs/{id}/priority:
+    post:
+      operationId: UpdateJobPriority
+      summary: Update Job Priority
+      description: >-
+        Updates an existing S3 Batch Operations job's priority. You can use this
+        operation to increase or decrease the priority of a job. Higher number
+        priorities are processed first.
+      tags:
+        - Batch Operations
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: id
+          in: path
+          required: true
+          description: The ID for the job whose priority you want to update.
+          schema:
+            type: string
+        - name: priority
+          in: query
+          required: true
+          description: The priority you want to assign to this job.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2147483647
+      responses:
+        '200':
+          description: Job priority updated successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                  Priority:
+                    type: integer
+  /v20180820/jobs/{id}/status:
+    post:
+      operationId: UpdateJobStatus
+      summary: Update Job Status
+      description: >-
+        Updates the status for the specified job. Use this action to confirm that
+        you want to run a job or to cancel an existing job.
+      tags:
+        - Batch Operations
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the job whose status you want to update.
+          schema:
+            type: string
+        - name: requestedJobStatus
+          in: query
+          required: true
+          description: The status that you want to move the specified job to.
+          schema:
+            type: string
+            enum:
+              - Cancelled
+              - Ready
+        - name: statusUpdateReason
+          in: query
+          description: A description of the reason why you want to change the job status.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status updated successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                  Status:
+                    type: string
+                  StatusUpdateReason:
+                    type: string
+  /v20180820/configuration/publicAccessBlock:
+    get:
+      operationId: GetPublicAccessBlock
+      summary: Get Public Access Block
+      description: >-
+        Retrieves the PublicAccessBlock configuration for an AWS account. For
+        using this operation with S3 on Outposts, you must provide the Outpost
+        bucket ARN.
+      tags:
+        - Public Access Block
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Successfully returned public access block configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        '404':
+          description: The public access block configuration does not exist.
+    put:
+      operationId: PutPublicAccessBlock
+      summary: Put Public Access Block
+      description: >-
+        Creates or modifies the PublicAccessBlock configuration for an AWS
+        account. To use this operation, you must have the
+        s3:PutAccountPublicAccessBlock permission.
+      tags:
+        - Public Access Block
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+      responses:
+        '200':
+          description: Public access block configuration updated successfully.
+    delete:
+      operationId: DeletePublicAccessBlock
+      summary: Delete Public Access Block
+      description: >-
+        Removes the PublicAccessBlock configuration for an AWS account. For this
+        operation, you must have the s3:PutAccountPublicAccessBlock permission.
+      tags:
+        - Public Access Block
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Public access block configuration deleted successfully.
+  /v20180820/storagelens:
+    get:
+      operationId: ListStorageLensConfigurations
+      summary: List Storage Lens Configurations
+      description: >-
+        Gets a list of Amazon S3 Storage Lens configurations. To use this
+        action, you must have permission to perform the
+        s3:ListStorageLensConfigurations action.
+      tags:
+        - Storage Lens
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: nextToken
+          in: query
+          description: A pagination token for the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned list of Storage Lens configurations.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListStorageLensConfigurationsResult'
+  /v20180820/storagelens/{storagelensid}:
+    get:
+      operationId: GetStorageLensConfiguration
+      summary: Get Storage Lens Configuration
+      description: >-
+        Gets the Amazon S3 Storage Lens configuration. To use this action, you
+        must have permission to perform the s3:GetStorageLensConfiguration
+        action.
+      tags:
+        - Storage Lens
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: storagelensid
+          in: path
+          required: true
+          description: The ID of the Amazon S3 Storage Lens configuration.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned Storage Lens configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StorageLensConfiguration'
+        '404':
+          description: The specified Storage Lens configuration does not exist.
+    put:
+      operationId: PutStorageLensConfiguration
+      summary: Put Storage Lens Configuration
+      description: >-
+        Puts an Amazon S3 Storage Lens configuration. To use this action, you
+        must have permission to perform the s3:PutStorageLensConfiguration
+        action.
+      tags:
+        - Storage Lens
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: storagelensid
+          in: path
+          required: true
+          description: The ID of the Amazon S3 Storage Lens configuration.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StorageLensConfiguration'
+      responses:
+        '200':
+          description: Storage Lens configuration updated successfully.
+    delete:
+      operationId: DeleteStorageLensConfiguration
+      summary: Delete Storage Lens Configuration
+      description: >-
+        Deletes the Amazon S3 Storage Lens configuration. To use this action,
+        you must have permission to perform the
+        s3:DeleteStorageLensConfiguration action.
+      tags:
+        - Storage Lens
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: storagelensid
+          in: path
+          required: true
+          description: The ID of the Storage Lens configuration to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Storage Lens configuration deleted successfully.
+  /v20180820/accessgrantsinstance:
+    get:
+      operationId: GetAccessGrantsInstance
+      summary: Get Access Grants Instance
+      description: >-
+        Retrieves the S3 Access Grants instance. You must have the
+        s3:GetAccessGrantsInstance permission to use this operation.
+      tags:
+        - Access Grants
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Successfully returned Access Grants instance.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AccessGrantsInstance'
+        '404':
+          description: The Access Grants instance does not exist.
+    post:
+      operationId: CreateAccessGrantsInstance
+      summary: Create Access Grants Instance
+      description: >-
+        Creates an S3 Access Grants instance, which serves as a logical grouping
+        for access grants. You can create one S3 Access Grants instance per
+        Region per account.
+      tags:
+        - Access Grants
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                IdentityCenterArn:
+                  type: string
+                  description: >-
+                    The ARN of the IAM Identity Center instance to associate with
+                    the S3 Access Grants instance.
+                Tags:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
+      responses:
+        '200':
+          description: Access Grants instance created successfully.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AccessGrantsInstance'
+    delete:
+      operationId: DeleteAccessGrantsInstance
+      summary: Delete Access Grants Instance
+      description: >-
+        Deletes the S3 Access Grants instance. You must first delete all access
+        grants and registered locations before you can delete the S3 Access
+        Grants instance.
+      tags:
+        - Access Grants
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Access Grants instance deleted successfully.
+  /v20180820/async-requests/mrap/create:
+    post:
+      operationId: CreateMultiRegionAccessPoint
+      summary: Create Multi-Region Access Point
+      description: >-
+        Creates a Multi-Region Access Point and associates it with the specified
+        buckets. Multi-Region Access Points provide a single global endpoint
+        that applications can use to request data regardless of the location of
+        the requester. This is an asynchronous request.
+      tags:
+        - Multi-Region Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateMultiRegionAccessPointRequest'
+      responses:
+        '200':
+          description: Request accepted. Multi-Region Access Point creation is asynchronous.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  RequestTokenARN:
+                    type: string
+                    description: >-
+                      The request token associated with the asynchronous request
+                      used to track the status of the create request.
+  /v20180820/mrap/instances:
+    get:
+      operationId: ListMultiRegionAccessPoints
+      summary: List Multi-Region Access Points
+      description: >-
+        Returns a list of the Multi-Region Access Points currently associated
+        with the specified AWS account.
+      tags:
+        - Multi-Region Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: nextToken
+          in: query
+          description: A pagination token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: Number of results to return per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        '200':
+          description: Successfully returned list of Multi-Region Access Points.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListMultiRegionAccessPointsResult'
+  /v20180820/mrap/instances/{mrap_name+}:
+    get:
+      operationId: GetMultiRegionAccessPoint
+      summary: Get Multi-Region Access Point
+      description: >-
+        Returns configuration information about the specified Multi-Region
+        Access Point.
+      tags:
+        - Multi-Region Access Points
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: mrap_name+
+          in: path
+          required: true
+          description: The name of the Multi-Region Access Point.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned Multi-Region Access Point configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MultiRegionAccessPointReport'
+        '404':
+          description: The specified Multi-Region Access Point does not exist.
+components:
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >-
+        AWS Signature Version 4 authentication. The S3 Control API uses the
+        service name s3 for signing.
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: '^\d{12}$'
+  schemas:
+    GetAccessPointResult:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the access point.
+        Bucket:
+          type: string
+          description: The name of the bucket associated with the access point.
+        NetworkOrigin:
+          type: string
+          description: Indicates whether this access point allows access from the public internet.
+          enum:
+            - Internet
+            - VPC
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: The ID of the VPC.
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time when the access point was created.
+        Alias:
+          type: string
+          description: The alias for the access point.
+        AccessPointArn:
+          type: string
+          description: The ARN for the access point.
+        Endpoints:
+          type: object
+          additionalProperties:
+            type: string
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+    CreateAccessPointRequest:
+      type: object
+      xml:
+        name: CreateAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+        - Bucket
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket you want to associate with the access point.
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: >-
+                If specified, the access point will only allow connections from
+                the specified VPC ID.
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+    ListAccessPointsResult:
+      type: object
+      properties:
+        AccessPointList:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              NetworkOrigin:
+                type: string
+                enum:
+                  - Internet
+                  - VPC
+              VpcConfiguration:
+                type: object
+                properties:
+                  VpcId:
+                    type: string
+              Bucket:
+                type: string
+              AccessPointArn:
+                type: string
+              Alias:
+                type: string
+              BucketAccountId:
+                type: string
+        NextToken:
+          type: string
+    PublicAccessBlockConfiguration:
+      type: object
+      description: >-
+        The PublicAccessBlock configuration that you want to apply to this Amazon
+        S3 account.
+      xml:
+        name: PublicAccessBlockConfiguration
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      properties:
+        BlockPublicAcls:
+          type: boolean
+          description: >-
+            Specifies whether Amazon S3 should block public access control lists
+            (ACLs) for buckets in this account.
+        IgnorePublicAcls:
+          type: boolean
+          description: >-
+            Specifies whether Amazon S3 should ignore public ACLs for buckets in
+            this account.
+        BlockPublicPolicy:
+          type: boolean
+          description: >-
+            Specifies whether Amazon S3 should block public bucket policies for
+            buckets in this account.
+        RestrictPublicBuckets:
+          type: boolean
+          description: >-
+            Specifies whether Amazon S3 should restrict public bucket policies
+            for buckets in this account.
+    ListJobsResult:
+      type: object
+      properties:
+        Jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              JobId:
+                type: string
+              Description:
+                type: string
+              Operation:
+                type: string
+                enum:
+                  - LambdaInvoke
+                  - S3PutObjectCopy
+                  - S3PutObjectAcl
+                  - S3PutObjectTagging
+                  - S3DeleteObjectTagging
+                  - S3InitiateRestoreObject
+                  - S3PutObjectLegalHold
+                  - S3PutObjectRetention
+                  - S3ReplicateObject
+              Priority:
+                type: integer
+              Status:
+                type: string
+                enum:
+                  - Active
+                  - Cancelled
+                  - Cancelling
+                  - Complete
+                  - Completing
+                  - Failed
+                  - Failing
+                  - New
+                  - Paused
+                  - Pausing
+                  - Preparing
+                  - Ready
+                  - Suspended
+              CreationTime:
+                type: string
+                format: date-time
+              TerminationDate:
+                type: string
+                format: date-time
+              ProgressSummary:
+                type: object
+                properties:
+                  TotalNumberOfTasks:
+                    type: integer
+                    format: int64
+                  NumberOfTasksSucceeded:
+                    type: integer
+                    format: int64
+                  NumberOfTasksFailed:
+                    type: integer
+                    format: int64
+                  Timers:
+                    type: object
+                    properties:
+                      ElapsedTimeInActiveSeconds:
+                        type: integer
+                        format: int64
+        NextToken:
+          type: string
+    CreateJobRequest:
+      type: object
+      xml:
+        name: CreateJobRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+        - Operation
+        - Report
+        - Priority
+        - RoleArn
+        - Manifest
+      properties:
+        Operation:
+          type: object
+          description: The action that you want the job to perform on each object.
+          properties:
+            LambdaInvoke:
+              type: object
+              properties:
+                FunctionArn:
+                  type: string
+            S3PutObjectCopy:
+              type: object
+              properties:
+                TargetResource:
+                  type: string
+                StorageClass:
+                  type: string
+            S3PutObjectAcl:
+              type: object
+              properties:
+                AccessControlPolicy:
+                  type: object
+            S3PutObjectTagging:
+              type: object
+              properties:
+                TagSet:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
+            S3DeleteObjectTagging:
+              type: object
+            S3InitiateRestoreObject:
+              type: object
+              properties:
+                ExpirationInDays:
+                  type: integer
+                GlacierJobTier:
+                  type: string
+                  enum:
+                    - BULK
+                    - STANDARD
+        Report:
+          type: object
+          description: Configuration parameters for the optional completion report for the job.
+          required:
+            - Enabled
+          properties:
+            Bucket:
+              type: string
+            Format:
+              type: string
+              enum:
+                - Report_CSV_20180820
+            Enabled:
+              type: boolean
+            Prefix:
+              type: string
+            ReportScope:
+              type: string
+              enum:
+                - AllTasks
+                - FailedTasksOnly
+        Manifest:
+          type: object
+          description: Configuration parameters for the manifest.
+          properties:
+            Spec:
+              type: object
+              properties:
+                Format:
+                  type: string
+                  enum:
+                    - S3BatchOperations_CSV_20180820
+                    - S3InventoryReport_CSV_20161130
+                Fields:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - Ignore
+                      - Bucket
+                      - Key
+                      - VersionId
+            Location:
+              type: object
+              properties:
+                ObjectArn:
+                  type: string
+                ObjectVersionId:
+                  type: string
+                ETag:
+                  type: string
+        Priority:
+          type: integer
+          description: The numerical priority for this job.
+        RoleArn:
+          type: string
+          description: The Amazon Resource Name (ARN) for the IAM role.
+        Description:
+          type: string
+          description: A description for this job.
+          maxLength: 256
+        ConfirmationRequired:
+          type: boolean
+          description: >-
+            Indicates whether confirmation is required before Amazon S3 runs the
+            job.
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3Tag'
+    JobDescriptor:
+      type: object
+      properties:
+        JobId:
+          type: string
+        Description:
+          type: string
+        Operation:
+          type: object
+        Manifest:
+          type: object
+        Priority:
+          type: integer
+        RoleArn:
+          type: string
+        Status:
+          type: string
+          enum:
+            - Active
+            - Cancelled
+            - Cancelling
+            - Complete
+            - Completing
+            - Failed
+            - Failing
+            - New
+            - Paused
+            - Pausing
+            - Preparing
+            - Ready
+            - Suspended
+        CreationTime:
+          type: string
+          format: date-time
+        TerminationDate:
+          type: string
+          format: date-time
+        ProgressSummary:
+          type: object
+          properties:
+            TotalNumberOfTasks:
+              type: integer
+              format: int64
+            NumberOfTasksSucceeded:
+              type: integer
+              format: int64
+            NumberOfTasksFailed:
+              type: integer
+              format: int64
+        FailureReasons:
+          type: array
+          items:
+            type: object
+            properties:
+              FailureCode:
+                type: string
+              FailureReason:
+                type: string
+        Report:
+          type: object
+        ConfirmationRequired:
+          type: boolean
+        StatusUpdateReason:
+          type: string
+        SuspendedDate:
+          type: string
+          format: date-time
+        SuspendedCause:
+          type: string
+    S3Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+        Value:
+          type: string
+          maxLength: 256
+    ListStorageLensConfigurationsResult:
+      type: object
+      properties:
+        StorageLensConfigurationList:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              StorageLensArn:
+                type: string
+              HomeRegion:
+                type: string
+              IsEnabled:
+                type: boolean
+        NextToken:
+          type: string
+    StorageLensConfiguration:
+      type: object
+      description: A container for the Amazon S3 Storage Lens configuration.
+      required:
+        - Id
+        - AccountLevel
+        - IsEnabled
+      properties:
+        Id:
+          type: string
+          description: A container for the Storage Lens configuration ID.
+        AccountLevel:
+          type: object
+          description: A container for the account-level settings for S3 Storage Lens.
+          properties:
+            ActivityMetrics:
+              type: object
+              properties:
+                IsEnabled:
+                  type: boolean
+            BucketLevel:
+              type: object
+              properties:
+                ActivityMetrics:
+                  type: object
+                  properties:
+                    IsEnabled:
+                      type: boolean
+                PrefixLevel:
+                  type: object
+                  properties:
+                    StorageMetrics:
+                      type: object
+                      properties:
+                        IsEnabled:
+                          type: boolean
+                        SelectionCriteria:
+                          type: object
+                          properties:
+                            Delimiter:
+                              type: string
+                            MaxDepth:
+                              type: integer
+                            MinStorageBytesPercentage:
+                              type: number
+        Include:
+          type: object
+          properties:
+            Buckets:
+              type: array
+              items:
+                type: string
+            Regions:
+              type: array
+              items:
+                type: string
+        Exclude:
+          type: object
+          properties:
+            Buckets:
+              type: array
+              items:
+                type: string
+            Regions:
+              type: array
+              items:
+                type: string
+        DataExport:
+          type: object
+          properties:
+            S3BucketDestination:
+              type: object
+              properties:
+                Format:
+                  type: string
+                  enum:
+                    - CSV
+                    - Parquet
+                OutputSchemaVersion:
+                  type: string
+                  enum:
+                    - V_1
+                AccountId:
+                  type: string
+                Arn:
+                  type: string
+                Prefix:
+                  type: string
+                Encryption:
+                  type: object
+            CloudWatchMetrics:
+              type: object
+              properties:
+                IsEnabled:
+                  type: boolean
+        IsEnabled:
+          type: boolean
+          description: A container for whether the S3 Storage Lens configuration is enabled.
+        AwsOrg:
+          type: object
+          properties:
+            Arn:
+              type: string
+        StorageLensArn:
+          type: string
+    AccessGrantsInstance:
+      type: object
+      properties:
+        AccessGrantsInstanceId:
+          type: string
+          description: The ID of the S3 Access Grants instance.
+        AccessGrantsInstanceArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the instance was created.
+        IdentityCenterArn:
+          type: string
+          description: >-
+            If you associated your S3 Access Grants instance with an IAM
+            Identity Center instance, this field returns the ARN of the IAM
+            Identity Center instance application.
+    CreateMultiRegionAccessPointRequest:
+      type: object
+      xml:
+        name: CreateMultiRegionAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+        - Details
+        - ClientToken
+      properties:
+        ClientToken:
+          type: string
+          description: An idempotency token used to identify the request.
+        Details:
+          type: object
+          required:
+            - Name
+            - Regions
+          properties:
+            Name:
+              type: string
+              description: The name of the Multi-Region Access Point.
+            PublicAccessBlock:
+              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            Regions:
+              type: array
+              description: >-
+                The buckets in different Regions that are associated with the
+                Multi-Region Access Point.
+              items:
+                type: object
+                required:
+                  - Bucket
+                properties:
+                  Bucket:
+                    type: string
+                  BucketAccountId:
+                    type: string
+    ListMultiRegionAccessPointsResult:
+      type: object
+      properties:
+        AccessPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiRegionAccessPointReport'
+        NextToken:
+          type: string
+    MultiRegionAccessPointReport:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the Multi-Region Access Point.
+        Alias:
+          type: string
+          description: The alias for the Multi-Region Access Point.
+        CreatedAt:
+          type: string
+          format: date-time
+        PublicAccessBlock:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        Status:
+          type: string
+          enum:
+            - READY
+            - INCONSISTENT_ACROSS_REGIONS
+            - CREATING
+            - PARTIALLY_CREATED
+            - PARTIALLY_DELETED
+            - DELETING
+        Regions:
+          type: array
+          items:
+            type: object
+            properties:
+              Bucket:
+                type: string
+              Region:
+                type: string
+              BucketAccountId:
+                type: string
+    Error:
+      type: object
+      properties:
+        Code:
+          type: string
+        Message:
+          type: string
+        Resource:
+          type: string
+        RequestId:
+          type: string

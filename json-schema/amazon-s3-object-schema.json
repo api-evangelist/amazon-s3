@@ -1,0 +1,310 @@
+{
+  "$id": "https://schema.api.io/amazon-s3/amazon-s3-object-schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amazon S3 Object",
+  "description": "Schema representing an Amazon S3 object. An object is the fundamental entity stored in Amazon S3. Objects consist of object data and metadata. The metadata is a set of name-value pairs that describe the object. An object is uniquely identified within a bucket by a key (name) and a version ID.",
+  "type": "object",
+  "required": [
+    "Key"
+  ],
+  "properties": {
+    "Key": {
+      "type": "string",
+      "description": "The name that you assign to an object. The object key is used to retrieve the object. Object keys can be up to 1,024 bytes long and can contain any UTF-8 character.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "BucketName": {
+      "type": "string",
+      "description": "The name of the bucket that contains the object.",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "Size": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Size of the object in bytes. The maximum size of an individual object is 5 TiB.",
+      "minimum": 0,
+      "maximum": 5497558138880
+    },
+    "ETag": {
+      "type": "string",
+      "description": "The entity tag is an opaque identifier assigned by a web server to a specific version of a resource. For objects not uploaded as multipart, the ETag is the MD5 digest of the object. For multipart uploads, the ETag is not the MD5 digest but a unique identifier."
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time at which the object was last modified."
+    },
+    "VersionId": {
+      "type": "string",
+      "description": "Version ID of the object. When versioning is enabled on a bucket, Amazon S3 assigns a version number to each object added to the bucket."
+    },
+    "StorageClass": {
+      "type": "string",
+      "description": "The storage class of the object. Amazon S3 offers a range of storage classes designed for different use cases.",
+      "enum": [
+        "STANDARD",
+        "REDUCED_REDUNDANCY",
+        "GLACIER",
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "DEEP_ARCHIVE",
+        "OUTPOSTS",
+        "GLACIER_IR",
+        "SNOW",
+        "EXPRESS_ONEZONE"
+      ],
+      "default": "STANDARD"
+    },
+    "Owner": {
+      "type": "object",
+      "description": "The owner of the object.",
+      "properties": {
+        "DisplayName": {
+          "type": "string",
+          "description": "Container for the display name of the owner."
+        },
+        "ID": {
+          "type": "string",
+          "description": "Container for the canonical user ID of the owner."
+        }
+      }
+    },
+    "ContentType": {
+      "type": "string",
+      "description": "A standard MIME type describing the format of the object data.",
+      "examples": [
+        "application/octet-stream",
+        "text/html",
+        "image/jpeg",
+        "application/json",
+        "application/pdf"
+      ]
+    },
+    "ContentLength": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Size of the body in bytes."
+    },
+    "ContentEncoding": {
+      "type": "string",
+      "description": "Specifies what content encodings have been applied to the object.",
+      "examples": [
+        "gzip",
+        "compress",
+        "deflate",
+        "identity"
+      ]
+    },
+    "ContentLanguage": {
+      "type": "string",
+      "description": "The language the content is in."
+    },
+    "ContentDisposition": {
+      "type": "string",
+      "description": "Specifies presentational information for the object."
+    },
+    "CacheControl": {
+      "type": "string",
+      "description": "Specifies caching behavior along the request/reply chain."
+    },
+    "Expires": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time at which the object is no longer cacheable."
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "A map of metadata to store with the object in S3. User-defined metadata keys must begin with x-amz-meta-.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ServerSideEncryption": {
+      "type": "string",
+      "description": "The server-side encryption algorithm used when storing this object in Amazon S3.",
+      "enum": [
+        "AES256",
+        "aws:kms",
+        "aws:kms:dsse"
+      ]
+    },
+    "SSEKMSKeyId": {
+      "type": "string",
+      "description": "If present, specifies the ID of the AWS KMS symmetric encryption customer managed key that was used for the object."
+    },
+    "SSECustomerAlgorithm": {
+      "type": "string",
+      "description": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header to confirm the encryption algorithm used."
+    },
+    "BucketKeyEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether the object uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS)."
+    },
+    "ChecksumAlgorithm": {
+      "type": "string",
+      "description": "The algorithm that was used to create a checksum of the object.",
+      "enum": [
+        "CRC32",
+        "CRC32C",
+        "SHA1",
+        "SHA256"
+      ]
+    },
+    "ChecksumCRC32": {
+      "type": "string",
+      "description": "The base64-encoded, 32-bit CRC32 checksum of the object."
+    },
+    "ChecksumCRC32C": {
+      "type": "string",
+      "description": "The base64-encoded, 32-bit CRC32C checksum of the object."
+    },
+    "ChecksumSHA1": {
+      "type": "string",
+      "description": "The base64-encoded, 160-bit SHA-1 digest of the object."
+    },
+    "ChecksumSHA256": {
+      "type": "string",
+      "description": "The base64-encoded, 256-bit SHA-256 digest of the object."
+    },
+    "ObjectLockMode": {
+      "type": "string",
+      "description": "The Object Lock mode currently in place for this object.",
+      "enum": [
+        "GOVERNANCE",
+        "COMPLIANCE"
+      ]
+    },
+    "ObjectLockRetainUntilDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the Object Lock retention period expires."
+    },
+    "ObjectLockLegalHoldStatus": {
+      "type": "string",
+      "description": "Indicates whether the object has a legal hold in place.",
+      "enum": [
+        "ON",
+        "OFF"
+      ]
+    },
+    "ReplicationStatus": {
+      "type": "string",
+      "description": "Amazon S3 can return this if your request involves a bucket that is either a source or destination in a replication rule.",
+      "enum": [
+        "COMPLETE",
+        "PENDING",
+        "FAILED",
+        "REPLICA",
+        "COMPLETED"
+      ]
+    },
+    "IsDeleteMarker": {
+      "type": "boolean",
+      "description": "Specifies whether the object is a delete marker (versioning enabled buckets only)."
+    },
+    "Expiration": {
+      "type": "string",
+      "description": "If the object expiration is configured, the response includes this header with the expiry-date and rule-id key-value pairs."
+    },
+    "Restore": {
+      "type": "string",
+      "description": "Provides information about object restoration action and expiration time of the restored object copy."
+    },
+    "TagCount": {
+      "type": "integer",
+      "description": "The number of tags, if any, on the object.",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tag-set associated with the object. Maximum of 10 tags per object.",
+      "items": {
+        "type": "object",
+        "required": ["Key", "Value"],
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "maxLength": 256
+          }
+        }
+      },
+      "maxItems": 10
+    },
+    "ACL": {
+      "type": "object",
+      "description": "Access control list for the object.",
+      "properties": {
+        "Owner": {
+          "type": "object",
+          "properties": {
+            "DisplayName": {
+              "type": "string"
+            },
+            "ID": {
+              "type": "string"
+            }
+          }
+        },
+        "Grants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Grantee": {
+                "type": "object",
+                "properties": {
+                  "Type": {
+                    "type": "string",
+                    "enum": ["CanonicalUser", "AmazonCustomerByEmail", "Group"]
+                  },
+                  "ID": {
+                    "type": "string"
+                  },
+                  "URI": {
+                    "type": "string"
+                  },
+                  "DisplayName": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string"
+                  }
+                }
+              },
+              "Permission": {
+                "type": "string",
+                "enum": ["FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "PartsCount": {
+      "type": "integer",
+      "description": "The count of parts this object has. This value is only returned if you specify partNumber in your request and the object was uploaded as a multipart upload."
+    },
+    "MissingMeta": {
+      "type": "integer",
+      "description": "This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API."
+    },
+    "WebsiteRedirectLocation": {
+      "type": "string",
+      "description": "If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL."
+    },
+    "AcceptRanges": {
+      "type": "string",
+      "description": "Indicates that a range of bytes was specified.",
+      "examples": ["bytes"]
+    }
+  }
+}
