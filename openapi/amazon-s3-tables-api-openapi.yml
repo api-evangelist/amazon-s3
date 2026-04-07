@@ -54,7 +54,7 @@ paths:
   /buckets:
     get:
       operationId: ListTableBuckets
-      summary: List Table Buckets
+      summary: Amazon S3 List Table Buckets
       description: >-
         Lists table buckets for your account. Returns a list of table buckets
         that you have access to.
@@ -93,7 +93,7 @@ paths:
           description: Too many requests.
     put:
       operationId: CreateTableBucket
-      summary: Create Table Bucket
+      summary: Amazon S3 Create Table Bucket
       description: >-
         Creates a table bucket. A table bucket is a resource that you can use to
         create and store tables. Each table bucket can contain tables in Apache
@@ -124,7 +124,7 @@ paths:
   /buckets/{tableBucketARN}:
     get:
       operationId: GetTableBucket
-      summary: Get Table Bucket
+      summary: Amazon S3 Get Table Bucket
       description: >-
         Gets details about a table bucket. Returns information about the
         specified table bucket including its name, ARN, owner, and creation date.
@@ -143,7 +143,7 @@ paths:
           description: The specified table bucket does not exist.
     delete:
       operationId: DeleteTableBucket
-      summary: Delete Table Bucket
+      summary: Amazon S3 Delete Table Bucket
       description: >-
         Deletes a table bucket. The table bucket must be empty (all tables and
         namespaces must be deleted first) before it can be deleted.
@@ -161,7 +161,7 @@ paths:
   /buckets/{tableBucketARN}/policy:
     get:
       operationId: GetTableBucketPolicy
-      summary: Get Table Bucket Policy
+      summary: Amazon S3 Get Table Bucket Policy
       description: >-
         Gets details about a table bucket policy. Returns the policy document
         associated with the specified table bucket.
@@ -184,7 +184,7 @@ paths:
           description: The table bucket policy does not exist.
     put:
       operationId: PutTableBucketPolicy
-      summary: Put Table Bucket Policy
+      summary: Amazon S3 Put Table Bucket Policy
       description: >-
         Creates or replaces a table bucket policy for a table bucket.
       tags:
@@ -210,7 +210,7 @@ paths:
           description: Invalid policy document.
     delete:
       operationId: DeleteTableBucketPolicy
-      summary: Delete Table Bucket Policy
+      summary: Amazon S3 Delete Table Bucket Policy
       description: >-
         Deletes a table bucket policy for a table bucket.
       tags:
@@ -223,7 +223,7 @@ paths:
   /buckets/{tableBucketARN}/maintenance:
     get:
       operationId: GetTableBucketMaintenanceConfiguration
-      summary: Get Table Bucket Maintenance Configuration
+      summary: Amazon S3 Get Table Bucket Maintenance Configuration
       description: >-
         Gets details about a table bucket maintenance configuration, including
         Iceberg compaction and snapshot management settings.
@@ -242,7 +242,7 @@ paths:
           description: The specified table bucket does not exist.
     put:
       operationId: PutTableBucketMaintenanceConfiguration
-      summary: Put Table Bucket Maintenance Configuration
+      summary: Amazon S3 Put Table Bucket Maintenance Configuration
       description: >-
         Creates or updates a table bucket maintenance configuration for the
         specified table bucket. This includes Iceberg compaction and snapshot
@@ -265,7 +265,7 @@ paths:
   /namespaces/{tableBucketARN}:
     get:
       operationId: ListNamespaces
-      summary: List Namespaces
+      summary: Amazon S3 List Namespaces
       description: >-
         Lists the namespaces within a table bucket. Namespaces organize tables
         within a table bucket.
@@ -301,7 +301,7 @@ paths:
           description: The specified table bucket does not exist.
     put:
       operationId: CreateNamespace
-      summary: Create Namespace
+      summary: Amazon S3 Create Namespace
       description: >-
         Creates a namespace. A namespace is a logical grouping of tables within a
         table bucket.
@@ -344,7 +344,7 @@ paths:
   /namespaces/{tableBucketARN}/{namespace}:
     get:
       operationId: GetNamespace
-      summary: Get Namespace
+      summary: Amazon S3 Get Namespace
       description: >-
         Gets details about a namespace within a table bucket.
       tags:
@@ -363,7 +363,7 @@ paths:
           description: The specified namespace does not exist.
     delete:
       operationId: DeleteNamespace
-      summary: Delete Namespace
+      summary: Amazon S3 Delete Namespace
       description: >-
         Deletes a namespace. The namespace must be empty (all tables must be
         deleted first) before it can be deleted.
@@ -382,7 +382,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}:
     get:
       operationId: ListTables
-      summary: List Tables
+      summary: Amazon S3 List Tables
       description: >-
         Lists the tables in the specified namespace within a table bucket.
       tags:
@@ -418,7 +418,7 @@ paths:
           description: The specified namespace does not exist.
     put:
       operationId: CreateTable
-      summary: Create Table
+      summary: Amazon S3 Create Table
       description: >-
         Creates a new table in the specified namespace within a table bucket. The
         table is created in Apache Iceberg format and data is stored in Apache
@@ -453,7 +453,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}/{name}:
     get:
       operationId: GetTable
-      summary: Get Table
+      summary: Amazon S3 Get Table
       description: >-
         Gets details about a table in the specified namespace within a table
         bucket.
@@ -479,7 +479,7 @@ paths:
           description: The specified table does not exist.
     delete:
       operationId: DeleteTable
-      summary: Delete Table
+      summary: Amazon S3 Delete Table
       description: >-
         Deletes a table from the specified namespace within a table bucket.
       tags:
@@ -505,7 +505,7 @@ paths:
           description: The specified table does not exist.
     post:
       operationId: RenameTable
-      summary: Rename Table
+      summary: Amazon S3 Rename Table
       description: >-
         Renames a table or moves a table to a different namespace within a table
         bucket.
@@ -548,7 +548,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}/{name}/policy:
     get:
       operationId: GetTablePolicy
-      summary: Get Table Policy
+      summary: Amazon S3 Get Table Policy
       description: >-
         Gets the resource policy for a table.
       tags:
@@ -576,7 +576,7 @@ paths:
           description: The table policy does not exist.
     put:
       operationId: PutTablePolicy
-      summary: Put Table Policy
+      summary: Amazon S3 Put Table Policy
       description: >-
         Creates or replaces the resource policy for a table.
       tags:
@@ -607,7 +607,7 @@ paths:
           description: Table policy updated successfully.
     delete:
       operationId: DeleteTablePolicy
-      summary: Delete Table Policy
+      summary: Amazon S3 Delete Table Policy
       description: >-
         Deletes the resource policy for a table.
       tags:
@@ -627,7 +627,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}/{name}/maintenance:
     get:
       operationId: GetTableMaintenanceConfiguration
-      summary: Get Table Maintenance Configuration
+      summary: Amazon S3 Get Table Maintenance Configuration
       description: >-
         Gets details about the maintenance configuration of a table, including
         Iceberg compaction and snapshot management settings.
@@ -653,7 +653,7 @@ paths:
           description: The specified table does not exist.
     put:
       operationId: PutTableMaintenanceConfiguration
-      summary: Put Table Maintenance Configuration
+      summary: Amazon S3 Put Table Maintenance Configuration
       description: >-
         Creates or updates the maintenance configuration for the specified table.
       tags:
@@ -679,7 +679,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}/{name}/maintenance-job-status:
     get:
       operationId: GetTableMaintenanceJobStatus
-      summary: Get Table Maintenance Job Status
+      summary: Amazon S3 Get Table Maintenance Job Status
       description: >-
         Gets the status of a maintenance job for a table, including the last
         run timestamp and status.
@@ -706,7 +706,7 @@ paths:
   /tables/{tableBucketARN}/{namespace}/{name}/metadata-location:
     get:
       operationId: GetTableMetadataLocation
-      summary: Get Table Metadata Location
+      summary: Amazon S3 Get Table Metadata Location
       description: >-
         Gets the location of the table metadata in S3.
       tags:
@@ -738,7 +738,7 @@ paths:
                     description: The S3 URI of the warehouse location.
     put:
       operationId: UpdateTableMetadataLocation
-      summary: Update Table Metadata Location
+      summary: Amazon S3 Update Table Metadata Location
       description: >-
         Updates the metadata location for a table. Used to point the table to a
         new Iceberg metadata file after a metadata update.

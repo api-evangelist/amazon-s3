@@ -65,7 +65,7 @@ paths:
   /v20180820/accesspoint/{name}:
     get:
       operationId: GetAccessPoint
-      summary: Get Access Point
+      summary: Amazon S3 Get Access Point
       description: >-
         Returns configuration information about the specified access point. All
         Amazon S3 on Outposts REST API requests for this action require an
@@ -93,7 +93,7 @@ paths:
           description: The specified access point does not exist.
     put:
       operationId: CreateAccessPoint
-      summary: Create Access Point
+      summary: Amazon S3 Create Access Point
       description: >-
         Creates an access point and associates it with the specified bucket. You
         can use access points to manage access to shared data sets. Access points
@@ -133,7 +133,7 @@ paths:
           description: An access point with this name already exists.
     delete:
       operationId: DeleteAccessPoint
-      summary: Delete Access Point
+      summary: Amazon S3 Delete Access Point
       description: >-
         Deletes the specified access point. All Amazon S3 on Outposts REST API
         requests for this action require an additional parameter of
@@ -156,7 +156,7 @@ paths:
   /v20180820/accesspoint:
     get:
       operationId: ListAccessPoints
-      summary: List Access Points
+      summary: Amazon S3 List Access Points
       description: >-
         Returns a list of the access points that are associated with the
         specified bucket. You can retrieve up to 1000 access points per call.
@@ -195,7 +195,7 @@ paths:
   /v20180820/accesspoint/{name}/policy:
     get:
       operationId: GetAccessPointPolicy
-      summary: Get Access Point Policy
+      summary: Amazon S3 Get Access Point Policy
       description: >-
         Returns the access point policy associated with the specified access
         point.
@@ -223,7 +223,7 @@ paths:
           description: The access point policy does not exist.
     put:
       operationId: PutAccessPointPolicy
-      summary: Put Access Point Policy
+      summary: Amazon S3 Put Access Point Policy
       description: >-
         Associates an access policy with the specified access point. Each access
         point can have only one policy, so a request made to this API replaces
@@ -255,7 +255,7 @@ paths:
           description: Access point policy updated successfully.
     delete:
       operationId: DeleteAccessPointPolicy
-      summary: Delete Access Point Policy
+      summary: Amazon S3 Delete Access Point Policy
       description: >-
         Deletes the access point policy for the specified access point.
       tags:
@@ -274,7 +274,7 @@ paths:
   /v20180820/jobs:
     get:
       operationId: ListJobs
-      summary: List Batch Operations Jobs
+      summary: Amazon S3 List Batch Operations Jobs
       description: >-
         Lists current S3 Batch Operations jobs as well as the jobs that have
         ended within the last 30 days for the AWS account making the request.
@@ -324,7 +324,7 @@ paths:
                 $ref: '#/components/schemas/ListJobsResult'
     post:
       operationId: CreateJob
-      summary: Create Batch Operations Job
+      summary: Amazon S3 Create Batch Operations Job
       description: >-
         Creates an S3 Batch Operations job to perform the specified operation on
         every object in the specified manifest. You can create a job that
@@ -356,7 +356,7 @@ paths:
   /v20180820/jobs/{id}:
     get:
       operationId: DescribeJob
-      summary: Describe Batch Operations Job
+      summary: Amazon S3 Describe Batch Operations Job
       description: >-
         Retrieves the configuration parameters and status for a Batch Operations
         job. For more information, see S3 Batch Operations in the Amazon S3 User
@@ -383,7 +383,7 @@ paths:
   /v20180820/jobs/{id}/priority:
     post:
       operationId: UpdateJobPriority
-      summary: Update Job Priority
+      summary: Amazon S3 Update Job Priority
       description: >-
         Updates an existing S3 Batch Operations job's priority. You can use this
         operation to increase or decrease the priority of a job. Higher number
@@ -421,7 +421,7 @@ paths:
   /v20180820/jobs/{id}/status:
     post:
       operationId: UpdateJobStatus
-      summary: Update Job Status
+      summary: Amazon S3 Update Job Status
       description: >-
         Updates the status for the specified job. Use this action to confirm that
         you want to run a job or to cancel an existing job.
@@ -466,7 +466,7 @@ paths:
   /v20180820/configuration/publicAccessBlock:
     get:
       operationId: GetPublicAccessBlock
-      summary: Get Public Access Block
+      summary: Amazon S3 Get Public Access Block
       description: >-
         Retrieves the PublicAccessBlock configuration for an AWS account. For
         using this operation with S3 on Outposts, you must provide the Outpost
@@ -486,7 +486,7 @@ paths:
           description: The public access block configuration does not exist.
     put:
       operationId: PutPublicAccessBlock
-      summary: Put Public Access Block
+      summary: Amazon S3 Put Public Access Block
       description: >-
         Creates or modifies the PublicAccessBlock configuration for an AWS
         account. To use this operation, you must have the
@@ -506,7 +506,7 @@ paths:
           description: Public access block configuration updated successfully.
     delete:
       operationId: DeletePublicAccessBlock
-      summary: Delete Public Access Block
+      summary: Amazon S3 Delete Public Access Block
       description: >-
         Removes the PublicAccessBlock configuration for an AWS account. For this
         operation, you must have the s3:PutAccountPublicAccessBlock permission.
@@ -520,7 +520,7 @@ paths:
   /v20180820/storagelens:
     get:
       operationId: ListStorageLensConfigurations
-      summary: List Storage Lens Configurations
+      summary: Amazon S3 List Storage Lens Configurations
       description: >-
         Gets a list of Amazon S3 Storage Lens configurations. To use this
         action, you must have permission to perform the
@@ -544,7 +544,7 @@ paths:
   /v20180820/storagelens/{storagelensid}:
     get:
       operationId: GetStorageLensConfiguration
-      summary: Get Storage Lens Configuration
+      summary: Amazon S3 Get Storage Lens Configuration
       description: >-
         Gets the Amazon S3 Storage Lens configuration. To use this action, you
         must have permission to perform the s3:GetStorageLensConfiguration
@@ -570,7 +570,7 @@ paths:
           description: The specified Storage Lens configuration does not exist.
     put:
       operationId: PutStorageLensConfiguration
-      summary: Put Storage Lens Configuration
+      summary: Amazon S3 Put Storage Lens Configuration
       description: >-
         Puts an Amazon S3 Storage Lens configuration. To use this action, you
         must have permission to perform the s3:PutStorageLensConfiguration
@@ -596,7 +596,7 @@ paths:
           description: Storage Lens configuration updated successfully.
     delete:
       operationId: DeleteStorageLensConfiguration
-      summary: Delete Storage Lens Configuration
+      summary: Amazon S3 Delete Storage Lens Configuration
       description: >-
         Deletes the Amazon S3 Storage Lens configuration. To use this action,
         you must have permission to perform the
@@ -617,7 +617,7 @@ paths:
   /v20180820/accessgrantsinstance:
     get:
       operationId: GetAccessGrantsInstance
-      summary: Get Access Grants Instance
+      summary: Amazon S3 Get Access Grants Instance
       description: >-
         Retrieves the S3 Access Grants instance. You must have the
         s3:GetAccessGrantsInstance permission to use this operation.
@@ -636,7 +636,7 @@ paths:
           description: The Access Grants instance does not exist.
     post:
       operationId: CreateAccessGrantsInstance
-      summary: Create Access Grants Instance
+      summary: Amazon S3 Create Access Grants Instance
       description: >-
         Creates an S3 Access Grants instance, which serves as a logical grouping
         for access grants. You can create one S3 Access Grants instance per
@@ -669,7 +669,7 @@ paths:
                 $ref: '#/components/schemas/AccessGrantsInstance'
     delete:
       operationId: DeleteAccessGrantsInstance
-      summary: Delete Access Grants Instance
+      summary: Amazon S3 Delete Access Grants Instance
       description: >-
         Deletes the S3 Access Grants instance. You must first delete all access
         grants and registered locations before you can delete the S3 Access
@@ -684,7 +684,7 @@ paths:
   /v20180820/async-requests/mrap/create:
     post:
       operationId: CreateMultiRegionAccessPoint
-      summary: Create Multi-Region Access Point
+      summary: Amazon S3 Create Multi-Region Access Point
       description: >-
         Creates a Multi-Region Access Point and associates it with the specified
         buckets. Multi-Region Access Points provide a single global endpoint
@@ -716,7 +716,7 @@ paths:
   /v20180820/mrap/instances:
     get:
       operationId: ListMultiRegionAccessPoints
-      summary: List Multi-Region Access Points
+      summary: Amazon S3 List Multi-Region Access Points
       description: >-
         Returns a list of the Multi-Region Access Points currently associated
         with the specified AWS account.
@@ -746,7 +746,7 @@ paths:
   /v20180820/mrap/instances/{mrap_name+}:
     get:
       operationId: GetMultiRegionAccessPoint
-      summary: Get Multi-Region Access Point
+      summary: Amazon S3 Get Multi-Region Access Point
       description: >-
         Returns configuration information about the specified Multi-Region
         Access Point.

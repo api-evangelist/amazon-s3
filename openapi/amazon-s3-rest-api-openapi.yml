@@ -75,7 +75,7 @@ paths:
   /:
     get:
       operationId: ListBuckets
-      summary: List Buckets
+      summary: Amazon S3 List Buckets
       description: >-
         Returns a list of all buckets owned by the authenticated sender of the
         request. To use this operation, you must have the s3:ListAllMyBuckets
@@ -109,7 +109,7 @@ paths:
   /{Bucket}:
     put:
       operationId: CreateBucket
-      summary: Create Bucket
+      summary: Amazon S3 Create Bucket
       description: >-
         Creates a new S3 bucket. To create a bucket, you must register with
         Amazon S3 and have a valid AWS Access Key ID. By default, buckets are
@@ -170,7 +170,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteBucket
-      summary: Delete Bucket
+      summary: Amazon S3 Delete Bucket
       description: >-
         Deletes the S3 bucket. All objects in the bucket must be deleted before
         the bucket itself can be deleted. The bucket owner can always delete a
@@ -201,7 +201,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     head:
       operationId: HeadBucket
-      summary: Head Bucket
+      summary: Amazon S3 Head Bucket
       description: >-
         Determines if a bucket exists and you have permission to access it. A
         HEAD request returns 200 OK if the bucket exists and you have permission
@@ -237,7 +237,7 @@ paths:
   /{Bucket}?list-type=2:
     get:
       operationId: ListObjectsV2
-      summary: List Objects V2
+      summary: Amazon S3 List Objects V2
       description: >-
         Returns some or all (up to 1,000) of the objects in a bucket with each
         request. You can use the request parameters as selection criteria to
@@ -344,7 +344,7 @@ paths:
   /{Bucket}/{Key+}:
     get:
       operationId: GetObject
-      summary: Get Object
+      summary: Amazon S3 Get Object
       description: >-
         Retrieves objects from Amazon S3. To use GET, you must have READ access
         to the object. You can grant READ access using a bucket policy or an
@@ -593,7 +593,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutObject
-      summary: Put Object
+      summary: Amazon S3 Put Object
       description: >-
         Adds an object to a bucket. You must have WRITE permissions on a bucket
         to add an object to it. Amazon S3 never adds partial objects; if you
@@ -855,7 +855,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteObject
-      summary: Delete Object
+      summary: Amazon S3 Delete Object
       description: >-
         Removes the null version (if there is one) of an object and inserts a
         delete marker, which becomes the latest version of the object. If there
@@ -930,7 +930,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     head:
       operationId: HeadObject
-      summary: Head Object
+      summary: Amazon S3 Head Object
       description: >-
         The HEAD action retrieves metadata from an object without returning the
         object itself. This action is useful if you are interested only in an
@@ -1076,7 +1076,7 @@ paths:
   /{Bucket}/{Key+}?copy:
     put:
       operationId: CopyObject
-      summary: Copy Object
+      summary: Amazon S3 Copy Object
       description: >-
         Creates a copy of an object that is already stored in Amazon S3. You can
         copy individual objects between general purpose buckets, between
@@ -1215,7 +1215,7 @@ paths:
   /{Bucket}?delete:
     post:
       operationId: DeleteObjects
-      summary: Delete Objects
+      summary: Amazon S3 Delete Objects
       description: >-
         This action enables you to delete multiple objects from a bucket using a
         single HTTP request. You may specify up to 1000 keys in a single
@@ -1282,7 +1282,7 @@ paths:
   /{Bucket}/{Key+}?uploads:
     post:
       operationId: CreateMultipartUpload
-      summary: Create Multipart Upload
+      summary: Amazon S3 Create Multipart Upload
       description: >-
         This action initiates a multipart upload and returns an upload ID. This
         upload ID is used to associate all of the parts in the specific multipart
@@ -1416,7 +1416,7 @@ paths:
   /{Bucket}/{Key+}?partNumber={partNumber}&uploadId={uploadId}:
     put:
       operationId: UploadPart
-      summary: Upload Part
+      summary: Amazon S3 Upload Part
       description: >-
         Uploads a part in a multipart upload. In this operation, you provide
         part data in your request. The part size must be between 5 MiB and 5
@@ -1492,7 +1492,7 @@ paths:
   /{Bucket}/{Key+}?uploadId={uploadId}:
     post:
       operationId: CompleteMultipartUpload
-      summary: Complete Multipart Upload
+      summary: Amazon S3 Complete Multipart Upload
       description: >-
         Completes a multipart upload by assembling previously uploaded parts. You
         must include the upload ID and a list of both part numbers and
@@ -1563,7 +1563,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: AbortMultipartUpload
-      summary: Abort Multipart Upload
+      summary: Amazon S3 Abort Multipart Upload
       description: >-
         This action aborts a multipart upload. After a multipart upload is
         aborted, no additional parts can be uploaded using that upload ID. The
@@ -1609,7 +1609,7 @@ paths:
   /{Bucket}?acl:
     get:
       operationId: GetBucketAcl
-      summary: Get Bucket ACL
+      summary: Amazon S3 Get Bucket ACL
       description: >-
         This implementation of the GET action uses the acl subresource to return
         the access control list (ACL) of a bucket. To use GET to return the ACL,
@@ -1638,7 +1638,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketAcl
-      summary: Put Bucket ACL
+      summary: Amazon S3 Put Bucket ACL
       description: >-
         Sets the permissions on an existing bucket using access control lists
         (ACL). You can set permissions to grant or revoke access at the bucket
@@ -1709,7 +1709,7 @@ paths:
   /{Bucket}?versioning:
     get:
       operationId: GetBucketVersioning
-      summary: Get Bucket Versioning
+      summary: Amazon S3 Get Bucket Versioning
       description: >-
         Returns the versioning state of a bucket. To retrieve the versioning
         state of a bucket, you must be the bucket owner. This implementation
@@ -1738,7 +1738,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketVersioning
-      summary: Put Bucket Versioning
+      summary: Amazon S3 Put Bucket Versioning
       description: >-
         Sets the versioning state of an existing bucket. To set the versioning
         state, you must be the bucket owner. You can set the versioning state
@@ -1782,7 +1782,7 @@ paths:
   /{Bucket}?tagging:
     get:
       operationId: GetBucketTagging
-      summary: Get Bucket Tagging
+      summary: Amazon S3 Get Bucket Tagging
       description: >-
         Returns the tag set associated with the bucket. To use this operation,
         you must have permission to perform the s3:GetBucketTagging action.
@@ -1816,7 +1816,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketTagging
-      summary: Put Bucket Tagging
+      summary: Amazon S3 Put Bucket Tagging
       description: >-
         Sets the tags for a bucket. Use tags to organize your AWS bill to reflect
         your own cost structure. To use this operation, you must have permission
@@ -1862,7 +1862,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteBucketTagging
-      summary: Delete Bucket Tagging
+      summary: Amazon S3 Delete Bucket Tagging
       description: >-
         Deletes the tags from the bucket. To use this operation, you must have
         permission to perform the s3:PutBucketTagging action.
@@ -1887,7 +1887,7 @@ paths:
   /{Bucket}?encryption:
     get:
       operationId: GetBucketEncryption
-      summary: Get Bucket Encryption
+      summary: Amazon S3 Get Bucket Encryption
       description: >-
         Returns the default encryption configuration for an Amazon S3 bucket.
         By default, all buckets have a default encryption configuration that
@@ -1916,7 +1916,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketEncryption
-      summary: Put Bucket Encryption
+      summary: Amazon S3 Put Bucket Encryption
       description: >-
         This action uses the encryption subresource to configure default
         encryption and Amazon S3 Bucket Keys for an existing bucket.
@@ -1961,7 +1961,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteBucketEncryption
-      summary: Delete Bucket Encryption
+      summary: Amazon S3 Delete Bucket Encryption
       description: >-
         This implementation of the DELETE action resets the default encryption
         for the bucket as server-side encryption with Amazon S3 managed keys
@@ -1987,7 +1987,7 @@ paths:
   /{Bucket}?lifecycle:
     get:
       operationId: GetBucketLifecycleConfiguration
-      summary: Get Bucket Lifecycle Configuration
+      summary: Amazon S3 Get Bucket Lifecycle Configuration
       description: >-
         Returns the lifecycle configuration information set on the bucket. It
         returns the lifecycle configuration for the specified bucket or an error
@@ -2022,7 +2022,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketLifecycleConfiguration
-      summary: Put Bucket Lifecycle Configuration
+      summary: Amazon S3 Put Bucket Lifecycle Configuration
       description: >-
         Creates a new lifecycle configuration for the bucket or replaces an
         existing lifecycle configuration. Lifecycle configuration manages
@@ -2064,7 +2064,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteBucketLifecycle
-      summary: Delete Bucket Lifecycle
+      summary: Amazon S3 Delete Bucket Lifecycle
       description: >-
         Deletes the lifecycle configuration from the specified bucket. Amazon S3
         removes all the lifecycle configuration rules in the lifecycle
@@ -2090,7 +2090,7 @@ paths:
   /{Bucket}?cors:
     get:
       operationId: GetBucketCors
-      summary: Get Bucket CORS
+      summary: Amazon S3 Get Bucket CORS
       description: >-
         Returns the Cross-Origin Resource Sharing (CORS) configuration
         information set for the bucket. To use this operation, you must have
@@ -2125,7 +2125,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: PutBucketCors
-      summary: Put Bucket CORS
+      summary: Amazon S3 Put Bucket CORS
       description: >-
         Sets the CORS configuration for your bucket. If the configuration
         exists, Amazon S3 replaces it. To use this operation, you must be
@@ -2161,7 +2161,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: DeleteBucketCors
-      summary: Delete Bucket CORS
+      summary: Amazon S3 Delete Bucket CORS
       description: >-
         Deletes the CORS configuration information set for the bucket.
       tags:
