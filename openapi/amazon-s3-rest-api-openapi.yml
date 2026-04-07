@@ -59,16 +59,16 @@ servers:
 security:
   - sigv4: []
 tags:
-  - name: Buckets
-    description: Operations for creating, listing, and managing S3 buckets
-  - name: Objects
-    description: Operations for uploading, downloading, copying, and deleting objects
-  - name: Multipart Upload
-    description: Operations for multipart upload of large objects
   - name: Access Control
     description: Operations for managing bucket and object access control lists (ACLs)
   - name: Bucket Configuration
     description: Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption
+  - name: Buckets
+    description: Operations for creating, listing, and managing S3 buckets
+  - name: Multipart Upload
+    description: Operations for multipart upload of large objects
+  - name: Objects
+    description: Operations for uploading, downloading, copying, and deleting objects
   - name: Tagging
     description: Operations for managing bucket and object tags
 paths:

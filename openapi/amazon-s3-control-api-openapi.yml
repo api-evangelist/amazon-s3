@@ -47,20 +47,18 @@ servers:
 security:
   - sigv4: []
 tags:
+  - name: Access Grants
+    description: Operations for S3 Access Grants management
   - name: Access Points
     description: Operations for creating and managing S3 access points
   - name: Batch Operations
     description: Operations for creating and managing S3 Batch Operations jobs
-  - name: Storage Lens
-    description: Operations for S3 Storage Lens configurations
-  - name: Access Grants
-    description: Operations for S3 Access Grants management
   - name: Multi-Region Access Points
     description: Operations for Multi-Region Access Points
   - name: Public Access Block
     description: Operations for managing public access block settings
-  - name: Bucket Policy
-    description: Operations for managing S3 on Outposts bucket policies
+  - name: Storage Lens
+    description: Operations for S3 Storage Lens configurations
 paths:
   /v20180820/accesspoint/{name}:
     get:

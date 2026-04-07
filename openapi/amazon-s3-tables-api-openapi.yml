@@ -40,16 +40,16 @@ servers:
 security:
   - sigv4: []
 tags:
-  - name: Table Buckets
-    description: Operations for creating and managing S3 table buckets
-  - name: Tables
-    description: Operations for creating and managing tables within table buckets
   - name: Namespaces
     description: Operations for managing namespaces within table buckets
+  - name: Table Buckets
+    description: Operations for creating and managing S3 table buckets
   - name: Table Maintenance
     description: Operations for managing table maintenance configurations
   - name: Table Policy
     description: Operations for managing table and table bucket policies
+  - name: Tables
+    description: Operations for creating and managing tables within table buckets
 paths:
   /buckets:
     get:
