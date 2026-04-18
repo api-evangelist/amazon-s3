@@ -1,0 +1,8 @@
+{
+  "ETag": "example_value",
+  "LastModified": "example_value",
+  "ChecksumCRC32": "example_value",
+  "ChecksumCRC32C": "example_value",
+  "ChecksumSHA1": "example_value",
+  "ChecksumSHA256": "example_value"
+}

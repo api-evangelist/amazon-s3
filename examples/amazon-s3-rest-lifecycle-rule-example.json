@@ -1,0 +1,10 @@
+{
+  "ID": "abc123",
+  "Filter": "example_value",
+  "Status": "example_value",
+  "Expiration": "example_value",
+  "Transition": [],
+  "NoncurrentVersionExpiration": "example_value",
+  "NoncurrentVersionTransition": [],
+  "AbortIncompleteMultipartUpload": "example_value"
+}

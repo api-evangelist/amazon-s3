@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateBucketConfiguration",
+  "type": "object",
+  "description": "The configuration information for the bucket.",
+  "properties": {
+    "LocationConstraint": {
+      "type": "string",
+      "description": "Specifies the Region where the bucket will be created. If you do not specify a Region, the bucket is created in the us-east-1 Region."
+    },
+    "Location": {
+      "type": "object",
+      "description": "Specifies the location of the bucket."
+    },
+    "Bucket": {
+      "type": "object",
+      "description": "Specifies the information about the bucket to create."
+    }
+  }
+}

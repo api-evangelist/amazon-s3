@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LifecycleRule",
+  "type": "object",
+  "description": "A lifecycle rule for individual objects in an Amazon S3 bucket.",
+  "properties": {
+    "ID": {
+      "type": "string",
+      "description": "Unique identifier for the rule."
+    },
+    "Filter": {
+      "type": "object",
+      "description": "The filter used to identify objects for the rule."
+    },
+    "Status": {
+      "type": "string",
+      "description": "If Enabled, Amazon S3 executes the lifecycle actions. If Disabled, Amazon S3 ignores the lifecycle actions."
+    },
+    "Expiration": {
+      "type": "object"
+    },
+    "Transition": {
+      "type": "array"
+    },
+    "NoncurrentVersionExpiration": {
+      "type": "object"
+    },
+    "NoncurrentVersionTransition": {
+      "type": "array"
+    },
+    "AbortIncompleteMultipartUpload": {
+      "type": "object"
+    }
+  }
+}

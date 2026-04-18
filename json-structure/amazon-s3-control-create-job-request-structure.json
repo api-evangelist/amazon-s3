@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CreateJobRequest",
+  "type": "object",
+  "properties": {
+    "Operation": {
+      "type": "object"
+    },
+    "Report": {
+      "type": "object"
+    },
+    "Manifest": {
+      "type": "object"
+    },
+    "Priority": {
+      "type": "integer"
+    },
+    "RoleArn": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "ConfirmationRequired": {
+      "type": "boolean"
+    },
+    "Tags": {
+      "type": "array"
+    }
+  }
+}

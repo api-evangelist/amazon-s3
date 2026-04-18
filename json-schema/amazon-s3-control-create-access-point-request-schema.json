@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateAccessPointRequest",
+  "type": "object",
+  "properties": {
+    "Bucket": {
+      "type": "string",
+      "description": "The name of the bucket you want to associate with the access point."
+    },
+    "VpcConfiguration": {
+      "type": "object"
+    },
+    "BucketAccountId": {
+      "type": "string",
+      "description": "The AWS account ID associated with the S3 bucket."
+    }
+  }
+}

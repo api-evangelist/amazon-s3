@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StorageLensConfiguration",
+  "type": "object",
+  "description": "A container for the Amazon S3 Storage Lens configuration.",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "A container for the Storage Lens configuration ID."
+    },
+    "AccountLevel": {
+      "type": "object",
+      "description": "A container for the account-level settings for S3 Storage Lens."
+    },
+    "Include": {
+      "type": "object"
+    },
+    "Exclude": {
+      "type": "object"
+    },
+    "DataExport": {
+      "type": "object"
+    },
+    "IsEnabled": {
+      "type": "boolean",
+      "description": "A container for whether the S3 Storage Lens configuration is enabled."
+    },
+    "AwsOrg": {
+      "type": "object"
+    },
+    "StorageLensArn": {
+      "type": "string"
+    }
+  }
+}

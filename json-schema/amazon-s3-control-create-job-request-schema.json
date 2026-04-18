@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateJobRequest",
+  "type": "object",
+  "properties": {
+    "Operation": {
+      "type": "object",
+      "description": "The action that you want the job to perform on each object."
+    },
+    "Report": {
+      "type": "object",
+      "description": "Configuration parameters for the optional completion report for the job."
+    },
+    "Manifest": {
+      "type": "object",
+      "description": "Configuration parameters for the manifest."
+    },
+    "Priority": {
+      "type": "integer",
+      "description": "The numerical priority for this job."
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the IAM role."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description for this job."
+    },
+    "ConfirmationRequired": {
+      "type": "boolean",
+      "description": "Indicates whether confirmation is required before Amazon S3 runs the job."
+    },
+    "Tags": {
+      "type": "array"
+    }
+  }
+}

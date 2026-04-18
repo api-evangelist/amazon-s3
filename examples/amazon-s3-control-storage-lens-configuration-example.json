@@ -1,0 +1,10 @@
+{
+  "Id": "abc123",
+  "AccountLevel": "example_value",
+  "Include": "example_value",
+  "Exclude": "example_value",
+  "DataExport": "example_value",
+  "IsEnabled": true,
+  "AwsOrg": "example_value",
+  "StorageLensArn": "example_value"
+}

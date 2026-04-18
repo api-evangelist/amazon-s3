@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CORSConfiguration",
+  "type": "object",
+  "description": "Describes the cross-origin access configuration for objects in an Amazon S3 bucket.",
+  "properties": {
+    "CORSRule": {
+      "type": "array"
+    }
+  }
+}

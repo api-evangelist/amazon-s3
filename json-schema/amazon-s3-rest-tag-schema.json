@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tag",
+  "type": "object",
+  "description": "A container of a key value name pair.",
+  "properties": {
+    "Key": {
+      "type": "string",
+      "description": "Name of the object key."
+    },
+    "Value": {
+      "type": "string",
+      "description": "Value of the tag."
+    }
+  }
+}

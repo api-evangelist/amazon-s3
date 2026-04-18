@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TableBucket",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "ownerAccountId": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "unreferencedFileRemoval": {
+      "type": "object"
+    }
+  }
+}

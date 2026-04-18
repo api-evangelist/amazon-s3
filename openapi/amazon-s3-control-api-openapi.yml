@@ -21,44 +21,44 @@ externalDocs:
   description: Amazon S3 Control API Reference
   url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 servers:
-  - url: https://s3-control.{region}.amazonaws.com
-    description: Amazon S3 Control regional endpoint
-    variables:
-      region:
-        default: us-east-1
-        description: AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - eu-north-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-          - ca-central-1
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
 security:
-  - sigv4: []
+- sigv4: []
 tags:
-  - name: Access Grants
-    description: Operations for S3 Access Grants management
-  - name: Access Points
-    description: Operations for creating and managing S3 access points
-  - name: Batch Operations
-    description: Operations for creating and managing S3 Batch Operations jobs
-  - name: Multi-Region Access Points
-    description: Operations for Multi-Region Access Points
-  - name: Public Access Block
-    description: Operations for managing public access block settings
-  - name: Storage Lens
-    description: Operations for S3 Storage Lens configurations
+- name: Access Grants
+  description: Operations for S3 Access Grants management
+- name: Access Points
+  description: Operations for creating and managing S3 access points
+- name: Batch Operations
+  description: Operations for creating and managing S3 Batch Operations jobs
+- name: Multi-Region Access Points
+  description: Operations for Multi-Region Access Points
+- name: Public Access Block
+  description: Operations for managing public access block settings
+- name: Storage Lens
+  description: Operations for S3 Storage Lens configurations
 paths:
   /v20180820/accesspoint/{name}:
     get:
@@ -69,17 +69,18 @@ paths:
         Amazon S3 on Outposts REST API requests for this action require an
         additional parameter of x-amz-outpost-id to be passed with the request.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: >-
-            The name of the access point, or the ARN of the access point for
-            S3 on Outposts.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: >-
+          The name of the access point, or the ARN of the access point for
+          S3 on Outposts.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned access point configuration.
@@ -87,8 +88,31 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/GetAccessPointResult'
+              examples:
+                Getaccesspoint200Example:
+                  summary: Default GetAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    Name: Example Title
+                    Bucket: example_value
+                    NetworkOrigin: Internet
+                    VpcConfiguration:
+                      VpcId: '500123'
+                    PublicAccessBlockConfiguration:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    CreationDate: '2026-01-15T10:30:00Z'
+                    Alias: example_value
+                    AccessPointArn: example_value
+                    Endpoints: example_value
+                    BucketAccountId: '500123'
         '404':
           description: The specified access point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: CreateAccessPoint
       summary: Amazon S3 Create Access Point
@@ -98,23 +122,38 @@ paths:
         simplify managing data access at scale for applications using shared data
         sets on S3.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: The name you want to assign to this access point.
-          schema:
-            type: string
-            minLength: 3
-            maxLength: 50
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name you want to assign to this access point.
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 50
+        example: Example Title
       requestBody:
         required: true
         content:
           application/xml:
             schema:
               $ref: '#/components/schemas/CreateAccessPointRequest'
+            examples:
+              CreateaccesspointRequestExample:
+                summary: Default CreateAccessPoint request
+                x-microcks-default: true
+                value:
+                  Bucket: example_value
+                  VpcConfiguration:
+                    VpcId: '500123'
+                  PublicAccessBlockConfiguration:
+                    BlockPublicAcls: true
+                    IgnorePublicAcls: true
+                    BlockPublicPolicy: true
+                    RestrictPublicBuckets: true
+                  BucketAccountId: '500123'
       responses:
         '200':
           description: Access point created successfully.
@@ -127,8 +166,18 @@ paths:
                     type: string
                   Alias:
                     type: string
+              examples:
+                Createaccesspoint200Example:
+                  summary: Default CreateAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPointArn: example_value
+                    Alias: example_value
         '409':
           description: An access point with this name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteAccessPoint
       summary: Amazon S3 Delete Access Point
@@ -137,20 +186,24 @@ paths:
         requests for this action require an additional parameter of
         x-amz-outpost-id.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: The name of the access point you want to delete.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point you want to delete.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '204':
           description: Access point deleted successfully.
         '404':
           description: The specified access point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/accesspoint:
     get:
       operationId: ListAccessPoints
@@ -159,30 +212,33 @@ paths:
         Returns a list of the access points that are associated with the
         specified bucket. You can retrieve up to 1000 access points per call.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: bucket
-          in: query
-          description: >-
-            The name of the bucket whose associated access points you want to
-            list.
-          schema:
-            type: string
-        - name: nextToken
-          in: query
-          description: >-
-            A continuation token. If a previous call produced a truncated list,
-            pass this value to get the next page of results.
-          schema:
-            type: string
-        - name: maxResults
-          in: query
-          description: The maximum number of access points to return (1-1000).
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+      - $ref: '#/components/parameters/AccountId'
+      - name: bucket
+        in: query
+        description: >-
+          The name of the bucket whose associated access points you want to
+          list.
+        schema:
+          type: string
+        example: example_value
+      - name: nextToken
+        in: query
+        description: >-
+          A continuation token. If a previous call produced a truncated list,
+          pass this value to get the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: The maximum number of access points to return (1-1000).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of access points.
@@ -190,6 +246,24 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ListAccessPointsResult'
+              examples:
+                Listaccesspoints200Example:
+                  summary: Default ListAccessPoints 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPointList:
+                    - Name: Example Title
+                      NetworkOrigin: Internet
+                      VpcConfiguration:
+                        VpcId: '500123'
+                      Bucket: example_value
+                      AccessPointArn: example_value
+                      Alias: example_value
+                      BucketAccountId: '500123'
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/accesspoint/{name}/policy:
     get:
       operationId: GetAccessPointPolicy
@@ -198,15 +272,16 @@ paths:
         Returns the access point policy associated with the specified access
         point.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: The name of the access point.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned access point policy.
@@ -217,8 +292,17 @@ paths:
                 properties:
                   Policy:
                     type: string
+              examples:
+                Getaccesspointpolicy200Example:
+                  summary: Default GetAccessPointPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    Policy: example_value
         '404':
           description: The access point policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutAccessPointPolicy
       summary: Amazon S3 Put Access Point Policy
@@ -227,15 +311,16 @@ paths:
         point can have only one policy, so a request made to this API replaces
         any existing policy associated with the specified access point.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: The name of the access point.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
       requestBody:
         required: true
         content:
@@ -243,32 +328,45 @@ paths:
             schema:
               type: object
               required:
-                - Policy
+              - Policy
               properties:
                 Policy:
                   type: string
                   description: The policy that you want to apply to the specified access point.
+            examples:
+              PutaccesspointpolicyRequestExample:
+                summary: Default PutAccessPointPolicy request
+                x-microcks-default: true
+                value:
+                  Policy: example_value
       responses:
         '200':
           description: Access point policy updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteAccessPointPolicy
       summary: Amazon S3 Delete Access Point Policy
       description: >-
         Deletes the access point policy for the specified access point.
       tags:
-        - Access Points
+      - Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: name
-          in: path
-          required: true
-          description: The name of the access point.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '204':
           description: Access point policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/jobs:
     get:
       operationId: ListJobs
@@ -277,42 +375,45 @@ paths:
         Lists current S3 Batch Operations jobs as well as the jobs that have
         ended within the last 30 days for the AWS account making the request.
       tags:
-        - Batch Operations
+      - Batch Operations
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: jobStatuses
-          in: query
-          description: The List Jobs request returns jobs that match the statuses listed.
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - Active
-                - Cancelled
-                - Cancelling
-                - Complete
-                - Completing
-                - Failed
-                - Failing
-                - New
-                - Paused
-                - Pausing
-                - Preparing
-                - Ready
-                - Suspended
-        - name: nextToken
-          in: query
-          description: A pagination token to request the next page of results.
-          schema:
+      - $ref: '#/components/parameters/AccountId'
+      - name: jobStatuses
+        in: query
+        description: The List Jobs request returns jobs that match the statuses listed.
+        schema:
+          type: array
+          items:
             type: string
-        - name: maxResults
-          in: query
-          description: The maximum number of jobs to return.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+            enum:
+            - Active
+            - Cancelled
+            - Cancelling
+            - Complete
+            - Completing
+            - Failed
+            - Failing
+            - New
+            - Paused
+            - Pausing
+            - Preparing
+            - Ready
+            - Suspended
+        example: []
+      - name: nextToken
+        in: query
+        description: A pagination token to request the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: The maximum number of jobs to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of jobs.
@@ -320,6 +421,28 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ListJobsResult'
+              examples:
+                Listjobs200Example:
+                  summary: Default ListJobs 200 response
+                  x-microcks-default: true
+                  value:
+                    Jobs:
+                    - JobId: '500123'
+                      Description: A sample description.
+                      Operation: LambdaInvoke
+                      Priority: 10
+                      Status: Active
+                      CreationTime: '2026-01-15T10:30:00Z'
+                      TerminationDate: '2026-01-15T10:30:00Z'
+                      ProgressSummary:
+                        TotalNumberOfTasks: 10
+                        NumberOfTasksSucceeded: 10
+                        NumberOfTasksFailed: 10
+                        Timers: {}
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: CreateJob
       summary: Amazon S3 Create Batch Operations Job
@@ -329,15 +452,57 @@ paths:
         performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier
         restore, replace tagging, delete objects, or replicate objects.
       tags:
-        - Batch Operations
+      - Batch Operations
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       requestBody:
         required: true
         content:
           application/xml:
             schema:
               $ref: '#/components/schemas/CreateJobRequest'
+            examples:
+              CreatejobRequestExample:
+                summary: Default CreateJob request
+                x-microcks-default: true
+                value:
+                  Operation:
+                    LambdaInvoke:
+                      FunctionArn: example_value
+                    S3PutObjectCopy:
+                      TargetResource: example_value
+                      StorageClass: example_value
+                    S3PutObjectAcl:
+                      AccessControlPolicy: example_value
+                    S3PutObjectTagging:
+                      TagSet:
+                      - {}
+                    S3DeleteObjectTagging: example_value
+                    S3InitiateRestoreObject:
+                      ExpirationInDays: 10
+                      GlacierJobTier: BULK
+                  Report:
+                    Bucket: example_value
+                    Format: Report_CSV_20180820
+                    Enabled: true
+                    Prefix: example_value
+                    ReportScope: AllTasks
+                  Manifest:
+                    Spec:
+                      Format: S3BatchOperations_CSV_20180820
+                      Fields:
+                      - {}
+                    Location:
+                      ObjectArn: example_value
+                      ObjectVersionId: '500123'
+                      ETag: example_value
+                  Priority: 10
+                  RoleArn: example_value
+                  Description: A sample description.
+                  ConfirmationRequired: true
+                  Tags:
+                  - Key: example_value
+                    Value: example_value
       responses:
         '200':
           description: Job created successfully.
@@ -349,8 +514,17 @@ paths:
                   JobId:
                     type: string
                     description: The ID for this job.
+              examples:
+                Createjob200Example:
+                  summary: Default CreateJob 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
         '400':
           description: Bad request. Invalid job configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/jobs/{id}:
     get:
       operationId: DescribeJob
@@ -360,15 +534,16 @@ paths:
         job. For more information, see S3 Batch Operations in the Amazon S3 User
         Guide.
       tags:
-        - Batch Operations
+      - Batch Operations
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: id
-          in: path
-          required: true
-          description: The ID for the job whose information you want to retrieve.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID for the job whose information you want to retrieve.
+        schema:
+          type: string
+        example: abc123
       responses:
         '200':
           description: Successfully returned job details.
@@ -376,8 +551,37 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/JobDescriptor'
+              examples:
+                Describejob200Example:
+                  summary: Default DescribeJob 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Description: A sample description.
+                    Operation: example_value
+                    Manifest: example_value
+                    Priority: 10
+                    RoleArn: example_value
+                    Status: Active
+                    CreationTime: '2026-01-15T10:30:00Z'
+                    TerminationDate: '2026-01-15T10:30:00Z'
+                    ProgressSummary:
+                      TotalNumberOfTasks: 10
+                      NumberOfTasksSucceeded: 10
+                      NumberOfTasksFailed: 10
+                    FailureReasons:
+                    - FailureCode: example_value
+                      FailureReason: example_value
+                    Report: example_value
+                    ConfirmationRequired: true
+                    StatusUpdateReason: example_value
+                    SuspendedDate: '2026-01-15T10:30:00Z'
+                    SuspendedCause: example_value
         '404':
           description: The specified job does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/jobs/{id}/priority:
     post:
       operationId: UpdateJobPriority
@@ -387,23 +591,25 @@ paths:
         operation to increase or decrease the priority of a job. Higher number
         priorities are processed first.
       tags:
-        - Batch Operations
+      - Batch Operations
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: id
-          in: path
-          required: true
-          description: The ID for the job whose priority you want to update.
-          schema:
-            type: string
-        - name: priority
-          in: query
-          required: true
-          description: The priority you want to assign to this job.
-          schema:
-            type: integer
-            minimum: 0
-            maximum: 2147483647
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID for the job whose priority you want to update.
+        schema:
+          type: string
+        example: abc123
+      - name: priority
+        in: query
+        required: true
+        description: The priority you want to assign to this job.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2147483647
+        example: 10
       responses:
         '200':
           description: Job priority updated successfully.
@@ -416,6 +622,16 @@ paths:
                     type: string
                   Priority:
                     type: integer
+              examples:
+                Updatejobpriority200Example:
+                  summary: Default UpdateJobPriority 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Priority: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/jobs/{id}/status:
     post:
       operationId: UpdateJobStatus
@@ -424,29 +640,32 @@ paths:
         Updates the status for the specified job. Use this action to confirm that
         you want to run a job or to cancel an existing job.
       tags:
-        - Batch Operations
+      - Batch Operations
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the job whose status you want to update.
-          schema:
-            type: string
-        - name: requestedJobStatus
-          in: query
-          required: true
-          description: The status that you want to move the specified job to.
-          schema:
-            type: string
-            enum:
-              - Cancelled
-              - Ready
-        - name: statusUpdateReason
-          in: query
-          description: A description of the reason why you want to change the job status.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID of the job whose status you want to update.
+        schema:
+          type: string
+        example: abc123
+      - name: requestedJobStatus
+        in: query
+        required: true
+        description: The status that you want to move the specified job to.
+        schema:
+          type: string
+          enum:
+          - Cancelled
+          - Ready
+        example: Cancelled
+      - name: statusUpdateReason
+        in: query
+        description: A description of the reason why you want to change the job status.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Job status updated successfully.
@@ -461,6 +680,17 @@ paths:
                     type: string
                   StatusUpdateReason:
                     type: string
+              examples:
+                Updatejobstatus200Example:
+                  summary: Default UpdateJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Status: example_value
+                    StatusUpdateReason: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/configuration/publicAccessBlock:
     get:
       operationId: GetPublicAccessBlock
@@ -470,9 +700,9 @@ paths:
         using this operation with S3 on Outposts, you must provide the Outpost
         bucket ARN.
       tags:
-        - Public Access Block
+      - Public Access Block
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       responses:
         '200':
           description: Successfully returned public access block configuration.
@@ -480,8 +710,20 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+              examples:
+                Getpublicaccessblock200Example:
+                  summary: Default GetPublicAccessBlock 200 response
+                  x-microcks-default: true
+                  value:
+                    BlockPublicAcls: true
+                    IgnorePublicAcls: true
+                    BlockPublicPolicy: true
+                    RestrictPublicBuckets: true
         '404':
           description: The public access block configuration does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutPublicAccessBlock
       summary: Amazon S3 Put Public Access Block
@@ -490,18 +732,30 @@ paths:
         account. To use this operation, you must have the
         s3:PutAccountPublicAccessBlock permission.
       tags:
-        - Public Access Block
+      - Public Access Block
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       requestBody:
         required: true
         content:
           application/xml:
             schema:
               $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            examples:
+              PutpublicaccessblockRequestExample:
+                summary: Default PutPublicAccessBlock request
+                x-microcks-default: true
+                value:
+                  BlockPublicAcls: true
+                  IgnorePublicAcls: true
+                  BlockPublicPolicy: true
+                  RestrictPublicBuckets: true
       responses:
         '200':
           description: Public access block configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeletePublicAccessBlock
       summary: Amazon S3 Delete Public Access Block
@@ -509,12 +763,15 @@ paths:
         Removes the PublicAccessBlock configuration for an AWS account. For this
         operation, you must have the s3:PutAccountPublicAccessBlock permission.
       tags:
-        - Public Access Block
+      - Public Access Block
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       responses:
         '204':
           description: Public access block configuration deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/storagelens:
     get:
       operationId: ListStorageLensConfigurations
@@ -524,14 +781,15 @@ paths:
         action, you must have permission to perform the
         s3:ListStorageLensConfigurations action.
       tags:
-        - Storage Lens
+      - Storage Lens
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: nextToken
-          in: query
-          description: A pagination token for the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: nextToken
+        in: query
+        description: A pagination token for the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successfully returned list of Storage Lens configurations.
@@ -539,6 +797,20 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ListStorageLensConfigurationsResult'
+              examples:
+                Liststoragelensconfigurations200Example:
+                  summary: Default ListStorageLensConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    StorageLensConfigurationList:
+                    - Id: abc123
+                      StorageLensArn: example_value
+                      HomeRegion: example_value
+                      IsEnabled: true
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/storagelens/{storagelensid}:
     get:
       operationId: GetStorageLensConfiguration
@@ -548,15 +820,16 @@ paths:
         must have permission to perform the s3:GetStorageLensConfiguration
         action.
       tags:
-        - Storage Lens
+      - Storage Lens
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: storagelensid
-          in: path
-          required: true
-          description: The ID of the Amazon S3 Storage Lens configuration.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Amazon S3 Storage Lens configuration.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Successfully returned Storage Lens configuration.
@@ -564,8 +837,49 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/StorageLensConfiguration'
+              examples:
+                Getstoragelensconfiguration200Example:
+                  summary: Default GetStorageLensConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: abc123
+                    AccountLevel:
+                      ActivityMetrics:
+                        IsEnabled: true
+                      BucketLevel:
+                        ActivityMetrics:
+                          IsEnabled: true
+                        PrefixLevel:
+                          StorageMetrics: {}
+                    Include:
+                      Buckets:
+                      - example_value
+                      Regions:
+                      - example_value
+                    Exclude:
+                      Buckets:
+                      - example_value
+                      Regions:
+                      - example_value
+                    DataExport:
+                      S3BucketDestination:
+                        Format: CSV
+                        OutputSchemaVersion: V_1
+                        AccountId: '500123'
+                        Arn: example_value
+                        Prefix: example_value
+                        Encryption: example_value
+                      CloudWatchMetrics:
+                        IsEnabled: true
+                    IsEnabled: true
+                    AwsOrg:
+                      Arn: example_value
+                    StorageLensArn: example_value
         '404':
           description: The specified Storage Lens configuration does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutStorageLensConfiguration
       summary: Amazon S3 Put Storage Lens Configuration
@@ -574,24 +888,66 @@ paths:
         must have permission to perform the s3:PutStorageLensConfiguration
         action.
       tags:
-        - Storage Lens
+      - Storage Lens
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: storagelensid
-          in: path
-          required: true
-          description: The ID of the Amazon S3 Storage Lens configuration.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Amazon S3 Storage Lens configuration.
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         required: true
         content:
           application/xml:
             schema:
               $ref: '#/components/schemas/StorageLensConfiguration'
+            examples:
+              PutstoragelensconfigurationRequestExample:
+                summary: Default PutStorageLensConfiguration request
+                x-microcks-default: true
+                value:
+                  Id: abc123
+                  AccountLevel:
+                    ActivityMetrics:
+                      IsEnabled: true
+                    BucketLevel:
+                      ActivityMetrics:
+                        IsEnabled: true
+                      PrefixLevel:
+                        StorageMetrics: {}
+                  Include:
+                    Buckets:
+                    - example_value
+                    Regions:
+                    - example_value
+                  Exclude:
+                    Buckets:
+                    - example_value
+                    Regions:
+                    - example_value
+                  DataExport:
+                    S3BucketDestination:
+                      Format: CSV
+                      OutputSchemaVersion: V_1
+                      AccountId: '500123'
+                      Arn: example_value
+                      Prefix: example_value
+                      Encryption: example_value
+                    CloudWatchMetrics:
+                      IsEnabled: true
+                  IsEnabled: true
+                  AwsOrg:
+                    Arn: example_value
+                  StorageLensArn: example_value
       responses:
         '200':
           description: Storage Lens configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteStorageLensConfiguration
       summary: Amazon S3 Delete Storage Lens Configuration
@@ -600,18 +956,22 @@ paths:
         you must have permission to perform the
         s3:DeleteStorageLensConfiguration action.
       tags:
-        - Storage Lens
+      - Storage Lens
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: storagelensid
-          in: path
-          required: true
-          description: The ID of the Storage Lens configuration to delete.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Storage Lens configuration to delete.
+        schema:
+          type: string
+        example: '500123'
       responses:
         '204':
           description: Storage Lens configuration deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/accessgrantsinstance:
     get:
       operationId: GetAccessGrantsInstance
@@ -620,9 +980,9 @@ paths:
         Retrieves the S3 Access Grants instance. You must have the
         s3:GetAccessGrantsInstance permission to use this operation.
       tags:
-        - Access Grants
+      - Access Grants
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       responses:
         '200':
           description: Successfully returned Access Grants instance.
@@ -630,8 +990,20 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/AccessGrantsInstance'
+              examples:
+                Getaccessgrantsinstance200Example:
+                  summary: Default GetAccessGrantsInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessGrantsInstanceId: '500123'
+                    AccessGrantsInstanceArn: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    IdentityCenterArn: example_value
         '404':
           description: The Access Grants instance does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: CreateAccessGrantsInstance
       summary: Amazon S3 Create Access Grants Instance
@@ -640,9 +1012,9 @@ paths:
         for access grants. You can create one S3 Access Grants instance per
         Region per account.
       tags:
-        - Access Grants
+      - Access Grants
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       requestBody:
         content:
           application/xml:
@@ -658,6 +1030,15 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/S3Tag'
+            examples:
+              CreateaccessgrantsinstanceRequestExample:
+                summary: Default CreateAccessGrantsInstance request
+                x-microcks-default: true
+                value:
+                  IdentityCenterArn: example_value
+                  Tags:
+                  - Key: example_value
+                    Value: example_value
       responses:
         '200':
           description: Access Grants instance created successfully.
@@ -665,6 +1046,18 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/AccessGrantsInstance'
+              examples:
+                Createaccessgrantsinstance200Example:
+                  summary: Default CreateAccessGrantsInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessGrantsInstanceId: '500123'
+                    AccessGrantsInstanceArn: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    IdentityCenterArn: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteAccessGrantsInstance
       summary: Amazon S3 Delete Access Grants Instance
@@ -673,31 +1066,50 @@ paths:
         grants and registered locations before you can delete the S3 Access
         Grants instance.
       tags:
-        - Access Grants
+      - Access Grants
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       responses:
         '204':
           description: Access Grants instance deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/async-requests/mrap/create:
     post:
       operationId: CreateMultiRegionAccessPoint
-      summary: Amazon S3 Create Multi-Region Access Point
+      summary: Amazon S3 Create Multi-region Access Point
       description: >-
         Creates a Multi-Region Access Point and associates it with the specified
         buckets. Multi-Region Access Points provide a single global endpoint
         that applications can use to request data regardless of the location of
         the requester. This is an asynchronous request.
       tags:
-        - Multi-Region Access Points
+      - Multi-Region Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/AccountId'
       requestBody:
         required: true
         content:
           application/xml:
             schema:
               $ref: '#/components/schemas/CreateMultiRegionAccessPointRequest'
+            examples:
+              CreatemultiregionaccesspointRequestExample:
+                summary: Default CreateMultiRegionAccessPoint request
+                x-microcks-default: true
+                value:
+                  ClientToken: example_value
+                  Details:
+                    Name: Example Title
+                    PublicAccessBlock:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    Regions:
+                    - Bucket: example_value
+                      BucketAccountId: '500123'
       responses:
         '200':
           description: Request accepted. Multi-Region Access Point creation is asynchronous.
@@ -711,29 +1123,40 @@ paths:
                     description: >-
                       The request token associated with the asynchronous request
                       used to track the status of the create request.
+              examples:
+                Createmultiregionaccesspoint200Example:
+                  summary: Default CreateMultiRegionAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    RequestTokenARN: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/mrap/instances:
     get:
       operationId: ListMultiRegionAccessPoints
-      summary: Amazon S3 List Multi-Region Access Points
+      summary: Amazon S3 List Multi-region Access Points
       description: >-
         Returns a list of the Multi-Region Access Points currently associated
         with the specified AWS account.
       tags:
-        - Multi-Region Access Points
+      - Multi-Region Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: nextToken
-          in: query
-          description: A pagination token for the next page of results.
-          schema:
-            type: string
-        - name: maxResults
-          in: query
-          description: Number of results to return per call.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+      - $ref: '#/components/parameters/AccountId'
+      - name: nextToken
+        in: query
+        description: A pagination token for the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: Number of results to return per call.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of Multi-Region Access Points.
@@ -741,23 +1164,39 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ListMultiRegionAccessPointsResult'
+              examples:
+                Listmultiregionaccesspoints200Example:
+                  summary: Default ListMultiRegionAccessPoints 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPoints:
+                    - Name: Example Title
+                      Alias: example_value
+                      CreatedAt: '2026-01-15T10:30:00Z'
+                      Status: READY
+                      Regions: {}
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v20180820/mrap/instances/{mrap_name+}:
     get:
       operationId: GetMultiRegionAccessPoint
-      summary: Amazon S3 Get Multi-Region Access Point
+      summary: Amazon S3 Get Multi-region Access Point
       description: >-
         Returns configuration information about the specified Multi-Region
         Access Point.
       tags:
-        - Multi-Region Access Points
+      - Multi-Region Access Points
       parameters:
-        - $ref: '#/components/parameters/AccountId'
-        - name: mrap_name+
-          in: path
-          required: true
-          description: The name of the Multi-Region Access Point.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/AccountId'
+      - name: mrap_name+
+        in: path
+        required: true
+        description: The name of the Multi-Region Access Point.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successfully returned Multi-Region Access Point configuration.
@@ -765,8 +1204,29 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/MultiRegionAccessPointReport'
+              examples:
+                Getmultiregionaccesspoint200Example:
+                  summary: Default GetMultiRegionAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    Name: Example Title
+                    Alias: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    PublicAccessBlock:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    Status: READY
+                    Regions:
+                    - Bucket: example_value
+                      Region: example_value
+                      BucketAccountId: '500123'
         '404':
           description: The specified Multi-Region Access Point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     sigv4:
@@ -792,51 +1252,61 @@ components:
         Name:
           type: string
           description: The name of the access point.
+          example: Example Title
         Bucket:
           type: string
           description: The name of the bucket associated with the access point.
+          example: example_value
         NetworkOrigin:
           type: string
           description: Indicates whether this access point allows access from the public internet.
           enum:
-            - Internet
-            - VPC
+          - Internet
+          - VPC
+          example: Internet
         VpcConfiguration:
           type: object
           properties:
             VpcId:
               type: string
               description: The ID of the VPC.
+          example: example_value
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
         CreationDate:
           type: string
           format: date-time
           description: The date and time when the access point was created.
+          example: '2026-01-15T10:30:00Z'
         Alias:
           type: string
           description: The alias for the access point.
+          example: example_value
         AccessPointArn:
           type: string
           description: The ARN for the access point.
+          example: example_value
         Endpoints:
           type: object
           additionalProperties:
             type: string
+          example: example_value
         BucketAccountId:
           type: string
           description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
     CreateAccessPointRequest:
       type: object
       xml:
         name: CreateAccessPointRequest
         namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
       required:
-        - Bucket
+      - Bucket
       properties:
         Bucket:
           type: string
           description: The name of the bucket you want to associate with the access point.
+          example: example_value
         VpcConfiguration:
           type: object
           properties:
@@ -845,11 +1315,13 @@ components:
               description: >-
                 If specified, the access point will only allow connections from
                 the specified VPC ID.
+          example: example_value
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
         BucketAccountId:
           type: string
           description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
     ListAccessPointsResult:
       type: object
       properties:
@@ -863,8 +1335,8 @@ components:
               NetworkOrigin:
                 type: string
                 enum:
-                  - Internet
-                  - VPC
+                - Internet
+                - VPC
               VpcConfiguration:
                 type: object
                 properties:
@@ -878,8 +1350,10 @@ components:
                 type: string
               BucketAccountId:
                 type: string
+          example: []
         NextToken:
           type: string
+          example: example_value
     PublicAccessBlockConfiguration:
       type: object
       description: >-
@@ -894,21 +1368,25 @@ components:
           description: >-
             Specifies whether Amazon S3 should block public access control lists
             (ACLs) for buckets in this account.
+          example: true
         IgnorePublicAcls:
           type: boolean
           description: >-
             Specifies whether Amazon S3 should ignore public ACLs for buckets in
             this account.
+          example: true
         BlockPublicPolicy:
           type: boolean
           description: >-
             Specifies whether Amazon S3 should block public bucket policies for
             buckets in this account.
+          example: true
         RestrictPublicBuckets:
           type: boolean
           description: >-
             Specifies whether Amazon S3 should restrict public bucket policies
             for buckets in this account.
+          example: true
     ListJobsResult:
       type: object
       properties:
@@ -924,33 +1402,33 @@ components:
               Operation:
                 type: string
                 enum:
-                  - LambdaInvoke
-                  - S3PutObjectCopy
-                  - S3PutObjectAcl
-                  - S3PutObjectTagging
-                  - S3DeleteObjectTagging
-                  - S3InitiateRestoreObject
-                  - S3PutObjectLegalHold
-                  - S3PutObjectRetention
-                  - S3ReplicateObject
+                - LambdaInvoke
+                - S3PutObjectCopy
+                - S3PutObjectAcl
+                - S3PutObjectTagging
+                - S3DeleteObjectTagging
+                - S3InitiateRestoreObject
+                - S3PutObjectLegalHold
+                - S3PutObjectRetention
+                - S3ReplicateObject
               Priority:
                 type: integer
               Status:
                 type: string
                 enum:
-                  - Active
-                  - Cancelled
-                  - Cancelling
-                  - Complete
-                  - Completing
-                  - Failed
-                  - Failing
-                  - New
-                  - Paused
-                  - Pausing
-                  - Preparing
-                  - Ready
-                  - Suspended
+                - Active
+                - Cancelled
+                - Cancelling
+                - Complete
+                - Completing
+                - Failed
+                - Failing
+                - New
+                - Paused
+                - Pausing
+                - Preparing
+                - Ready
+                - Suspended
               CreationTime:
                 type: string
                 format: date-time
@@ -975,19 +1453,21 @@ components:
                       ElapsedTimeInActiveSeconds:
                         type: integer
                         format: int64
+          example: []
         NextToken:
           type: string
+          example: example_value
     CreateJobRequest:
       type: object
       xml:
         name: CreateJobRequest
         namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
       required:
-        - Operation
-        - Report
-        - Priority
-        - RoleArn
-        - Manifest
+      - Operation
+      - Report
+      - Priority
+      - RoleArn
+      - Manifest
       properties:
         Operation:
           type: object
@@ -1027,20 +1507,21 @@ components:
                 GlacierJobTier:
                   type: string
                   enum:
-                    - BULK
-                    - STANDARD
+                  - BULK
+                  - STANDARD
+          example: example_value
         Report:
           type: object
           description: Configuration parameters for the optional completion report for the job.
           required:
-            - Enabled
+          - Enabled
           properties:
             Bucket:
               type: string
             Format:
               type: string
               enum:
-                - Report_CSV_20180820
+              - Report_CSV_20180820
             Enabled:
               type: boolean
             Prefix:
@@ -1048,8 +1529,9 @@ components:
             ReportScope:
               type: string
               enum:
-                - AllTasks
-                - FailedTasksOnly
+              - AllTasks
+              - FailedTasksOnly
+          example: example_value
         Manifest:
           type: object
           description: Configuration parameters for the manifest.
@@ -1060,17 +1542,17 @@ components:
                 Format:
                   type: string
                   enum:
-                    - S3BatchOperations_CSV_20180820
-                    - S3InventoryReport_CSV_20161130
+                  - S3BatchOperations_CSV_20180820
+                  - S3InventoryReport_CSV_20161130
                 Fields:
                   type: array
                   items:
                     type: string
                     enum:
-                      - Ignore
-                      - Bucket
-                      - Key
-                      - VersionId
+                    - Ignore
+                    - Bucket
+                    - Key
+                    - VersionId
             Location:
               type: object
               properties:
@@ -1080,62 +1562,77 @@ components:
                   type: string
                 ETag:
                   type: string
+          example: example_value
         Priority:
           type: integer
           description: The numerical priority for this job.
+          example: 10
         RoleArn:
           type: string
           description: The Amazon Resource Name (ARN) for the IAM role.
+          example: example_value
         Description:
           type: string
           description: A description for this job.
           maxLength: 256
+          example: A sample description.
         ConfirmationRequired:
           type: boolean
           description: >-
             Indicates whether confirmation is required before Amazon S3 runs the
             job.
+          example: true
         Tags:
           type: array
           items:
             $ref: '#/components/schemas/S3Tag'
+          example: []
     JobDescriptor:
       type: object
       properties:
         JobId:
           type: string
+          example: '500123'
         Description:
           type: string
+          example: A sample description.
         Operation:
           type: object
+          example: example_value
         Manifest:
           type: object
+          example: example_value
         Priority:
           type: integer
+          example: 10
         RoleArn:
           type: string
+          example: example_value
         Status:
           type: string
           enum:
-            - Active
-            - Cancelled
-            - Cancelling
-            - Complete
-            - Completing
-            - Failed
-            - Failing
-            - New
-            - Paused
-            - Pausing
-            - Preparing
-            - Ready
-            - Suspended
+          - Active
+          - Cancelled
+          - Cancelling
+          - Complete
+          - Completing
+          - Failed
+          - Failing
+          - New
+          - Paused
+          - Pausing
+          - Preparing
+          - Ready
+          - Suspended
+          example: Active
         CreationTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         TerminationDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         ProgressSummary:
           type: object
           properties:
@@ -1148,6 +1645,7 @@ components:
             NumberOfTasksFailed:
               type: integer
               format: int64
+          example: example_value
         FailureReasons:
           type: array
           items:
@@ -1157,30 +1655,38 @@ components:
                 type: string
               FailureReason:
                 type: string
+          example: []
         Report:
           type: object
+          example: example_value
         ConfirmationRequired:
           type: boolean
+          example: true
         StatusUpdateReason:
           type: string
+          example: example_value
         SuspendedDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         SuspendedCause:
           type: string
+          example: example_value
     S3Tag:
       type: object
       required:
-        - Key
-        - Value
+      - Key
+      - Value
       properties:
         Key:
           type: string
           minLength: 1
           maxLength: 128
+          example: example_value
         Value:
           type: string
           maxLength: 256
+          example: example_value
     ListStorageLensConfigurationsResult:
       type: object
       properties:
@@ -1197,19 +1703,22 @@ components:
                 type: string
               IsEnabled:
                 type: boolean
+          example: []
         NextToken:
           type: string
+          example: example_value
     StorageLensConfiguration:
       type: object
       description: A container for the Amazon S3 Storage Lens configuration.
       required:
-        - Id
-        - AccountLevel
-        - IsEnabled
+      - Id
+      - AccountLevel
+      - IsEnabled
       properties:
         Id:
           type: string
           description: A container for the Storage Lens configuration ID.
+          example: abc123
         AccountLevel:
           type: object
           description: A container for the account-level settings for S3 Storage Lens.
@@ -1244,6 +1753,7 @@ components:
                               type: integer
                             MinStorageBytesPercentage:
                               type: number
+          example: example_value
         Include:
           type: object
           properties:
@@ -1255,6 +1765,7 @@ components:
               type: array
               items:
                 type: string
+          example: example_value
         Exclude:
           type: object
           properties:
@@ -1266,6 +1777,7 @@ components:
               type: array
               items:
                 type: string
+          example: example_value
         DataExport:
           type: object
           properties:
@@ -1275,12 +1787,12 @@ components:
                 Format:
                   type: string
                   enum:
-                    - CSV
-                    - Parquet
+                  - CSV
+                  - Parquet
                 OutputSchemaVersion:
                   type: string
                   enum:
-                    - V_1
+                  - V_1
                 AccountId:
                   type: string
                 Arn:
@@ -1294,52 +1806,61 @@ components:
               properties:
                 IsEnabled:
                   type: boolean
+          example: example_value
         IsEnabled:
           type: boolean
           description: A container for whether the S3 Storage Lens configuration is enabled.
+          example: true
         AwsOrg:
           type: object
           properties:
             Arn:
               type: string
+          example: example_value
         StorageLensArn:
           type: string
+          example: example_value
     AccessGrantsInstance:
       type: object
       properties:
         AccessGrantsInstanceId:
           type: string
           description: The ID of the S3 Access Grants instance.
+          example: '500123'
         AccessGrantsInstanceArn:
           type: string
           description: The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+          example: example_value
         CreatedAt:
           type: string
           format: date-time
           description: The date and time when the instance was created.
+          example: '2026-01-15T10:30:00Z'
         IdentityCenterArn:
           type: string
           description: >-
             If you associated your S3 Access Grants instance with an IAM
             Identity Center instance, this field returns the ARN of the IAM
             Identity Center instance application.
+          example: example_value
     CreateMultiRegionAccessPointRequest:
       type: object
       xml:
         name: CreateMultiRegionAccessPointRequest
         namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
       required:
-        - Details
-        - ClientToken
+      - Details
+      - ClientToken
       properties:
         ClientToken:
           type: string
           description: An idempotency token used to identify the request.
+          example: example_value
         Details:
           type: object
           required:
-            - Name
-            - Regions
+          - Name
+          - Regions
           properties:
             Name:
               type: string
@@ -1354,12 +1875,13 @@ components:
               items:
                 type: object
                 required:
-                  - Bucket
+                - Bucket
                 properties:
                   Bucket:
                     type: string
                   BucketAccountId:
                     type: string
+          example: example_value
     ListMultiRegionAccessPointsResult:
       type: object
       properties:
@@ -1367,31 +1889,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MultiRegionAccessPointReport'
+          example: []
         NextToken:
           type: string
+          example: example_value
     MultiRegionAccessPointReport:
       type: object
       properties:
         Name:
           type: string
           description: The name of the Multi-Region Access Point.
+          example: Example Title
         Alias:
           type: string
           description: The alias for the Multi-Region Access Point.
+          example: example_value
         CreatedAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         PublicAccessBlock:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
         Status:
           type: string
           enum:
-            - READY
-            - INCONSISTENT_ACROSS_REGIONS
-            - CREATING
-            - PARTIALLY_CREATED
-            - PARTIALLY_DELETED
-            - DELETING
+          - READY
+          - INCONSISTENT_ACROSS_REGIONS
+          - CREATING
+          - PARTIALLY_CREATED
+          - PARTIALLY_DELETED
+          - DELETING
+          example: READY
         Regions:
           type: array
           items:
@@ -1403,14 +1931,19 @@ components:
                 type: string
               BucketAccountId:
                 type: string
+          example: []
     Error:
       type: object
       properties:
         Code:
           type: string
+          example: example_value
         Message:
           type: string
+          example: example_value
         Resource:
           type: string
+          example: example_value
         RequestId:
           type: string
+          example: '500123'

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error",
+  "type": "object",
+  "properties": {
+    "Code": {
+      "type": "string"
+    },
+    "Message": {
+      "type": "string"
+    },
+    "Resource": {
+      "type": "string"
+    },
+    "RequestId": {
+      "type": "string"
+    }
+  }
+}

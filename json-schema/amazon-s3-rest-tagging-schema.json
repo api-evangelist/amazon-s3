@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tagging",
+  "type": "object",
+  "description": "Container for TagSet elements.",
+  "properties": {
+    "TagSet": {
+      "type": "object"
+    }
+  }
+}

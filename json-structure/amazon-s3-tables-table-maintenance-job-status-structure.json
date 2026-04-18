@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TableMaintenanceJobStatus",
+  "type": "object",
+  "properties": {
+    "tableARN": {
+      "type": "string"
+    },
+    "status": {
+      "type": "object"
+    }
+  }
+}

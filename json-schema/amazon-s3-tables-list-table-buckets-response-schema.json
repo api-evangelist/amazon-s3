@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTableBucketsResponse",
+  "type": "object",
+  "properties": {
+    "tableBuckets": {
+      "type": "array"
+    },
+    "continuationToken": {
+      "type": "string",
+      "description": "A continuation token for paginating the list."
+    }
+  }
+}

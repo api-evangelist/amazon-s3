@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Owner",
+  "type": "object",
+  "description": "Container for the owner's display name and ID.",
+  "properties": {
+    "DisplayName": {
+      "type": "string",
+      "description": "Container for the display name of the owner."
+    },
+    "ID": {
+      "type": "string",
+      "description": "Container for the ID of the owner."
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AccessGrantsInstance",
+  "type": "object",
+  "properties": {
+    "AccessGrantsInstanceId": {
+      "type": "string"
+    },
+    "AccessGrantsInstanceArn": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "IdentityCenterArn": {
+      "type": "string"
+    }
+  }
+}

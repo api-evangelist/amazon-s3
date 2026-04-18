@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "StorageLensConfiguration",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "AccountLevel": {
+      "type": "object"
+    },
+    "Include": {
+      "type": "object"
+    },
+    "Exclude": {
+      "type": "object"
+    },
+    "DataExport": {
+      "type": "object"
+    },
+    "IsEnabled": {
+      "type": "boolean"
+    },
+    "AwsOrg": {
+      "type": "object"
+    },
+    "StorageLensArn": {
+      "type": "string"
+    }
+  }
+}

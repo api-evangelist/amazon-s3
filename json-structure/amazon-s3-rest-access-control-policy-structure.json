@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AccessControlPolicy",
+  "type": "object",
+  "properties": {
+    "AccessControlList": {
+      "type": "object"
+    }
+  }
+}

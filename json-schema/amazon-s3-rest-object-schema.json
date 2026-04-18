@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Object",
+  "type": "object",
+  "description": "An object consists of data and its descriptive metadata.",
+  "properties": {
+    "Key": {
+      "type": "string",
+      "description": "The name assigned to an object which identifies it in the bucket."
+    },
+    "LastModified": {
+      "type": "string",
+      "description": "Date and time the object was last modified."
+    },
+    "ETag": {
+      "type": "string",
+      "description": "The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata."
+    },
+    "Size": {
+      "type": "integer",
+      "description": "Size in bytes of the object."
+    },
+    "StorageClass": {
+      "type": "string",
+      "description": "The class of storage used to store the object."
+    },
+    "ChecksumAlgorithm": {
+      "type": "array"
+    },
+    "RestoreStatus": {
+      "type": "object"
+    }
+  }
+}

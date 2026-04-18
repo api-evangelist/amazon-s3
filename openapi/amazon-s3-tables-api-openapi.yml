@@ -23,33 +23,33 @@ externalDocs:
   description: Amazon S3 Tables API Reference
   url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
 servers:
-  - url: https://s3tables.{region}.amazonaws.com
-    description: Amazon S3 Tables regional endpoint
-    variables:
-      region:
-        default: us-east-1
-        description: AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-2
-          - eu-west-1
-          - eu-central-1
-          - ap-northeast-1
-          - ap-southeast-1
+- url: https://s3tables.{region}.amazonaws.com
+  description: Amazon S3 Tables regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-2
+      - eu-west-1
+      - eu-central-1
+      - ap-northeast-1
+      - ap-southeast-1
 security:
-  - sigv4: []
+- sigv4: []
 tags:
-  - name: Namespaces
-    description: Operations for managing namespaces within table buckets
-  - name: Table Buckets
-    description: Operations for creating and managing S3 table buckets
-  - name: Table Maintenance
-    description: Operations for managing table maintenance configurations
-  - name: Table Policy
-    description: Operations for managing table and table bucket policies
-  - name: Tables
-    description: Operations for creating and managing tables within table buckets
+- name: Namespaces
+  description: Operations for managing namespaces within table buckets
+- name: Table Buckets
+  description: Operations for creating and managing S3 table buckets
+- name: Table Maintenance
+  description: Operations for managing table maintenance configurations
+- name: Table Policy
+  description: Operations for managing table and table bucket policies
+- name: Tables
+  description: Operations for creating and managing tables within table buckets
 paths:
   /buckets:
     get:
@@ -59,27 +59,30 @@ paths:
         Lists table buckets for your account. Returns a list of table buckets
         that you have access to.
       tags:
-        - Table Buckets
+      - Table Buckets
       parameters:
-        - name: prefix
-          in: query
-          description: The prefix of the table buckets.
-          schema:
-            type: string
-        - name: continuationToken
-          in: query
-          description: >-
-            ContinuationToken indicates to S3 Tables that the list is being
-            continued with a token.
-          schema:
-            type: string
-        - name: maxBuckets
-          in: query
-          description: The maximum number of table buckets to return in the list.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+      - name: prefix
+        in: query
+        description: The prefix of the table buckets.
+        schema:
+          type: string
+        example: example_value
+      - name: continuationToken
+        in: query
+        description: >-
+          ContinuationToken indicates to S3 Tables that the list is being
+          continued with a token.
+        schema:
+          type: string
+        example: example_value
+      - name: maxBuckets
+        in: query
+        description: The maximum number of table buckets to return in the list.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of table buckets.
@@ -87,10 +90,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTableBucketsResponse'
+              examples:
+                Listtablebuckets200Example:
+                  summary: Default ListTableBuckets 200 response
+                  x-microcks-default: true
+                  value:
+                    tableBuckets:
+                    - arn: example_value
+                      name: Example Title
+                      ownerAccountId: '500123'
+                      createdAt: '2026-01-15T10:30:00Z'
+                    continuationToken: example_value
         '403':
           description: Access denied.
         '429':
           description: Too many requests.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: CreateTableBucket
       summary: Amazon S3 Create Table Bucket
@@ -99,13 +116,19 @@ paths:
         create and store tables. Each table bucket can contain tables in Apache
         Iceberg format stored as Apache Parquet files.
       tags:
-        - Table Buckets
+      - Table Buckets
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTableBucketRequest'
+            examples:
+              CreatetablebucketRequestExample:
+                summary: Default CreateTableBucket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
       responses:
         '200':
           description: Table bucket created successfully.
@@ -117,10 +140,19 @@ paths:
                   arn:
                     type: string
                     description: The Amazon Resource Name (ARN) of the table bucket.
+              examples:
+                Createtablebucket200Example:
+                  summary: Default CreateTableBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    arn: example_value
         '409':
           description: A table bucket with this name already exists.
         '429':
           description: Too many requests.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /buckets/{tableBucketARN}:
     get:
       operationId: GetTableBucket
@@ -129,9 +161,9 @@ paths:
         Gets details about a table bucket. Returns information about the
         specified table bucket including its name, ARN, owner, and creation date.
       tags:
-        - Table Buckets
+      - Table Buckets
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       responses:
         '200':
           description: Successfully returned table bucket details.
@@ -139,8 +171,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableBucket'
+              examples:
+                Gettablebucket200Example:
+                  summary: Default GetTableBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    arn: example_value
+                    name: Example Title
+                    ownerAccountId: '500123'
+                    createdAt: '2026-01-15T10:30:00Z'
+                    unreferencedFileRemoval:
+                      status: Enabled
+                      settings:
+                        unreferencedDays: 10
+                        nonCurrentDays: 10
         '404':
           description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteTableBucket
       summary: Amazon S3 Delete Table Bucket
@@ -148,9 +197,9 @@ paths:
         Deletes a table bucket. The table bucket must be empty (all tables and
         namespaces must be deleted first) before it can be deleted.
       tags:
-        - Table Buckets
+      - Table Buckets
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       responses:
         '204':
           description: Table bucket deleted successfully.
@@ -158,6 +207,9 @@ paths:
           description: The specified table bucket does not exist.
         '409':
           description: The table bucket is not empty and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /buckets/{tableBucketARN}/policy:
     get:
       operationId: GetTableBucketPolicy
@@ -166,9 +218,9 @@ paths:
         Gets details about a table bucket policy. Returns the policy document
         associated with the specified table bucket.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       responses:
         '200':
           description: Successfully returned table bucket policy.
@@ -180,17 +232,26 @@ paths:
                   resourcePolicy:
                     type: string
                     description: The resource policy document in JSON format.
+              examples:
+                Gettablebucketpolicy200Example:
+                  summary: Default GetTableBucketPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    resourcePolicy: example_value
         '404':
           description: The table bucket policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutTableBucketPolicy
       summary: Amazon S3 Put Table Bucket Policy
       description: >-
         Creates or replaces a table bucket policy for a table bucket.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       requestBody:
         required: true
         content:
@@ -198,28 +259,40 @@ paths:
             schema:
               type: object
               required:
-                - resourcePolicy
+              - resourcePolicy
               properties:
                 resourcePolicy:
                   type: string
                   description: The resource policy document in JSON format.
+            examples:
+              PuttablebucketpolicyRequestExample:
+                summary: Default PutTableBucketPolicy request
+                x-microcks-default: true
+                value:
+                  resourcePolicy: example_value
       responses:
         '200':
           description: Table bucket policy updated successfully.
         '400':
           description: Invalid policy document.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteTableBucketPolicy
       summary: Amazon S3 Delete Table Bucket Policy
       description: >-
         Deletes a table bucket policy for a table bucket.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       responses:
         '204':
           description: Table bucket policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /buckets/{tableBucketARN}/maintenance:
     get:
       operationId: GetTableBucketMaintenanceConfiguration
@@ -228,9 +301,9 @@ paths:
         Gets details about a table bucket maintenance configuration, including
         Iceberg compaction and snapshot management settings.
       tags:
-        - Table Maintenance
+      - Table Maintenance
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       responses:
         '200':
           description: Successfully returned maintenance configuration.
@@ -238,8 +311,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableBucketMaintenanceConfiguration'
+              examples:
+                Gettablebucketmaintenanceconfiguration200Example:
+                  summary: Default GetTableBucketMaintenanceConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    tableBucketARN: example_value
+                    configuration: example_value
         '404':
           description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutTableBucketMaintenanceConfiguration
       summary: Amazon S3 Put Table Bucket Maintenance Configuration
@@ -248,20 +331,34 @@ paths:
         specified table bucket. This includes Iceberg compaction and snapshot
         management.
       tags:
-        - Table Maintenance
+      - Table Maintenance
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PutTableBucketMaintenanceConfigurationRequest'
+            examples:
+              PuttablebucketmaintenanceconfigurationRequestExample:
+                summary: Default PutTableBucketMaintenanceConfiguration request
+                x-microcks-default: true
+                value:
+                  type: icebergUnreferencedFileRemoval
+                  value:
+                    status: Enabled
+                    settings:
+                      unreferencedDays: 10
+                      nonCurrentDays: 10
       responses:
         '200':
           description: Maintenance configuration updated successfully.
         '400':
           description: Invalid maintenance configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /namespaces/{tableBucketARN}:
     get:
       operationId: ListNamespaces
@@ -270,26 +367,29 @@ paths:
         Lists the namespaces within a table bucket. Namespaces organize tables
         within a table bucket.
       tags:
-        - Namespaces
+      - Namespaces
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - name: prefix
-          in: query
-          description: The prefix of the namespaces.
-          schema:
-            type: string
-        - name: continuationToken
-          in: query
-          description: A continuation token for pagination.
-          schema:
-            type: string
-        - name: maxNamespaces
-          in: query
-          description: The maximum number of namespaces to return.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+      - $ref: '#/components/parameters/TableBucketARN'
+      - name: prefix
+        in: query
+        description: The prefix of the namespaces.
+        schema:
+          type: string
+        example: example_value
+      - name: continuationToken
+        in: query
+        description: A continuation token for pagination.
+        schema:
+          type: string
+        example: example_value
+      - name: maxNamespaces
+        in: query
+        description: The maximum number of namespaces to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of namespaces.
@@ -297,8 +397,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListNamespacesResponse'
+              examples:
+                Listnamespaces200Example:
+                  summary: Default ListNamespaces 200 response
+                  x-microcks-default: true
+                  value:
+                    namespaces:
+                    - namespace:
+                      - {}
+                      createdAt: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      ownerAccountId: '500123'
+                    continuationToken: example_value
         '404':
           description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: CreateNamespace
       summary: Amazon S3 Create Namespace
@@ -306,9 +421,9 @@ paths:
         Creates a namespace. A namespace is a logical grouping of tables within a
         table bucket.
       tags:
-        - Namespaces
+      - Namespaces
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/TableBucketARN'
       requestBody:
         required: true
         content:
@@ -316,7 +431,7 @@ paths:
             schema:
               type: object
               required:
-                - namespace
+              - namespace
               properties:
                 namespace:
                   type: array
@@ -325,6 +440,13 @@ paths:
                     the table bucket.
                   items:
                     type: string
+            examples:
+              CreatenamespaceRequestExample:
+                summary: Default CreateNamespace request
+                x-microcks-default: true
+                value:
+                  namespace:
+                  - example_value
       responses:
         '200':
           description: Namespace created successfully.
@@ -339,8 +461,19 @@ paths:
                       type: string
                   tableBucketARN:
                     type: string
+              examples:
+                Createnamespace200Example:
+                  summary: Default CreateNamespace 200 response
+                  x-microcks-default: true
+                  value:
+                    namespace:
+                    - example_value
+                    tableBucketARN: example_value
         '409':
           description: A namespace with this name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /namespaces/{tableBucketARN}/{namespace}:
     get:
       operationId: GetNamespace
@@ -348,10 +481,10 @@ paths:
       description: >-
         Gets details about a namespace within a table bucket.
       tags:
-        - Namespaces
+      - Namespaces
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
       responses:
         '200':
           description: Successfully returned namespace details.
@@ -359,8 +492,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NamespaceDetail'
+              examples:
+                Getnamespace200Example:
+                  summary: Default GetNamespace 200 response
+                  x-microcks-default: true
+                  value:
+                    namespace:
+                    - example_value
+                    createdAt: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    ownerAccountId: '500123'
+                    tableBucketARN: example_value
         '404':
           description: The specified namespace does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteNamespace
       summary: Amazon S3 Delete Namespace
@@ -368,10 +515,10 @@ paths:
         Deletes a namespace. The namespace must be empty (all tables must be
         deleted first) before it can be deleted.
       tags:
-        - Namespaces
+      - Namespaces
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
       responses:
         '204':
           description: Namespace deleted successfully.
@@ -379,6 +526,9 @@ paths:
           description: The specified namespace does not exist.
         '409':
           description: The namespace is not empty and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}:
     get:
       operationId: ListTables
@@ -386,27 +536,30 @@ paths:
       description: >-
         Lists the tables in the specified namespace within a table bucket.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: prefix
-          in: query
-          description: The prefix of the table names.
-          schema:
-            type: string
-        - name: continuationToken
-          in: query
-          description: A continuation token for pagination.
-          schema:
-            type: string
-        - name: maxTables
-          in: query
-          description: The maximum number of tables to return.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: prefix
+        in: query
+        description: The prefix of the table names.
+        schema:
+          type: string
+        example: example_value
+      - name: continuationToken
+        in: query
+        description: A continuation token for pagination.
+        schema:
+          type: string
+        example: example_value
+      - name: maxTables
+        in: query
+        description: The maximum number of tables to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
       responses:
         '200':
           description: Successfully returned list of tables.
@@ -414,8 +567,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTablesResponse'
+              examples:
+                Listtables200Example:
+                  summary: Default ListTables 200 response
+                  x-microcks-default: true
+                  value:
+                    tables:
+                    - namespace: {}
+                      name: Example Title
+                      type: customer
+                      tableARN: example_value
+                      createdAt: '2026-01-15T10:30:00Z'
+                      modifiedAt: '2026-01-15T10:30:00Z'
+                    continuationToken: example_value
         '404':
           description: The specified namespace does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: CreateTable
       summary: Amazon S3 Create Table
@@ -424,16 +593,23 @@ paths:
         table is created in Apache Iceberg format and data is stored in Apache
         Parquet format.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTableRequest'
+            examples:
+              CreatetableRequestExample:
+                summary: Default CreateTable request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  format: ICEBERG
       responses:
         '200':
           description: Table created successfully.
@@ -448,8 +624,18 @@ paths:
                   versionToken:
                     type: string
                     description: The version token for the table.
+              examples:
+                Createtable200Example:
+                  summary: Default CreateTable 200 response
+                  x-microcks-default: true
+                  value:
+                    tableARN: example_value
+                    versionToken: example_value
         '409':
           description: A table with this name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}/{name}:
     get:
       operationId: GetTable
@@ -458,16 +644,17 @@ paths:
         Gets details about a table in the specified namespace within a table
         bucket.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned table details.
@@ -475,34 +662,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableDetail'
+              examples:
+                Gettable200Example:
+                  summary: Default GetTable 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    tableARN: example_value
+                    namespace:
+                    - example_value
+                    versionToken: example_value
+                    metadataLocation: example_value
+                    warehouseLocation: example_value
+                    createdAt: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    modifiedAt: '2026-01-15T10:30:00Z'
+                    modifiedBy: example_value
+                    managedByService: example_value
+                    ownerAccountId: '500123'
+                    type: customer
+                    format: ICEBERG
         '404':
           description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteTable
       summary: Amazon S3 Delete Table
       description: >-
         Deletes a table from the specified namespace within a table bucket.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table to delete.
-          schema:
-            type: string
-        - name: versionToken
-          in: query
-          description: The version token of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table to delete.
+        schema:
+          type: string
+        example: Example Title
+      - name: versionToken
+        in: query
+        description: The version token of the table.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Table deleted successfully.
         '404':
           description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: RenameTable
       summary: Amazon S3 Rename Table
@@ -510,16 +725,17 @@ paths:
         Renames a table or moves a table to a different namespace within a table
         bucket.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The current name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The current name of the table.
+        schema:
+          type: string
+        example: Example Title
       requestBody:
         required: true
         content:
@@ -538,6 +754,14 @@ paths:
                 newName:
                   type: string
                   description: The new name for the table.
+            examples:
+              RenametableRequestExample:
+                summary: Default RenameTable request
+                x-microcks-default: true
+                value:
+                  versionToken: example_value
+                  newNamespaceName: example_value
+                  newName: example_value
       responses:
         '200':
           description: Table renamed successfully.
@@ -545,6 +769,9 @@ paths:
           description: The specified table does not exist.
         '409':
           description: A table with the new name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}/{name}/policy:
     get:
       operationId: GetTablePolicy
@@ -552,16 +779,17 @@ paths:
       description: >-
         Gets the resource policy for a table.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned table policy.
@@ -572,24 +800,34 @@ paths:
                 properties:
                   resourcePolicy:
                     type: string
+              examples:
+                Gettablepolicy200Example:
+                  summary: Default GetTablePolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    resourcePolicy: example_value
         '404':
           description: The table policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutTablePolicy
       summary: Amazon S3 Put Table Policy
       description: >-
         Creates or replaces the resource policy for a table.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       requestBody:
         required: true
         content:
@@ -597,33 +835,46 @@ paths:
             schema:
               type: object
               required:
-                - resourcePolicy
+              - resourcePolicy
               properties:
                 resourcePolicy:
                   type: string
                   description: The resource policy document in JSON format.
+            examples:
+              PuttablepolicyRequestExample:
+                summary: Default PutTablePolicy request
+                x-microcks-default: true
+                value:
+                  resourcePolicy: example_value
       responses:
         '200':
           description: Table policy updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteTablePolicy
       summary: Amazon S3 Delete Table Policy
       description: >-
         Deletes the resource policy for a table.
       tags:
-        - Table Policy
+      - Table Policy
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '204':
           description: Table policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}/{name}/maintenance:
     get:
       operationId: GetTableMaintenanceConfiguration
@@ -632,16 +883,17 @@ paths:
         Gets details about the maintenance configuration of a table, including
         Iceberg compaction and snapshot management settings.
       tags:
-        - Table Maintenance
+      - Table Maintenance
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned table maintenance configuration.
@@ -649,33 +901,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMaintenanceConfiguration'
+              examples:
+                Gettablemaintenanceconfiguration200Example:
+                  summary: Default GetTableMaintenanceConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    tableARN: example_value
+                    configuration: example_value
         '404':
           description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: PutTableMaintenanceConfiguration
       summary: Amazon S3 Put Table Maintenance Configuration
       description: >-
         Creates or updates the maintenance configuration for the specified table.
       tags:
-        - Table Maintenance
+      - Table Maintenance
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PutTableMaintenanceConfigurationRequest'
+            examples:
+              PuttablemaintenanceconfigurationRequestExample:
+                summary: Default PutTableMaintenanceConfiguration request
+                x-microcks-default: true
+                value:
+                  type: icebergCompaction
+                  value:
+                    status: Enabled
+                    settings: example_value
       responses:
         '200':
           description: Table maintenance configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}/{name}/maintenance-job-status:
     get:
       operationId: GetTableMaintenanceJobStatus
@@ -684,16 +959,17 @@ paths:
         Gets the status of a maintenance job for a table, including the last
         run timestamp and status.
       tags:
-        - Table Maintenance
+      - Table Maintenance
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned maintenance job status.
@@ -701,8 +977,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMaintenanceJobStatus'
+              examples:
+                Gettablemaintenancejobstatus200Example:
+                  summary: Default GetTableMaintenanceJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    tableARN: example_value
+                    status: example_value
         '404':
           description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tables/{tableBucketARN}/{namespace}/{name}/metadata-location:
     get:
       operationId: GetTableMetadataLocation
@@ -710,16 +996,17 @@ paths:
       description: >-
         Gets the location of the table metadata in S3.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully returned table metadata location.
@@ -736,6 +1023,17 @@ paths:
                   warehouseLocation:
                     type: string
                     description: The S3 URI of the warehouse location.
+              examples:
+                Gettablemetadatalocation200Example:
+                  summary: Default GetTableMetadataLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    versionToken: example_value
+                    metadataLocation: example_value
+                    warehouseLocation: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: UpdateTableMetadataLocation
       summary: Amazon S3 Update Table Metadata Location
@@ -743,16 +1041,17 @@ paths:
         Updates the metadata location for a table. Used to point the table to a
         new Iceberg metadata file after a metadata update.
       tags:
-        - Tables
+      - Tables
       parameters:
-        - $ref: '#/components/parameters/TableBucketARN'
-        - $ref: '#/components/parameters/Namespace'
-        - name: name
-          in: path
-          required: true
-          description: The name of the table.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
       requestBody:
         required: true
         content:
@@ -760,8 +1059,8 @@ paths:
             schema:
               type: object
               required:
-                - versionToken
-                - metadataLocation
+              - versionToken
+              - metadataLocation
               properties:
                 versionToken:
                   type: string
@@ -769,6 +1068,13 @@ paths:
                 metadataLocation:
                   type: string
                   description: The new S3 URI for the table metadata file.
+            examples:
+              UpdatetablemetadatalocationRequestExample:
+                summary: Default UpdateTableMetadataLocation request
+                x-microcks-default: true
+                value:
+                  versionToken: example_value
+                  metadataLocation: example_value
       responses:
         '200':
           description: Table metadata location updated successfully.
@@ -785,6 +1091,18 @@ paths:
                     type: string
                   metadataLocation:
                     type: string
+              examples:
+                Updatetablemetadatalocation200Example:
+                  summary: Default UpdateTableMetadataLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    tableARN: example_value
+                    versionToken: example_value
+                    metadataLocation: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     sigv4:
@@ -817,41 +1135,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TableBucketSummary'
+          example: []
         continuationToken:
           type: string
           description: A continuation token for paginating the list.
+          example: example_value
     TableBucketSummary:
       type: object
       properties:
         arn:
           type: string
           description: The Amazon Resource Name (ARN) of the table bucket.
+          example: example_value
         name:
           type: string
           description: The name of the table bucket.
+          example: Example Title
         ownerAccountId:
           type: string
           description: The account ID of the owner of the table bucket.
+          example: '500123'
         createdAt:
           type: string
           format: date-time
           description: The date and time when the table bucket was created.
+          example: '2026-01-15T10:30:00Z'
     TableBucket:
       type: object
       properties:
         arn:
           type: string
           description: The Amazon Resource Name (ARN) of the table bucket.
+          example: example_value
         name:
           type: string
           description: The name of the table bucket.
+          example: Example Title
         ownerAccountId:
           type: string
           description: The account ID of the owner.
+          example: '500123'
         createdAt:
           type: string
           format: date-time
           description: The date and time when the table bucket was created.
+          example: '2026-01-15T10:30:00Z'
         unreferencedFileRemoval:
           type: object
           description: The unreferenced file removal settings for the table bucket.
@@ -859,8 +1187,8 @@ components:
             status:
               type: string
               enum:
-                - Enabled
-                - Disabled
+              - Enabled
+              - Disabled
             settings:
               type: object
               properties:
@@ -870,16 +1198,18 @@ components:
                 nonCurrentDays:
                   type: integer
                   description: Number of days for non-current data.
+          example: example_value
     CreateTableBucketRequest:
       type: object
       required:
-        - name
+      - name
       properties:
         name:
           type: string
           description: The name for the table bucket.
           minLength: 3
           maxLength: 63
+          example: Example Title
     ListNamespacesResponse:
       type: object
       properties:
@@ -899,8 +1229,10 @@ components:
                 type: string
               ownerAccountId:
                 type: string
+          example: []
         continuationToken:
           type: string
+          example: example_value
     NamespaceDetail:
       type: object
       properties:
@@ -908,15 +1240,20 @@ components:
           type: array
           items:
             type: string
+          example: []
         createdAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         createdBy:
           type: string
+          example: example_value
         ownerAccountId:
           type: string
+          example: '500123'
         tableBucketARN:
           type: string
+          example: example_value
     ListTablesResponse:
       type: object
       properties:
@@ -924,8 +1261,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TableSummary'
+          example: []
         continuationToken:
           type: string
+          example: example_value
     TableSummary:
       type: object
       properties:
@@ -933,90 +1272,113 @@ components:
           type: array
           items:
             type: string
+          example: []
         name:
           type: string
           description: The name of the table.
+          example: Example Title
         type:
           type: string
           description: The type of the table.
           enum:
-            - customer
-            - aws
+          - customer
+          - aws
+          example: customer
         tableARN:
           type: string
           description: The Amazon Resource Name (ARN) of the table.
+          example: example_value
         createdAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         modifiedAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     CreateTableRequest:
       type: object
       required:
-        - name
-        - format
+      - name
+      - format
       properties:
         name:
           type: string
           description: The name for the table.
           minLength: 1
           maxLength: 255
+          example: Example Title
         format:
           type: string
           description: The format of the table. Currently only ICEBERG is supported.
           enum:
-            - ICEBERG
+          - ICEBERG
+          example: ICEBERG
     TableDetail:
       type: object
       properties:
         name:
           type: string
           description: The name of the table.
+          example: Example Title
         tableARN:
           type: string
           description: The Amazon Resource Name (ARN) of the table.
+          example: example_value
         namespace:
           type: array
           items:
             type: string
+          example: []
         versionToken:
           type: string
           description: The version token of the table.
+          example: example_value
         metadataLocation:
           type: string
           description: The S3 URI location of the table metadata.
+          example: example_value
         warehouseLocation:
           type: string
           description: The S3 URI of the warehouse location for the table.
+          example: example_value
         createdAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         createdBy:
           type: string
+          example: example_value
         modifiedAt:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         modifiedBy:
           type: string
+          example: example_value
         managedByService:
           type: string
+          example: example_value
         ownerAccountId:
           type: string
+          example: '500123'
         type:
           type: string
           enum:
-            - customer
-            - aws
+          - customer
+          - aws
+          example: customer
         format:
           type: string
           enum:
-            - ICEBERG
+          - ICEBERG
+          example: ICEBERG
     TableBucketMaintenanceConfiguration:
       type: object
       properties:
         tableBucketARN:
           type: string
+          example: example_value
         configuration:
           type: object
           additionalProperties:
@@ -1025,29 +1387,31 @@ components:
               status:
                 type: string
                 enum:
-                  - Enabled
-                  - Disabled
+                - Enabled
+                - Disabled
               settings:
                 type: object
+          example: example_value
     PutTableBucketMaintenanceConfigurationRequest:
       type: object
       required:
-        - type
-        - value
+      - type
+      - value
       properties:
         type:
           type: string
           description: The type of maintenance configuration.
           enum:
-            - icebergUnreferencedFileRemoval
+          - icebergUnreferencedFileRemoval
+          example: icebergUnreferencedFileRemoval
         value:
           type: object
           properties:
             status:
               type: string
               enum:
-                - Enabled
-                - Disabled
+              - Enabled
+              - Disabled
             settings:
               type: object
               properties:
@@ -1055,11 +1419,13 @@ components:
                   type: integer
                 nonCurrentDays:
                   type: integer
+          example: example_value
     TableMaintenanceConfiguration:
       type: object
       properties:
         tableARN:
           type: string
+          example: example_value
         configuration:
           type: object
           additionalProperties:
@@ -1068,41 +1434,45 @@ components:
               status:
                 type: string
                 enum:
-                  - Enabled
-                  - Disabled
+                - Enabled
+                - Disabled
               settings:
                 type: object
+          example: example_value
     PutTableMaintenanceConfigurationRequest:
       type: object
       required:
-        - type
-        - value
+      - type
+      - value
       properties:
         type:
           type: string
           description: The type of maintenance configuration.
           enum:
-            - icebergCompaction
-            - icebergSnapshotManagement
+          - icebergCompaction
+          - icebergSnapshotManagement
+          example: icebergCompaction
         value:
           type: object
           properties:
             status:
               type: string
               enum:
-                - Enabled
-                - Disabled
+              - Enabled
+              - Disabled
             settings:
               type: object
               description: >-
                 Settings specific to the maintenance type. For icebergCompaction,
                 includes targetFileSizeMB. For icebergSnapshotManagement,
                 includes minSnapshotsToKeep and maxSnapshotAgeHours.
+          example: example_value
     TableMaintenanceJobStatus:
       type: object
       properties:
         tableARN:
           type: string
+          example: example_value
         status:
           type: object
           additionalProperties:
@@ -1111,19 +1481,22 @@ components:
               status:
                 type: string
                 enum:
-                  - Not_Yet_Run
-                  - Successful
-                  - Failed
-                  - Disabled
+                - Not_Yet_Run
+                - Successful
+                - Failed
+                - Disabled
               lastRunTimestamp:
                 type: string
                 format: date-time
               failureMessage:
                 type: string
+          example: example_value
     Error:
       type: object
       properties:
         errorCode:
           type: string
+          example: example_value
         message:
           type: string
+          example: example_value

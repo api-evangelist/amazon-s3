@@ -1,0 +1,18 @@
+{
+  "JobId": "500123",
+  "Description": "A sample description.",
+  "Operation": "example_value",
+  "Manifest": "example_value",
+  "Priority": 10,
+  "RoleArn": "example_value",
+  "Status": "example_value",
+  "CreationTime": "example_value",
+  "TerminationDate": "example_value",
+  "ProgressSummary": "example_value",
+  "FailureReasons": [],
+  "Report": "example_value",
+  "ConfirmationRequired": true,
+  "StatusUpdateReason": "example_value",
+  "SuspendedDate": "example_value",
+  "SuspendedCause": "example_value"
+}

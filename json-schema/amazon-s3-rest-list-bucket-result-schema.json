@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListBucketResult",
+  "type": "object",
+  "description": "Container for the result of the ListObjectsV2 operation.",
+  "properties": {
+    "IsTruncated": {
+      "type": "boolean",
+      "description": "Set to false if all of the results were returned. Set to true if more keys are available to return."
+    },
+    "Contents": {
+      "type": "array"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Bucket name."
+    },
+    "Prefix": {
+      "type": "string",
+      "description": "Keys that begin with the indicated prefix."
+    },
+    "Delimiter": {
+      "type": "string",
+      "description": "Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element."
+    },
+    "MaxKeys": {
+      "type": "integer",
+      "description": "Sets the maximum number of keys returned in the response."
+    },
+    "CommonPrefixes": {
+      "type": "array"
+    },
+    "EncodingType": {
+      "type": "string",
+      "description": "Encoding type used by Amazon S3 to encode object key names."
+    },
+    "KeyCount": {
+      "type": "integer",
+      "description": "The number of keys returned with this request."
+    },
+    "ContinuationToken": {
+      "type": "string",
+      "description": "If ContinuationToken was sent with the request, it is included in the response."
+    },
+    "NextContinuationToken": {
+      "type": "string",
+      "description": "NextContinuationToken is sent when isTruncated is true, which indicates that there are more keys to return."
+    },
+    "StartAfter": {
+      "type": "string",
+      "description": "If StartAfter was sent with the request, it is included in the response."
+    }
+  }
+}

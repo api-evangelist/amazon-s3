@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MultiRegionAccessPointReport",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "Alias": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Regions": {
+      "type": "array"
+    }
+  }
+}

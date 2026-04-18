@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListTableBucketsResponse",
+  "type": "object",
+  "properties": {
+    "tableBuckets": {
+      "type": "array"
+    },
+    "continuationToken": {
+      "type": "string"
+    }
+  }
+}

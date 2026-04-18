@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Delete",
+  "type": "object",
+  "description": "Container for the objects to delete.",
+  "properties": {
+    "Object": {
+      "type": "array",
+      "description": "Container element that describes the delete request for an object."
+    },
+    "Quiet": {
+      "type": "boolean",
+      "description": "Element to enable quiet mode for the request. When added, it must be set to true."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListJobsResult",
+  "type": "object",
+  "properties": {
+    "Jobs": {
+      "type": "array"
+    },
+    "NextToken": {
+      "type": "string"
+    }
+  }
+}

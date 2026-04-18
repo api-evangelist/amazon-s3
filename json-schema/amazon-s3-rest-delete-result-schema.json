@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeleteResult",
+  "type": "object",
+  "description": "Container for the response of the DeleteObjects operation.",
+  "properties": {
+    "Deleted": {
+      "type": "array"
+    },
+    "Error": {
+      "type": "array"
+    }
+  }
+}

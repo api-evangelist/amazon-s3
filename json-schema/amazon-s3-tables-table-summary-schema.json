@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TableSummary",
+  "type": "object",
+  "properties": {
+    "namespace": {
+      "type": "array"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the table."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the table."
+    },
+    "tableARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the table."
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "modifiedAt": {
+      "type": "string"
+    }
+  }
+}

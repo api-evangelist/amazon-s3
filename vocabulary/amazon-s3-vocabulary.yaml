@@ -1,0 +1,24 @@
+name: amazon-s3 API Vocabulary
+provider: amazon-s3
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 80
+schemas: 54
+tags:
+- Access Control
+- Access Grants
+- Access Points
+- Batch Operations
+- Bucket Configuration
+- Buckets
+- Multi-Region Access Points
+- Multipart Upload
+- Namespaces
+- Objects
+- Public Access Block
+- Storage Lens
+- Table Buckets
+- Table Maintenance
+- Table Policy
+- Tables
+- Tagging

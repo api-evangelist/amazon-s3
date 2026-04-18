@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PublicAccessBlockConfiguration",
+  "type": "object",
+  "properties": {
+    "BlockPublicAcls": {
+      "type": "boolean"
+    },
+    "IgnorePublicAcls": {
+      "type": "boolean"
+    },
+    "BlockPublicPolicy": {
+      "type": "boolean"
+    },
+    "RestrictPublicBuckets": {
+      "type": "boolean"
+    }
+  }
+}

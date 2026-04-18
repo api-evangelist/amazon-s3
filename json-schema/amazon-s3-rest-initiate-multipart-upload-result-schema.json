@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InitiateMultipartUploadResult",
+  "type": "object",
+  "description": "Container for response to initiate multipart upload.",
+  "properties": {
+    "Bucket": {
+      "type": "string",
+      "description": "The name of the bucket to which the multipart upload was initiated."
+    },
+    "Key": {
+      "type": "string",
+      "description": "Object key for which the multipart upload was initiated."
+    },
+    "UploadId": {
+      "type": "string",
+      "description": "ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations."
+    }
+  }
+}

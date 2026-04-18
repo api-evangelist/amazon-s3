@@ -1,0 +1,317 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon S3 Control API"
+  description: "Amazon S3 Control API for managing account-level settings, access points, Batch Operations jobs, Access Grants, Multi-Region Access Points, and Storage Lens configurations."
+  tags:
+    - Amazon
+    - AWS
+    - S3 Control
+    - Access Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: s3-control
+      baseUri: https://s3-control.us-east-1.amazonaws.com
+      description: "Amazon S3 Control API for account-level management"
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_ACCESS_KEY_ID}}"
+        placement: header
+      resources:
+        - name: access-points
+          path: /v20180820
+          description: "S3 access point management"
+          operations:
+            - name: list-access-points
+              method: GET
+              description: "List access points for an account"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-access-point
+              method: GET
+              description: "Get access point configuration"
+              inputParameters:
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Access point name or ARN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-access-point
+              method: PUT
+              description: "Create an access point"
+              inputParameters:
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Access point name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-access-point
+              method: DELETE
+              description: "Delete an access point"
+              inputParameters:
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Access point name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: batch-operations
+          path: /v20180820
+          description: "S3 Batch Operations job management"
+          operations:
+            - name: list-jobs
+              method: GET
+              description: "List Batch Operations jobs"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-job
+              method: POST
+              description: "Create a Batch Operations job"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: describe-job
+              method: GET
+              description: "Get details of a Batch Operations job"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Job ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-job-priority
+              method: POST
+              description: "Update priority of a Batch Operations job"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Job ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-job-status
+              method: POST
+              description: "Update status of a Batch Operations job"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Job ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: storage-lens
+          path: /v20180820
+          description: "S3 Storage Lens configuration management"
+          operations:
+            - name: list-storage-lens-configurations
+              method: GET
+              description: "List Storage Lens configurations"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-storage-lens-configuration
+              method: GET
+              description: "Get a Storage Lens configuration"
+              inputParameters:
+                - name: storagelensid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Storage Lens configuration ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-storage-lens-configuration
+              method: PUT
+              description: "Create or update a Storage Lens configuration"
+              inputParameters:
+                - name: storagelensid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Storage Lens configuration ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-storage-lens-configuration
+              method: DELETE
+              description: "Delete a Storage Lens configuration"
+              inputParameters:
+                - name: storagelensid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Storage Lens configuration ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: public-access-block
+          path: /v20180820
+          description: "Public access block settings"
+          operations:
+            - name: get-public-access-block
+              method: GET
+              description: "Get public access block configuration"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-public-access-block
+              method: PUT
+              description: "Set public access block configuration"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-public-access-block
+              method: DELETE
+              description: "Delete public access block configuration"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: s3-control-rest
+      resources:
+        - path: /v1/access-points
+          name: access-points
+          description: "S3 access points"
+          operations:
+            - method: GET
+              name: list-access-points
+              description: "List all access points"
+              call: "s3-control.list-access-points"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: s3-control-mcp
+      transport: http
+      tools:
+        - name: list-access-points
+          description: "List S3 access points"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-access-points"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-access-point
+          description: "Get an S3 access point configuration"
+          hints:
+            readOnly: true
+          call: "s3-control.get-access-point"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-jobs
+          description: "List S3 Batch Operations jobs"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-jobs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: describe-job
+          description: "Get details of a Batch Operations job"
+          hints:
+            readOnly: true
+          call: "s3-control.describe-job"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-storage-lens-configurations
+          description: "List S3 Storage Lens configurations"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-storage-lens-configurations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-public-access-block
+          description: "Get public access block settings"
+          hints:
+            readOnly: true
+          call: "s3-control.get-public-access-block"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,10 @@
+{
+  "Location": "example_value",
+  "Bucket": "example_value",
+  "Key": "example_value",
+  "ETag": "example_value",
+  "ChecksumCRC32": "example_value",
+  "ChecksumCRC32C": "example_value",
+  "ChecksumSHA1": "example_value",
+  "ChecksumSHA256": "example_value"
+}

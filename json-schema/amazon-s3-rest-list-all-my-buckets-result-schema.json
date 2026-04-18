@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListAllMyBucketsResult",
+  "type": "object",
+  "description": "Container for the result of the ListBuckets operation.",
+  "properties": {
+    "Buckets": {
+      "type": "object"
+    }
+  }
+}

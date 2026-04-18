@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CommonPrefix",
+  "type": "object",
+  "description": "Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.",
+  "properties": {
+    "Prefix": {
+      "type": "string",
+      "description": "Container for the specified common prefix."
+    }
+  }
+}

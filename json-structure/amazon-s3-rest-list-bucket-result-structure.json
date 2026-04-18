@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListBucketResult",
+  "type": "object",
+  "properties": {
+    "IsTruncated": {
+      "type": "boolean"
+    },
+    "Contents": {
+      "type": "array"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Prefix": {
+      "type": "string"
+    },
+    "Delimiter": {
+      "type": "string"
+    },
+    "MaxKeys": {
+      "type": "integer"
+    },
+    "CommonPrefixes": {
+      "type": "array"
+    },
+    "EncodingType": {
+      "type": "string"
+    },
+    "KeyCount": {
+      "type": "integer"
+    },
+    "ContinuationToken": {
+      "type": "string"
+    },
+    "NextContinuationToken": {
+      "type": "string"
+    },
+    "StartAfter": {
+      "type": "string"
+    }
+  }
+}

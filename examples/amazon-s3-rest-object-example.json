@@ -1,0 +1,9 @@
+{
+  "Key": "example_value",
+  "LastModified": "example_value",
+  "ETag": "example_value",
+  "Size": 10,
+  "StorageClass": "example_value",
+  "ChecksumAlgorithm": [],
+  "RestoreStatus": "example_value"
+}

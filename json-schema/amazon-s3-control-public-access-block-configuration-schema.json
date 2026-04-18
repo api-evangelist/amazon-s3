@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublicAccessBlockConfiguration",
+  "type": "object",
+  "description": "The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.",
+  "properties": {
+    "BlockPublicAcls": {
+      "type": "boolean",
+      "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account."
+    },
+    "IgnorePublicAcls": {
+      "type": "boolean",
+      "description": "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account."
+    },
+    "BlockPublicPolicy": {
+      "type": "boolean",
+      "description": "Specifies whether Amazon S3 should block public bucket policies for buckets in this account."
+    },
+    "RestrictPublicBuckets": {
+      "type": "boolean",
+      "description": "Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account."
+    }
+  }
+}

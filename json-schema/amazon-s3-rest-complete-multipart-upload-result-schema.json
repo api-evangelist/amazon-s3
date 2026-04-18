@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CompleteMultipartUploadResult",
+  "type": "object",
+  "description": "The container for the completed multipart upload response.",
+  "properties": {
+    "Location": {
+      "type": "string",
+      "description": "The URI that identifies the newly created object."
+    },
+    "Bucket": {
+      "type": "string",
+      "description": "The name of the bucket that contains the newly created object."
+    },
+    "Key": {
+      "type": "string",
+      "description": "The object key of the newly created object."
+    },
+    "ETag": {
+      "type": "string",
+      "description": "Entity tag that identifies the newly created object's data."
+    },
+    "ChecksumCRC32": {
+      "type": "string"
+    },
+    "ChecksumCRC32C": {
+      "type": "string"
+    },
+    "ChecksumSHA1": {
+      "type": "string"
+    },
+    "ChecksumSHA256": {
+      "type": "string"
+    }
+  }
+}

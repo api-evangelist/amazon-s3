@@ -1,0 +1,10 @@
+{
+  "Operation": "example_value",
+  "Report": "example_value",
+  "Manifest": "example_value",
+  "Priority": 10,
+  "RoleArn": "example_value",
+  "Description": "A sample description.",
+  "ConfirmationRequired": true,
+  "Tags": []
+}

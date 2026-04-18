@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Bucket",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "CreationDate": {
+      "type": "string"
+    }
+  }
+}

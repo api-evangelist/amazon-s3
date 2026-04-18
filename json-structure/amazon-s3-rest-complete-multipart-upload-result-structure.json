@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CompleteMultipartUploadResult",
+  "type": "object",
+  "properties": {
+    "Location": {
+      "type": "string"
+    },
+    "Bucket": {
+      "type": "string"
+    },
+    "Key": {
+      "type": "string"
+    },
+    "ETag": {
+      "type": "string"
+    },
+    "ChecksumCRC32": {
+      "type": "string"
+    },
+    "ChecksumCRC32C": {
+      "type": "string"
+    },
+    "ChecksumSHA1": {
+      "type": "string"
+    },
+    "ChecksumSHA256": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,470 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon S3 REST API"
+  description: "Amazon S3 REST API for object storage operations including bucket management, object CRUD, multipart uploads, access control, versioning, tagging, encryption, lifecycle, and CORS."
+  tags:
+    - Amazon
+    - AWS
+    - S3
+    - Object Storage
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: s3-rest
+      baseUri: https://s3.us-east-1.amazonaws.com
+      description: "Amazon S3 REST API for object storage"
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_ACCESS_KEY_ID}}"
+        placement: header
+      resources:
+        - name: buckets
+          path: /
+          description: "S3 bucket operations"
+          operations:
+            - name: list-buckets
+              method: GET
+              description: "List all buckets owned by the authenticated user"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-bucket
+              method: PUT
+              description: "Create a new S3 bucket"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Name of the bucket to create"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-bucket
+              method: DELETE
+              description: "Delete an S3 bucket"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Name of the bucket to delete"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: head-bucket
+              method: HEAD
+              description: "Check if a bucket exists and you have access"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Name of the bucket"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: objects
+          path: /
+          description: "S3 object operations"
+          operations:
+            - name: list-objects-v2
+              method: GET
+              description: "List objects in a bucket using v2 listing"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+                - name: prefix
+                  in: query
+                  type: string
+                  required: false
+                  description: "Prefix filter for object keys"
+                - name: max-keys
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of keys to return"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-object
+              method: GET
+              description: "Retrieve an object from S3"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+                - name: Key
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-object
+              method: PUT
+              description: "Upload an object to S3"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+                - name: Key
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-object
+              method: DELETE
+              description: "Delete an object from S3"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+                - name: Key
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: head-object
+              method: HEAD
+              description: "Get object metadata without the object body"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+                - name: Key
+                  in: path
+                  type: string
+                  required: true
+                  description: "Object key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: copy-object
+              method: PUT
+              description: "Copy an object within S3"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Destination bucket"
+                - name: Key
+                  in: path
+                  type: string
+                  required: true
+                  description: "Destination key"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-objects
+              method: POST
+              description: "Delete multiple objects from a bucket"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: bucket-config
+          path: /
+          description: "Bucket configuration operations"
+          operations:
+            - name: get-bucket-acl
+              method: GET
+              description: "Get bucket access control list"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-bucket-acl
+              method: PUT
+              description: "Set bucket access control list"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-bucket-versioning
+              method: GET
+              description: "Get bucket versioning configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-bucket-versioning
+              method: PUT
+              description: "Set bucket versioning configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-bucket-encryption
+              method: GET
+              description: "Get bucket encryption configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-bucket-encryption
+              method: PUT
+              description: "Set bucket encryption configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-bucket-lifecycle-configuration
+              method: GET
+              description: "Get bucket lifecycle configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: put-bucket-lifecycle-configuration
+              method: PUT
+              description: "Set bucket lifecycle configuration"
+              inputParameters:
+                - name: Bucket
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bucket name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: s3-rest-api
+      resources:
+        - path: /v1/buckets
+          name: buckets
+          description: "S3 buckets"
+          operations:
+            - method: GET
+              name: list-buckets
+              description: "List all S3 buckets"
+              call: "s3-rest.list-buckets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-bucket
+              description: "Create an S3 bucket"
+              call: "s3-rest.create-bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/buckets/{bucket}/objects
+          name: objects
+          description: "Objects in a bucket"
+          operations:
+            - method: GET
+              name: list-objects
+              description: "List objects in a bucket"
+              call: "s3-rest.list-objects-v2"
+              with:
+                Bucket: "rest.bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: s3-rest-mcp
+      transport: http
+      tools:
+        - name: list-buckets
+          description: "List all S3 buckets"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-rest.list-buckets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-bucket
+          description: "Create a new S3 bucket"
+          hints:
+            readOnly: false
+          call: "s3-rest.create-bucket"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-bucket
+          description: "Delete an S3 bucket"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "s3-rest.delete-bucket"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-objects
+          description: "List objects in an S3 bucket"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-rest.list-objects-v2"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-object
+          description: "Retrieve an object from S3"
+          hints:
+            readOnly: true
+          call: "s3-rest.get-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: put-object
+          description: "Upload an object to S3"
+          hints:
+            readOnly: false
+          call: "s3-rest.put-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-object
+          description: "Delete an object from S3"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "s3-rest.delete-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: copy-object
+          description: "Copy an object within S3"
+          hints:
+            readOnly: false
+          call: "s3-rest.copy-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."

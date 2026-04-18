@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error",
+  "type": "object",
+  "description": "Container for all error elements.",
+  "properties": {
+    "Code": {
+      "type": "string",
+      "description": "The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc."
+    },
+    "Message": {
+      "type": "string",
+      "description": "A human-readable description of the error."
+    },
+    "Resource": {
+      "type": "string",
+      "description": "The bucket or object that is involved in the error."
+    },
+    "RequestId": {
+      "type": "string",
+      "description": "Unique identifier for the request."
+    },
+    "HostId": {
+      "type": "string",
+      "description": "A special token to help AWS troubleshoot problems."
+    }
+  }
+}

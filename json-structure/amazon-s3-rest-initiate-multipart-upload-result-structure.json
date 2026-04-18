@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "InitiateMultipartUploadResult",
+  "type": "object",
+  "properties": {
+    "Bucket": {
+      "type": "string"
+    },
+    "Key": {
+      "type": "string"
+    },
+    "UploadId": {
+      "type": "string"
+    }
+  }
+}

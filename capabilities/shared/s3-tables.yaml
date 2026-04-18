@@ -1,0 +1,363 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon S3 Tables API"
+  description: "Amazon S3 Tables API for managing table buckets and tables stored in Apache Iceberg format, enabling structured tabular data storage within Amazon S3."
+  tags:
+    - Amazon
+    - AWS
+    - S3 Tables
+    - Apache Iceberg
+    - Data Lake
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: s3-tables
+      baseUri: https://s3tables.us-east-1.amazonaws.com
+      description: "Amazon S3 Tables API for tabular data storage"
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_ACCESS_KEY_ID}}"
+        placement: header
+      resources:
+        - name: table-buckets
+          path: /buckets
+          description: "S3 table bucket management"
+          operations:
+            - name: list-table-buckets
+              method: GET
+              description: "List table buckets for your account"
+              inputParameters:
+                - name: prefix
+                  in: query
+                  type: string
+                  required: false
+                  description: "Prefix filter for table buckets"
+                - name: maxBuckets
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of buckets to return"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-table-bucket
+              method: PUT
+              description: "Create a table bucket"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: get-table-bucket
+              method: GET
+              description: "Get table bucket details"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-table-bucket
+              method: DELETE
+              description: "Delete a table bucket"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: namespaces
+          path: /namespaces
+          description: "Namespace management within table buckets"
+          operations:
+            - name: list-namespaces
+              method: GET
+              description: "List namespaces in a table bucket"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-namespace
+              method: PUT
+              description: "Create a namespace"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  namespace: "{{tools.namespace}}"
+            - name: get-namespace
+              method: GET
+              description: "Get namespace details"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-namespace
+              method: DELETE
+              description: "Delete a namespace"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: tables
+          path: /tables
+          description: "Table management within namespaces"
+          operations:
+            - name: list-tables
+              method: GET
+              description: "List tables in a namespace"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-table
+              method: PUT
+              description: "Create a table"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-table
+              method: GET
+              description: "Get table details"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-table
+              method: DELETE
+              description: "Delete a table"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: rename-table
+              method: PUT
+              description: "Rename a table"
+              inputParameters:
+                - name: tableBucketARN
+                  in: path
+                  type: string
+                  required: true
+                  description: "Table bucket ARN"
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Namespace name"
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+                  description: "Current table name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: s3-tables-rest
+      resources:
+        - path: /v1/table-buckets
+          name: table-buckets
+          description: "S3 table buckets"
+          operations:
+            - method: GET
+              name: list-table-buckets
+              description: "List table buckets"
+              call: "s3-tables.list-table-buckets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: s3-tables-mcp
+      transport: http
+      tools:
+        - name: list-table-buckets
+          description: "List S3 table buckets"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-table-buckets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-table-bucket
+          description: "Get details of an S3 table bucket"
+          hints:
+            readOnly: true
+          call: "s3-tables.get-table-bucket"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-namespaces
+          description: "List namespaces in a table bucket"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-namespaces"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-tables
+          description: "List tables in a namespace"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-tables"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-table
+          description: "Get details of a table"
+          hints:
+            readOnly: true
+          call: "s3-tables.get-table"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."

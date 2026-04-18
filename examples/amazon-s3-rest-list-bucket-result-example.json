@@ -1,0 +1,14 @@
+{
+  "IsTruncated": true,
+  "Contents": [],
+  "Name": "Example Title",
+  "Prefix": "example_value",
+  "Delimiter": "example_value",
+  "MaxKeys": 10,
+  "CommonPrefixes": [],
+  "EncodingType": "example_value",
+  "KeyCount": 10,
+  "ContinuationToken": "example_value",
+  "NextContinuationToken": "example_value",
+  "StartAfter": "example_value"
+}

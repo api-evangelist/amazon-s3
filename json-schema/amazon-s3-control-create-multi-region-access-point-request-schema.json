@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateMultiRegionAccessPointRequest",
+  "type": "object",
+  "properties": {
+    "ClientToken": {
+      "type": "string",
+      "description": "An idempotency token used to identify the request."
+    },
+    "Details": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CopyObjectResult",
+  "type": "object",
+  "description": "Container for all response elements.",
+  "properties": {
+    "ETag": {
+      "type": "string",
+      "description": "Returns the ETag of the new object."
+    },
+    "LastModified": {
+      "type": "string",
+      "description": "Creation date of the object."
+    },
+    "ChecksumCRC32": {
+      "type": "string"
+    },
+    "ChecksumCRC32C": {
+      "type": "string"
+    },
+    "ChecksumSHA1": {
+      "type": "string"
+    },
+    "ChecksumSHA256": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "LifecycleRule",
+  "type": "object",
+  "properties": {
+    "ID": {
+      "type": "string"
+    },
+    "Filter": {
+      "type": "object"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "Expiration": {
+      "type": "object"
+    },
+    "Transition": {
+      "type": "array"
+    },
+    "NoncurrentVersionExpiration": {
+      "type": "object"
+    },
+    "NoncurrentVersionTransition": {
+      "type": "array"
+    },
+    "AbortIncompleteMultipartUpload": {
+      "type": "object"
+    }
+  }
+}

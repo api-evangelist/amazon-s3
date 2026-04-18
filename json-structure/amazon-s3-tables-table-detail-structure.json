@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TableDetail",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "tableARN": {
+      "type": "string"
+    },
+    "namespace": {
+      "type": "array"
+    },
+    "versionToken": {
+      "type": "string"
+    },
+    "metadataLocation": {
+      "type": "string"
+    },
+    "warehouseLocation": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedAt": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "managedByService": {
+      "type": "string"
+    },
+    "ownerAccountId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string"
+    }
+  }
+}

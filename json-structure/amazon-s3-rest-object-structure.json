@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Object",
+  "type": "object",
+  "properties": {
+    "Key": {
+      "type": "string"
+    },
+    "LastModified": {
+      "type": "string"
+    },
+    "ETag": {
+      "type": "string"
+    },
+    "Size": {
+      "type": "integer"
+    },
+    "StorageClass": {
+      "type": "string"
+    },
+    "ChecksumAlgorithm": {
+      "type": "array"
+    },
+    "RestoreStatus": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Grant",
+  "type": "object",
+  "description": "Container for grant information.",
+  "properties": {
+    "Grantee": {
+      "type": "object",
+      "description": "The person being granted permissions."
+    },
+    "Permission": {
+      "type": "string",
+      "description": "Specifies the permission given to the grantee."
+    }
+  }
+}

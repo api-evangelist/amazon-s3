@@ -1,0 +1,455 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon S3 Storage Management"
+  description: "Unified capability for Amazon S3 storage management combining object storage operations, account-level controls, and tabular data management. Used by cloud engineers, data engineers, and platform teams."
+  tags:
+    - Amazon
+    - AWS
+    - S3
+    - Storage Management
+    - Cloud Storage
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - import: s3-rest
+      location: ./shared/s3-rest.yaml
+    - import: s3-control
+      location: ./shared/s3-control.yaml
+    - import: s3-tables
+      location: ./shared/s3-tables.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: storage-management-api
+      description: "Unified REST API for Amazon S3 storage management."
+      resources:
+        - path: /v1/buckets
+          name: buckets
+          description: "S3 buckets"
+          operations:
+            - method: GET
+              name: list-buckets
+              description: "List all S3 buckets"
+              call: "s3-rest.list-buckets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-bucket
+              description: "Create an S3 bucket"
+              call: "s3-rest.create-bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/buckets/{bucket}
+          name: bucket
+          description: "Single S3 bucket"
+          operations:
+            - method: HEAD
+              name: head-bucket
+              description: "Check if a bucket exists"
+              call: "s3-rest.head-bucket"
+              with:
+                Bucket: "rest.bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-bucket
+              description: "Delete an S3 bucket"
+              call: "s3-rest.delete-bucket"
+              with:
+                Bucket: "rest.bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/buckets/{bucket}/objects
+          name: objects
+          description: "Objects in a bucket"
+          operations:
+            - method: GET
+              name: list-objects
+              description: "List objects in a bucket"
+              call: "s3-rest.list-objects-v2"
+              with:
+                Bucket: "rest.bucket"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/buckets/{bucket}/objects/{key}
+          name: object
+          description: "Single object"
+          operations:
+            - method: GET
+              name: get-object
+              description: "Get an object"
+              call: "s3-rest.get-object"
+              with:
+                Bucket: "rest.bucket"
+                Key: "rest.key"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: put-object
+              description: "Upload an object"
+              call: "s3-rest.put-object"
+              with:
+                Bucket: "rest.bucket"
+                Key: "rest.key"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-object
+              description: "Delete an object"
+              call: "s3-rest.delete-object"
+              with:
+                Bucket: "rest.bucket"
+                Key: "rest.key"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/access-points
+          name: access-points
+          description: "S3 access points"
+          operations:
+            - method: GET
+              name: list-access-points
+              description: "List S3 access points"
+              call: "s3-control.list-access-points"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/access-points/{name}
+          name: access-point
+          description: "Single access point"
+          operations:
+            - method: GET
+              name: get-access-point
+              description: "Get an access point"
+              call: "s3-control.get-access-point"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/batch-jobs
+          name: batch-jobs
+          description: "S3 Batch Operations jobs"
+          operations:
+            - method: GET
+              name: list-jobs
+              description: "List Batch Operations jobs"
+              call: "s3-control.list-jobs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-job
+              description: "Create a Batch Operations job"
+              call: "s3-control.create-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/batch-jobs/{id}
+          name: batch-job
+          description: "Single Batch Operations job"
+          operations:
+            - method: GET
+              name: describe-job
+              description: "Get details of a Batch Operations job"
+              call: "s3-control.describe-job"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/storage-lens
+          name: storage-lens
+          description: "Storage Lens configurations"
+          operations:
+            - method: GET
+              name: list-storage-lens
+              description: "List Storage Lens configurations"
+              call: "s3-control.list-storage-lens-configurations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/table-buckets
+          name: table-buckets
+          description: "S3 table buckets"
+          operations:
+            - method: GET
+              name: list-table-buckets
+              description: "List S3 table buckets"
+              call: "s3-tables.list-table-buckets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/table-buckets/{arn}/tables
+          name: tables
+          description: "Tables in a table bucket"
+          operations:
+            - method: GET
+              name: list-tables
+              description: "List tables in a namespace"
+              call: "s3-tables.list-tables"
+              with:
+                tableBucketARN: "rest.arn"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: storage-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Amazon S3 storage management."
+      tools:
+        - name: list-buckets
+          description: "List all S3 buckets owned by the account"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-rest.list-buckets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-bucket
+          description: "Create a new S3 bucket"
+          hints:
+            readOnly: false
+          call: "s3-rest.create-bucket"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-bucket
+          description: "Delete an S3 bucket"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "s3-rest.delete-bucket"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-objects
+          description: "List objects in an S3 bucket"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-rest.list-objects-v2"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-object
+          description: "Retrieve an object from S3"
+          hints:
+            readOnly: true
+          call: "s3-rest.get-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: put-object
+          description: "Upload an object to S3"
+          hints:
+            readOnly: false
+          call: "s3-rest.put-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-object
+          description: "Delete an object from S3"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "s3-rest.delete-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: copy-object
+          description: "Copy an object within S3"
+          hints:
+            readOnly: false
+          call: "s3-rest.copy-object"
+          with:
+            Bucket: "tools.bucket"
+            Key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-objects
+          description: "Delete multiple objects from an S3 bucket"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "s3-rest.delete-objects"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-bucket-versioning
+          description: "Get versioning configuration for an S3 bucket"
+          hints:
+            readOnly: true
+          call: "s3-rest.get-bucket-versioning"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-bucket-encryption
+          description: "Get encryption configuration for an S3 bucket"
+          hints:
+            readOnly: true
+          call: "s3-rest.get-bucket-encryption"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-bucket-lifecycle
+          description: "Get lifecycle configuration for an S3 bucket"
+          hints:
+            readOnly: true
+          call: "s3-rest.get-bucket-lifecycle-configuration"
+          with:
+            Bucket: "tools.bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-access-points
+          description: "List S3 access points for the account"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-access-points"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-access-point
+          description: "Get configuration of an S3 access point"
+          hints:
+            readOnly: true
+          call: "s3-control.get-access-point"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-batch-jobs
+          description: "List S3 Batch Operations jobs"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-jobs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: describe-batch-job
+          description: "Get details of a Batch Operations job"
+          hints:
+            readOnly: true
+          call: "s3-control.describe-job"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-storage-lens-configs
+          description: "List S3 Storage Lens configurations"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-control.list-storage-lens-configurations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-public-access-block
+          description: "Get public access block settings for the account"
+          hints:
+            readOnly: true
+          call: "s3-control.get-public-access-block"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-table-buckets
+          description: "List S3 table buckets"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-table-buckets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-table-bucket
+          description: "Get details of an S3 table bucket"
+          hints:
+            readOnly: true
+          call: "s3-tables.get-table-bucket"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-namespaces
+          description: "List namespaces in a table bucket"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-namespaces"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-tables
+          description: "List tables in a namespace"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "s3-tables.list-tables"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-table
+          description: "Get details of a table"
+          hints:
+            readOnly: true
+          call: "s3-tables.get-table"
+          with:
+            tableBucketARN: "tools.table_bucket_arn"
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."

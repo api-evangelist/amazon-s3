@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CompleteMultipartUpload",
+  "type": "object",
+  "description": "The container for the completed multipart upload request.",
+  "properties": {
+    "Part": {
+      "type": "array"
+    }
+  }
+}

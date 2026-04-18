@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "JobDescriptor",
+  "type": "object",
+  "properties": {
+    "JobId": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Operation": {
+      "type": "object"
+    },
+    "Manifest": {
+      "type": "object"
+    },
+    "Priority": {
+      "type": "integer"
+    },
+    "RoleArn": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "CreationTime": {
+      "type": "string"
+    },
+    "TerminationDate": {
+      "type": "string"
+    },
+    "ProgressSummary": {
+      "type": "object"
+    },
+    "FailureReasons": {
+      "type": "array"
+    },
+    "Report": {
+      "type": "object"
+    },
+    "ConfirmationRequired": {
+      "type": "boolean"
+    },
+    "StatusUpdateReason": {
+      "type": "string"
+    },
+    "SuspendedDate": {
+      "type": "string"
+    },
+    "SuspendedCause": {
+      "type": "string"
+    }
+  }
+}

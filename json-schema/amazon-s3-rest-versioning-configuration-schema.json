@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VersioningConfiguration",
+  "type": "object",
+  "description": "Container for setting the versioning state.",
+  "properties": {
+    "Status": {
+      "type": "string",
+      "description": "The versioning state of the bucket."
+    },
+    "MFADelete": {
+      "type": "string",
+      "description": "Specifies whether MFA delete is enabled in the bucket versioning configuration."
+    }
+  }
+}

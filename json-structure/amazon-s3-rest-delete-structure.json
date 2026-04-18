@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Delete",
+  "type": "object",
+  "properties": {
+    "Object": {
+      "type": "array"
+    },
+    "Quiet": {
+      "type": "boolean"
+    }
+  }
+}

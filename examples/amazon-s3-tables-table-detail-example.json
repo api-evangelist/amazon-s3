@@ -1,0 +1,16 @@
+{
+  "name": "Example Title",
+  "tableARN": "example_value",
+  "namespace": [],
+  "versionToken": "example_value",
+  "metadataLocation": "example_value",
+  "warehouseLocation": "example_value",
+  "createdAt": "example_value",
+  "createdBy": "example_value",
+  "modifiedAt": "example_value",
+  "modifiedBy": "example_value",
+  "managedByService": "example_value",
+  "ownerAccountId": "500123",
+  "type": "example_value",
+  "format": "example_value"
+}

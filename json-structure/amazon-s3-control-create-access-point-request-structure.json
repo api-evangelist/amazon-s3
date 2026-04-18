@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CreateAccessPointRequest",
+  "type": "object",
+  "properties": {
+    "Bucket": {
+      "type": "string"
+    },
+    "VpcConfiguration": {
+      "type": "object"
+    },
+    "BucketAccountId": {
+      "type": "string"
+    }
+  }
+}

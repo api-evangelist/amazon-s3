@@ -1,0 +1,11 @@
+{
+  "Name": "Example Title",
+  "Bucket": "example_value",
+  "NetworkOrigin": "example_value",
+  "VpcConfiguration": "example_value",
+  "CreationDate": "example_value",
+  "Alias": "example_value",
+  "AccessPointArn": "example_value",
+  "Endpoints": "example_value",
+  "BucketAccountId": "500123"
+}
