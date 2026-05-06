@@ -4,99 +4,68 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Amazon S3
 providerId: amazon-s3
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Archive
-  - AWS
-  - Backup
-  - Cloud Storage
-  - Data Storage
-  - Object Storage
-  - Scalable Storage
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Amazon S3 API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+  - AWS
+  - Object Storage
+  - S3
+description: Amazon S3 enforces request limits at the partitioned-prefix level inside a bucket - 3,500
+  PUT/COPY/POST/DELETE per second and 5,500 GET/HEAD per second per prefix - and scales nearly linearly
+  by sharding across prefixes. Bucket-level operations (CreateBucket, DeleteBucket, etc.) follow the
+  AWS API throttling envelope. Use exponential backoff with jitter on SlowDown (503) responses.
+sources:
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance.html
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/troubleshooting.html
+  - https://docs.aws.amazon.com/general/latest/gr/api-retries.html
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
+  requestId: x-amz-request-id
   retryAfter: Retry-After
-  policy: RateLimit-Policy
 responseCodes:
-  throttled: 429
+  throttled: 503
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Amazon S3 REST API
-      - Amazon S3 Control API
-      - Amazon S3 Tables API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Amazon S3 REST API
-      - Amazon S3 Control API
-      - Amazon S3 Tables API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Amazon S3 REST API
-      - Amazon S3 Control API
-      - Amazon S3 Tables API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Amazon S3 REST API
-      - Amazon S3 Control API
-      - Amazon S3 Tables API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Amazon S3 REST API
-      - Amazon S3 Control API
-      - Amazon S3 Tables API
+  - name: PUT/COPY/POST/DELETE per prefix
+    scope: bucket-prefix
+    metric: requests_per_second
+    limit: 3500
+    timeFrame: second
+    notes: Per partitioned prefix; shard across prefixes to scale linearly.
+  - name: GET/HEAD per prefix
+    scope: bucket-prefix
+    metric: requests_per_second
+    limit: 5500
+    timeFrame: second
+    notes: Per partitioned prefix.
+  - name: Bucket count per account
+    scope: account
+    metric: count
+    limit: 10000
+    notes: Soft limit; raisable via Service Quotas (default ranges 100 to 10,000).
+  - name: S3 Express One Zone directory bucket
+    scope: bucket
+    metric: requests_per_second
+    limit: see S3 Express One Zone docs
+    notes: Higher per-bucket limits (millions of requests/second) on Express One Zone.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Backoff on SlowDown
+    description: SlowDown (HTTP 503) responses indicate prefix-level throttling. Retry with exponential
+      backoff and jitter; AWS SDKs default to standard retry mode.
+  - name: Prefix sharding
+    description: For very high throughput, distribute keys across prefixes (e.g. random hash prefixes)
+      to multiply throughput.
+  - name: Multipart upload
+    description: For files larger than 100 MB, use multipart upload (parallel parts) to reduce wall-clock
+      time and benefit from prefix-level concurrency.
+  - name: Quota increases
+    description: Bucket-count, multipart upload, and bucket policy limits are soft and raisable via Service
+      Quotas.
 maintainers:
-  - FN: Kin Lane
+  - name: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+  - name: Amazon Web Services
+    email: support@aws.amazon.com
+    url: https://aws.amazon.com
