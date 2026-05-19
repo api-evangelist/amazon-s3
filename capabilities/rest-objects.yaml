@@ -1,0 +1,831 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 REST API — Objects
+  description: 'Amazon S3 REST API — Objects. 7 operations. Lead operation: Amazon S3 Get Object. Self-contained Naftiko capability
+    covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Objects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-objects
+    baseUri: https://s3.{region}.amazonaws.com
+    description: Amazon S3 REST API — Objects business capability. Self-contained, no shared references.
+    resources:
+    - name: Bucket-Key+
+      path: /{Bucket}/{Key+}
+      operations:
+      - name: getobject
+        method: GET
+        description: Amazon S3 Get Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: response-cache-control
+          in: query
+          type: string
+          description: Sets the Cache-Control header of the response.
+        - name: response-content-disposition
+          in: query
+          type: string
+          description: Sets the Content-Disposition header of the response.
+        - name: response-content-encoding
+          in: query
+          type: string
+          description: Sets the Content-Encoding header of the response.
+        - name: response-content-language
+          in: query
+          type: string
+          description: Sets the Content-Language header of the response.
+        - name: response-content-type
+          in: query
+          type: string
+          description: Sets the Content-Type header of the response.
+        - name: response-expires
+          in: query
+          type: string
+          description: Sets the Expires header of the response.
+        - name: versionId
+          in: query
+          type: string
+          description: VersionId used to reference a specific version of the object.
+        - name: partNumber
+          in: query
+          type: integer
+          description: Part number of the object being read for a multipart object.
+        - name: Range
+          in: header
+          type: string
+          description: Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.
+        - name: If-Match
+          in: header
+          type: string
+          description: Return the object only if its entity tag (ETag) matches the specified tag.
+        - name: If-None-Match
+          in: header
+          type: string
+          description: Return the object only if its entity tag (ETag) differs from the specified tag.
+        - name: If-Modified-Since
+          in: header
+          type: string
+          description: Return the object only if it has been modified since the specified time.
+        - name: If-Unmodified-Since
+          in: header
+          type: string
+          description: Return the object only if it has not been modified since the specified time.
+        - name: x-amz-server-side-encryption-customer-algorithm
+          in: header
+          type: string
+          description: Specifies the algorithm to use to when decrypting the object (AES256).
+        - name: x-amz-server-side-encryption-customer-key
+          in: header
+          type: string
+          description: Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.
+        - name: x-amz-server-side-encryption-customer-key-MD5
+          in: header
+          type: string
+          description: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows that they will be charged for the request.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-checksum-mode
+          in: header
+          type: string
+          description: To retrieve the checksum, this mode must be enabled. Set to ENABLED.
+      - name: putobject
+        method: PUT
+        description: Amazon S3 Put Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Cache-Control
+          in: header
+          type: string
+          description: Can be used to specify caching behavior along the request/reply chain.
+        - name: Content-Disposition
+          in: header
+          type: string
+          description: Specifies presentational information for the object.
+        - name: Content-Encoding
+          in: header
+          type: string
+          description: Specifies what content encodings have been applied to the object.
+        - name: Content-Language
+          in: header
+          type: string
+          description: The language the content is in.
+        - name: Content-Length
+          in: header
+          type: integer
+          description: Size of the body in bytes. This parameter is useful when the size of the body cannot be determined
+            automatically.
+        - name: Content-MD5
+          in: header
+          type: string
+          description: The base64-encoded 128-bit MD5 digest of the message.
+        - name: Content-Type
+          in: header
+          type: string
+          description: A standard MIME type describing the format of the contents.
+        - name: Expires
+          in: header
+          type: string
+          description: The date and time at which the object is no longer cacheable.
+        - name: x-amz-acl
+          in: header
+          type: string
+          description: The canned ACL to apply to the object.
+        - name: x-amz-storage-class
+          in: header
+          type: string
+          description: Amazon S3 storage class to use for storing the object.
+        - name: x-amz-server-side-encryption
+          in: header
+          type: string
+          description: The server-side encryption algorithm used when storing this object in Amazon S3.
+        - name: x-amz-server-side-encryption-aws-kms-key-id
+          in: header
+          type: string
+          description: If x-amz-server-side-encryption is aws:kms or aws:kms:dsse, specifies the ID of the KMS key.
+        - name: x-amz-server-side-encryption-context
+          in: header
+          type: string
+          description: Specifies the AWS KMS Encryption Context to use for object encryption.
+        - name: x-amz-server-side-encryption-bucket-key-enabled
+          in: header
+          type: boolean
+          description: Specifies whether S3 should use an S3 Bucket Key for object encryption with server-side encryption
+            using AWS KMS.
+        - name: x-amz-server-side-encryption-customer-algorithm
+          in: header
+          type: string
+          description: Specifies the algorithm to use to encrypt the object (AES256).
+        - name: x-amz-server-side-encryption-customer-key
+          in: header
+          type: string
+          description: Specifies the customer-provided encryption key.
+        - name: x-amz-server-side-encryption-customer-key-MD5
+          in: header
+          type: string
+          description: Specifies the 128-bit MD5 digest of the encryption key.
+        - name: x-amz-tagging
+          in: header
+          type: string
+          description: The tag-set for the object. Must be encoded as URL query parameters.
+        - name: x-amz-object-lock-mode
+          in: header
+          type: string
+          description: The Object Lock mode that you want to apply to the uploaded object.
+        - name: x-amz-object-lock-retain-until-date
+          in: header
+          type: string
+          description: The date and time when you want the Object Lock retention period to expire.
+        - name: x-amz-object-lock-legal-hold
+          in: header
+          type: string
+          description: Specifies whether a legal hold will be applied to the uploaded object.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-checksum-algorithm
+          in: header
+          type: string
+          description: Indicates the algorithm used to create the checksum for the object.
+        - name: x-amz-checksum-crc32
+          in: header
+          type: string
+          description: The base64-encoded, 32-bit CRC32 checksum of the object.
+        - name: x-amz-checksum-crc32c
+          in: header
+          type: string
+          description: The base64-encoded, 32-bit CRC32C checksum of the object.
+        - name: x-amz-checksum-sha1
+          in: header
+          type: string
+          description: The base64-encoded, 160-bit SHA-1 digest of the object.
+        - name: x-amz-checksum-sha256
+          in: header
+          type: string
+          description: The base64-encoded, 256-bit SHA-256 digest of the object.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteobject
+        method: DELETE
+        description: Amazon S3 Delete Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: versionId
+          in: query
+          type: string
+          description: VersionId used to reference a specific version of the object.
+        - name: x-amz-mfa
+          in: header
+          type: string
+          description: 'The concatenation of the authentication device serial number, a space, and the value displayed on
+            your authentication device. Required for permanently deleting '
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: x-amz-bypass-governance-retention
+          in: header
+          type: boolean
+          description: Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+      - name: headobject
+        method: HEAD
+        description: Amazon S3 Head Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: versionId
+          in: query
+          type: string
+          description: VersionId used to reference a specific version of the object.
+        - name: Range
+          in: header
+          type: string
+          description: HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return
+            the Content-Length for the range.
+        - name: If-Match
+          in: header
+          type: string
+          description: Return the object only if its ETag matches the specified tag.
+        - name: If-None-Match
+          in: header
+          type: string
+          description: Return the object only if its ETag differs from the specified tag.
+        - name: If-Modified-Since
+          in: header
+          type: string
+          description: Return the object only if modified since the specified time.
+        - name: If-Unmodified-Since
+          in: header
+          type: string
+          description: Return the object only if not modified since the specified time.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: x-amz-checksum-mode
+          in: header
+          type: string
+          description: To retrieve the checksum, set to ENABLED.
+        - name: partNumber
+          in: query
+          type: integer
+          description: Part number of the object being read for multipart objects.
+    - name: Bucket-Key+}?copy
+      path: /{Bucket}/{Key+}?copy
+      operations:
+      - name: copyobject
+        method: PUT
+        description: Amazon S3 Copy Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-copy-source
+          in: header
+          type: string
+          description: Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode
+            the path.
+          required: true
+        - name: x-amz-copy-source-if-match
+          in: header
+          type: string
+          description: Copies the object only if its ETag matches the specified value.
+        - name: x-amz-copy-source-if-none-match
+          in: header
+          type: string
+          description: Copies the object only if its ETag does not match the specified value.
+        - name: x-amz-copy-source-if-modified-since
+          in: header
+          type: string
+          description: Copies the object only if it has been modified since the specified time.
+        - name: x-amz-copy-source-if-unmodified-since
+          in: header
+          type: string
+          description: Copies the object only if it has not been modified since the specified time.
+        - name: x-amz-metadata-directive
+          in: header
+          type: string
+          description: Specifies whether the metadata is copied from the source object or replaced with metadata provided
+            in the request.
+        - name: x-amz-tagging-directive
+          in: header
+          type: string
+          description: Specifies whether the object tag-set is copied or replaced.
+        - name: x-amz-server-side-encryption
+          in: header
+          type: string
+          description: The server-side encryption algorithm used.
+        - name: x-amz-storage-class
+          in: header
+          type: string
+          description: Amazon S3 storage class for the destination object.
+        - name: x-amz-acl
+          in: header
+          type: string
+          description: The canned ACL to apply to the object.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-source-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected source bucket owner.
+    - name: Bucket}?delete
+      path: /{Bucket}?delete
+      operations:
+      - name: deleteobjects
+        method: POST
+        description: Amazon S3 Delete Objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-mfa
+          in: header
+          type: string
+          description: The concatenation of the authentication device serial number, a space, and the value displayed on your
+            authentication device.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: x-amz-bypass-governance-retention
+          in: header
+          type: boolean
+          description: Indicates whether S3 Object Lock should bypass governance-mode restrictions.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-checksum-algorithm
+          in: header
+          type: string
+          description: The algorithm used to create the checksum.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: Bucket}?list-type=2
+      path: /{Bucket}?list-type=2
+      operations:
+      - name: listobjectsv2
+        method: GET
+        description: Amazon S3 List Objects V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: list-type
+          in: query
+          type: integer
+          description: Set to 2 to use the ListObjectsV2 API.
+          required: true
+        - name: continuation-token
+          in: query
+          type: string
+          description: ContinuationToken indicates to S3 that the list is being continued on this bucket with a token returned
+            in a previous response.
+        - name: delimiter
+          in: query
+          type: string
+          description: A delimiter is a character that you use to group keys. All keys that contain the same string between
+            the prefix and the first occurrence of the delimiter are gr
+        - name: encoding-type
+          in: query
+          type: string
+          description: Encoding type used by Amazon S3 to encode object keys in the response.
+        - name: fetch-owner
+          in: query
+          type: boolean
+          description: Set to true to include the owner field in the response.
+        - name: max-keys
+          in: query
+          type: integer
+          description: Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000
+            key names.
+        - name: prefix
+          in: query
+          type: string
+          description: Limits the response to keys that begin with the specified prefix.
+        - name: start-after
+          in: query
+          type: string
+          description: StartAfter is where you want Amazon S3 to start listing from. S3 starts listing after this specified
+            key.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged for the request.
+        - name: x-amz-optional-object-attributes
+          in: header
+          type: string
+          description: Specifies the optional metadata attributes to include in the response.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-objects-rest
+    port: 8080
+    description: REST adapter for Amazon S3 REST API — Objects. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{bucket}/{key}
+      name: bucket-key
+      description: REST surface for Bucket-Key+.
+      operations:
+      - method: GET
+        name: getobject
+        description: Amazon S3 Get Object
+        call: rest-objects.getobject
+        with:
+          response-cache-control: rest.response-cache-control
+          response-content-disposition: rest.response-content-disposition
+          response-content-encoding: rest.response-content-encoding
+          response-content-language: rest.response-content-language
+          response-content-type: rest.response-content-type
+          response-expires: rest.response-expires
+          versionId: rest.versionId
+          partNumber: rest.partNumber
+          Range: rest.Range
+          If-Match: rest.If-Match
+          If-None-Match: rest.If-None-Match
+          If-Modified-Since: rest.If-Modified-Since
+          If-Unmodified-Since: rest.If-Unmodified-Since
+          x-amz-server-side-encryption-customer-algorithm: rest.x-amz-server-side-encryption-customer-algorithm
+          x-amz-server-side-encryption-customer-key: rest.x-amz-server-side-encryption-customer-key
+          x-amz-server-side-encryption-customer-key-MD5: rest.x-amz-server-side-encryption-customer-key-MD5
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-checksum-mode: rest.x-amz-checksum-mode
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putobject
+        description: Amazon S3 Put Object
+        call: rest-objects.putobject
+        with:
+          Cache-Control: rest.Cache-Control
+          Content-Disposition: rest.Content-Disposition
+          Content-Encoding: rest.Content-Encoding
+          Content-Language: rest.Content-Language
+          Content-Length: rest.Content-Length
+          Content-MD5: rest.Content-MD5
+          Content-Type: rest.Content-Type
+          Expires: rest.Expires
+          x-amz-acl: rest.x-amz-acl
+          x-amz-storage-class: rest.x-amz-storage-class
+          x-amz-server-side-encryption: rest.x-amz-server-side-encryption
+          x-amz-server-side-encryption-aws-kms-key-id: rest.x-amz-server-side-encryption-aws-kms-key-id
+          x-amz-server-side-encryption-context: rest.x-amz-server-side-encryption-context
+          x-amz-server-side-encryption-bucket-key-enabled: rest.x-amz-server-side-encryption-bucket-key-enabled
+          x-amz-server-side-encryption-customer-algorithm: rest.x-amz-server-side-encryption-customer-algorithm
+          x-amz-server-side-encryption-customer-key: rest.x-amz-server-side-encryption-customer-key
+          x-amz-server-side-encryption-customer-key-MD5: rest.x-amz-server-side-encryption-customer-key-MD5
+          x-amz-tagging: rest.x-amz-tagging
+          x-amz-object-lock-mode: rest.x-amz-object-lock-mode
+          x-amz-object-lock-retain-until-date: rest.x-amz-object-lock-retain-until-date
+          x-amz-object-lock-legal-hold: rest.x-amz-object-lock-legal-hold
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-checksum-algorithm: rest.x-amz-checksum-algorithm
+          x-amz-checksum-crc32: rest.x-amz-checksum-crc32
+          x-amz-checksum-crc32c: rest.x-amz-checksum-crc32c
+          x-amz-checksum-sha1: rest.x-amz-checksum-sha1
+          x-amz-checksum-sha256: rest.x-amz-checksum-sha256
+          x-amz-request-payer: rest.x-amz-request-payer
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteobject
+        description: Amazon S3 Delete Object
+        call: rest-objects.deleteobject
+        with:
+          versionId: rest.versionId
+          x-amz-mfa: rest.x-amz-mfa
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-bypass-governance-retention: rest.x-amz-bypass-governance-retention
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: headobject
+        description: Amazon S3 Head Object
+        call: rest-objects.headobject
+        with:
+          versionId: rest.versionId
+          Range: rest.Range
+          If-Match: rest.If-Match
+          If-None-Match: rest.If-None-Match
+          If-Modified-Since: rest.If-Modified-Since
+          If-Unmodified-Since: rest.If-Unmodified-Since
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-checksum-mode: rest.x-amz-checksum-mode
+          partNumber: rest.partNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{bucket}/key-copy
+      name: bucket-key-copy
+      description: REST surface for Bucket-Key+}?copy.
+      operations:
+      - method: PUT
+        name: copyobject
+        description: Amazon S3 Copy Object
+        call: rest-objects.copyobject
+        with:
+          x-amz-copy-source: rest.x-amz-copy-source
+          x-amz-copy-source-if-match: rest.x-amz-copy-source-if-match
+          x-amz-copy-source-if-none-match: rest.x-amz-copy-source-if-none-match
+          x-amz-copy-source-if-modified-since: rest.x-amz-copy-source-if-modified-since
+          x-amz-copy-source-if-unmodified-since: rest.x-amz-copy-source-if-unmodified-since
+          x-amz-metadata-directive: rest.x-amz-metadata-directive
+          x-amz-tagging-directive: rest.x-amz-tagging-directive
+          x-amz-server-side-encryption: rest.x-amz-server-side-encryption
+          x-amz-storage-class: rest.x-amz-storage-class
+          x-amz-acl: rest.x-amz-acl
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-source-expected-bucket-owner: rest.x-amz-source-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bucket-delete
+      name: bucket-delete
+      description: REST surface for Bucket}?delete.
+      operations:
+      - method: POST
+        name: deleteobjects
+        description: Amazon S3 Delete Objects
+        call: rest-objects.deleteobjects
+        with:
+          x-amz-mfa: rest.x-amz-mfa
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-bypass-governance-retention: rest.x-amz-bypass-governance-retention
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-checksum-algorithm: rest.x-amz-checksum-algorithm
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bucket-list-type-2
+      name: bucket-list-type-2
+      description: REST surface for Bucket}?list-type=2.
+      operations:
+      - method: GET
+        name: listobjectsv2
+        description: Amazon S3 List Objects V2
+        call: rest-objects.listobjectsv2
+        with:
+          list-type: rest.list-type
+          continuation-token: rest.continuation-token
+          delimiter: rest.delimiter
+          encoding-type: rest.encoding-type
+          fetch-owner: rest.fetch-owner
+          max-keys: rest.max-keys
+          prefix: rest.prefix
+          start-after: rest.start-after
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-optional-object-attributes: rest.x-amz-optional-object-attributes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-objects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 REST API — Objects. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-s3-get-object
+      description: Amazon S3 Get Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-objects.getobject
+      with:
+        response-cache-control: tools.response-cache-control
+        response-content-disposition: tools.response-content-disposition
+        response-content-encoding: tools.response-content-encoding
+        response-content-language: tools.response-content-language
+        response-content-type: tools.response-content-type
+        response-expires: tools.response-expires
+        versionId: tools.versionId
+        partNumber: tools.partNumber
+        Range: tools.Range
+        If-Match: tools.If-Match
+        If-None-Match: tools.If-None-Match
+        If-Modified-Since: tools.If-Modified-Since
+        If-Unmodified-Since: tools.If-Unmodified-Since
+        x-amz-server-side-encryption-customer-algorithm: tools.x-amz-server-side-encryption-customer-algorithm
+        x-amz-server-side-encryption-customer-key: tools.x-amz-server-side-encryption-customer-key
+        x-amz-server-side-encryption-customer-key-MD5: tools.x-amz-server-side-encryption-customer-key-MD5
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-checksum-mode: tools.x-amz-checksum-mode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-put-object
+      description: Amazon S3 Put Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-objects.putobject
+      with:
+        Cache-Control: tools.Cache-Control
+        Content-Disposition: tools.Content-Disposition
+        Content-Encoding: tools.Content-Encoding
+        Content-Language: tools.Content-Language
+        Content-Length: tools.Content-Length
+        Content-MD5: tools.Content-MD5
+        Content-Type: tools.Content-Type
+        Expires: tools.Expires
+        x-amz-acl: tools.x-amz-acl
+        x-amz-storage-class: tools.x-amz-storage-class
+        x-amz-server-side-encryption: tools.x-amz-server-side-encryption
+        x-amz-server-side-encryption-aws-kms-key-id: tools.x-amz-server-side-encryption-aws-kms-key-id
+        x-amz-server-side-encryption-context: tools.x-amz-server-side-encryption-context
+        x-amz-server-side-encryption-bucket-key-enabled: tools.x-amz-server-side-encryption-bucket-key-enabled
+        x-amz-server-side-encryption-customer-algorithm: tools.x-amz-server-side-encryption-customer-algorithm
+        x-amz-server-side-encryption-customer-key: tools.x-amz-server-side-encryption-customer-key
+        x-amz-server-side-encryption-customer-key-MD5: tools.x-amz-server-side-encryption-customer-key-MD5
+        x-amz-tagging: tools.x-amz-tagging
+        x-amz-object-lock-mode: tools.x-amz-object-lock-mode
+        x-amz-object-lock-retain-until-date: tools.x-amz-object-lock-retain-until-date
+        x-amz-object-lock-legal-hold: tools.x-amz-object-lock-legal-hold
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-checksum-algorithm: tools.x-amz-checksum-algorithm
+        x-amz-checksum-crc32: tools.x-amz-checksum-crc32
+        x-amz-checksum-crc32c: tools.x-amz-checksum-crc32c
+        x-amz-checksum-sha1: tools.x-amz-checksum-sha1
+        x-amz-checksum-sha256: tools.x-amz-checksum-sha256
+        x-amz-request-payer: tools.x-amz-request-payer
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-object
+      description: Amazon S3 Delete Object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-objects.deleteobject
+      with:
+        versionId: tools.versionId
+        x-amz-mfa: tools.x-amz-mfa
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-bypass-governance-retention: tools.x-amz-bypass-governance-retention
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-head-object
+      description: Amazon S3 Head Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-objects.headobject
+      with:
+        versionId: tools.versionId
+        Range: tools.Range
+        If-Match: tools.If-Match
+        If-None-Match: tools.If-None-Match
+        If-Modified-Since: tools.If-Modified-Since
+        If-Unmodified-Since: tools.If-Unmodified-Since
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-checksum-mode: tools.x-amz-checksum-mode
+        partNumber: tools.partNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-copy-object
+      description: Amazon S3 Copy Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-objects.copyobject
+      with:
+        x-amz-copy-source: tools.x-amz-copy-source
+        x-amz-copy-source-if-match: tools.x-amz-copy-source-if-match
+        x-amz-copy-source-if-none-match: tools.x-amz-copy-source-if-none-match
+        x-amz-copy-source-if-modified-since: tools.x-amz-copy-source-if-modified-since
+        x-amz-copy-source-if-unmodified-since: tools.x-amz-copy-source-if-unmodified-since
+        x-amz-metadata-directive: tools.x-amz-metadata-directive
+        x-amz-tagging-directive: tools.x-amz-tagging-directive
+        x-amz-server-side-encryption: tools.x-amz-server-side-encryption
+        x-amz-storage-class: tools.x-amz-storage-class
+        x-amz-acl: tools.x-amz-acl
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-source-expected-bucket-owner: tools.x-amz-source-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-objects
+      description: Amazon S3 Delete Objects
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-objects.deleteobjects
+      with:
+        x-amz-mfa: tools.x-amz-mfa
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-bypass-governance-retention: tools.x-amz-bypass-governance-retention
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-checksum-algorithm: tools.x-amz-checksum-algorithm
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-list-objects-v2
+      description: Amazon S3 List Objects V2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-objects.listobjectsv2
+      with:
+        list-type: tools.list-type
+        continuation-token: tools.continuation-token
+        delimiter: tools.delimiter
+        encoding-type: tools.encoding-type
+        fetch-owner: tools.fetch-owner
+        max-keys: tools.max-keys
+        prefix: tools.prefix
+        start-after: tools.start-after
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-optional-object-attributes: tools.x-amz-optional-object-attributes
+      outputParameters:
+      - type: object
+        mapping: $.

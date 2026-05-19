@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 REST API — Access Control
+  description: 'Amazon S3 REST API — Access Control. 2 operations. Lead operation: Amazon S3 Get Bucket Acl. Self-contained
+    Naftiko capability covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Access Control
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-access-control
+    baseUri: https://s3.{region}.amazonaws.com
+    description: Amazon S3 REST API — Access Control business capability. Self-contained, no shared references.
+    resources:
+    - name: Bucket}?acl
+      path: /{Bucket}?acl
+      operations:
+      - name: getbucketacl
+        method: GET
+        description: Amazon S3 Get Bucket Acl
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+      - name: putbucketacl
+        method: PUT
+        description: Amazon S3 Put Bucket Acl
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-acl
+          in: header
+          type: string
+          description: The canned ACL to apply to the bucket.
+        - name: x-amz-grant-full-control
+          in: header
+          type: string
+          description: Allows grantee full control of the bucket.
+        - name: x-amz-grant-read
+          in: header
+          type: string
+          description: Allows grantee to list the objects in the bucket.
+        - name: x-amz-grant-read-acp
+          in: header
+          type: string
+          description: Allows grantee to read the bucket ACL.
+        - name: x-amz-grant-write
+          in: header
+          type: string
+          description: Allows grantee to create objects in the bucket.
+        - name: x-amz-grant-write-acp
+          in: header
+          type: string
+          description: Allows grantee to write the ACL for the applicable bucket.
+        - name: Content-MD5
+          in: header
+          type: string
+          description: The base64-encoded 128-bit MD5 digest of the data.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-access-control-rest
+    port: 8080
+    description: REST adapter for Amazon S3 REST API — Access Control. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/bucket-acl
+      name: bucket-acl
+      description: REST surface for Bucket}?acl.
+      operations:
+      - method: GET
+        name: getbucketacl
+        description: Amazon S3 Get Bucket Acl
+        call: rest-access-control.getbucketacl
+        with:
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putbucketacl
+        description: Amazon S3 Put Bucket Acl
+        call: rest-access-control.putbucketacl
+        with:
+          x-amz-acl: rest.x-amz-acl
+          x-amz-grant-full-control: rest.x-amz-grant-full-control
+          x-amz-grant-read: rest.x-amz-grant-read
+          x-amz-grant-read-acp: rest.x-amz-grant-read-acp
+          x-amz-grant-write: rest.x-amz-grant-write
+          x-amz-grant-write-acp: rest.x-amz-grant-write-acp
+          Content-MD5: rest.Content-MD5
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-access-control-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 REST API — Access Control. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-s3-get-bucket-acl
+      description: Amazon S3 Get Bucket Acl
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-access-control.getbucketacl
+      with:
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-put-bucket-acl
+      description: Amazon S3 Put Bucket Acl
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-access-control.putbucketacl
+      with:
+        x-amz-acl: tools.x-amz-acl
+        x-amz-grant-full-control: tools.x-amz-grant-full-control
+        x-amz-grant-read: tools.x-amz-grant-read
+        x-amz-grant-read-acp: tools.x-amz-grant-read-acp
+        x-amz-grant-write: tools.x-amz-grant-write
+        x-amz-grant-write-acp: tools.x-amz-grant-write-acp
+        Content-MD5: tools.Content-MD5
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

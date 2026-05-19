@@ -1,0 +1,332 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 Control API — Access Points
+  description: 'Amazon S3 Control API — Access Points. 7 operations. Lead operation: Amazon S3 List Access Points. Self-contained
+    Naftiko capability covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Access Points
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: control-access-points
+    baseUri: https://s3-control.{region}.amazonaws.com
+    description: Amazon S3 Control API — Access Points business capability. Self-contained, no shared references.
+    resources:
+    - name: v20180820-accesspoint
+      path: /v20180820/accesspoint
+      operations:
+      - name: listaccesspoints
+        method: GET
+        description: Amazon S3 List Access Points
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: query
+          type: string
+          description: The name of the bucket whose associated access points you want to list.
+        - name: nextToken
+          in: query
+          type: string
+          description: A continuation token. If a previous call produced a truncated list, pass this value to get the next
+            page of results.
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of access points to return (1-1000).
+    - name: v20180820-accesspoint-name
+      path: /v20180820/accesspoint/{name}
+      operations:
+      - name: getaccesspoint
+        method: GET
+        description: Amazon S3 Get Access Point
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the access point, or the ARN of the access point for S3 on Outposts.
+          required: true
+      - name: createaccesspoint
+        method: PUT
+        description: Amazon S3 Create Access Point
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name you want to assign to this access point.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteaccesspoint
+        method: DELETE
+        description: Amazon S3 Delete Access Point
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the access point you want to delete.
+          required: true
+    - name: v20180820-accesspoint-name-policy
+      path: /v20180820/accesspoint/{name}/policy
+      operations:
+      - name: getaccesspointpolicy
+        method: GET
+        description: Amazon S3 Get Access Point Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the access point.
+          required: true
+      - name: putaccesspointpolicy
+        method: PUT
+        description: Amazon S3 Put Access Point Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the access point.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteaccesspointpolicy
+        method: DELETE
+        description: Amazon S3 Delete Access Point Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the access point.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: control-access-points-rest
+    port: 8080
+    description: REST adapter for Amazon S3 Control API — Access Points. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v20180820/accesspoint
+      name: v20180820-accesspoint
+      description: REST surface for v20180820-accesspoint.
+      operations:
+      - method: GET
+        name: listaccesspoints
+        description: Amazon S3 List Access Points
+        call: control-access-points.listaccesspoints
+        with:
+          bucket: rest.bucket
+          nextToken: rest.nextToken
+          maxResults: rest.maxResults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v20180820/accesspoint/{name}
+      name: v20180820-accesspoint-name
+      description: REST surface for v20180820-accesspoint-name.
+      operations:
+      - method: GET
+        name: getaccesspoint
+        description: Amazon S3 Get Access Point
+        call: control-access-points.getaccesspoint
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createaccesspoint
+        description: Amazon S3 Create Access Point
+        call: control-access-points.createaccesspoint
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteaccesspoint
+        description: Amazon S3 Delete Access Point
+        call: control-access-points.deleteaccesspoint
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v20180820/accesspoint/{name}/policy
+      name: v20180820-accesspoint-name-policy
+      description: REST surface for v20180820-accesspoint-name-policy.
+      operations:
+      - method: GET
+        name: getaccesspointpolicy
+        description: Amazon S3 Get Access Point Policy
+        call: control-access-points.getaccesspointpolicy
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putaccesspointpolicy
+        description: Amazon S3 Put Access Point Policy
+        call: control-access-points.putaccesspointpolicy
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteaccesspointpolicy
+        description: Amazon S3 Delete Access Point Policy
+        call: control-access-points.deleteaccesspointpolicy
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: control-access-points-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 Control API — Access Points. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-s3-list-access-points
+      description: Amazon S3 List Access Points
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-access-points.listaccesspoints
+      with:
+        bucket: tools.bucket
+        nextToken: tools.nextToken
+        maxResults: tools.maxResults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-get-access-point
+      description: Amazon S3 Get Access Point
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-access-points.getaccesspoint
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-create-access-point
+      description: Amazon S3 Create Access Point
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: control-access-points.createaccesspoint
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-access-point
+      description: Amazon S3 Delete Access Point
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: control-access-points.deleteaccesspoint
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-get-access-point-2
+      description: Amazon S3 Get Access Point Policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-access-points.getaccesspointpolicy
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-put-access-point
+      description: Amazon S3 Put Access Point Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: control-access-points.putaccesspointpolicy
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-access-point-2
+      description: Amazon S3 Delete Access Point Policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: control-access-points.deleteaccesspointpolicy
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

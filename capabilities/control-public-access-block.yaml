@@ -1,0 +1,132 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 Control API — Public Access Block
+  description: 'Amazon S3 Control API — Public Access Block. 3 operations. Lead operation: Amazon S3 Get Public Access Block.
+    Self-contained Naftiko capability covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Public Access Block
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: control-public-access-block
+    baseUri: https://s3-control.{region}.amazonaws.com
+    description: Amazon S3 Control API — Public Access Block business capability. Self-contained, no shared references.
+    resources:
+    - name: v20180820-configuration-publicAccessBlock
+      path: /v20180820/configuration/publicAccessBlock
+      operations:
+      - name: getpublicaccessblock
+        method: GET
+        description: Amazon S3 Get Public Access Block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: putpublicaccessblock
+        method: PUT
+        description: Amazon S3 Put Public Access Block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepublicaccessblock
+        method: DELETE
+        description: Amazon S3 Delete Public Access Block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: control-public-access-block-rest
+    port: 8080
+    description: REST adapter for Amazon S3 Control API — Public Access Block. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v20180820/configuration/publicaccessblock
+      name: v20180820-configuration-publicaccessblock
+      description: REST surface for v20180820-configuration-publicAccessBlock.
+      operations:
+      - method: GET
+        name: getpublicaccessblock
+        description: Amazon S3 Get Public Access Block
+        call: control-public-access-block.getpublicaccessblock
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putpublicaccessblock
+        description: Amazon S3 Put Public Access Block
+        call: control-public-access-block.putpublicaccessblock
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepublicaccessblock
+        description: Amazon S3 Delete Public Access Block
+        call: control-public-access-block.deletepublicaccessblock
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: control-public-access-block-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 Control API — Public Access Block. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amazon-s3-get-public-access
+      description: Amazon S3 Get Public Access Block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-public-access-block.getpublicaccessblock
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-put-public-access
+      description: Amazon S3 Put Public Access Block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: control-public-access-block.putpublicaccessblock
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-public-access
+      description: Amazon S3 Delete Public Access Block
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: control-public-access-block.deletepublicaccessblock
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,371 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 REST API — Multipart Upload
+  description: 'Amazon S3 REST API — Multipart Upload. 4 operations. Lead operation: Amazon S3 Upload Part. Self-contained
+    Naftiko capability covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Multipart Upload
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-multipart-upload
+    baseUri: https://s3.{region}.amazonaws.com
+    description: Amazon S3 REST API — Multipart Upload business capability. Self-contained, no shared references.
+    resources:
+    - name: Bucket-Key+}?partNumber={partNumber}&uploadId={uploadId
+      path: /{Bucket}/{Key+}?partNumber={partNumber}&uploadId={uploadId}
+      operations:
+      - name: uploadpart
+        method: PUT
+        description: Amazon S3 Upload Part
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: partNumber
+          in: query
+          type: integer
+          description: Part number identifying the part (1 to 10,000).
+          required: true
+        - name: uploadId
+          in: query
+          type: string
+          description: Upload ID identifying the multipart upload.
+          required: true
+        - name: Content-Length
+          in: header
+          type: integer
+          description: Size of the part in bytes.
+        - name: Content-MD5
+          in: header
+          type: string
+          description: The base64-encoded 128-bit MD5 digest of the part data.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: Bucket-Key+}?uploadId={uploadId
+      path: /{Bucket}/{Key+}?uploadId={uploadId}
+      operations:
+      - name: completemultipartupload
+        method: POST
+        description: Amazon S3 Complete Multipart Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uploadId
+          in: query
+          type: string
+          description: Upload ID identifying the multipart upload.
+          required: true
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+        - name: x-amz-checksum-crc32
+          in: header
+          type: string
+          description: CRC32 checksum of the object.
+        - name: x-amz-checksum-crc32c
+          in: header
+          type: string
+          description: CRC32C checksum of the object.
+        - name: x-amz-checksum-sha1
+          in: header
+          type: string
+          description: SHA-1 digest of the object.
+        - name: x-amz-checksum-sha256
+          in: header
+          type: string
+          description: SHA-256 digest of the object.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: abortmultipartupload
+        method: DELETE
+        description: Amazon S3 Abort Multipart Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uploadId
+          in: query
+          type: string
+          description: Upload ID identifying the multipart upload to abort.
+          required: true
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-request-payer
+          in: header
+          type: string
+          description: Confirms that the requester knows they will be charged.
+    - name: Bucket-Key+}?uploads
+      path: /{Bucket}/{Key+}?uploads
+      operations:
+      - name: createmultipartupload
+        method: POST
+        description: Amazon S3 Create Multipart Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Cache-Control
+          in: header
+          type: string
+          description: Specifies caching behavior along the request/reply chain.
+        - name: Content-Disposition
+          in: header
+          type: string
+          description: Specifies presentational information for the object.
+        - name: Content-Encoding
+          in: header
+          type: string
+          description: Specifies content encodings applied to the object.
+        - name: Content-Type
+          in: header
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        - name: x-amz-acl
+          in: header
+          type: string
+          description: The canned ACL to apply to the object.
+        - name: x-amz-storage-class
+          in: header
+          type: string
+          description: The storage class for the object.
+        - name: x-amz-server-side-encryption
+          in: header
+          type: string
+          description: The server-side encryption algorithm.
+        - name: x-amz-server-side-encryption-aws-kms-key-id
+          in: header
+          type: string
+          description: Specifies the KMS key ID.
+        - name: x-amz-tagging
+          in: header
+          type: string
+          description: The tag-set for the object.
+        - name: x-amz-object-lock-mode
+          in: header
+          type: string
+          description: Specifies the Object Lock mode.
+        - name: x-amz-object-lock-retain-until-date
+          in: header
+          type: string
+          description: Object Lock retention expiry.
+        - name: x-amz-object-lock-legal-hold
+          in: header
+          type: string
+          description: Specifies whether a legal hold will be applied.
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+        - name: x-amz-checksum-algorithm
+          in: header
+          type: string
+          description: Algorithm for object checksum.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-multipart-upload-rest
+    port: 8080
+    description: REST adapter for Amazon S3 REST API — Multipart Upload. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/{bucket}/{key-partnumber-partnumber-uploadid-uploadid}
+      name: bucket-key-partnumber-partnumber-uploadid-uploadid
+      description: REST surface for Bucket-Key+}?partNumber={partNumber}&uploadId={uploadId.
+      operations:
+      - method: PUT
+        name: uploadpart
+        description: Amazon S3 Upload Part
+        call: rest-multipart-upload.uploadpart
+        with:
+          partNumber: rest.partNumber
+          uploadId: rest.uploadId
+          Content-Length: rest.Content-Length
+          Content-MD5: rest.Content-MD5
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-request-payer: rest.x-amz-request-payer
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{bucket}/{key-uploadid-uploadid}
+      name: bucket-key-uploadid-uploadid
+      description: REST surface for Bucket-Key+}?uploadId={uploadId.
+      operations:
+      - method: POST
+        name: completemultipartupload
+        description: Amazon S3 Complete Multipart Upload
+        call: rest-multipart-upload.completemultipartupload
+        with:
+          uploadId: rest.uploadId
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-request-payer: rest.x-amz-request-payer
+          x-amz-checksum-crc32: rest.x-amz-checksum-crc32
+          x-amz-checksum-crc32c: rest.x-amz-checksum-crc32c
+          x-amz-checksum-sha1: rest.x-amz-checksum-sha1
+          x-amz-checksum-sha256: rest.x-amz-checksum-sha256
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: abortmultipartupload
+        description: Amazon S3 Abort Multipart Upload
+        call: rest-multipart-upload.abortmultipartupload
+        with:
+          uploadId: rest.uploadId
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-request-payer: rest.x-amz-request-payer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{bucket}/key-uploads
+      name: bucket-key-uploads
+      description: REST surface for Bucket-Key+}?uploads.
+      operations:
+      - method: POST
+        name: createmultipartupload
+        description: Amazon S3 Create Multipart Upload
+        call: rest-multipart-upload.createmultipartupload
+        with:
+          Cache-Control: rest.Cache-Control
+          Content-Disposition: rest.Content-Disposition
+          Content-Encoding: rest.Content-Encoding
+          Content-Type: rest.Content-Type
+          x-amz-acl: rest.x-amz-acl
+          x-amz-storage-class: rest.x-amz-storage-class
+          x-amz-server-side-encryption: rest.x-amz-server-side-encryption
+          x-amz-server-side-encryption-aws-kms-key-id: rest.x-amz-server-side-encryption-aws-kms-key-id
+          x-amz-tagging: rest.x-amz-tagging
+          x-amz-object-lock-mode: rest.x-amz-object-lock-mode
+          x-amz-object-lock-retain-until-date: rest.x-amz-object-lock-retain-until-date
+          x-amz-object-lock-legal-hold: rest.x-amz-object-lock-legal-hold
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+          x-amz-checksum-algorithm: rest.x-amz-checksum-algorithm
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-multipart-upload-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 REST API — Multipart Upload. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-s3-upload-part
+      description: Amazon S3 Upload Part
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-multipart-upload.uploadpart
+      with:
+        partNumber: tools.partNumber
+        uploadId: tools.uploadId
+        Content-Length: tools.Content-Length
+        Content-MD5: tools.Content-MD5
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-request-payer: tools.x-amz-request-payer
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-complete-multipart-upload
+      description: Amazon S3 Complete Multipart Upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-multipart-upload.completemultipartupload
+      with:
+        uploadId: tools.uploadId
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-request-payer: tools.x-amz-request-payer
+        x-amz-checksum-crc32: tools.x-amz-checksum-crc32
+        x-amz-checksum-crc32c: tools.x-amz-checksum-crc32c
+        x-amz-checksum-sha1: tools.x-amz-checksum-sha1
+        x-amz-checksum-sha256: tools.x-amz-checksum-sha256
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-abort-multipart-upload
+      description: Amazon S3 Abort Multipart Upload
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-multipart-upload.abortmultipartupload
+      with:
+        uploadId: tools.uploadId
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-request-payer: tools.x-amz-request-payer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-create-multipart-upload
+      description: Amazon S3 Create Multipart Upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-multipart-upload.createmultipartupload
+      with:
+        Cache-Control: tools.Cache-Control
+        Content-Disposition: tools.Content-Disposition
+        Content-Encoding: tools.Content-Encoding
+        Content-Type: tools.Content-Type
+        x-amz-acl: tools.x-amz-acl
+        x-amz-storage-class: tools.x-amz-storage-class
+        x-amz-server-side-encryption: tools.x-amz-server-side-encryption
+        x-amz-server-side-encryption-aws-kms-key-id: tools.x-amz-server-side-encryption-aws-kms-key-id
+        x-amz-tagging: tools.x-amz-tagging
+        x-amz-object-lock-mode: tools.x-amz-object-lock-mode
+        x-amz-object-lock-retain-until-date: tools.x-amz-object-lock-retain-until-date
+        x-amz-object-lock-legal-hold: tools.x-amz-object-lock-legal-hold
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+        x-amz-checksum-algorithm: tools.x-amz-checksum-algorithm
+      outputParameters:
+      - type: object
+        mapping: $.

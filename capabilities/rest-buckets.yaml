@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon S3 REST API — Buckets
+  description: 'Amazon S3 REST API — Buckets. 4 operations. Lead operation: Amazon S3 List Buckets. Self-contained Naftiko
+    capability covering one Amazon S3 business surface.'
+  tags:
+  - Amazon S3
+  - Buckets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_S3_API_KEY: AMAZON_S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-buckets
+    baseUri: https://s3.{region}.amazonaws.com
+    description: Amazon S3 REST API — Buckets business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: listbuckets
+        method: GET
+        description: Amazon S3 List Buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+    - name: Bucket
+      path: /{Bucket}
+      operations:
+      - name: createbucket
+        method: PUT
+        description: Amazon S3 Create Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-acl
+          in: header
+          type: string
+          description: The canned ACL to apply to the bucket.
+        - name: x-amz-bucket-object-lock-enabled
+          in: header
+          type: boolean
+          description: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+        - name: x-amz-object-ownership
+          in: header
+          type: string
+          description: The container element for object ownership.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletebucket
+        method: DELETE
+        description: Amazon S3 Delete Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+      - name: headbucket
+        method: HEAD
+        description: Amazon S3 Head Bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-amz-expected-bucket-owner
+          in: header
+          type: string
+          description: The account ID of the expected bucket owner.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_S3_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-buckets-rest
+    port: 8080
+    description: REST adapter for Amazon S3 REST API — Buckets. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: listbuckets
+        description: Amazon S3 List Buckets
+        call: rest-buckets.listbuckets
+        with:
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{bucket}
+      name: bucket
+      description: REST surface for Bucket.
+      operations:
+      - method: PUT
+        name: createbucket
+        description: Amazon S3 Create Bucket
+        call: rest-buckets.createbucket
+        with:
+          x-amz-acl: rest.x-amz-acl
+          x-amz-bucket-object-lock-enabled: rest.x-amz-bucket-object-lock-enabled
+          x-amz-object-ownership: rest.x-amz-object-ownership
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebucket
+        description: Amazon S3 Delete Bucket
+        call: rest-buckets.deletebucket
+        with:
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: headbucket
+        description: Amazon S3 Head Bucket
+        call: rest-buckets.headbucket
+        with:
+          x-amz-expected-bucket-owner: rest.x-amz-expected-bucket-owner
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-buckets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon S3 REST API — Buckets. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-s3-list-buckets
+      description: Amazon S3 List Buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-buckets.listbuckets
+      with:
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-create-bucket
+      description: Amazon S3 Create Bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-buckets.createbucket
+      with:
+        x-amz-acl: tools.x-amz-acl
+        x-amz-bucket-object-lock-enabled: tools.x-amz-bucket-object-lock-enabled
+        x-amz-object-ownership: tools.x-amz-object-ownership
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-delete-bucket
+      description: Amazon S3 Delete Bucket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-buckets.deletebucket
+      with:
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-s3-head-bucket
+      description: Amazon S3 Head Bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-buckets.headbucket
+      with:
+        x-amz-expected-bucket-owner: tools.x-amz-expected-bucket-owner
+      outputParameters:
+      - type: object
+        mapping: $.
