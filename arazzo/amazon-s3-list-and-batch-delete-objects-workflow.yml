@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 List and Batch Delete Objects
+  summary: List objects under a prefix then delete a batch of keys in one request.
+  description: >-
+    A bulk cleanup flow for Amazon S3. The workflow lists the objects under a
+    given prefix to discover what exists, then issues a single DeleteObjects
+    request carrying the list of keys to remove. DeleteObjects can remove up to
+    1,000 keys per call. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-and-batch-delete
+  summary: List objects under a prefix then batch-delete a supplied set of keys.
+  description: >-
+    Discovers objects under a prefix with ListObjectsV2 and removes a supplied
+    set of keys with a single DeleteObjects request.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - prefix
+    - objectsToDelete
+    properties:
+      bucket:
+        type: string
+        description: The bucket to list and delete from.
+      prefix:
+        type: string
+        description: The key prefix to scope the listing to.
+      objectsToDelete:
+        type: array
+        description: The list of objects to delete, each an object with a Key (and optional VersionId).
+        items:
+          type: object
+          required:
+          - Key
+          properties:
+            Key:
+              type: string
+              description: The key of an object to delete.
+            VersionId:
+              type: string
+              description: An optional specific version of the object to delete.
+  steps:
+  - stepId: listObjects
+    description: >-
+      List the objects under the prefix so the caller can see what is about to be
+      removed.
+    operationId: ListObjectsV2
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: list-type
+      in: query
+      value: 2
+    - name: prefix
+      in: query
+      value: $inputs.prefix
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      keyCount: $response.body#/KeyCount
+  - stepId: batchDelete
+    description: >-
+      Delete the supplied set of keys in a single DeleteObjects request, using
+      quiet mode so only errors are returned.
+    operationId: DeleteObjects
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Object: $inputs.objectsToDelete
+        Quiet: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleted: $response.body#/Deleted
+      errors: $response.body#/Error
+  outputs:
+    keyCount: $steps.listObjects.outputs.keyCount
+    deleted: $steps.batchDelete.outputs.deleted
+    errors: $steps.batchDelete.outputs.errors

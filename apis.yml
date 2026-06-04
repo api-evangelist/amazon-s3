@@ -149,6 +149,69 @@ apis:
   - type: NaftikoCapability
     url: capabilities/tables-tables.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-s3-abort-multipart-upload-workflow.yml
+    name: Amazon S3 Start and Abort a Multipart Upload
+    summary: Initiate a multipart upload then abort it to release any staged storage.
+  - url: arazzo/amazon-s3-archive-object-workflow.yml
+    name: Amazon S3 Archive an Object to a Cold Storage Class
+    summary: Copy an object into an archival storage class then delete the hot original.
+  - url: arazzo/amazon-s3-conditional-download-object-workflow.yml
+    name: Amazon S3 Conditional Download of an Object
+    summary: HEAD an object to read its ETag, then GET it only when it is present.
+  - url: arazzo/amazon-s3-copy-object-workflow.yml
+    name: Amazon S3 Copy Object Between Keys
+    summary: Confirm a source object exists, copy it to a destination, and verify the copy.
+  - url: arazzo/amazon-s3-create-bucket-put-object-workflow.yml
+    name: Amazon S3 Create Bucket and Store an Object
+    summary: Create a bucket, confirm it exists, upload an object, and read it back.
+  - url: arazzo/amazon-s3-delete-object-workflow.yml
+    name: Amazon S3 Delete Object and Confirm Removal
+    summary: Delete an object then HEAD it to confirm it is gone.
+  - url: arazzo/amazon-s3-empty-and-delete-bucket-workflow.yml
+    name: Amazon S3 Empty and Delete a Bucket
+    summary: List the bucket, batch-delete its objects, then delete the empty bucket.
+  - url: arazzo/amazon-s3-enable-versioning-put-object-workflow.yml
+    name: Amazon S3 Enable Versioning Then Store an Object
+    summary: Turn on bucket versioning, confirm it, then write a versioned object.
+  - url: arazzo/amazon-s3-get-or-create-object-workflow.yml
+    name: Amazon S3 Get Object or Create It
+    summary: Check whether an object exists with HEAD and upload it only if missing.
+  - url: arazzo/amazon-s3-list-and-batch-delete-objects-workflow.yml
+    name: Amazon S3 List and Batch Delete Objects
+    summary: List objects under a prefix then delete a batch of keys in one request.
+  - url: arazzo/amazon-s3-move-object-workflow.yml
+    name: Amazon S3 Move an Object
+    summary: Copy an object to a new key, verify it, then delete the original.
+  - url: arazzo/amazon-s3-multipart-upload-workflow.yml
+    name: Amazon S3 Multipart Upload a Large Object
+    summary: Initiate a multipart upload, upload a part, and complete the upload.
+  - url: arazzo/amazon-s3-paginate-list-objects-workflow.yml
+    name: Amazon S3 Paginate Through Bucket Objects
+    summary: List a first page of objects then fetch the next page by continuation token.
+  - url: arazzo/amazon-s3-provision-secure-bucket-workflow.yml
+    name: Amazon S3 Provision a Secure Bucket
+    summary: Create a bucket, enable versioning, and apply default encryption.
+  - url: arazzo/amazon-s3-put-object-list-objects-workflow.yml
+    name: Amazon S3 Upload and List Objects
+    summary: Upload an object then list the bucket contents to confirm it appears.
+  - url: arazzo/amazon-s3-set-bucket-acl-workflow.yml
+    name: Amazon S3 Apply and Verify a Bucket ACL
+    summary: Set a bucket access control policy then read it back to confirm.
+  - url: arazzo/amazon-s3-set-bucket-cors-workflow.yml
+    name: Amazon S3 Configure and Verify Bucket CORS
+    summary: Put a bucket CORS configuration then read it back to confirm.
+  - url: arazzo/amazon-s3-set-bucket-encryption-workflow.yml
+    name: Amazon S3 Configure and Verify Default Encryption
+    summary: Put a bucket default-encryption configuration then read it back.
+  - url: arazzo/amazon-s3-set-bucket-lifecycle-workflow.yml
+    name: Amazon S3 Apply and Verify a Lifecycle Configuration
+    summary: Put a bucket lifecycle configuration then read it back to confirm.
+  - url: arazzo/amazon-s3-set-bucket-tagging-workflow.yml
+    name: Amazon S3 Set and Verify Bucket Tags
+    summary: Write a bucket tag set then read it back to confirm it was stored.
 - type: Portal
   url: https://aws.amazon.com/
 - type: Documentation

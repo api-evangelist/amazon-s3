@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Configure and Verify Bucket CORS
+  summary: Put a bucket CORS configuration then read it back to confirm.
+  description: >-
+    A browser-access flow for Amazon S3. The workflow writes a Cross-Origin
+    Resource Sharing (CORS) configuration to the bucket so that web clients on
+    other origins can call the bucket, and then reads the configuration back to
+    confirm the rules are in effect. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: set-and-verify-cors
+  summary: Put a bucket CORS configuration then get it back to confirm.
+  description: >-
+    Applies a CORSConfiguration with PutBucketCors and confirms it with
+    GetBucketCors.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - corsRules
+    properties:
+      bucket:
+        type: string
+        description: The bucket to configure CORS on.
+      corsRules:
+        type: array
+        description: The CORSRule list defining allowed methods, origins, and headers.
+        items:
+          type: object
+          properties:
+            ID:
+              type: string
+            AllowedMethods:
+              type: array
+              items:
+                type: string
+            AllowedOrigins:
+              type: array
+              items:
+                type: string
+            AllowedHeaders:
+              type: array
+              items:
+                type: string
+            MaxAgeSeconds:
+              type: integer
+  steps:
+  - stepId: putCors
+    description: >-
+      Write the CORS configuration to the bucket, replacing any existing
+      configuration.
+    operationId: PutBucketCors
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        CORSRule: $inputs.corsRules
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getCors
+    description: >-
+      Read the CORS configuration back to confirm the rules are now in effect on
+      the bucket.
+    operationId: GetBucketCors
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      corsRules: $response.body#/CORSRule
+  outputs:
+    corsRules: $steps.getCors.outputs.corsRules

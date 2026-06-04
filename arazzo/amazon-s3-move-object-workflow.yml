@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Move an Object
+  summary: Copy an object to a new key, verify it, then delete the original.
+  description: >-
+    Amazon S3 has no native move operation, so a move is modeled as a
+    server-side copy followed by a delete of the source. The workflow copies the
+    source object to the destination key, HEADs the destination to confirm the
+    copy landed, and only then deletes the source object — so data is never lost
+    if the copy fails. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: move-object
+  summary: Copy an object to a new key, confirm it, then delete the source.
+  description: >-
+    Performs a copy-then-delete move; the source is only removed after the
+    destination copy is confirmed to exist.
+  inputs:
+    type: object
+    required:
+    - sourceBucket
+    - sourceKey
+    - destinationBucket
+    - destinationKey
+    - copySource
+    properties:
+      sourceBucket:
+        type: string
+        description: The bucket holding the source object.
+      sourceKey:
+        type: string
+        description: The key of the source object to move.
+      destinationBucket:
+        type: string
+        description: The bucket the object is moved to.
+      destinationKey:
+        type: string
+        description: The key the object is moved to.
+      copySource:
+        type: string
+        description: The x-amz-copy-source value, e.g. /sourcebucket/sourcekey (URL-encoded path).
+  steps:
+  - stepId: copyObject
+    description: >-
+      Server-side copy the source object to the destination key.
+    operationId: CopyObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.destinationBucket
+    - name: Key+
+      in: path
+      value: $inputs.destinationKey
+    - name: x-amz-copy-source
+      in: header
+      value: $inputs.copySource
+    - name: x-amz-metadata-directive
+      in: header
+      value: COPY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      copyEtag: $response.body#/ETag
+  - stepId: confirmDestination
+    description: >-
+      HEAD the destination key to confirm the copy succeeded before removing the
+      source.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.destinationBucket
+    - name: Key+
+      in: path
+      value: $inputs.destinationKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      destinationEtag: $response.header.ETag
+  - stepId: deleteSource
+    description: >-
+      Delete the source object now that the destination copy is confirmed,
+      completing the move.
+    operationId: DeleteObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.sourceBucket
+    - name: Key+
+      in: path
+      value: $inputs.sourceKey
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    copyEtag: $steps.copyObject.outputs.copyEtag
+    destinationEtag: $steps.confirmDestination.outputs.destinationEtag

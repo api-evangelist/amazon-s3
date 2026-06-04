@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Enable Versioning Then Store an Object
+  summary: Turn on bucket versioning, confirm it, then write a versioned object.
+  description: >-
+    Prepares a bucket to retain object history. The workflow enables versioning
+    on the bucket, reads the versioning configuration back to confirm it is
+    Enabled, and then uploads an object so the write is captured as a distinct
+    version. The version id is returned from the PUT response header. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: enable-versioning-and-put-object
+  summary: Enable versioning, verify it, then upload a versioned object.
+  description: >-
+    Sets the bucket versioning state to Enabled, confirms the state with a GET,
+    and writes an object that is captured as a new version.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectKey
+    - objectBody
+    properties:
+      bucket:
+        type: string
+        description: The bucket to enable versioning on and write to.
+      objectKey:
+        type: string
+        description: The key of the object to upload.
+      objectBody:
+        type: string
+        description: The raw object payload to upload.
+  steps:
+  - stepId: enableVersioning
+    description: >-
+      Set the bucket versioning state to Enabled via a VersioningConfiguration
+      body.
+    operationId: PutBucketVersioning
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Status: Enabled
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmVersioning
+    description: >-
+      Read the versioning configuration back to confirm the bucket now reports
+      the Enabled status.
+    operationId: GetBucketVersioning
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/Status == "Enabled"
+    outputs:
+      status: $response.body#/Status
+  - stepId: putObject
+    description: >-
+      Upload the object; because versioning is enabled the write is captured as a
+      new version and a version id is returned.
+    operationId: PutObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    requestBody:
+      contentType: application/octet-stream
+      payload: $inputs.objectBody
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionId: $response.header.x-amz-version-id
+      etag: $response.header.ETag
+  outputs:
+    versioningStatus: $steps.confirmVersioning.outputs.status
+    versionId: $steps.putObject.outputs.versionId

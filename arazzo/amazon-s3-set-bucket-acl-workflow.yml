@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Apply and Verify a Bucket ACL
+  summary: Set a bucket access control policy then read it back to confirm.
+  description: >-
+    A bucket-level access control flow for Amazon S3. The workflow writes an
+    AccessControlPolicy to the bucket — granting the supplied owner and grants —
+    and then reads the ACL back to confirm the policy was applied. This is the
+    closest supported analogue to a bucket policy in this API, which does not
+    expose a dedicated bucket policy operation. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: set-and-verify-bucket-acl
+  summary: Put a bucket ACL then get it back to confirm.
+  description: >-
+    Applies an AccessControlPolicy to the bucket with PutBucketAcl and confirms
+    it with GetBucketAcl.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - owner
+    - accessControlList
+    properties:
+      bucket:
+        type: string
+        description: The bucket to set the ACL on.
+      owner:
+        type: object
+        description: The Owner container, with DisplayName and ID.
+        properties:
+          DisplayName:
+            type: string
+          ID:
+            type: string
+      accessControlList:
+        type: object
+        description: The AccessControlList container holding the Grant array.
+        properties:
+          Grant:
+            type: array
+            items:
+              type: object
+  steps:
+  - stepId: putAcl
+    description: >-
+      Write the access control policy to the bucket using owner and grant
+      details.
+    operationId: PutBucketAcl
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Owner: $inputs.owner
+        AccessControlList: $inputs.accessControlList
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getAcl
+    description: >-
+      Read the ACL back to confirm the owner and grants are now in effect on the
+      bucket.
+    operationId: GetBucketAcl
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      owner: $response.body#/Owner
+      grants: $response.body#/AccessControlList
+  outputs:
+    owner: $steps.getAcl.outputs.owner
+    grants: $steps.getAcl.outputs.grants

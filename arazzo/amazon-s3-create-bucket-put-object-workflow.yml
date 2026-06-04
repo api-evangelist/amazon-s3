@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Create Bucket and Store an Object
+  summary: Create a bucket, confirm it exists, upload an object, and read it back.
+  description: >-
+    The foundational Amazon S3 onboarding flow. The workflow creates a new
+    bucket, verifies the bucket is reachable with a HEAD request, uploads a
+    single object into it with a PUT, and then retrieves that same object with a
+    GET to confirm the round trip succeeded. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-bucket-and-store-object
+  summary: Create a bucket then put and get an object inside it.
+  description: >-
+    Provisions a bucket in the requested Region, confirms access to it, writes a
+    single object using the object's binary body, and reads the object back to
+    verify it was stored.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - region
+    - objectKey
+    - objectBody
+    properties:
+      bucket:
+        type: string
+        description: The globally unique bucket name to create (3-63 lowercase characters).
+      region:
+        type: string
+        description: The AWS Region (LocationConstraint) the bucket should live in, e.g. us-west-2.
+      objectKey:
+        type: string
+        description: The key (path) the object will be stored under in the bucket.
+      objectBody:
+        type: string
+        description: The raw object payload to upload.
+      contentType:
+        type: string
+        description: The MIME type of the object body, e.g. text/plain.
+  steps:
+  - stepId: createBucket
+    description: >-
+      Create the bucket in the requested Region using a CreateBucketConfiguration
+      body that carries the LocationConstraint.
+    operationId: CreateBucket
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: x-amz-acl
+      in: header
+      value: private
+    requestBody:
+      contentType: application/xml
+      payload:
+        LocationConstraint: $inputs.region
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      location: $response.header.Location
+  - stepId: confirmBucket
+    description: >-
+      Issue a HEAD request to confirm the bucket exists and is accessible before
+      writing to it.
+    operationId: HeadBucket
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      bucketRegion: $response.header.x-amz-bucket-region
+  - stepId: putObject
+    description: >-
+      Upload the object's binary body to the bucket under the supplied key.
+    operationId: PutObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    - name: Content-Type
+      in: header
+      value: $inputs.contentType
+    requestBody:
+      contentType: application/octet-stream
+      payload: $inputs.objectBody
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      etag: $response.header.ETag
+      versionId: $response.header.x-amz-version-id
+  - stepId: getObject
+    description: >-
+      Read the object back to confirm the upload landed and is retrievable.
+    operationId: GetObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      retrievedEtag: $response.header.ETag
+  outputs:
+    bucketLocation: $steps.createBucket.outputs.location
+    etag: $steps.putObject.outputs.etag
+    retrievedEtag: $steps.getObject.outputs.retrievedEtag

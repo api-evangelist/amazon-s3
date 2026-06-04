@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Get Object or Create It
+  summary: Check whether an object exists with HEAD and upload it only if missing.
+  description: >-
+    An idempotent write pattern for Amazon S3. The workflow probes for an object
+    with a HEAD request and branches: when the object already exists it ends and
+    reports the existing ETag, and when the object is missing it uploads the
+    supplied body with a PUT. This avoids overwriting data that is already in
+    place. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: get-or-create-object
+  summary: Upload an object only when it does not already exist.
+  description: >-
+    Uses HeadObject to detect the presence of an object and only writes it with
+    PutObject when the object is not found.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectKey
+    - objectBody
+    properties:
+      bucket:
+        type: string
+        description: The bucket that holds (or will hold) the object.
+      objectKey:
+        type: string
+        description: The key to check for and conditionally write.
+      objectBody:
+        type: string
+        description: The raw object payload to upload when the object is missing.
+  steps:
+  - stepId: headObject
+    description: >-
+      Probe for the object with a HEAD request. A 200 means it exists; a 404
+      means it must be created.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      existingEtag: $response.header.ETag
+    onSuccess:
+    - name: alreadyExists
+      type: end
+      criteria:
+      - condition: $statusCode == 200
+    onFailure:
+    - name: notFoundCreate
+      type: goto
+      stepId: putObject
+      criteria:
+      - condition: $statusCode == 404
+  - stepId: putObject
+    description: >-
+      Upload the object's binary body because the HEAD request reported it was
+      not present.
+    operationId: PutObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    requestBody:
+      contentType: application/octet-stream
+      payload: $inputs.objectBody
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdEtag: $response.header.ETag
+      versionId: $response.header.x-amz-version-id
+  outputs:
+    existingEtag: $steps.headObject.outputs.existingEtag
+    createdEtag: $steps.putObject.outputs.createdEtag

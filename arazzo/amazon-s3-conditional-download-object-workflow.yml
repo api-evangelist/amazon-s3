@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Conditional Download of an Object
+  summary: HEAD an object to read its ETag, then GET it only when it is present.
+  description: >-
+    A safe read flow for Amazon S3. The workflow issues a HEAD request to learn
+    an object's ETag and size without transferring its bytes, and branches: when
+    the object exists it proceeds to GET the full body, and when the object is
+    missing it ends without downloading anything. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: conditional-download-object
+  summary: HEAD then GET an object, downloading only when it exists.
+  description: >-
+    Probes an object with HeadObject and downloads it with GetObject only when
+    the HEAD reports it is present.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectKey
+    properties:
+      bucket:
+        type: string
+        description: The bucket holding the object.
+      objectKey:
+        type: string
+        description: The key of the object to download.
+  steps:
+  - stepId: headObject
+    description: >-
+      HEAD the object to learn its ETag and size before deciding to download.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      etag: $response.header.ETag
+    onSuccess:
+    - name: present
+      type: goto
+      stepId: getObject
+      criteria:
+      - condition: $statusCode == 200
+    onFailure:
+    - name: missing
+      type: end
+      criteria:
+      - condition: $statusCode == 404
+  - stepId: getObject
+    description: >-
+      Download the full object body now that the HEAD confirmed it exists.
+    operationId: GetObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      etag: $response.header.ETag
+      contentLength: $response.header.Content-Length
+  outputs:
+    headEtag: $steps.headObject.outputs.etag
+    downloadedEtag: $steps.getObject.outputs.etag

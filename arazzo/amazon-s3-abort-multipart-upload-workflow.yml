@@ -1,0 +1,69 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Start and Abort a Multipart Upload
+  summary: Initiate a multipart upload then abort it to release any staged storage.
+  description: >-
+    A cleanup flow for abandoned multipart uploads in Amazon S3. The workflow
+    initiates a multipart upload to obtain an UploadId and then immediately
+    aborts that upload, which frees the storage consumed by any previously
+    uploaded parts. This is the recommended way to cancel an upload that will not
+    be completed. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: start-and-abort-multipart-upload
+  summary: Create a multipart upload then abort it by UploadId.
+  description: >-
+    Initiates a multipart upload and aborts it, releasing the storage of any
+    staged parts.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectKey
+    properties:
+      bucket:
+        type: string
+        description: The bucket the multipart upload targets.
+      objectKey:
+        type: string
+        description: The key the multipart upload targets.
+  steps:
+  - stepId: createMultipartUpload
+    description: >-
+      Initiate the multipart upload and capture the UploadId to abort.
+    operationId: CreateMultipartUpload
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uploadId: $response.body#/UploadId
+  - stepId: abortMultipartUpload
+    description: >-
+      Abort the multipart upload by its UploadId. S3 responds with 204 No Content
+      and frees any staged parts.
+    operationId: AbortMultipartUpload
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    - name: uploadId
+      in: query
+      value: $steps.createMultipartUpload.outputs.uploadId
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    uploadId: $steps.createMultipartUpload.outputs.uploadId

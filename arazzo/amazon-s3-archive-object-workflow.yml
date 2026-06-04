@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Archive an Object to a Cold Storage Class
+  summary: Copy an object into an archival storage class then delete the hot original.
+  description: >-
+    A cost-optimization flow for Amazon S3. The workflow performs a server-side
+    copy of an object onto itself (or a new key) while setting an archival
+    storage class such as GLACIER, confirms the rewritten object exists, and then
+    deletes the original hot-tier object. The result is the same data held in a
+    cheaper storage class. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: archive-object
+  summary: Copy an object into an archival storage class then remove the hot copy.
+  description: >-
+    Rewrites an object into a colder storage class via CopyObject, confirms it,
+    and deletes the original object.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - sourceKey
+    - archiveKey
+    - copySource
+    - storageClass
+    properties:
+      bucket:
+        type: string
+        description: The bucket holding the object.
+      sourceKey:
+        type: string
+        description: The key of the hot-tier object to archive.
+      archiveKey:
+        type: string
+        description: The key the archived copy is written to.
+      copySource:
+        type: string
+        description: The x-amz-copy-source value, e.g. /bucket/sourcekey (URL-encoded path).
+      storageClass:
+        type: string
+        description: The archival storage class, e.g. GLACIER or DEEP_ARCHIVE.
+  steps:
+  - stepId: copyToArchive
+    description: >-
+      Server-side copy the object to the archive key while setting the cold
+      storage class.
+    operationId: CopyObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.archiveKey
+    - name: x-amz-copy-source
+      in: header
+      value: $inputs.copySource
+    - name: x-amz-storage-class
+      in: header
+      value: $inputs.storageClass
+    - name: x-amz-metadata-directive
+      in: header
+      value: COPY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      archiveEtag: $response.body#/ETag
+  - stepId: confirmArchive
+    description: >-
+      HEAD the archived object to confirm it exists before removing the original.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.archiveKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      storageClass: $response.header.x-amz-storage-class
+  - stepId: deleteOriginal
+    description: >-
+      Delete the original hot-tier object now that the archived copy is
+      confirmed.
+    operationId: DeleteObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.sourceKey
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    archiveEtag: $steps.copyToArchive.outputs.archiveEtag
+    storageClass: $steps.confirmArchive.outputs.storageClass

@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Empty and Delete a Bucket
+  summary: List the bucket, batch-delete its objects, then delete the empty bucket.
+  description: >-
+    A full teardown flow for Amazon S3. A bucket cannot be deleted while it still
+    contains objects, so the workflow first lists the objects, then removes a
+    supplied set of keys with a single DeleteObjects request, and finally deletes
+    the now-empty bucket. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: empty-and-delete-bucket
+  summary: List, batch-delete objects, then delete the empty bucket.
+  description: >-
+    Lists the bucket, removes the supplied keys with DeleteObjects, and deletes
+    the bucket once it is empty.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectsToDelete
+    properties:
+      bucket:
+        type: string
+        description: The bucket to empty and delete.
+      objectsToDelete:
+        type: array
+        description: The list of objects to delete, each an object with a Key.
+        items:
+          type: object
+          required:
+          - Key
+          properties:
+            Key:
+              type: string
+            VersionId:
+              type: string
+  steps:
+  - stepId: listObjects
+    description: >-
+      List the bucket contents to see what must be removed before the bucket can
+      be deleted.
+    operationId: ListObjectsV2
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: list-type
+      in: query
+      value: 2
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      keyCount: $response.body#/KeyCount
+  - stepId: batchDelete
+    description: >-
+      Delete the supplied keys in a single DeleteObjects request to empty the
+      bucket.
+    operationId: DeleteObjects
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Object: $inputs.objectsToDelete
+        Quiet: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleted: $response.body#/Deleted
+  - stepId: deleteBucket
+    description: >-
+      Delete the now-empty bucket. S3 responds with 204 No Content on success.
+    operationId: DeleteBucket
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    keyCount: $steps.listObjects.outputs.keyCount
+    deleted: $steps.batchDelete.outputs.deleted

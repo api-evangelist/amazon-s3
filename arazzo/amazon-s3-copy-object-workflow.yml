@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Copy Object Between Keys
+  summary: Confirm a source object exists, copy it to a destination, and verify the copy.
+  description: >-
+    A safe server-side copy flow for Amazon S3. The workflow first HEADs the
+    source object to confirm it exists, performs a server-side CopyObject to the
+    destination key using the x-amz-copy-source header, and then HEADs the
+    destination to confirm the copy succeeded. No object bytes pass through the
+    client. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: copy-object
+  summary: Server-side copy an object from a source key to a destination key.
+  description: >-
+    Verifies the source object, copies it with CopyObject, and verifies the
+    destination object was created.
+  inputs:
+    type: object
+    required:
+    - sourceBucket
+    - sourceKey
+    - destinationBucket
+    - destinationKey
+    - copySource
+    properties:
+      sourceBucket:
+        type: string
+        description: The bucket holding the source object.
+      sourceKey:
+        type: string
+        description: The key of the source object to copy.
+      destinationBucket:
+        type: string
+        description: The bucket the copy will be written to.
+      destinationKey:
+        type: string
+        description: The key the copy will be written under.
+      copySource:
+        type: string
+        description: The x-amz-copy-source value, e.g. /sourcebucket/sourcekey (URL-encoded path).
+  steps:
+  - stepId: headSource
+    description: >-
+      Confirm the source object exists before attempting the server-side copy.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.sourceBucket
+    - name: Key+
+      in: path
+      value: $inputs.sourceKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceEtag: $response.header.ETag
+  - stepId: copyObject
+    description: >-
+      Perform the server-side copy to the destination key using the
+      x-amz-copy-source header.
+    operationId: CopyObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.destinationBucket
+    - name: Key+
+      in: path
+      value: $inputs.destinationKey
+    - name: x-amz-copy-source
+      in: header
+      value: $inputs.copySource
+    - name: x-amz-metadata-directive
+      in: header
+      value: COPY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      copyEtag: $response.body#/ETag
+      lastModified: $response.body#/LastModified
+  - stepId: headDestination
+    description: >-
+      Confirm the destination object now exists, completing the copy
+      verification.
+    operationId: HeadObject
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.destinationBucket
+    - name: Key+
+      in: path
+      value: $inputs.destinationKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      destinationEtag: $response.header.ETag
+  outputs:
+    copyEtag: $steps.copyObject.outputs.copyEtag
+    destinationEtag: $steps.headDestination.outputs.destinationEtag

@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Multipart Upload a Large Object
+  summary: Initiate a multipart upload, upload a part, and complete the upload.
+  description: >-
+    The canonical large-object upload flow for Amazon S3. The workflow initiates
+    a multipart upload to obtain an UploadId, uploads a single part against that
+    UploadId, and then completes the multipart upload by submitting the part
+    manifest so S3 assembles the final object. Because S3 returns each part's
+    ETag only in a response header rather than the response body, the part ETags
+    used in the completion manifest are supplied as a workflow input. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: multipart-upload
+  summary: Create, upload a part to, and complete a multipart upload.
+  description: >-
+    Initiates a multipart upload, pushes one part, and completes the upload with
+    a part manifest to produce the final assembled object.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - objectKey
+    - partBody
+    - partManifest
+    properties:
+      bucket:
+        type: string
+        description: The bucket the multipart object will be written to.
+      objectKey:
+        type: string
+        description: The key the assembled object will be stored under.
+      partBody:
+        type: string
+        description: The raw bytes for part number 1.
+      partManifest:
+        type: array
+        description: The completed-part manifest, each item carrying ETag and PartNumber.
+        items:
+          type: object
+          required:
+          - ETag
+          - PartNumber
+          properties:
+            ETag:
+              type: string
+              description: The ETag returned in the UploadPart response header for this part.
+            PartNumber:
+              type: integer
+              description: The 1-based number identifying this part.
+  steps:
+  - stepId: createMultipartUpload
+    description: >-
+      Initiate the multipart upload and capture the UploadId used by all
+      subsequent part operations.
+    operationId: CreateMultipartUpload
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uploadId: $response.body#/UploadId
+  - stepId: uploadPart
+    description: >-
+      Upload part number 1 against the new UploadId. The part ETag is returned in
+      the ETag response header for use in the completion manifest.
+    operationId: UploadPart
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    - name: partNumber
+      in: query
+      value: 1
+    - name: uploadId
+      in: query
+      value: $steps.createMultipartUpload.outputs.uploadId
+    requestBody:
+      contentType: application/octet-stream
+      payload: $inputs.partBody
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      partEtag: $response.header.ETag
+  - stepId: completeMultipartUpload
+    description: >-
+      Complete the upload by submitting the part manifest so S3 concatenates the
+      parts into the final object.
+    operationId: CompleteMultipartUpload
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: Key+
+      in: path
+      value: $inputs.objectKey
+    - name: uploadId
+      in: query
+      value: $steps.createMultipartUpload.outputs.uploadId
+    requestBody:
+      contentType: application/xml
+      payload:
+        Part: $inputs.partManifest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      location: $response.body#/Location
+      etag: $response.body#/ETag
+  outputs:
+    uploadId: $steps.createMultipartUpload.outputs.uploadId
+    location: $steps.completeMultipartUpload.outputs.location
+    etag: $steps.completeMultipartUpload.outputs.etag

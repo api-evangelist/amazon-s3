@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Set and Verify Bucket Tags
+  summary: Write a bucket tag set then read it back to confirm it was stored.
+  description: >-
+    A cost-allocation and organization flow for Amazon S3 buckets. The workflow
+    writes a tag set to the bucket and then reads the tag set back to confirm the
+    tags were stored. Tags are used to organize buckets and attribute costs in
+    the AWS bill. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: set-and-verify-bucket-tags
+  summary: Put a bucket tag set then get it back to confirm.
+  description: >-
+    Applies a tag set to the bucket with PutBucketTagging and confirms it with
+    GetBucketTagging.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - tagSet
+    properties:
+      bucket:
+        type: string
+        description: The bucket to tag.
+      tagSet:
+        type: object
+        description: The TagSet container holding the Tag array to apply.
+        properties:
+          Tag:
+            type: array
+            description: The list of Key/Value tag pairs.
+            items:
+              type: object
+              properties:
+                Key:
+                  type: string
+                Value:
+                  type: string
+  steps:
+  - stepId: putTags
+    description: >-
+      Write the tag set to the bucket. S3 responds with 204 No Content on
+      success.
+    operationId: PutBucketTagging
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        TagSet: $inputs.tagSet
+    successCriteria:
+    - condition: $statusCode == 204
+  - stepId: getTags
+    description: >-
+      Read the tag set back to confirm the tags were stored on the bucket.
+    operationId: GetBucketTagging
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tagSet: $response.body#/TagSet
+  outputs:
+    tagSet: $steps.getTags.outputs.tagSet

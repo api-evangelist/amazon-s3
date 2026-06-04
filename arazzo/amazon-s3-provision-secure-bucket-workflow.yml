@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Amazon S3 Provision a Secure Bucket
+  summary: Create a bucket, enable versioning, and apply default encryption.
+  description: >-
+    A hardening flow that stands up a bucket ready for sensitive data. The
+    workflow creates the bucket, enables versioning so object history is
+    retained, and applies a default server-side encryption rule so new objects
+    are encrypted at rest. The result is a bucket configured with two of the most
+    common data-protection guardrails. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: s3RestApi
+  url: ../openapi/amazon-s3-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-secure-bucket
+  summary: Create a bucket then enable versioning and default encryption on it.
+  description: >-
+    Creates a bucket in the requested Region, enables versioning, and applies a
+    default encryption rule.
+  inputs:
+    type: object
+    required:
+    - bucket
+    - region
+    - encryptionRules
+    properties:
+      bucket:
+        type: string
+        description: The bucket name to create.
+      region:
+        type: string
+        description: The AWS Region (LocationConstraint) for the bucket.
+      encryptionRules:
+        type: array
+        description: The default-encryption Rule list to apply to the bucket.
+        items:
+          type: object
+          properties:
+            ApplyServerSideEncryptionByDefault:
+              type: object
+              properties:
+                SSEAlgorithm:
+                  type: string
+            BucketKeyEnabled:
+              type: boolean
+  steps:
+  - stepId: createBucket
+    description: >-
+      Create the bucket in the requested Region.
+    operationId: CreateBucket
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    - name: x-amz-acl
+      in: header
+      value: private
+    requestBody:
+      contentType: application/xml
+      payload:
+        LocationConstraint: $inputs.region
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      location: $response.header.Location
+  - stepId: enableVersioning
+    description: >-
+      Enable versioning on the new bucket so object overwrites are retained as
+      versions.
+    operationId: PutBucketVersioning
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Status: Enabled
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: applyEncryption
+    description: >-
+      Apply a default server-side encryption rule so new objects are encrypted at
+      rest.
+    operationId: PutBucketEncryption
+    parameters:
+    - name: Bucket
+      in: path
+      value: $inputs.bucket
+    requestBody:
+      contentType: application/xml
+      payload:
+        Rule: $inputs.encryptionRules
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    bucketLocation: $steps.createBucket.outputs.location
