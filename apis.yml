@@ -1,317 +1,288 @@
 name: Amazon S3
-description: Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability, data availability,
-  security, and performance.
+description: >-
+  Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability, data
+  availability, security, and performance.
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/s3/
 created: '2024-01-15'
 modified: '2026-05-19'
 apis:
-- name: Amazon S3 REST API
-  description: RESTful API for Amazon S3 storage operations including bucket management, object operations, and access control.
-  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - AWS
-  - Cloud Storage
-  - Object Storage
-  - Storage
-  properties:
+  - name: Amazon S3 REST API
+    description: RESTful API for Amazon S3 storage operations including bucket management, object operations, and access control.
+    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+    humanURL: https://aws.amazon.com/s3/
+    baseURL: https://s3.amazonaws.com
+    tags:
+      - AWS
+      - Cloud Storage
+      - Object Storage
+      - Storage
+    properties:
+      - type: Documentation
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+      - type: OpenAPI
+        url: openapi/amazon-s3-rest-api-openapi.yml
+      - type: OpenAPI
+        url: https://api.apis.guru/v2/specs/amazonaws.com/s3/2006-03-01/openapi.yaml
+      - type: JSONSchema
+        url: json-schema/amazon-s3-bucket-schema.json
+      - type: JSONSchema
+        url: json-schema/amazon-s3-object-schema.json
+      - type: JSONLD
+        url: json-ld/amazon-s3-context.jsonld
+      - type: Pricing
+        url: https://aws.amazon.com/s3/pricing/
+      - type: GettingStarted
+        url: https://aws.amazon.com/s3/getting-started/
+      - type: Authentication
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+      - type: SDK
+        url: https://aws.amazon.com/tools/
+      - type: StatusPage
+        url: https://status.aws.amazon.com/
+      - type: BestPractices
+        url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+      - type: FAQ
+        url: https://aws.amazon.com/s3/faqs/
+      - type: APIReference
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+      - type: ChangeLog
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+      - type: CodeExamples
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+      - type: Security
+        url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - name: Amazon S3 Control API
+    description: >-
+      Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations
+      jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations.
+    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+    humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+    baseURL: https://s3-control.amazonaws.com
+    tags:
+      - Access Control
+      - AWS
+      - Batch Operations
+      - Storage
+    properties:
+      - type: Documentation
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+      - type: OpenAPI
+        url: openapi/amazon-s3-control-api-openapi.yml
+      - type: OpenAPI
+        url: https://api.apis.guru/v2/specs/amazonaws.com/s3control/2018-08-20/openapi.yaml
+      - type: JSONLD
+        url: json-ld/amazon-s3-context.jsonld
+      - type: Pricing
+        url: https://aws.amazon.com/s3/pricing/
+      - type: GettingStarted
+        url: https://aws.amazon.com/s3/getting-started/
+      - type: Authentication
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+      - type: SDK
+        url: https://aws.amazon.com/tools/
+      - type: FAQ
+        url: https://aws.amazon.com/s3/faqs/
+      - type: ChangeLog
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - name: Amazon S3 Tables API
+    description: >-
+      Amazon S3 Tables API provides operations for managing table buckets and tables stored in Apache Iceberg format,
+      enabling structured tabular data storage in Apache Parquet format within Amazon S3.
+    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+    humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+    baseURL: https://s3tables.amazonaws.com
+    tags:
+      - Apache Iceberg
+      - AWS
+      - Data Lake
+      - Storage
+      - Tables
+    properties:
+      - type: Documentation
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+      - type: OpenAPI
+        url: openapi/amazon-s3-tables-api-openapi.yml
+      - type: JSONLD
+        url: json-ld/amazon-s3-context.jsonld
+      - type: APIReference
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+      - type: Pricing
+        url: https://aws.amazon.com/s3/pricing/
+      - type: GettingStarted
+        url: https://aws.amazon.com/s3/getting-started/
+      - type: Authentication
+        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+      - type: SDK
+        url: https://aws.amazon.com/tools/
+      - type: FAQ
+        url: https://aws.amazon.com/s3/faqs/
+common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/amazon-s3/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/amazon-s3-abort-multipart-upload-workflow.yml
+        name: Amazon S3 Start and Abort a Multipart Upload
+        summary: Initiate a multipart upload then abort it to release any staged storage.
+      - url: arazzo/amazon-s3-archive-object-workflow.yml
+        name: Amazon S3 Archive an Object to a Cold Storage Class
+        summary: Copy an object into an archival storage class then delete the hot original.
+      - url: arazzo/amazon-s3-conditional-download-object-workflow.yml
+        name: Amazon S3 Conditional Download of an Object
+        summary: HEAD an object to read its ETag, then GET it only when it is present.
+      - url: arazzo/amazon-s3-copy-object-workflow.yml
+        name: Amazon S3 Copy Object Between Keys
+        summary: Confirm a source object exists, copy it to a destination, and verify the copy.
+      - url: arazzo/amazon-s3-create-bucket-put-object-workflow.yml
+        name: Amazon S3 Create Bucket and Store an Object
+        summary: Create a bucket, confirm it exists, upload an object, and read it back.
+      - url: arazzo/amazon-s3-delete-object-workflow.yml
+        name: Amazon S3 Delete Object and Confirm Removal
+        summary: Delete an object then HEAD it to confirm it is gone.
+      - url: arazzo/amazon-s3-empty-and-delete-bucket-workflow.yml
+        name: Amazon S3 Empty and Delete a Bucket
+        summary: List the bucket, batch-delete its objects, then delete the empty bucket.
+      - url: arazzo/amazon-s3-enable-versioning-put-object-workflow.yml
+        name: Amazon S3 Enable Versioning Then Store an Object
+        summary: Turn on bucket versioning, confirm it, then write a versioned object.
+      - url: arazzo/amazon-s3-get-or-create-object-workflow.yml
+        name: Amazon S3 Get Object or Create It
+        summary: Check whether an object exists with HEAD and upload it only if missing.
+      - url: arazzo/amazon-s3-list-and-batch-delete-objects-workflow.yml
+        name: Amazon S3 List and Batch Delete Objects
+        summary: List objects under a prefix then delete a batch of keys in one request.
+      - url: arazzo/amazon-s3-move-object-workflow.yml
+        name: Amazon S3 Move an Object
+        summary: Copy an object to a new key, verify it, then delete the original.
+      - url: arazzo/amazon-s3-multipart-upload-workflow.yml
+        name: Amazon S3 Multipart Upload a Large Object
+        summary: Initiate a multipart upload, upload a part, and complete the upload.
+      - url: arazzo/amazon-s3-paginate-list-objects-workflow.yml
+        name: Amazon S3 Paginate Through Bucket Objects
+        summary: List a first page of objects then fetch the next page by continuation token.
+      - url: arazzo/amazon-s3-provision-secure-bucket-workflow.yml
+        name: Amazon S3 Provision a Secure Bucket
+        summary: Create a bucket, enable versioning, and apply default encryption.
+      - url: arazzo/amazon-s3-put-object-list-objects-workflow.yml
+        name: Amazon S3 Upload and List Objects
+        summary: Upload an object then list the bucket contents to confirm it appears.
+      - url: arazzo/amazon-s3-set-bucket-acl-workflow.yml
+        name: Amazon S3 Apply and Verify a Bucket ACL
+        summary: Set a bucket access control policy then read it back to confirm.
+      - url: arazzo/amazon-s3-set-bucket-cors-workflow.yml
+        name: Amazon S3 Configure and Verify Bucket CORS
+        summary: Put a bucket CORS configuration then read it back to confirm.
+      - url: arazzo/amazon-s3-set-bucket-encryption-workflow.yml
+        name: Amazon S3 Configure and Verify Default Encryption
+        summary: Put a bucket default-encryption configuration then read it back.
+      - url: arazzo/amazon-s3-set-bucket-lifecycle-workflow.yml
+        name: Amazon S3 Apply and Verify a Lifecycle Configuration
+        summary: Put a bucket lifecycle configuration then read it back to confirm.
+      - url: arazzo/amazon-s3-set-bucket-tagging-workflow.yml
+        name: Amazon S3 Set and Verify Bucket Tags
+        summary: Write a bucket tag set then read it back to confirm it was stored.
+  - type: Portal
+    url: https://aws.amazon.com/
   - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
-  - type: OpenAPI
-    url: openapi/amazon-s3-rest-api-openapi.yml
-  - type: OpenAPI
-    url: https://api.apis.guru/v2/specs/amazonaws.com/s3/2006-03-01/openapi.yaml
-  - type: JSONSchema
-    url: json-schema/amazon-s3-bucket-schema.json
-  - type: JSONSchema
-    url: json-schema/amazon-s3-object-schema.json
-  - type: JSONLD
-    url: json-ld/amazon-s3-context.jsonld
-  - type: Pricing
-    url: https://aws.amazon.com/s3/pricing/
-  - type: GettingStarted
-    url: https://aws.amazon.com/s3/getting-started/
-  - type: Authentication
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - type: SDK
-    url: https://aws.amazon.com/tools/
+    url: https://docs.aws.amazon.com/s3/
+  - type: TermsOfService
+    url: https://aws.amazon.com/service-terms/
+  - type: PrivacyPolicy
+    url: https://aws.amazon.com/privacy/
+  - type: Support
+    url: https://aws.amazon.com/premiumsupport/
+  - type: Blog
+    url: https://aws.amazon.com/blogs/storage/
+  - type: GitHubOrganization
+    url: https://github.com/aws
+  - type: Console
+    url: https://console.aws.amazon.com/s3/
+  - type: SignUp
+    url: https://signin.aws.amazon.com/signup?request_type=register
+  - type: Login
+    url: https://aws.amazon.com/console/
   - type: StatusPage
-    url: https://status.aws.amazon.com/
-  - type: BestPractices
-    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
-  - type: FAQ
-    url: https://aws.amazon.com/s3/faqs/
-  - type: APIReference
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
-  - type: ChangeLog
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - type: CodeExamples
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+    url: https://health.aws.amazon.com/health/status
+  - type: KnowledgeCenter
+    url: https://repost.aws/knowledge-center
+  - type: YouTube
+    url: https://www.youtube.com/user/AmazonWebServices
+  - type: StackOverflow
+    url: https://stackoverflow.com/questions/tagged/amazon-s3
+  - type: Contact
+    url: https://aws.amazon.com/contact-us/
   - type: Security
     url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-  - type: NaftikoCapability
-    url: capabilities/rest-access-control.yaml
-  - type: NaftikoCapability
-    url: capabilities/rest-bucket-configuration.yaml
-  - type: NaftikoCapability
-    url: capabilities/rest-buckets.yaml
-  - type: NaftikoCapability
-    url: capabilities/rest-multipart-upload.yaml
-  - type: NaftikoCapability
-    url: capabilities/rest-objects.yaml
-  - type: NaftikoCapability
-    url: capabilities/rest-tagging.yaml
-- name: Amazon S3 Control API
-  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations
-    jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations.
-  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-  humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-  baseURL: https://s3-control.amazonaws.com
-  tags:
-  - Access Control
-  - AWS
-  - Batch Operations
-  - Storage
-  properties:
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-  - type: OpenAPI
-    url: openapi/amazon-s3-control-api-openapi.yml
-  - type: OpenAPI
-    url: https://api.apis.guru/v2/specs/amazonaws.com/s3control/2018-08-20/openapi.yaml
-  - type: JSONLD
-    url: json-ld/amazon-s3-context.jsonld
-  - type: Pricing
-    url: https://aws.amazon.com/s3/pricing/
-  - type: GettingStarted
-    url: https://aws.amazon.com/s3/getting-started/
-  - type: Authentication
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - type: SDK
-    url: https://aws.amazon.com/tools/
-  - type: FAQ
-    url: https://aws.amazon.com/s3/faqs/
+  - type: Compliance
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-compliance.html
   - type: ChangeLog
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - type: NaftikoCapability
-    url: capabilities/control-access-grants.yaml
-  - type: NaftikoCapability
-    url: capabilities/control-access-points.yaml
-  - type: NaftikoCapability
-    url: capabilities/control-batch-operations.yaml
-  - type: NaftikoCapability
-    url: capabilities/control-multi-region-access-points.yaml
-  - type: NaftikoCapability
-    url: capabilities/control-public-access-block.yaml
-  - type: NaftikoCapability
-    url: capabilities/control-storage-lens.yaml
-- name: Amazon S3 Tables API
-  description: Amazon S3 Tables API provides operations for managing table buckets and tables stored in Apache Iceberg format,
-    enabling structured tabular data storage in Apache Parquet format within Amazon S3.
-  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-  humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-  baseURL: https://s3tables.amazonaws.com
-  tags:
-  - Apache Iceberg
-  - AWS
-  - Data Lake
-  - Storage
-  - Tables
-  properties:
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-  - type: OpenAPI
-    url: openapi/amazon-s3-tables-api-openapi.yml
-  - type: JSONLD
-    url: json-ld/amazon-s3-context.jsonld
-  - type: APIReference
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-  - type: Pricing
-    url: https://aws.amazon.com/s3/pricing/
-  - type: GettingStarted
-    url: https://aws.amazon.com/s3/getting-started/
-  - type: Authentication
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - type: SDK
-    url: https://aws.amazon.com/tools/
-  - type: FAQ
-    url: https://aws.amazon.com/s3/faqs/
-  - type: NaftikoCapability
-    url: capabilities/tables-namespaces.yaml
-  - type: NaftikoCapability
-    url: capabilities/tables-table-buckets.yaml
-  - type: NaftikoCapability
-    url: capabilities/tables-table-maintenance.yaml
-  - type: NaftikoCapability
-    url: capabilities/tables-table-policy.yaml
-  - type: NaftikoCapability
-    url: capabilities/tables-tables.yaml
-common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/amazon-s3-abort-multipart-upload-workflow.yml
-    name: Amazon S3 Start and Abort a Multipart Upload
-    summary: Initiate a multipart upload then abort it to release any staged storage.
-  - url: arazzo/amazon-s3-archive-object-workflow.yml
-    name: Amazon S3 Archive an Object to a Cold Storage Class
-    summary: Copy an object into an archival storage class then delete the hot original.
-  - url: arazzo/amazon-s3-conditional-download-object-workflow.yml
-    name: Amazon S3 Conditional Download of an Object
-    summary: HEAD an object to read its ETag, then GET it only when it is present.
-  - url: arazzo/amazon-s3-copy-object-workflow.yml
-    name: Amazon S3 Copy Object Between Keys
-    summary: Confirm a source object exists, copy it to a destination, and verify the copy.
-  - url: arazzo/amazon-s3-create-bucket-put-object-workflow.yml
-    name: Amazon S3 Create Bucket and Store an Object
-    summary: Create a bucket, confirm it exists, upload an object, and read it back.
-  - url: arazzo/amazon-s3-delete-object-workflow.yml
-    name: Amazon S3 Delete Object and Confirm Removal
-    summary: Delete an object then HEAD it to confirm it is gone.
-  - url: arazzo/amazon-s3-empty-and-delete-bucket-workflow.yml
-    name: Amazon S3 Empty and Delete a Bucket
-    summary: List the bucket, batch-delete its objects, then delete the empty bucket.
-  - url: arazzo/amazon-s3-enable-versioning-put-object-workflow.yml
-    name: Amazon S3 Enable Versioning Then Store an Object
-    summary: Turn on bucket versioning, confirm it, then write a versioned object.
-  - url: arazzo/amazon-s3-get-or-create-object-workflow.yml
-    name: Amazon S3 Get Object or Create It
-    summary: Check whether an object exists with HEAD and upload it only if missing.
-  - url: arazzo/amazon-s3-list-and-batch-delete-objects-workflow.yml
-    name: Amazon S3 List and Batch Delete Objects
-    summary: List objects under a prefix then delete a batch of keys in one request.
-  - url: arazzo/amazon-s3-move-object-workflow.yml
-    name: Amazon S3 Move an Object
-    summary: Copy an object to a new key, verify it, then delete the original.
-  - url: arazzo/amazon-s3-multipart-upload-workflow.yml
-    name: Amazon S3 Multipart Upload a Large Object
-    summary: Initiate a multipart upload, upload a part, and complete the upload.
-  - url: arazzo/amazon-s3-paginate-list-objects-workflow.yml
-    name: Amazon S3 Paginate Through Bucket Objects
-    summary: List a first page of objects then fetch the next page by continuation token.
-  - url: arazzo/amazon-s3-provision-secure-bucket-workflow.yml
-    name: Amazon S3 Provision a Secure Bucket
-    summary: Create a bucket, enable versioning, and apply default encryption.
-  - url: arazzo/amazon-s3-put-object-list-objects-workflow.yml
-    name: Amazon S3 Upload and List Objects
-    summary: Upload an object then list the bucket contents to confirm it appears.
-  - url: arazzo/amazon-s3-set-bucket-acl-workflow.yml
-    name: Amazon S3 Apply and Verify a Bucket ACL
-    summary: Set a bucket access control policy then read it back to confirm.
-  - url: arazzo/amazon-s3-set-bucket-cors-workflow.yml
-    name: Amazon S3 Configure and Verify Bucket CORS
-    summary: Put a bucket CORS configuration then read it back to confirm.
-  - url: arazzo/amazon-s3-set-bucket-encryption-workflow.yml
-    name: Amazon S3 Configure and Verify Default Encryption
-    summary: Put a bucket default-encryption configuration then read it back.
-  - url: arazzo/amazon-s3-set-bucket-lifecycle-workflow.yml
-    name: Amazon S3 Apply and Verify a Lifecycle Configuration
-    summary: Put a bucket lifecycle configuration then read it back to confirm.
-  - url: arazzo/amazon-s3-set-bucket-tagging-workflow.yml
-    name: Amazon S3 Set and Verify Bucket Tags
-    summary: Write a bucket tag set then read it back to confirm it was stored.
-- type: Portal
-  url: https://aws.amazon.com/
-- type: Documentation
-  url: https://docs.aws.amazon.com/s3/
-- type: TermsOfService
-  url: https://aws.amazon.com/service-terms/
-- type: PrivacyPolicy
-  url: https://aws.amazon.com/privacy/
-- type: Support
-  url: https://aws.amazon.com/premiumsupport/
-- type: Blog
-  url: https://aws.amazon.com/blogs/storage/
-- type: GitHubOrganization
-  url: https://github.com/aws
-- type: Console
-  url: https://console.aws.amazon.com/s3/
-- type: SignUp
-  url: https://signin.aws.amazon.com/signup?request_type=register
-- type: Login
-  url: https://aws.amazon.com/console/
-- type: StatusPage
-  url: https://health.aws.amazon.com/health/status
-- type: KnowledgeCenter
-  url: https://repost.aws/knowledge-center
-- type: YouTube
-  url: https://www.youtube.com/user/AmazonWebServices
-- type: StackOverflow
-  url: https://stackoverflow.com/questions/tagged/amazon-s3
-- type: Contact
-  url: https://aws.amazon.com/contact-us/
-- type: Security
-  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-- type: Compliance
-  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-compliance.html
-- type: ChangeLog
-  url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-- type: Features
-  data:
-  - Industry-leading scalability and 99.999999999% durability
-  - Multiple storage classes for cost optimization
-  - Object versioning and lifecycle management
-  - Server-side encryption and access control
-  - S3 Object Lock for WORM compliance
-  - Cross-region and same-region replication
-  - S3 Tables for Apache Iceberg tabular data
-  - S3 Access Grants for identity-based access
-  - Storage Lens analytics and insights
-  - Batch Operations for large-scale object processing
-- type: UseCases
-  data:
-  - Storing and serving static website content
-  - Data lake foundation for analytics workloads
-  - Backup and disaster recovery storage
-  - Archive storage with Glacier integration
-  - Hosting machine learning training datasets
-  - Storing application logs and audit trails
-- type: Integrations
-  data:
-  - AWS Lambda
-  - Amazon CloudFront
-  - Amazon Athena
-  - AWS Glue
-  - Amazon EMR
-  - Amazon Redshift
-  - AWS CloudTrail
-  - Amazon EventBridge
-- type: Integrations
-  url: https://aws.amazon.com/marketplace/
+  - type: Features
+    data:
+      - Industry-leading scalability and 99.999999999% durability
+      - Multiple storage classes for cost optimization
+      - Object versioning and lifecycle management
+      - Server-side encryption and access control
+      - S3 Object Lock for WORM compliance
+      - Cross-region and same-region replication
+      - S3 Tables for Apache Iceberg tabular data
+      - S3 Access Grants for identity-based access
+      - Storage Lens analytics and insights
+      - Batch Operations for large-scale object processing
+  - type: UseCases
+    data:
+      - Storing and serving static website content
+      - Data lake foundation for analytics workloads
+      - Backup and disaster recovery storage
+      - Archive storage with Glacier integration
+      - Hosting machine learning training datasets
+      - Storing application logs and audit trails
+  - type: Integrations
+    data:
+      - AWS Lambda
+      - Amazon CloudFront
+      - Amazon Athena
+      - AWS Glue
+      - Amazon EMR
+      - Amazon Redshift
+      - AWS CloudTrail
+      - Amazon EventBridge
+  - type: Integrations
+    url: https://aws.amazon.com/marketplace/
 properties:
-- type: Capabilities
-  url: capabilities/storage-management.yaml
-  title: Storage Management Capability
-- type: Capabilities
-  url: capabilities/shared/s3-rest.yaml
-  title: S3 REST API Shared Definition
-- type: Capabilities
-  url: capabilities/shared/s3-control.yaml
-  title: S3 Control API Shared Definition
-- type: Capabilities
-  url: capabilities/shared/s3-tables.yaml
-  title: S3 Tables API Shared Definition
+  - type: Capabilities
+    url: capabilities/storage-management.yaml
+    title: Storage Management Capability
+  - type: Capabilities
+    url: capabilities/shared/s3-rest.yaml
+    title: S3 REST API Shared Definition
+  - type: Capabilities
+    url: capabilities/shared/s3-control.yaml
+    title: S3 Control API Shared Definition
+  - type: Capabilities
+    url: capabilities/shared/s3-tables.yaml
+    title: S3 Tables API Shared Definition
 integrations:
-- name: Sign in
-- name: Agent Mode
-- name: Why AWS Marketplace?
-- name: Get started in AWS Marketplace
-- name: Industry
-- name: Resources
-- name: Become a Channel Partner
-- name: Sell in AWS Marketplace
-- name: Manage Your Account
+  - name: Sign in
+  - name: Agent Mode
+  - name: Why AWS Marketplace?
+  - name: Get started in AWS Marketplace
+  - name: Industry
+  - name: Resources
+  - name: Become a Channel Partner
+  - name: Sell in AWS Marketplace
+  - name: Manage Your Account
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
 tags:
-- Archive
-- AWS
-- Backup
-- Cloud Storage
-- Data Storage
-- Object Storage
-- Scalable Storage
+  - Archive
+  - AWS
+  - Backup
+  - Cloud Storage
+  - Data Storage
+  - Object Storage
+  - Scalable Storage
