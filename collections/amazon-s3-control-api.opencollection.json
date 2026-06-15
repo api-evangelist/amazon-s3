@@ -1,0 +1,675 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point, or the ARN of the access point for S3 on Outposts."
+              }
+            ]
+          },
+          "docs": "Returns configuration information about the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name you want to assign to this access point."
+              }
+            ]
+          },
+          "docs": "Creates an access point and associates it with the specified bucket. You can use access points to manage access to shared data sets. Access points simplify managing data access at scale for applications using shared data sets on S3."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point you want to delete."
+              }
+            ]
+          },
+          "docs": "Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 List Access Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "bucket",
+                "value": "example_value",
+                "type": "query",
+                "description": "The name of the bucket whose associated access points you want to list."
+              },
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A continuation token. If a previous call produced a truncated list, pass this value to get the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of access points to return (1-1000)."
+              }
+            ]
+          },
+          "docs": "Returns a list of the access points that are associated with the specified bucket. You can retrieve up to 1000 access points per call."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Returns the access point policy associated with the specified access point."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Deletes the access point policy for the specified access point."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Batch Operations Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobStatuses",
+                "value": "",
+                "type": "query",
+                "description": "The List Jobs request returns jobs that match the statuses listed."
+              },
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token to request the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of jobs to return."
+              }
+            ]
+          },
+          "docs": "Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the AWS account making the request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Batch Operations Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an S3 Batch Operations job to perform the specified operation on every object in the specified manifest. You can create a job that performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier restore, replace tagging, delete objects, or replicate objects."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Describe Batch Operations Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID for the job whose information you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Update Job Priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id/priority",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID for the job whose priority you want to update."
+              },
+              {
+                "name": "priority",
+                "value": "10",
+                "type": "query",
+                "description": "The priority you want to assign to this job."
+              }
+            ]
+          },
+          "docs": "Updates an existing S3 Batch Operations job's priority. You can use this operation to increase or decrease the priority of a job. Higher number priorities are processed first."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Update Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id/status",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID of the job whose status you want to update."
+              },
+              {
+                "name": "requestedJobStatus",
+                "value": "Cancelled",
+                "type": "query",
+                "description": "The status that you want to move the specified job to."
+              },
+              {
+                "name": "statusUpdateReason",
+                "value": "example_value",
+                "type": "query",
+                "description": "A description of the reason why you want to change the job status."
+              }
+            ]
+          },
+          "docs": "Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Public Access Block",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the PublicAccessBlock configuration for an AWS account. For using this operation with S3 on Outposts, you must provide the Outpost bucket ARN."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates or modifies the PublicAccessBlock configuration for an AWS account. To use this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Removes the PublicAccessBlock configuration for an AWS account. For this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Storage Lens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Storage Lens Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token for the next page of results."
+              }
+            ]
+          },
+          "docs": "Gets a list of Amazon S3 Storage Lens configurations. To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Amazon S3 Storage Lens configuration."
+              }
+            ]
+          },
+          "docs": "Gets the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Amazon S3 Storage Lens configuration."
+              }
+            ]
+          },
+          "docs": "Puts an Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Storage Lens configuration to delete."
+              }
+            ]
+          },
+          "docs": "Deletes the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Grants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the S3 Access Grants instance. You must have the s3:GetAccessGrantsInstance permission to use this operation."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deletes the S3 Access Grants instance. You must first delete all access grants and registered locations before you can delete the S3 Access Grants instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Multi-Region Access Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Create Multi-region Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/async-requests/mrap/create",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a Multi-Region Access Point and associates it with the specified buckets. Multi-Region Access Points provide a single global endpoint that applications can use to request data regardless of the location of the requester. This is an asynchronous request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 List Multi-region Access Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/mrap/instances",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token for the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results to return per call."
+              }
+            ]
+          },
+          "docs": "Returns a list of the Multi-Region Access Points currently associated with the specified AWS account."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Multi-region Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/mrap/instances/:mrap_name+",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mrap_name+",
+                "value": "example_value",
+                "type": "path",
+                "description": "The name of the Multi-Region Access Point."
+              }
+            ]
+          },
+          "docs": "Returns configuration information about the specified Multi-Region Access Point."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

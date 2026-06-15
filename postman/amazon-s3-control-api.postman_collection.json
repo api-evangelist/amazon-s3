@@ -1,0 +1,3263 @@
+{
+  "info": {
+    "_postman_id": "7147c267-2885-4e27-85a5-c4b6c8d98f86",
+    "name": "Amazon S3 Control API",
+    "description": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:03.000Z",
+    "updatedAt": "2026-06-05T15:05:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7147c267-2885-4e27-85a5-c4b6c8d98f86"
+  },
+  "item": [
+    {
+      "name": "v20180820",
+      "item": [
+        {
+          "name": "accesspoint",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "policy",
+                  "item": [
+                    {
+                      "name": "Amazon S3 Get Access Point Policy",
+                      "id": "a9f53185-2482-4802-a365-76b2a354ff31",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e130f9d0-c549-4a74-bbda-cf426a9fbba2",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the access point."
+                            }
+                          ]
+                        },
+                        "description": "Returns the access point policy associated with the specified access point."
+                      },
+                      "response": [
+                        {
+                          "id": "3617ba2f-d4f6-4d9a-84e0-495a06bc068a",
+                          "name": "Successfully returned access point policy.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "accesspoint",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "xml",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/xml"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Policy>(string)</Policy>\n</element>",
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-3617ba2f-d4f6-4d9a-84e0-495a06bc068a"
+                        },
+                        {
+                          "id": "469b67ad-23a1-4be3-8929-f7e1c411d014",
+                          "name": "The access point policy does not exist.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "accesspoint",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-469b67ad-23a1-4be3-8929-f7e1c411d014"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-a9f53185-2482-4802-a365-76b2a354ff31"
+                    },
+                    {
+                      "name": "Amazon S3 Put Access Point Policy",
+                      "id": "15c4d83d-f364-4a41-a282-75444de7b838",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Policy>(string)</Policy>\n</element>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f5741e67-5d47-47ba-bb56-7cb144643f9f",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the access point."
+                            }
+                          ]
+                        },
+                        "description": "Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point."
+                      },
+                      "response": [
+                        {
+                          "id": "d31011e0-8141-4e9b-a449-37751b703472",
+                          "name": "Access point policy updated successfully.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Policy>(string)</Policy>\n</element>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "xml",
+                                  "language": "xml"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "accesspoint",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-d31011e0-8141-4e9b-a449-37751b703472"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-15c4d83d-f364-4a41-a282-75444de7b838"
+                    },
+                    {
+                      "name": "Amazon S3 Delete Access Point Policy",
+                      "id": "158a4d43-55ab-4c76-bb0c-0deb02f63cfd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "id": "39e032f4-e5d7-48ce-b7f3-f3e6fe249cd9",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the access point."
+                            }
+                          ]
+                        },
+                        "description": "Deletes the access point policy for the specified access point."
+                      },
+                      "response": [
+                        {
+                          "id": "08b74c05-b2ed-4bfa-ada1-70239226640e",
+                          "name": "Access point policy deleted successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/accesspoint/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "accesspoint",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-08b74c05-b2ed-4bfa-ada1-70239226640e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-158a4d43-55ab-4c76-bb0c-0deb02f63cfd"
+                    }
+                  ],
+                  "id": "19a9ac69-7ac2-44e8-ada9-6c8eeab55fda",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-19a9ac69-7ac2-44e8-ada9-6c8eeab55fda"
+                },
+                {
+                  "name": "Amazon S3 Get Access Point",
+                  "id": "650e9d17-24ea-447a-8b53-f51b22ead7af",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accesspoint",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bfb2e05e-2a9a-49cd-9d03-77d1d88cbc49",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name of the access point, or the ARN of the access point for S3 on Outposts."
+                        }
+                      ]
+                    },
+                    "description": "Returns configuration information about the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request."
+                  },
+                  "response": [
+                    {
+                      "id": "d6e75324-6374-4281-801b-8b58e1b4fd6f",
+                      "name": "Successfully returned access point configuration.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Name>(string)</Name>\n  <Bucket>(string)</Bucket>\n  <NetworkOrigin>(string)</NetworkOrigin>\n  <VpcConfiguration>\n    <VpcId>(string)</VpcId>\n  </VpcConfiguration>\n  <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n    <BlockPublicAcls>(boolean)</BlockPublicAcls>\n    <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n    <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n    <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n  </PublicAccessBlockConfiguration>\n  <CreationDate>(string)</CreationDate>\n  <Alias>(string)</Alias>\n  <AccessPointArn>(string)</AccessPointArn>\n  <Endpoints>\n  </Endpoints>\n  <BucketAccountId>(string)</BucketAccountId>\n</element>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-d6e75324-6374-4281-801b-8b58e1b4fd6f"
+                    },
+                    {
+                      "id": "6678a688-6786-40eb-9963-208dc5de9a78",
+                      "name": "The specified access point does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-6678a688-6786-40eb-9963-208dc5de9a78"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-650e9d17-24ea-447a-8b53-f51b22ead7af"
+                },
+                {
+                  "name": "Amazon S3 Create Access Point",
+                  "id": "21d996cd-0583-4c16-ad6e-e41eb380786d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Bucket>(string)</Bucket>\n  <VpcConfiguration>\n    <VpcId>(string)</VpcId>\n  </VpcConfiguration>\n  <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n    <BlockPublicAcls>(boolean)</BlockPublicAcls>\n    <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n    <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n    <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n  </PublicAccessBlockConfiguration>\n  <BucketAccountId>(string)</BucketAccountId>\n</CreateAccessPointRequest>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accesspoint",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "97df67cc-0f58-447d-b22d-197531fb2e7b",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name you want to assign to this access point."
+                        }
+                      ]
+                    },
+                    "description": "Creates an access point and associates it with the specified bucket. You can use access points to manage access to shared data sets. Access points simplify managing data access at scale for applications using shared data sets on S3."
+                  },
+                  "response": [
+                    {
+                      "id": "b4216fe5-ade4-4110-9c7f-28c639ecc32c",
+                      "name": "Access point created successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Bucket>(string)</Bucket>\n  <VpcConfiguration>\n    <VpcId>(string)</VpcId>\n  </VpcConfiguration>\n  <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n    <BlockPublicAcls>(boolean)</BlockPublicAcls>\n    <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n    <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n    <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n  </PublicAccessBlockConfiguration>\n  <BucketAccountId>(string)</BucketAccountId>\n</CreateAccessPointRequest>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <AccessPointArn>(string)</AccessPointArn>\n  <Alias>(string)</Alias>\n</element>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-b4216fe5-ade4-4110-9c7f-28c639ecc32c"
+                    },
+                    {
+                      "id": "a5178d17-e6e4-4af3-9503-9f62ece84c6c",
+                      "name": "An access point with this name already exists.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Bucket>(string)</Bucket>\n  <VpcConfiguration>\n    <VpcId>(string)</VpcId>\n  </VpcConfiguration>\n  <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n    <BlockPublicAcls>(boolean)</BlockPublicAcls>\n    <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n    <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n    <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n  </PublicAccessBlockConfiguration>\n  <BucketAccountId>(string)</BucketAccountId>\n</CreateAccessPointRequest>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-a5178d17-e6e4-4af3-9503-9f62ece84c6c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-21d996cd-0583-4c16-ad6e-e41eb380786d"
+                },
+                {
+                  "name": "Amazon S3 Delete Access Point",
+                  "id": "a5046b0d-75fa-45d1-85cf-3d4b1e48b67e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accesspoint",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b3f03186-ec21-4932-9f93-35496bc1d6ee",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) The name of the access point you want to delete."
+                        }
+                      ]
+                    },
+                    "description": "Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id."
+                  },
+                  "response": [
+                    {
+                      "id": "692090a3-4b53-40c6-a943-2bf31828a02a",
+                      "name": "Access point deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-692090a3-4b53-40c6-a943-2bf31828a02a"
+                    },
+                    {
+                      "id": "62e27913-9779-4d6f-8bd9-af710f49391f",
+                      "name": "The specified access point does not exist.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/accesspoint/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "accesspoint",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-62e27913-9779-4d6f-8bd9-af710f49391f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-a5046b0d-75fa-45d1-85cf-3d4b1e48b67e"
+                }
+              ],
+              "id": "2d166d87-7417-48a2-b9f0-abaae3d26666",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-2d166d87-7417-48a2-b9f0-abaae3d26666"
+            },
+            {
+              "name": "Amazon S3 List Access Points",
+              "id": "7cc4790e-5fc8-42e0-885d-0a38ad7593f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/accesspoint?bucket=<string>&nextToken=<string>&maxResults=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "accesspoint"
+                  ],
+                  "query": [
+                    {
+                      "description": "The name of the bucket whose associated access points you want to list.",
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A continuation token. If a previous call produced a truncated list, pass this value to get the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of access points to return (1-1000).",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Returns a list of the access points that are associated with the specified bucket. You can retrieve up to 1000 access points per call."
+              },
+              "response": [
+                {
+                  "id": "59144f9d-efbc-40a6-aacf-59298c162845",
+                  "name": "Successfully returned list of access points.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accesspoint?bucket=<string>&nextToken=<string>&maxResults=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accesspoint"
+                      ],
+                      "query": [
+                        {
+                          "description": "The name of the bucket whose associated access points you want to list.",
+                          "key": "bucket",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A continuation token. If a previous call produced a truncated list, pass this value to get the next page of results.",
+                          "key": "nextToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of access points to return (1-1000).",
+                          "key": "maxResults",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <AccessPointList>\n    <Name>(string)</Name>\n    <NetworkOrigin>(string)</NetworkOrigin>\n    <VpcConfiguration>\n      <VpcId>(string)</VpcId>\n    </VpcConfiguration>\n    <Bucket>(string)</Bucket>\n    <AccessPointArn>(string)</AccessPointArn>\n    <Alias>(string)</Alias>\n    <BucketAccountId>(string)</BucketAccountId>\n  </AccessPointList>\n  <AccessPointList>\n    <Name>(string)</Name>\n    <NetworkOrigin>(string)</NetworkOrigin>\n    <VpcConfiguration>\n      <VpcId>(string)</VpcId>\n    </VpcConfiguration>\n    <Bucket>(string)</Bucket>\n    <AccessPointArn>(string)</AccessPointArn>\n    <Alias>(string)</Alias>\n    <BucketAccountId>(string)</BucketAccountId>\n  </AccessPointList>\n  <NextToken>(string)</NextToken>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-59144f9d-efbc-40a6-aacf-59298c162845"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-7cc4790e-5fc8-42e0-885d-0a38ad7593f0"
+            }
+          ],
+          "id": "317c523f-0208-429d-a635-d8fb19da215b",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-317c523f-0208-429d-a635-d8fb19da215b"
+        },
+        {
+          "name": "jobs",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "priority",
+                  "item": [
+                    {
+                      "name": "Amazon S3 Update Job Priority",
+                      "id": "edafb620-715f-4856-a1d2-48bd0efab81f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/jobs/:id/priority?priority=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "jobs",
+                            ":id",
+                            "priority"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The priority you want to assign to this job.",
+                              "key": "priority",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "8bc1c139-35f6-4207-ad56-e64ec8779b4f",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID for the job whose priority you want to update."
+                            }
+                          ]
+                        },
+                        "description": "Updates an existing S3 Batch Operations job's priority. You can use this operation to increase or decrease the priority of a job. Higher number priorities are processed first."
+                      },
+                      "response": [
+                        {
+                          "id": "62888968-13b0-4d2a-b153-24dc94e668fa",
+                          "name": "Job priority updated successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/jobs/:id/priority?priority=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "jobs",
+                                ":id",
+                                "priority"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The priority you want to assign to this job.",
+                                  "key": "priority",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "xml",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/xml"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>(string)</JobId>\n  <Priority>(integer)</Priority>\n</element>",
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-62888968-13b0-4d2a-b153-24dc94e668fa"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-edafb620-715f-4856-a1d2-48bd0efab81f"
+                    }
+                  ],
+                  "id": "71f2246e-0338-4db7-a922-fcfefff960dc",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-71f2246e-0338-4db7-a922-fcfefff960dc"
+                },
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "Amazon S3 Update Job Status",
+                      "id": "131aebfb-51ea-4d3e-86e1-41b972936860",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/jobs/:id/status?requestedJobStatus=Cancelled&statusUpdateReason=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "jobs",
+                            ":id",
+                            "status"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The status that you want to move the specified job to.",
+                              "key": "requestedJobStatus",
+                              "value": "Cancelled"
+                            },
+                            {
+                              "description": "A description of the reason why you want to change the job status.",
+                              "key": "statusUpdateReason",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1c55a9de-c9d9-4ebc-9ee2-cf6306c9d712",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the job whose status you want to update."
+                            }
+                          ]
+                        },
+                        "description": "Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job."
+                      },
+                      "response": [
+                        {
+                          "id": "f77842bb-1924-4819-90ed-7058de16fed1",
+                          "name": "Job status updated successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/jobs/:id/status?requestedJobStatus=Cancelled&statusUpdateReason=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "jobs",
+                                ":id",
+                                "status"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The status that you want to move the specified job to.",
+                                  "key": "requestedJobStatus",
+                                  "value": "Cancelled"
+                                },
+                                {
+                                  "description": "A description of the reason why you want to change the job status.",
+                                  "key": "statusUpdateReason",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "xml",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/xml"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>(string)</JobId>\n  <Status>(string)</Status>\n  <StatusUpdateReason>(string)</StatusUpdateReason>\n</element>",
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-f77842bb-1924-4819-90ed-7058de16fed1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-131aebfb-51ea-4d3e-86e1-41b972936860"
+                    }
+                  ],
+                  "id": "247fa674-3f4a-435e-b119-d83e2075168d",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-247fa674-3f4a-435e-b119-d83e2075168d"
+                },
+                {
+                  "name": "Amazon S3 Describe Batch Operations Job",
+                  "id": "7b3f7223-4ed7-4df1-9fc1-9f040a911ba7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/jobs/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "jobs",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "440f49dc-e44c-49c0-9f92-8bd188a51b47",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID for the job whose information you want to retrieve."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide."
+                  },
+                  "response": [
+                    {
+                      "id": "f31328dd-d681-45e0-a642-facbe72df7aa",
+                      "name": "Successfully returned job details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>(string)</JobId>\n  <Description>(string)</Description>\n  <Operation>\n  </Operation>\n  <Manifest>\n  </Manifest>\n  <Priority>(integer)</Priority>\n  <RoleArn>(string)</RoleArn>\n  <Status>(string)</Status>\n  <CreationTime>(string)</CreationTime>\n  <TerminationDate>(string)</TerminationDate>\n  <ProgressSummary>\n    <TotalNumberOfTasks>(integer)</TotalNumberOfTasks>\n    <NumberOfTasksSucceeded>(integer)</NumberOfTasksSucceeded>\n    <NumberOfTasksFailed>(integer)</NumberOfTasksFailed>\n  </ProgressSummary>\n  <FailureReasons>\n    <FailureCode>(string)</FailureCode>\n    <FailureReason>(string)</FailureReason>\n  </FailureReasons>\n  <FailureReasons>\n    <FailureCode>(string)</FailureCode>\n    <FailureReason>(string)</FailureReason>\n  </FailureReasons>\n  <Report>\n  </Report>\n  <ConfirmationRequired>(boolean)</ConfirmationRequired>\n  <StatusUpdateReason>(string)</StatusUpdateReason>\n  <SuspendedDate>(string)</SuspendedDate>\n  <SuspendedCause>(string)</SuspendedCause>\n</element>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-f31328dd-d681-45e0-a642-facbe72df7aa"
+                    },
+                    {
+                      "id": "49c8ec47-e297-49c8-b205-e1d0f6bccf61",
+                      "name": "The specified job does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-49c8ec47-e297-49c8-b205-e1d0f6bccf61"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-7b3f7223-4ed7-4df1-9fc1-9f040a911ba7"
+                }
+              ],
+              "id": "c6773834-5a34-4502-8e22-3a2569ae85ca",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-c6773834-5a34-4502-8e22-3a2569ae85ca"
+            },
+            {
+              "name": "Amazon S3 List Batch Operations Jobs",
+              "id": "e37d24c7-f4c0-4baf-b975-0a461d10dc1c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/jobs?jobStatuses=Preparing&jobStatuses=Preparing&nextToken=<string>&maxResults=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The List Jobs request returns jobs that match the statuses listed.",
+                      "key": "jobStatuses",
+                      "value": "Preparing"
+                    },
+                    {
+                      "description": "The List Jobs request returns jobs that match the statuses listed.",
+                      "key": "jobStatuses",
+                      "value": "Preparing"
+                    },
+                    {
+                      "description": "A pagination token to request the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of jobs to return.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the AWS account making the request."
+              },
+              "response": [
+                {
+                  "id": "b4bb5a7e-2bd5-41cb-8727-13317467780b",
+                  "name": "Successfully returned list of jobs.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/jobs?jobStatuses=Preparing&nextToken=<string>&maxResults=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "The List Jobs request returns jobs that match the statuses listed.",
+                          "key": "jobStatuses",
+                          "value": "Preparing"
+                        },
+                        {
+                          "description": "A pagination token to request the next page of results.",
+                          "key": "nextToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of jobs to return.",
+                          "key": "maxResults",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Jobs>\n    <JobId>(string)</JobId>\n    <Description>(string)</Description>\n    <Operation>(string)</Operation>\n    <Priority>(integer)</Priority>\n    <Status>(string)</Status>\n    <CreationTime>(string)</CreationTime>\n    <TerminationDate>(string)</TerminationDate>\n    <ProgressSummary>\n      <TotalNumberOfTasks>(integer)</TotalNumberOfTasks>\n      <NumberOfTasksSucceeded>(integer)</NumberOfTasksSucceeded>\n      <NumberOfTasksFailed>(integer)</NumberOfTasksFailed>\n      <Timers>\n        <ElapsedTimeInActiveSeconds>(integer)</ElapsedTimeInActiveSeconds>\n      </Timers>\n    </ProgressSummary>\n  </Jobs>\n  <Jobs>\n    <JobId>(string)</JobId>\n    <Description>(string)</Description>\n    <Operation>(string)</Operation>\n    <Priority>(integer)</Priority>\n    <Status>(string)</Status>\n    <CreationTime>(string)</CreationTime>\n    <TerminationDate>(string)</TerminationDate>\n    <ProgressSummary>\n      <TotalNumberOfTasks>(integer)</TotalNumberOfTasks>\n      <NumberOfTasksSucceeded>(integer)</NumberOfTasksSucceeded>\n      <NumberOfTasksFailed>(integer)</NumberOfTasksFailed>\n      <Timers>\n        <ElapsedTimeInActiveSeconds>(integer)</ElapsedTimeInActiveSeconds>\n      </Timers>\n    </ProgressSummary>\n  </Jobs>\n  <NextToken>(string)</NextToken>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-b4bb5a7e-2bd5-41cb-8727-13317467780b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-e37d24c7-f4c0-4baf-b975-0a461d10dc1c"
+            },
+            {
+              "name": "Amazon S3 Create Batch Operations Job",
+              "id": "3b2c0841-a6fe-407d-84c8-c8dae357aff3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>(string)</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>(string)</TargetResource>\n      <StorageClass>(string)</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>\n      </AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>\n    </S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>(integer)</ExpirationInDays>\n      <GlacierJobTier>(string)</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>(string)</Bucket>\n    <Format>(string)</Format>\n    <Enabled>(boolean)</Enabled>\n    <Prefix>(string)</Prefix>\n    <ReportScope>(string)</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>(string)</Format>\n      <Fields>(string)</Fields>\n      <Fields>(string)</Fields>\n    </Spec>\n    <Location>\n      <ObjectArn>(string)</ObjectArn>\n      <ObjectVersionId>(string)</ObjectVersionId>\n      <ETag>(string)</ETag>\n    </Location>\n  </Manifest>\n  <Priority>(integer)</Priority>\n  <RoleArn>(string)</RoleArn>\n  <Description>(string)</Description>\n  <ConfirmationRequired>(boolean)</ConfirmationRequired>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</CreateJobRequest>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/jobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "jobs"
+                  ]
+                },
+                "description": "Creates an S3 Batch Operations job to perform the specified operation on every object in the specified manifest. You can create a job that performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier restore, replace tagging, delete objects, or replicate objects."
+              },
+              "response": [
+                {
+                  "id": "c3b23a3d-6ac2-40e8-9467-08168c7e68b2",
+                  "name": "Job created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>(string)</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>(string)</TargetResource>\n      <StorageClass>(string)</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>\n      </AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>\n    </S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>(integer)</ExpirationInDays>\n      <GlacierJobTier>(string)</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>(string)</Bucket>\n    <Format>(string)</Format>\n    <Enabled>(boolean)</Enabled>\n    <Prefix>(string)</Prefix>\n    <ReportScope>(string)</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>(string)</Format>\n      <Fields>(string)</Fields>\n      <Fields>(string)</Fields>\n    </Spec>\n    <Location>\n      <ObjectArn>(string)</ObjectArn>\n      <ObjectVersionId>(string)</ObjectVersionId>\n      <ETag>(string)</ETag>\n    </Location>\n  </Manifest>\n  <Priority>(integer)</Priority>\n  <RoleArn>(string)</RoleArn>\n  <Description>(string)</Description>\n  <ConfirmationRequired>(boolean)</ConfirmationRequired>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</CreateJobRequest>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "jobs"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>(string)</JobId>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-c3b23a3d-6ac2-40e8-9467-08168c7e68b2"
+                },
+                {
+                  "id": "2ced5ec2-183e-453a-8860-75894a69955e",
+                  "name": "Bad request. Invalid job configuration.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>(string)</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>(string)</TargetResource>\n      <StorageClass>(string)</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>\n      </AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>\n    </S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>(integer)</ExpirationInDays>\n      <GlacierJobTier>(string)</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>(string)</Bucket>\n    <Format>(string)</Format>\n    <Enabled>(boolean)</Enabled>\n    <Prefix>(string)</Prefix>\n    <ReportScope>(string)</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>(string)</Format>\n      <Fields>(string)</Fields>\n      <Fields>(string)</Fields>\n    </Spec>\n    <Location>\n      <ObjectArn>(string)</ObjectArn>\n      <ObjectVersionId>(string)</ObjectVersionId>\n      <ETag>(string)</ETag>\n    </Location>\n  </Manifest>\n  <Priority>(integer)</Priority>\n  <RoleArn>(string)</RoleArn>\n  <Description>(string)</Description>\n  <ConfirmationRequired>(boolean)</ConfirmationRequired>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</CreateJobRequest>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "jobs"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-2ced5ec2-183e-453a-8860-75894a69955e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-3b2c0841-a6fe-407d-84c8-c8dae357aff3"
+            }
+          ],
+          "id": "7547d5a9-db12-430e-96c6-c2ab611ba479",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-7547d5a9-db12-430e-96c6-c2ab611ba479"
+        },
+        {
+          "name": "configuration",
+          "item": [
+            {
+              "name": "publicAccessBlock",
+              "item": [
+                {
+                  "name": "Amazon S3 Get Public Access Block",
+                  "id": "7e97ccbb-e7e7-47cb-9023-7a8a7711fe04",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "configuration",
+                        "publicAccessBlock"
+                      ]
+                    },
+                    "description": "Retrieves the PublicAccessBlock configuration for an AWS account. For using this operation with S3 on Outposts, you must provide the Outpost bucket ARN."
+                  },
+                  "response": [
+                    {
+                      "id": "00c1140a-b6e8-4ccf-84aa-480ab32f1dc7",
+                      "name": "Successfully returned public access block configuration.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "configuration",
+                            "publicAccessBlock"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <BlockPublicAcls>(boolean)</BlockPublicAcls>\n  <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n  <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n  <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n</PublicAccessBlockConfiguration>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-00c1140a-b6e8-4ccf-84aa-480ab32f1dc7"
+                    },
+                    {
+                      "id": "35aa816b-d18d-493c-b452-a86d00e9c5a6",
+                      "name": "The public access block configuration does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "configuration",
+                            "publicAccessBlock"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-35aa816b-d18d-493c-b452-a86d00e9c5a6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-7e97ccbb-e7e7-47cb-9023-7a8a7711fe04"
+                },
+                {
+                  "name": "Amazon S3 Put Public Access Block",
+                  "id": "9443b551-716c-48ea-aca8-b7b227c96c81",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <BlockPublicAcls>(boolean)</BlockPublicAcls>\n  <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n  <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n  <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n</PublicAccessBlockConfiguration>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "configuration",
+                        "publicAccessBlock"
+                      ]
+                    },
+                    "description": "Creates or modifies the PublicAccessBlock configuration for an AWS account. To use this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+                  },
+                  "response": [
+                    {
+                      "id": "07d8f530-37c0-45df-bdf0-73ab418770ba",
+                      "name": "Public access block configuration updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <BlockPublicAcls>(boolean)</BlockPublicAcls>\n  <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n  <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n  <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n</PublicAccessBlockConfiguration>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "configuration",
+                            "publicAccessBlock"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-07d8f530-37c0-45df-bdf0-73ab418770ba"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-9443b551-716c-48ea-aca8-b7b227c96c81"
+                },
+                {
+                  "name": "Amazon S3 Delete Public Access Block",
+                  "id": "e5f67241-156a-48f3-8774-0310e6f0dfcb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "configuration",
+                        "publicAccessBlock"
+                      ]
+                    },
+                    "description": "Removes the PublicAccessBlock configuration for an AWS account. For this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+                  },
+                  "response": [
+                    {
+                      "id": "b0bac67f-e844-4008-8489-771848723b4c",
+                      "name": "Public access block configuration deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/configuration/publicAccessBlock",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "configuration",
+                            "publicAccessBlock"
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-b0bac67f-e844-4008-8489-771848723b4c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-e5f67241-156a-48f3-8774-0310e6f0dfcb"
+                }
+              ],
+              "id": "ccb4ea56-7700-463d-a442-6d1d42f1bfad",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-ccb4ea56-7700-463d-a442-6d1d42f1bfad"
+            }
+          ],
+          "id": "75b2fe66-e914-4e7b-bc50-aaec9a77dcfb",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-75b2fe66-e914-4e7b-bc50-aaec9a77dcfb"
+        },
+        {
+          "name": "storagelens",
+          "item": [
+            {
+              "name": "{storagelensid}",
+              "item": [
+                {
+                  "name": "Amazon S3 Get Storage Lens Configuration",
+                  "id": "86ea95c1-b741-4a7d-a4dc-50dcd7711602",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "storagelens",
+                        ":storagelensid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b5979cd5-a062-4131-9765-19fc7dd81cdc",
+                          "key": "storagelensid",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the Amazon S3 Storage Lens configuration."
+                        }
+                      ]
+                    },
+                    "description": "Gets the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action."
+                  },
+                  "response": [
+                    {
+                      "id": "795b7248-7580-484c-b5a1-4f97d91267e0",
+                      "name": "Successfully returned Storage Lens configuration.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "storagelens",
+                            ":storagelensid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "storagelensid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Id>(string)</Id>\n  <AccountLevel>\n    <ActivityMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </ActivityMetrics>\n    <BucketLevel>\n      <ActivityMetrics>\n        <IsEnabled>(boolean)</IsEnabled>\n      </ActivityMetrics>\n      <PrefixLevel>\n        <StorageMetrics>\n          <IsEnabled>(boolean)</IsEnabled>\n          <SelectionCriteria>\n            <Delimiter>(string)</Delimiter>\n            <MaxDepth>(integer)</MaxDepth>\n            <MinStorageBytesPercentage>(number)</MinStorageBytesPercentage>\n          </SelectionCriteria>\n        </StorageMetrics>\n      </PrefixLevel>\n    </BucketLevel>\n  </AccountLevel>\n  <Include>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Include>\n  <Exclude>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Exclude>\n  <DataExport>\n    <S3BucketDestination>\n      <Format>(string)</Format>\n      <OutputSchemaVersion>(string)</OutputSchemaVersion>\n      <AccountId>(string)</AccountId>\n      <Arn>(string)</Arn>\n      <Prefix>(string)</Prefix>\n      <Encryption>\n      </Encryption>\n    </S3BucketDestination>\n    <CloudWatchMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </CloudWatchMetrics>\n  </DataExport>\n  <IsEnabled>(boolean)</IsEnabled>\n  <AwsOrg>\n    <Arn>(string)</Arn>\n  </AwsOrg>\n  <StorageLensArn>(string)</StorageLensArn>\n</element>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-795b7248-7580-484c-b5a1-4f97d91267e0"
+                    },
+                    {
+                      "id": "60495f29-adf0-4813-8548-5ebfd46fbe47",
+                      "name": "The specified Storage Lens configuration does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "storagelens",
+                            ":storagelensid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "storagelensid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-60495f29-adf0-4813-8548-5ebfd46fbe47"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-86ea95c1-b741-4a7d-a4dc-50dcd7711602"
+                },
+                {
+                  "name": "Amazon S3 Put Storage Lens Configuration",
+                  "id": "7204ec63-5f24-48f4-bc42-878b674eb1cd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Id>(string)</Id>\n  <AccountLevel>\n    <ActivityMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </ActivityMetrics>\n    <BucketLevel>\n      <ActivityMetrics>\n        <IsEnabled>(boolean)</IsEnabled>\n      </ActivityMetrics>\n      <PrefixLevel>\n        <StorageMetrics>\n          <IsEnabled>(boolean)</IsEnabled>\n          <SelectionCriteria>\n            <Delimiter>(string)</Delimiter>\n            <MaxDepth>(integer)</MaxDepth>\n            <MinStorageBytesPercentage>(number)</MinStorageBytesPercentage>\n          </SelectionCriteria>\n        </StorageMetrics>\n      </PrefixLevel>\n    </BucketLevel>\n  </AccountLevel>\n  <Include>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Include>\n  <Exclude>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Exclude>\n  <DataExport>\n    <S3BucketDestination>\n      <Format>(string)</Format>\n      <OutputSchemaVersion>(string)</OutputSchemaVersion>\n      <AccountId>(string)</AccountId>\n      <Arn>(string)</Arn>\n      <Prefix>(string)</Prefix>\n      <Encryption>\n      </Encryption>\n    </S3BucketDestination>\n    <CloudWatchMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </CloudWatchMetrics>\n  </DataExport>\n  <IsEnabled>(boolean)</IsEnabled>\n  <AwsOrg>\n    <Arn>(string)</Arn>\n  </AwsOrg>\n  <StorageLensArn>(string)</StorageLensArn>\n</element>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "storagelens",
+                        ":storagelensid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0463e6e8-c472-4168-848f-cee0a71a99c9",
+                          "key": "storagelensid",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the Amazon S3 Storage Lens configuration."
+                        }
+                      ]
+                    },
+                    "description": "Puts an Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action."
+                  },
+                  "response": [
+                    {
+                      "id": "a11d2480-3631-468c-848f-f0786e2206fe",
+                      "name": "Storage Lens configuration updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Id>(string)</Id>\n  <AccountLevel>\n    <ActivityMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </ActivityMetrics>\n    <BucketLevel>\n      <ActivityMetrics>\n        <IsEnabled>(boolean)</IsEnabled>\n      </ActivityMetrics>\n      <PrefixLevel>\n        <StorageMetrics>\n          <IsEnabled>(boolean)</IsEnabled>\n          <SelectionCriteria>\n            <Delimiter>(string)</Delimiter>\n            <MaxDepth>(integer)</MaxDepth>\n            <MinStorageBytesPercentage>(number)</MinStorageBytesPercentage>\n          </SelectionCriteria>\n        </StorageMetrics>\n      </PrefixLevel>\n    </BucketLevel>\n  </AccountLevel>\n  <Include>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Include>\n  <Exclude>\n    <Buckets>(string)</Buckets>\n    <Buckets>(string)</Buckets>\n    <Regions>(string)</Regions>\n    <Regions>(string)</Regions>\n  </Exclude>\n  <DataExport>\n    <S3BucketDestination>\n      <Format>(string)</Format>\n      <OutputSchemaVersion>(string)</OutputSchemaVersion>\n      <AccountId>(string)</AccountId>\n      <Arn>(string)</Arn>\n      <Prefix>(string)</Prefix>\n      <Encryption>\n      </Encryption>\n    </S3BucketDestination>\n    <CloudWatchMetrics>\n      <IsEnabled>(boolean)</IsEnabled>\n    </CloudWatchMetrics>\n  </DataExport>\n  <IsEnabled>(boolean)</IsEnabled>\n  <AwsOrg>\n    <Arn>(string)</Arn>\n  </AwsOrg>\n  <StorageLensArn>(string)</StorageLensArn>\n</element>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "storagelens",
+                            ":storagelensid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "storagelensid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-a11d2480-3631-468c-848f-f0786e2206fe"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-7204ec63-5f24-48f4-bc42-878b674eb1cd"
+                },
+                {
+                  "name": "Amazon S3 Delete Storage Lens Configuration",
+                  "id": "04b93478-9f75-4099-83ba-3029535b5d3f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "storagelens",
+                        ":storagelensid"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a3f9a881-f2ab-4a55-bed9-cb6446144fae",
+                          "key": "storagelensid",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the Storage Lens configuration to delete."
+                        }
+                      ]
+                    },
+                    "description": "Deletes the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action."
+                  },
+                  "response": [
+                    {
+                      "id": "8905eb37-2527-431c-9bd0-e15487e33bd0",
+                      "name": "Storage Lens configuration deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/storagelens/:storagelensid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "storagelens",
+                            ":storagelensid"
+                          ],
+                          "variable": [
+                            {
+                              "key": "storagelensid"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-8905eb37-2527-431c-9bd0-e15487e33bd0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-04b93478-9f75-4099-83ba-3029535b5d3f"
+                }
+              ],
+              "id": "7ccf3b8b-6ed3-4170-816f-2a1a0e66dcff",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-7ccf3b8b-6ed3-4170-816f-2a1a0e66dcff"
+            },
+            {
+              "name": "Amazon S3 List Storage Lens Configurations",
+              "id": "6e2e94bf-ed2c-45f5-892b-2d90255dee1b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/storagelens?nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "storagelens"
+                  ],
+                  "query": [
+                    {
+                      "description": "A pagination token for the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Gets a list of Amazon S3 Storage Lens configurations. To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action."
+              },
+              "response": [
+                {
+                  "id": "0f80259e-fcc4-4e9b-8d0e-d33a60df7786",
+                  "name": "Successfully returned list of Storage Lens configurations.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/storagelens?nextToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "storagelens"
+                      ],
+                      "query": [
+                        {
+                          "description": "A pagination token for the next page of results.",
+                          "key": "nextToken",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <StorageLensConfigurationList>\n    <Id>(string)</Id>\n    <StorageLensArn>(string)</StorageLensArn>\n    <HomeRegion>(string)</HomeRegion>\n    <IsEnabled>(boolean)</IsEnabled>\n  </StorageLensConfigurationList>\n  <StorageLensConfigurationList>\n    <Id>(string)</Id>\n    <StorageLensArn>(string)</StorageLensArn>\n    <HomeRegion>(string)</HomeRegion>\n    <IsEnabled>(boolean)</IsEnabled>\n  </StorageLensConfigurationList>\n  <NextToken>(string)</NextToken>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-0f80259e-fcc4-4e9b-8d0e-d33a60df7786"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-6e2e94bf-ed2c-45f5-892b-2d90255dee1b"
+            }
+          ],
+          "id": "9daf70ec-518e-4d96-8688-4635e02fc3f3",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-9daf70ec-518e-4d96-8688-4635e02fc3f3"
+        },
+        {
+          "name": "accessgrantsinstance",
+          "item": [
+            {
+              "name": "Amazon S3 Get Access Grants Instance",
+              "id": "f19d3b4a-f514-4016-800a-2fd9d5322aea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "accessgrantsinstance"
+                  ]
+                },
+                "description": "Retrieves the S3 Access Grants instance. You must have the s3:GetAccessGrantsInstance permission to use this operation."
+              },
+              "response": [
+                {
+                  "id": "6233fba0-910a-47f1-aa84-7169a0ff21af",
+                  "name": "Successfully returned Access Grants instance.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accessgrantsinstance"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <AccessGrantsInstanceId>(string)</AccessGrantsInstanceId>\n  <AccessGrantsInstanceArn>(string)</AccessGrantsInstanceArn>\n  <CreatedAt>(string)</CreatedAt>\n  <IdentityCenterArn>(string)</IdentityCenterArn>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-6233fba0-910a-47f1-aa84-7169a0ff21af"
+                },
+                {
+                  "id": "f1fb2c54-2d8d-4e7a-a40d-3433866cd806",
+                  "name": "The Access Grants instance does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accessgrantsinstance"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-f1fb2c54-2d8d-4e7a-a40d-3433866cd806"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-f19d3b4a-f514-4016-800a-2fd9d5322aea"
+            },
+            {
+              "name": "Amazon S3 Create Access Grants Instance",
+              "id": "404790fe-db54-4f7c-9f63-41a5aaf0184b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <IdentityCenterArn>(string)</IdentityCenterArn>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "accessgrantsinstance"
+                  ]
+                },
+                "description": "Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account."
+              },
+              "response": [
+                {
+                  "id": "8fbe261b-3949-4600-9fc9-64ebf70aa642",
+                  "name": "Access Grants instance created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <IdentityCenterArn>(string)</IdentityCenterArn>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</element>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accessgrantsinstance"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <AccessGrantsInstanceId>(string)</AccessGrantsInstanceId>\n  <AccessGrantsInstanceArn>(string)</AccessGrantsInstanceArn>\n  <CreatedAt>(string)</CreatedAt>\n  <IdentityCenterArn>(string)</IdentityCenterArn>\n</element>",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-8fbe261b-3949-4600-9fc9-64ebf70aa642"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-404790fe-db54-4f7c-9f63-41a5aaf0184b"
+            },
+            {
+              "name": "Amazon S3 Delete Access Grants Instance",
+              "id": "9a2046fb-e008-4251-8641-cdf52534ca5e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "846600533000"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v20180820",
+                    "accessgrantsinstance"
+                  ]
+                },
+                "description": "Deletes the S3 Access Grants instance. You must first delete all access grants and registered locations before you can delete the S3 Access Grants instance."
+              },
+              "response": [
+                {
+                  "id": "62e33a90-297f-45a3-aeff-a8e57f85ee1d",
+                  "name": "Access Grants instance deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/accessgrantsinstance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "accessgrantsinstance"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-62e33a90-297f-45a3-aeff-a8e57f85ee1d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-9a2046fb-e008-4251-8641-cdf52534ca5e"
+            }
+          ],
+          "id": "bda57dc1-e935-4782-a970-98064f78ce7d",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-bda57dc1-e935-4782-a970-98064f78ce7d"
+        },
+        {
+          "name": "async-requests",
+          "item": [
+            {
+              "name": "mrap",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Amazon S3 Create Multi-region Access Point",
+                      "id": "35616c94-2f03-4163-b42a-8b01d1b9efac",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/xml"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateMultiRegionAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <ClientToken>(string)</ClientToken>\n  <Details>\n    <Name>(string)</Name>\n    <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n      <BlockPublicAcls>(boolean)</BlockPublicAcls>\n      <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n      <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n      <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n    </PublicAccessBlockConfiguration>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n  </Details>\n</CreateMultiRegionAccessPointRequest>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "xml",
+                              "language": "xml"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/async-requests/mrap/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "async-requests",
+                            "mrap",
+                            "create"
+                          ]
+                        },
+                        "description": "Creates a Multi-Region Access Point and associates it with the specified buckets. Multi-Region Access Points provide a single global endpoint that applications can use to request data regardless of the location of the requester. This is an asynchronous request."
+                      },
+                      "response": [
+                        {
+                          "id": "392487ba-95b3-49db-b7f8-57f5f8d81162",
+                          "name": "Request accepted. Multi-Region Access Point creation is asynchronous.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/xml"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateMultiRegionAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <ClientToken>(string)</ClientToken>\n  <Details>\n    <Name>(string)</Name>\n    <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n      <BlockPublicAcls>(boolean)</BlockPublicAcls>\n      <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n      <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n      <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n    </PublicAccessBlockConfiguration>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n  </Details>\n</CreateMultiRegionAccessPointRequest>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "xml",
+                                  "language": "xml"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/async-requests/mrap/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "async-requests",
+                                "mrap",
+                                "create"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "xml",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/xml"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <RequestTokenARN>(string)</RequestTokenARN>\n</element>",
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-392487ba-95b3-49db-b7f8-57f5f8d81162"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-35616c94-2f03-4163-b42a-8b01d1b9efac"
+                    }
+                  ],
+                  "id": "00bfc66b-1aaf-4522-8327-e98129576e05",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-00bfc66b-1aaf-4522-8327-e98129576e05"
+                }
+              ],
+              "id": "eb585ccb-0f92-491c-adcd-9a79687067cd",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-eb585ccb-0f92-491c-adcd-9a79687067cd"
+            }
+          ],
+          "id": "f82fb15b-2b1d-461c-a6fa-e6d10b0e2f1a",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-f82fb15b-2b1d-461c-a6fa-e6d10b0e2f1a"
+        },
+        {
+          "name": "mrap",
+          "item": [
+            {
+              "name": "instances",
+              "item": [
+                {
+                  "name": "{mrap_name+}",
+                  "item": [
+                    {
+                      "name": "Amazon S3 Get Multi-region Access Point",
+                      "id": "750ac25a-2d1c-4ff8-ab1b-50ddd1e7d6d5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/mrap/instances/:mrap_name+",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "mrap",
+                            "instances",
+                            ":mrap_name+"
+                          ],
+                          "variable": [
+                            {
+                              "id": "592c2bd5-e18b-47d5-9111-b3b7a621fe44",
+                              "key": "mrap_name+",
+                              "value": "<string>",
+                              "description": "(Required) The name of the Multi-Region Access Point."
+                            }
+                          ]
+                        },
+                        "description": "Returns configuration information about the specified Multi-Region Access Point."
+                      },
+                      "response": [
+                        {
+                          "id": "1bca43fc-17e1-44c2-a71e-13e732a65ccb",
+                          "name": "Successfully returned Multi-Region Access Point configuration.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/xml"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/mrap/instances/:mrap_name+",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "mrap",
+                                "instances",
+                                ":mrap_name+"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "mrap_name+"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "xml",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/xml"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Name>(string)</Name>\n  <Alias>(string)</Alias>\n  <CreatedAt>(string)</CreatedAt>\n  <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n    <BlockPublicAcls>(boolean)</BlockPublicAcls>\n    <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n    <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n    <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n  </PublicAccessBlockConfiguration>\n  <Status>(string)</Status>\n  <Regions>\n    <Bucket>(string)</Bucket>\n    <Region>(string)</Region>\n    <BucketAccountId>(string)</BucketAccountId>\n  </Regions>\n  <Regions>\n    <Bucket>(string)</Bucket>\n    <Region>(string)</Region>\n    <BucketAccountId>(string)</BucketAccountId>\n  </Regions>\n</element>",
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-1bca43fc-17e1-44c2-a71e-13e732a65ccb"
+                        },
+                        {
+                          "id": "8374ac8b-4333-4c82-ab04-615c74a0330f",
+                          "name": "The specified Multi-Region Access Point does not exist.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                                "key": "x-amz-account-id",
+                                "value": "846600533000"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v20180820/mrap/instances/:mrap_name+",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v20180820",
+                                "mrap",
+                                "instances",
+                                ":mrap_name+"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "mrap_name+"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:04.000Z",
+                          "updatedAt": "2026-06-05T15:05:04.000Z",
+                          "uid": "35240-8374ac8b-4333-4c82-ab04-615c74a0330f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-750ac25a-2d1c-4ff8-ab1b-50ddd1e7d6d5"
+                    }
+                  ],
+                  "id": "0f6469cc-1491-4475-80bb-dab611598efb",
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-0f6469cc-1491-4475-80bb-dab611598efb"
+                },
+                {
+                  "name": "Amazon S3 List Multi-region Access Points",
+                  "id": "de05f5e5-45eb-4b25-831c-59d10e64daf4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                        "key": "x-amz-account-id",
+                        "value": "846600533000"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v20180820/mrap/instances?nextToken=<string>&maxResults=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v20180820",
+                        "mrap",
+                        "instances"
+                      ],
+                      "query": [
+                        {
+                          "description": "A pagination token for the next page of results.",
+                          "key": "nextToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results to return per call.",
+                          "key": "maxResults",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of the Multi-Region Access Points currently associated with the specified AWS account."
+                  },
+                  "response": [
+                    {
+                      "id": "2f2b0a48-04ac-47b1-890a-240ba4e6980f",
+                      "name": "Successfully returned list of Multi-Region Access Points.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                            "key": "x-amz-account-id",
+                            "value": "846600533000"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/xml"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v20180820/mrap/instances?nextToken=<string>&maxResults=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v20180820",
+                            "mrap",
+                            "instances"
+                          ],
+                          "query": [
+                            {
+                              "description": "A pagination token for the next page of results.",
+                              "key": "nextToken",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results to return per call.",
+                              "key": "maxResults",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <AccessPoints>\n    <Name>(string)</Name>\n    <Alias>(string)</Alias>\n    <CreatedAt>(string)</CreatedAt>\n    <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n      <BlockPublicAcls>(boolean)</BlockPublicAcls>\n      <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n      <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n      <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n    </PublicAccessBlockConfiguration>\n    <Status>(string)</Status>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <Region>(string)</Region>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <Region>(string)</Region>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n  </AccessPoints>\n  <AccessPoints>\n    <Name>(string)</Name>\n    <Alias>(string)</Alias>\n    <CreatedAt>(string)</CreatedAt>\n    <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n      <BlockPublicAcls>(boolean)</BlockPublicAcls>\n      <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n      <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n      <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n    </PublicAccessBlockConfiguration>\n    <Status>(string)</Status>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <Region>(string)</Region>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <Region>(string)</Region>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n  </AccessPoints>\n  <NextToken>(string)</NextToken>\n</element>",
+                      "createdAt": "2026-06-05T15:05:04.000Z",
+                      "updatedAt": "2026-06-05T15:05:04.000Z",
+                      "uid": "35240-2f2b0a48-04ac-47b1-890a-240ba4e6980f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:04.000Z",
+                  "updatedAt": "2026-06-05T15:05:04.000Z",
+                  "uid": "35240-de05f5e5-45eb-4b25-831c-59d10e64daf4"
+                }
+              ],
+              "id": "0d3ec5da-653a-492a-a5d8-3db1244ce214",
+              "createdAt": "2026-06-05T15:05:04.000Z",
+              "updatedAt": "2026-06-05T15:05:04.000Z",
+              "uid": "35240-0d3ec5da-653a-492a-a5d8-3db1244ce214"
+            }
+          ],
+          "id": "3ff6258f-960e-41be-a3cd-269ec1260b63",
+          "createdAt": "2026-06-05T15:05:04.000Z",
+          "updatedAt": "2026-06-05T15:05:04.000Z",
+          "uid": "35240-3ff6258f-960e-41be-a3cd-269ec1260b63"
+        }
+      ],
+      "id": "6e99c0b3-35e7-43fc-aab1-accee2678a42",
+      "createdAt": "2026-06-05T15:05:04.000Z",
+      "updatedAt": "2026-06-05T15:05:04.000Z",
+      "uid": "35240-6e99c0b3-35e7-43fc-aab1-accee2678a42"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://s3-control.{{region}}.amazonaws.com"
+    }
+  ]
+}

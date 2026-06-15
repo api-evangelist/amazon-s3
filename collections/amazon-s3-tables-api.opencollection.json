@@ -1,0 +1,790 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Tables API",
+    "version": "2024-12-11"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Table Buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "The prefix of the table buckets."
+              },
+              {
+                "name": "continuationToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token."
+              },
+              {
+                "name": "maxBuckets",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of table buckets to return in the list."
+              }
+            ]
+          },
+          "docs": "Lists table buckets for your account. Returns a list of table buckets that you have access to."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a table bucket. A table bucket is a resource that you can use to create and store tables. Each table bucket can contain tables in Apache Iceberg format stored as Apache Parquet files."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket. Returns information about the specified table bucket including its name, ARN, owner, and creation date."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Deletes a table bucket. The table bucket must be empty (all tables and namespaces must be deleted first) before it can be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Table Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket policy. Returns the policy document associated with the specified table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or replaces a table bucket policy for a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Deletes a table bucket policy for a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets the resource policy for a table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or replaces the resource policy for a table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Deletes the resource policy for a table."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Table Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket maintenance configuration, including Iceberg compaction and snapshot management settings."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Bucket Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/buckets/:tableBucketARN/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a table bucket maintenance configuration for the specified table bucket. This includes Iceberg compaction and snapshot management."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets details about the maintenance configuration of a table, including Iceberg compaction and snapshot management settings."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the maintenance configuration for the specified table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Maintenance Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance-job-status",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets the status of a maintenance job for a table, including the last run timestamp and status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/namespaces/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "The prefix of the namespaces."
+              },
+              {
+                "name": "continuationToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A continuation token for pagination."
+              },
+              {
+                "name": "maxNamespaces",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of namespaces to return."
+              }
+            ]
+          },
+          "docs": "Lists the namespaces within a table bucket. Namespaces organize tables within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/namespaces/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a namespace. A namespace is a logical grouping of tables within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/namespaces/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Gets details about a namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3tables.{region}.amazonaws.com/namespaces/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Deletes a namespace. The namespace must be empty (all tables must be deleted first) before it can be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "The prefix of the table names."
+              },
+              {
+                "name": "continuationToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A continuation token for pagination."
+              },
+              {
+                "name": "maxTables",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of tables to return."
+              }
+            ]
+          },
+          "docs": "Lists the tables in the specified namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new table in the specified namespace within a table bucket. The table is created in Apache Iceberg format and data is stored in Apache Parquet format."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets details about a table in the specified namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Rename Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The current name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a table or moves a table to a different namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table to delete."
+              },
+              {
+                "name": "versionToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "The version token of the table."
+              }
+            ]
+          },
+          "docs": "Deletes a table from the specified namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Metadata Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/metadata-location",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets the location of the table metadata in S3."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Update Table Metadata Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3tables.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/metadata-location",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the metadata location for a table. Used to point the table to a new Iceberg metadata file after a metadata update."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

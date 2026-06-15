@@ -1,0 +1,4203 @@
+{
+  "info": {
+    "_postman_id": "3ad45345-c241-410b-82c4-7851e18ff348",
+    "name": "Amazon S3 Tables API",
+    "description": "Amazon S3 Tables API provides operations for managing table buckets and tables stored in Apache Iceberg format. S3 Tables deliver the first cloud object store with built-in Apache Iceberg support, enabling analytics workloads on tabular data stored in Apache Parquet format within Amazon S3. S3 Tables provide storage optimized specifically for tabular data, with automated compaction, snapshot management, and Iceberg metadata management.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:05.000Z",
+    "updatedAt": "2026-06-05T15:05:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3ad45345-c241-410b-82c4-7851e18ff348"
+  },
+  "item": [
+    {
+      "name": "buckets",
+      "item": [
+        {
+          "name": "{tableBucketARN}",
+          "item": [
+            {
+              "name": "policy",
+              "item": [
+                {
+                  "name": "Amazon S3 Get Table Bucket Policy",
+                  "id": "dd41fb0d-0e0e-43d9-9abb-2f47e27ce476",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN",
+                        "policy"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6bf305c2-1584-40ab-a39b-f44907b902cc",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        }
+                      ]
+                    },
+                    "description": "Gets details about a table bucket policy. Returns the policy document associated with the specified table bucket."
+                  },
+                  "response": [
+                    {
+                      "id": "80c12d09-931c-4da0-98cd-5bae09ebf2d8",
+                      "name": "Successfully returned table bucket policy.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-80c12d09-931c-4da0-98cd-5bae09ebf2d8"
+                    },
+                    {
+                      "id": "21419dfc-fe21-4ea9-b184-348f07485ade",
+                      "name": "The table bucket policy does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-21419dfc-fe21-4ea9-b184-348f07485ade"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-dd41fb0d-0e0e-43d9-9abb-2f47e27ce476"
+                },
+                {
+                  "name": "Amazon S3 Put Table Bucket Policy",
+                  "id": "90df7eac-f7b5-4f3c-bcef-be8590f571f1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN",
+                        "policy"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e07dbac0-7b11-45a3-8c60-1e4c28a111c4",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        }
+                      ]
+                    },
+                    "description": "Creates or replaces a table bucket policy for a table bucket."
+                  },
+                  "response": [
+                    {
+                      "id": "8c537640-bad9-49d8-ac81-b00a237bbd2f",
+                      "name": "Table bucket policy updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-8c537640-bad9-49d8-ac81-b00a237bbd2f"
+                    },
+                    {
+                      "id": "2614a0a9-abfa-487e-b84c-c9e8b8ad13b7",
+                      "name": "Invalid policy document.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-2614a0a9-abfa-487e-b84c-c9e8b8ad13b7"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-90df7eac-f7b5-4f3c-bcef-be8590f571f1"
+                },
+                {
+                  "name": "Amazon S3 Delete Table Bucket Policy",
+                  "id": "0506cda8-2a3d-40c9-9af7-1f0027fc1bd3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN",
+                        "policy"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4adf88f5-59b8-425b-b2c6-9ad6a01efccf",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        }
+                      ]
+                    },
+                    "description": "Deletes a table bucket policy for a table bucket."
+                  },
+                  "response": [
+                    {
+                      "id": "055b29e3-c9d4-4712-8ac9-8a97897c2d59",
+                      "name": "Table bucket policy deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/policy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "policy"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-055b29e3-c9d4-4712-8ac9-8a97897c2d59"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-0506cda8-2a3d-40c9-9af7-1f0027fc1bd3"
+                }
+              ],
+              "id": "e8186b9f-cae4-4cbf-add0-551f2ea6cd8c",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-e8186b9f-cae4-4cbf-add0-551f2ea6cd8c"
+            },
+            {
+              "name": "maintenance",
+              "item": [
+                {
+                  "name": "Amazon S3 Get Table Bucket Maintenance Configuration",
+                  "id": "6aacdc9c-b188-4e2d-9b7a-d10550ecb90e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN",
+                        "maintenance"
+                      ],
+                      "variable": [
+                        {
+                          "id": "add6b5c8-ea12-46c4-8cd9-67ba73d22c9e",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        }
+                      ]
+                    },
+                    "description": "Gets details about a table bucket maintenance configuration, including Iceberg compaction and snapshot management settings."
+                  },
+                  "response": [
+                    {
+                      "id": "63a69612-5a4a-44c4-916a-8cc0034a0704",
+                      "name": "Successfully returned maintenance configuration.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "maintenance"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tableBucketARN\": \"<string>\",\n  \"configuration\": {\n    \"in_4\": {\n      \"status\": \"Disabled\",\n      \"settings\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-63a69612-5a4a-44c4-916a-8cc0034a0704"
+                    },
+                    {
+                      "id": "25c086cd-c72e-4da2-97d1-b7e958e2be6a",
+                      "name": "The specified table bucket does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "maintenance"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-25c086cd-c72e-4da2-97d1-b7e958e2be6a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-6aacdc9c-b188-4e2d-9b7a-d10550ecb90e"
+                },
+                {
+                  "name": "Amazon S3 Put Table Bucket Maintenance Configuration",
+                  "id": "755750d2-1fc5-4d90-a688-0bce0787a8e7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"icebergUnreferencedFileRemoval\",\n  \"value\": {\n    \"status\": \"Enabled\",\n    \"settings\": {\n      \"unreferencedDays\": \"<integer>\",\n      \"nonCurrentDays\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN",
+                        "maintenance"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a3a8cbd-c90b-4eb0-bbf0-2e8bf7de9558",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        }
+                      ]
+                    },
+                    "description": "Creates or updates a table bucket maintenance configuration for the specified table bucket. This includes Iceberg compaction and snapshot management."
+                  },
+                  "response": [
+                    {
+                      "id": "28db3226-f311-470a-8663-8ff01c9e6cbf",
+                      "name": "Maintenance configuration updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"icebergUnreferencedFileRemoval\",\n  \"value\": {\n    \"status\": \"Enabled\",\n    \"settings\": {\n      \"unreferencedDays\": \"<integer>\",\n      \"nonCurrentDays\": \"<integer>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "maintenance"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-28db3226-f311-470a-8663-8ff01c9e6cbf"
+                    },
+                    {
+                      "id": "04d8bc2d-f5ef-41ea-a531-46bb0549de41",
+                      "name": "Invalid maintenance configuration.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"icebergUnreferencedFileRemoval\",\n  \"value\": {\n    \"status\": \"Enabled\",\n    \"settings\": {\n      \"unreferencedDays\": \"<integer>\",\n      \"nonCurrentDays\": \"<integer>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/buckets/:tableBucketARN/maintenance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "buckets",
+                            ":tableBucketARN",
+                            "maintenance"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-04d8bc2d-f5ef-41ea-a531-46bb0549de41"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-755750d2-1fc5-4d90-a688-0bce0787a8e7"
+                }
+              ],
+              "id": "c444d71c-dfa0-4608-9cbb-b033e82a5e60",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-c444d71c-dfa0-4608-9cbb-b033e82a5e60"
+            },
+            {
+              "name": "Amazon S3 Get Table Bucket",
+              "id": "ed0916bb-8bee-437a-91fe-429fa3ad2d50",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets",
+                    ":tableBucketARN"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0bc0f2cb-f9ad-4840-a7a2-aae950af0f6f",
+                      "key": "tableBucketARN",
+                      "value": "<string>",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    }
+                  ]
+                },
+                "description": "Gets details about a table bucket. Returns information about the specified table bucket including its name, ARN, owner, and creation date."
+              },
+              "response": [
+                {
+                  "id": "ed92fbe9-5c7c-445a-a0a6-20954581e465",
+                  "name": "Successfully returned table bucket details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"arn\": \"<string>\",\n  \"name\": \"<string>\",\n  \"ownerAccountId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"unreferencedFileRemoval\": {\n    \"status\": \"Disabled\",\n    \"settings\": {\n      \"unreferencedDays\": \"<integer>\",\n      \"nonCurrentDays\": \"<integer>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-ed92fbe9-5c7c-445a-a0a6-20954581e465"
+                },
+                {
+                  "id": "b668e6e6-42cd-4f58-9fa9-f8e42e746764",
+                  "name": "The specified table bucket does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-b668e6e6-42cd-4f58-9fa9-f8e42e746764"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-ed0916bb-8bee-437a-91fe-429fa3ad2d50"
+            },
+            {
+              "name": "Amazon S3 Delete Table Bucket",
+              "id": "f760096d-1cdd-4f17-a798-be685c060664",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets",
+                    ":tableBucketARN"
+                  ],
+                  "variable": [
+                    {
+                      "id": "409dc558-43d0-4ad9-8858-9d59059f496d",
+                      "key": "tableBucketARN",
+                      "value": "<string>",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    }
+                  ]
+                },
+                "description": "Deletes a table bucket. The table bucket must be empty (all tables and namespaces must be deleted first) before it can be deleted."
+              },
+              "response": [
+                {
+                  "id": "4105e592-5898-430d-aeb5-f5bb193d8f59",
+                  "name": "Table bucket deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-4105e592-5898-430d-aeb5-f5bb193d8f59"
+                },
+                {
+                  "id": "b92d3389-8ab8-4b84-b0d4-7c48bf638ff8",
+                  "name": "The specified table bucket does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-b92d3389-8ab8-4b84-b0d4-7c48bf638ff8"
+                },
+                {
+                  "id": "f2602f2e-a46b-490e-a441-8e748a425324",
+                  "name": "The table bucket is not empty and cannot be deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/buckets/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "buckets",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-f2602f2e-a46b-490e-a441-8e748a425324"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-f760096d-1cdd-4f17-a798-be685c060664"
+            }
+          ],
+          "id": "5c9a985c-e1b1-42ff-a5d4-0d92ae8b9cf6",
+          "createdAt": "2026-06-05T15:05:05.000Z",
+          "updatedAt": "2026-06-05T15:05:05.000Z",
+          "uid": "35240-5c9a985c-e1b1-42ff-a5d4-0d92ae8b9cf6"
+        },
+        {
+          "name": "Amazon S3 List Table Buckets",
+          "id": "09fd2c38-ba45-4037-9f13-ea97b6972851",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/buckets?prefix=<string>&continuationToken=<string>&maxBuckets=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "buckets"
+              ],
+              "query": [
+                {
+                  "description": "The prefix of the table buckets.",
+                  "key": "prefix",
+                  "value": "<string>"
+                },
+                {
+                  "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token.",
+                  "key": "continuationToken",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of table buckets to return in the list.",
+                  "key": "maxBuckets",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Lists table buckets for your account. Returns a list of table buckets that you have access to."
+          },
+          "response": [
+            {
+              "id": "664cece6-63db-4735-9950-7c4729c746b4",
+              "name": "Successfully returned list of table buckets.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/buckets?prefix=<string>&continuationToken=<string>&maxBuckets=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ],
+                  "query": [
+                    {
+                      "description": "The prefix of the table buckets.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token.",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of table buckets to return in the list.",
+                      "key": "maxBuckets",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tableBuckets\": [\n    {\n      \"arn\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ownerAccountId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"arn\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ownerAccountId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"continuationToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-664cece6-63db-4735-9950-7c4729c746b4"
+            },
+            {
+              "id": "769d1c31-f13c-446a-8938-44cc4c9ccf77",
+              "name": "Access denied.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/buckets?prefix=<string>&continuationToken=<string>&maxBuckets=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ],
+                  "query": [
+                    {
+                      "description": "The prefix of the table buckets.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token.",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of table buckets to return in the list.",
+                      "key": "maxBuckets",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-769d1c31-f13c-446a-8938-44cc4c9ccf77"
+            },
+            {
+              "id": "62671bfe-daa3-438f-ac10-ba4bf9eb548a",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/buckets?prefix=<string>&continuationToken=<string>&maxBuckets=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ],
+                  "query": [
+                    {
+                      "description": "The prefix of the table buckets.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token.",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of table buckets to return in the list.",
+                      "key": "maxBuckets",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-62671bfe-daa3-438f-ac10-ba4bf9eb548a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:05.000Z",
+          "updatedAt": "2026-06-05T15:05:05.000Z",
+          "uid": "35240-09fd2c38-ba45-4037-9f13-ea97b6972851"
+        },
+        {
+          "name": "Amazon S3 Create Table Bucket",
+          "id": "6c4252e3-c9ae-4708-95fe-03b945077ceb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/buckets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "buckets"
+              ]
+            },
+            "description": "Creates a table bucket. A table bucket is a resource that you can use to create and store tables. Each table bucket can contain tables in Apache Iceberg format stored as Apache Parquet files."
+          },
+          "response": [
+            {
+              "id": "0d68289a-304e-481c-bcc6-7eb6a3ac2adc",
+              "name": "Table bucket created successfully.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/buckets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"arn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-0d68289a-304e-481c-bcc6-7eb6a3ac2adc"
+            },
+            {
+              "id": "2b3b8c6f-2b9d-4f17-bf09-640ccc2911eb",
+              "name": "A table bucket with this name already exists.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/buckets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-2b3b8c6f-2b9d-4f17-bf09-640ccc2911eb"
+            },
+            {
+              "id": "46c8d605-2089-49a7-9ebb-2c112fc1a838",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/buckets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "buckets"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-46c8d605-2089-49a7-9ebb-2c112fc1a838"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:05.000Z",
+          "updatedAt": "2026-06-05T15:05:05.000Z",
+          "uid": "35240-6c4252e3-c9ae-4708-95fe-03b945077ceb"
+        }
+      ],
+      "id": "3a56b427-a4c5-418d-89b0-1a8f3ef03185",
+      "createdAt": "2026-06-05T15:05:05.000Z",
+      "updatedAt": "2026-06-05T15:05:05.000Z",
+      "uid": "35240-3a56b427-a4c5-418d-89b0-1a8f3ef03185"
+    },
+    {
+      "name": "namespaces",
+      "item": [
+        {
+          "name": "{tableBucketARN}",
+          "item": [
+            {
+              "name": "{namespace}",
+              "item": [
+                {
+                  "name": "Amazon S3 Get Namespace",
+                  "id": "06d5cd7b-e72a-4292-9e1d-52fe80df1e92",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN",
+                        ":namespace"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b185cef6-d2b6-4d4f-b356-df67ccf43d37",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        },
+                        {
+                          "id": "8c7b798f-7c03-4576-9364-4f02e8c7cfd7",
+                          "key": "namespace",
+                          "value": "<string>",
+                          "description": "(Required) The name of the namespace."
+                        }
+                      ]
+                    },
+                    "description": "Gets details about a namespace within a table bucket."
+                  },
+                  "response": [
+                    {
+                      "id": "a8d95ce9-dcb4-4b93-87a7-c7245e4e541f",
+                      "name": "Successfully returned namespace details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "namespaces",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"ownerAccountId\": \"<string>\",\n  \"tableBucketARN\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-a8d95ce9-dcb4-4b93-87a7-c7245e4e541f"
+                    },
+                    {
+                      "id": "58c0c151-cee2-4e42-819c-84e4d3ad3450",
+                      "name": "The specified namespace does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "namespaces",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-58c0c151-cee2-4e42-819c-84e4d3ad3450"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-06d5cd7b-e72a-4292-9e1d-52fe80df1e92"
+                },
+                {
+                  "name": "Amazon S3 Delete Namespace",
+                  "id": "b6dfaf0e-738e-4e6f-b965-04a23c8fe1c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN",
+                        ":namespace"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6dc16a24-3d8b-40db-b742-3425d43eb7e1",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        },
+                        {
+                          "id": "f89a63f3-14c6-40fc-9c9c-c93acf4ac07e",
+                          "key": "namespace",
+                          "value": "<string>",
+                          "description": "(Required) The name of the namespace."
+                        }
+                      ]
+                    },
+                    "description": "Deletes a namespace. The namespace must be empty (all tables must be deleted first) before it can be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "33196c98-71fd-4fa6-8102-d9370ef65780",
+                      "name": "Namespace deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "namespaces",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-33196c98-71fd-4fa6-8102-d9370ef65780"
+                    },
+                    {
+                      "id": "769c4b15-8f19-4742-8332-c304da4e333f",
+                      "name": "The specified namespace does not exist.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "namespaces",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-769c4b15-8f19-4742-8332-c304da4e333f"
+                    },
+                    {
+                      "id": "57ec94a1-5b7a-4901-b5cd-7882c663597c",
+                      "name": "The namespace is not empty and cannot be deleted.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/namespaces/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "namespaces",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-57ec94a1-5b7a-4901-b5cd-7882c663597c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-b6dfaf0e-738e-4e6f-b965-04a23c8fe1c4"
+                }
+              ],
+              "id": "e8888b27-2fd2-4dc1-8fc0-9109a8a283c5",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-e8888b27-2fd2-4dc1-8fc0-9109a8a283c5"
+            },
+            {
+              "name": "Amazon S3 List Namespaces",
+              "id": "3378bd68-7874-4c35-8e6e-9271831e1f22",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces/:tableBucketARN?prefix=<string>&continuationToken=<string>&maxNamespaces=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces",
+                    ":tableBucketARN"
+                  ],
+                  "query": [
+                    {
+                      "description": "The prefix of the namespaces.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A continuation token for pagination.",
+                      "key": "continuationToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of namespaces to return.",
+                      "key": "maxNamespaces",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "28ebfd72-e64c-4c99-ba7c-4b3b06de8fa6",
+                      "key": "tableBucketARN",
+                      "value": "<string>",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    }
+                  ]
+                },
+                "description": "Lists the namespaces within a table bucket. Namespaces organize tables within a table bucket."
+              },
+              "response": [
+                {
+                  "id": "df9d871c-ac21-4df1-9897-78d5b83c1e5f",
+                  "name": "Successfully returned list of namespaces.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN?prefix=<string>&continuationToken=<string>&maxNamespaces=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN"
+                      ],
+                      "query": [
+                        {
+                          "description": "The prefix of the namespaces.",
+                          "key": "prefix",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A continuation token for pagination.",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of namespaces to return.",
+                          "key": "maxNamespaces",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"namespaces\": [\n    {\n      \"namespace\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"ownerAccountId\": \"<string>\"\n    },\n    {\n      \"namespace\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"ownerAccountId\": \"<string>\"\n    }\n  ],\n  \"continuationToken\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-df9d871c-ac21-4df1-9897-78d5b83c1e5f"
+                },
+                {
+                  "id": "3d44b001-ac6a-4001-a57d-5335f351800d",
+                  "name": "The specified table bucket does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN?prefix=<string>&continuationToken=<string>&maxNamespaces=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN"
+                      ],
+                      "query": [
+                        {
+                          "description": "The prefix of the namespaces.",
+                          "key": "prefix",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A continuation token for pagination.",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of namespaces to return.",
+                          "key": "maxNamespaces",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-3d44b001-ac6a-4001-a57d-5335f351800d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-3378bd68-7874-4c35-8e6e-9271831e1f22"
+            },
+            {
+              "name": "Amazon S3 Create Namespace",
+              "id": "0e8dd663-8ec2-4b6d-8aeb-eb4440a4a33e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/namespaces/:tableBucketARN",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "namespaces",
+                    ":tableBucketARN"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3ce94e07-ac34-4f94-9326-631f275c494f",
+                      "key": "tableBucketARN",
+                      "value": "<string>",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    }
+                  ]
+                },
+                "description": "Creates a namespace. A namespace is a logical grouping of tables within a table bucket."
+              },
+              "response": [
+                {
+                  "id": "118a53aa-2219-47e7-b165-a1f712e74fcf",
+                  "name": "Namespace created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tableBucketARN\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-118a53aa-2219-47e7-b165-a1f712e74fcf"
+                },
+                {
+                  "id": "362f2f4b-d94a-40b1-a8ed-0b1d6e7a2526",
+                  "name": "A namespace with this name already exists.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/namespaces/:tableBucketARN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "namespaces",
+                        ":tableBucketARN"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tableBucketARN"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-362f2f4b-d94a-40b1-a8ed-0b1d6e7a2526"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-0e8dd663-8ec2-4b6d-8aeb-eb4440a4a33e"
+            }
+          ],
+          "id": "bf243889-404b-423b-884c-982d012daea1",
+          "createdAt": "2026-06-05T15:05:05.000Z",
+          "updatedAt": "2026-06-05T15:05:05.000Z",
+          "uid": "35240-bf243889-404b-423b-884c-982d012daea1"
+        }
+      ],
+      "id": "c6c5a512-8088-4235-b06e-e0d58d90aab2",
+      "createdAt": "2026-06-05T15:05:05.000Z",
+      "updatedAt": "2026-06-05T15:05:05.000Z",
+      "uid": "35240-c6c5a512-8088-4235-b06e-e0d58d90aab2"
+    },
+    {
+      "name": "tables",
+      "item": [
+        {
+          "name": "{tableBucketARN}",
+          "item": [
+            {
+              "name": "{namespace}",
+              "item": [
+                {
+                  "name": "{name}",
+                  "item": [
+                    {
+                      "name": "policy",
+                      "item": [
+                        {
+                          "name": "Amazon S3 Get Table Policy",
+                          "id": "92ddcd02-4287-4034-b721-9c1d940a38d4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b1934f78-edbf-4f6b-9ffb-88a8d7e7b953",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "129f9303-2ef1-4722-9156-cd6aba2f6551",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "01f4fa40-0ecd-4cfc-9cc8-3feeff9b1ae9",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Gets the resource policy for a table."
+                          },
+                          "response": [
+                            {
+                              "id": "802dbd33-3c0c-4584-a71c-358beeaf6cab",
+                              "name": "Successfully returned table policy.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "policy"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-802dbd33-3c0c-4584-a71c-358beeaf6cab"
+                            },
+                            {
+                              "id": "360bdc8d-d359-482e-8d0c-198816e38408",
+                              "name": "The table policy does not exist.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "policy"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-360bdc8d-d359-482e-8d0c-198816e38408"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-92ddcd02-4287-4034-b721-9c1d940a38d4"
+                        },
+                        {
+                          "name": "Amazon S3 Put Table Policy",
+                          "id": "c6501066-28db-46a6-b35e-95e2b1608dc6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "65609dff-0d43-48b2-8741-c8f82df2404e",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "79009629-23ea-4832-9ebc-7f16ce058bd6",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "82505341-bf23-4175-bba6-bde3d5f6ad7b",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Creates or replaces the resource policy for a table."
+                          },
+                          "response": [
+                            {
+                              "id": "5e76084a-af2e-48a0-9c51-edaa4a42ffab",
+                              "name": "Table policy updated successfully.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "policy"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-5e76084a-af2e-48a0-9c51-edaa4a42ffab"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-c6501066-28db-46a6-b35e-95e2b1608dc6"
+                        },
+                        {
+                          "name": "Amazon S3 Delete Table Policy",
+                          "id": "d564ffaf-c60f-45be-8ae8-f7498d3d57a7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "policy"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "76c50809-a5d9-4da0-9bfa-36146c9b0c5f",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "7b1160cf-2a69-4e46-a936-c9bae90ed9ff",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "07d50d33-53a7-47dc-99df-d55abd32ec17",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Deletes the resource policy for a table."
+                          },
+                          "response": [
+                            {
+                              "id": "5f74eed5-99f2-4803-a533-f8247fccb927",
+                              "name": "Table policy deleted successfully.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/policy",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "policy"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-5f74eed5-99f2-4803-a533-f8247fccb927"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-d564ffaf-c60f-45be-8ae8-f7498d3d57a7"
+                        }
+                      ],
+                      "id": "e8fc9be6-56d8-4c89-9619-9069ecd4df49",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-e8fc9be6-56d8-4c89-9619-9069ecd4df49"
+                    },
+                    {
+                      "name": "maintenance",
+                      "item": [
+                        {
+                          "name": "Amazon S3 Get Table Maintenance Configuration",
+                          "id": "2ae0c2a5-4bb7-4614-919b-05ec86412924",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "maintenance"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0ed90371-8b57-4117-952f-2714c4c913c3",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "8b4127e0-9daf-4719-8b46-b6a533c2f4f9",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "a5d61990-d6c4-43f2-b2e0-fcc272dad7ac",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Gets details about the maintenance configuration of a table, including Iceberg compaction and snapshot management settings."
+                          },
+                          "response": [
+                            {
+                              "id": "5c4c3447-6420-42e0-9bef-6e19fb67eaee",
+                              "name": "Successfully returned table maintenance configuration.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "maintenance"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"tableARN\": \"<string>\",\n  \"configuration\": {\n    \"mollit_dd\": {\n      \"status\": \"Disabled\",\n      \"settings\": {}\n    },\n    \"esteb8\": {\n      \"status\": \"Disabled\",\n      \"settings\": {}\n    }\n  }\n}",
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-5c4c3447-6420-42e0-9bef-6e19fb67eaee"
+                            },
+                            {
+                              "id": "d5f48760-0d44-43ac-bb38-1f2774818f83",
+                              "name": "The specified table does not exist.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "maintenance"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-d5f48760-0d44-43ac-bb38-1f2774818f83"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-2ae0c2a5-4bb7-4614-919b-05ec86412924"
+                        },
+                        {
+                          "name": "Amazon S3 Put Table Maintenance Configuration",
+                          "id": "f4520579-d4e0-4b42-9a86-4e69d3b21563",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"type\": \"icebergSnapshotManagement\",\n  \"value\": {\n    \"status\": \"Disabled\",\n    \"settings\": {}\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "maintenance"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ea0bac76-7880-4564-bdfe-8075c9a7e978",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "4008327c-36f4-4eaf-8760-5899127094b5",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "11075593-564f-4747-9afa-e0c7ea8cd334",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Creates or updates the maintenance configuration for the specified table."
+                          },
+                          "response": [
+                            {
+                              "id": "fc855d85-2cfd-4e10-8622-e1623425eaa7",
+                              "name": "Table maintenance configuration updated successfully.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"type\": \"icebergSnapshotManagement\",\n  \"value\": {\n    \"status\": \"Disabled\",\n    \"settings\": {}\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "maintenance"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-fc855d85-2cfd-4e10-8622-e1623425eaa7"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-f4520579-d4e0-4b42-9a86-4e69d3b21563"
+                        }
+                      ],
+                      "id": "ca985ae1-442a-4a7e-a5eb-252b5062e3dd",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-ca985ae1-442a-4a7e-a5eb-252b5062e3dd"
+                    },
+                    {
+                      "name": "maintenance-job-status",
+                      "item": [
+                        {
+                          "name": "Amazon S3 Get Table Maintenance Job Status",
+                          "id": "ef223cac-8b73-4aa1-9131-34535e980748",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance-job-status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "maintenance-job-status"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9b5c128a-27ff-4871-a1e9-17ecc4b29b18",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "0bdf6327-a38a-4311-8930-b1187831a025",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "de6a0d87-8c70-4cfe-b10e-fd4b0f28de5f",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Gets the status of a maintenance job for a table, including the last run timestamp and status."
+                          },
+                          "response": [
+                            {
+                              "id": "5a91b7ec-e054-483b-8f80-987222c47808",
+                              "name": "Successfully returned maintenance job status.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance-job-status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "maintenance-job-status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"tableARN\": \"<string>\",\n  \"status\": {\n    \"incididunt_7f_\": {\n      \"status\": \"Not_Yet_Run\",\n      \"lastRunTimestamp\": \"<dateTime>\",\n      \"failureMessage\": \"<string>\"\n    },\n    \"aliquip_eb5\": {\n      \"status\": \"Failed\",\n      \"lastRunTimestamp\": \"<dateTime>\",\n      \"failureMessage\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-5a91b7ec-e054-483b-8f80-987222c47808"
+                            },
+                            {
+                              "id": "b4707c6a-f935-4c30-b1cb-054a49487300",
+                              "name": "The specified table does not exist.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/maintenance-job-status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "maintenance-job-status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-b4707c6a-f935-4c30-b1cb-054a49487300"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-ef223cac-8b73-4aa1-9131-34535e980748"
+                        }
+                      ],
+                      "id": "fe8ff51e-5f2e-4103-8409-d28ec96ac6b3",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-fe8ff51e-5f2e-4103-8409-d28ec96ac6b3"
+                    },
+                    {
+                      "name": "metadata-location",
+                      "item": [
+                        {
+                          "name": "Amazon S3 Get Table Metadata Location",
+                          "id": "ffb74b0a-daa8-483c-8dbd-33a17eed02b2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/metadata-location",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "metadata-location"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9d8f9a82-31a2-4f4d-aa5f-7138fbe3850b",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "13dde7c4-9e28-4998-857f-4c248589bd63",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "eccdbc3e-85fc-4fc2-86d4-f93140052b67",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Gets the location of the table metadata in S3."
+                          },
+                          "response": [
+                            {
+                              "id": "29d6ae04-46b8-49c9-ab92-57b80afd45bd",
+                              "name": "Successfully returned table metadata location.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/metadata-location",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "metadata-location"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\",\n  \"warehouseLocation\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-29d6ae04-46b8-49c9-ab92-57b80afd45bd"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-ffb74b0a-daa8-483c-8dbd-33a17eed02b2"
+                        },
+                        {
+                          "name": "Amazon S3 Update Table Metadata Location",
+                          "id": "fc678c4a-e7e0-494d-ab47-db9b5b211715",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/metadata-location",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name",
+                                "metadata-location"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "486b7d2e-201c-4bed-9fc2-74a03fff64f7",
+                                  "key": "tableBucketARN",
+                                  "value": "<string>",
+                                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                                },
+                                {
+                                  "id": "0440d8e5-47b8-4d7c-ad7f-825e8a9d866e",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the namespace."
+                                },
+                                {
+                                  "id": "86677d27-9040-47ee-8814-22e6b5d86920",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the table."
+                                }
+                              ]
+                            },
+                            "description": "Updates the metadata location for a table. Used to point the table to a new Iceberg metadata file after a metadata update."
+                          },
+                          "response": [
+                            {
+                              "id": "57bb5d60-6e8c-4622-9be8-751223483db1",
+                              "name": "Table metadata location updated successfully.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name/metadata-location",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "tables",
+                                    ":tableBucketARN",
+                                    ":namespace",
+                                    ":name",
+                                    "metadata-location"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "tableBucketARN"
+                                    },
+                                    {
+                                      "key": "namespace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"tableARN\": \"<string>\",\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:05:05.000Z",
+                              "updatedAt": "2026-06-05T15:05:05.000Z",
+                              "uid": "35240-57bb5d60-6e8c-4622-9be8-751223483db1"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-fc678c4a-e7e0-494d-ab47-db9b5b211715"
+                        }
+                      ],
+                      "id": "81dafdc8-2522-40ab-a50c-571f17669988",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-81dafdc8-2522-40ab-a50c-571f17669988"
+                    },
+                    {
+                      "name": "Amazon S3 Get Table",
+                      "id": "4f92c168-4e5f-4366-b5af-668406e687ad",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fb8b333a-1d28-4623-af7b-2949434b85f5",
+                              "key": "tableBucketARN",
+                              "value": "<string>",
+                              "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                            },
+                            {
+                              "id": "90ce7e55-da19-4511-b7bf-d3cc14f2d39a",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "description": "(Required) The name of the namespace."
+                            },
+                            {
+                              "id": "cc4b926d-342c-4008-9574-2ba00ff4fa7b",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the table."
+                            }
+                          ]
+                        },
+                        "description": "Gets details about a table in the specified namespace within a table bucket."
+                      },
+                      "response": [
+                        {
+                          "id": "008170d3-1242-4b24-a771-9a5a718b75af",
+                          "name": "Successfully returned table details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"tableARN\": \"<string>\",\n  \"namespace\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\",\n  \"warehouseLocation\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"modifiedAt\": \"<dateTime>\",\n  \"modifiedBy\": \"<string>\",\n  \"managedByService\": \"<string>\",\n  \"ownerAccountId\": \"<string>\",\n  \"type\": \"aws\",\n  \"format\": \"ICEBERG\"\n}",
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-008170d3-1242-4b24-a771-9a5a718b75af"
+                        },
+                        {
+                          "id": "150cd286-52c0-40f4-b561-5eb7793c57b1",
+                          "name": "The specified table does not exist.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-150cd286-52c0-40f4-b561-5eb7793c57b1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-4f92c168-4e5f-4366-b5af-668406e687ad"
+                    },
+                    {
+                      "name": "Amazon S3 Delete Table",
+                      "id": "8c8d9d50-f1e7-4f5a-b67c-29ee901d4201",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name?versionToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace",
+                            ":name"
+                          ],
+                          "query": [
+                            {
+                              "description": "The version token of the table.",
+                              "key": "versionToken",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "0ae6faae-d798-43d8-a969-193e54311732",
+                              "key": "tableBucketARN",
+                              "value": "<string>",
+                              "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                            },
+                            {
+                              "id": "62bc121f-96bb-4d36-8e8d-99b92f478416",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "description": "(Required) The name of the namespace."
+                            },
+                            {
+                              "id": "f867c7f5-b8ef-41bb-b71d-8437772f8f81",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The name of the table to delete."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a table from the specified namespace within a table bucket."
+                      },
+                      "response": [
+                        {
+                          "id": "1bf60706-efce-4665-b110-cc3841a962af",
+                          "name": "Table deleted successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name?versionToken=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The version token of the table.",
+                                  "key": "versionToken",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-1bf60706-efce-4665-b110-cc3841a962af"
+                        },
+                        {
+                          "id": "5ba90bd3-c302-4a4e-ae3d-1d25d364a9c7",
+                          "name": "The specified table does not exist.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name?versionToken=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The version token of the table.",
+                                  "key": "versionToken",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-5ba90bd3-c302-4a4e-ae3d-1d25d364a9c7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-8c8d9d50-f1e7-4f5a-b67c-29ee901d4201"
+                    },
+                    {
+                      "name": "Amazon S3 Rename Table",
+                      "id": "8c39f424-d61d-4b58-b5a2-e2b7d2aeddee",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"versionToken\": \"<string>\",\n  \"newNamespaceName\": \"<string>\",\n  \"newName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c80630aa-0876-4c29-bf66-39de1c8a2105",
+                              "key": "tableBucketARN",
+                              "value": "<string>",
+                              "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                            },
+                            {
+                              "id": "0f92f62f-235c-424f-ba8b-4a5e506fe47a",
+                              "key": "namespace",
+                              "value": "<string>",
+                              "description": "(Required) The name of the namespace."
+                            },
+                            {
+                              "id": "8fd465ee-b283-4e5b-b933-321b40389d63",
+                              "key": "name",
+                              "value": "<string>",
+                              "description": "(Required) The current name of the table."
+                            }
+                          ]
+                        },
+                        "description": "Renames a table or moves a table to a different namespace within a table bucket."
+                      },
+                      "response": [
+                        {
+                          "id": "60456851-ad8b-449c-97df-537f12b2a8f2",
+                          "name": "Table renamed successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"newNamespaceName\": \"<string>\",\n  \"newName\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-60456851-ad8b-449c-97df-537f12b2a8f2"
+                        },
+                        {
+                          "id": "7811109e-8900-4b08-b34e-d37063f2124c",
+                          "name": "The specified table does not exist.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"newNamespaceName\": \"<string>\",\n  \"newName\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-7811109e-8900-4b08-b34e-d37063f2124c"
+                        },
+                        {
+                          "id": "aca4c814-d47e-4e5b-b57b-a068a1eac95f",
+                          "name": "A table with the new name already exists.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"newNamespaceName\": \"<string>\",\n  \"newName\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "tables",
+                                ":tableBucketARN",
+                                ":namespace",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "tableBucketARN"
+                                },
+                                {
+                                  "key": "namespace"
+                                },
+                                {
+                                  "key": "name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:05.000Z",
+                          "updatedAt": "2026-06-05T15:05:05.000Z",
+                          "uid": "35240-aca4c814-d47e-4e5b-b57b-a068a1eac95f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-8c39f424-d61d-4b58-b5a2-e2b7d2aeddee"
+                    }
+                  ],
+                  "id": "38298c56-73fb-4f72-a1bf-c711ce3259e8",
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-38298c56-73fb-4f72-a1bf-c711ce3259e8"
+                },
+                {
+                  "name": "Amazon S3 List Tables",
+                  "id": "2e2f95ae-2c9e-4eb2-a9a7-ad9c6727613f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace?prefix=<string>&continuationToken=<string>&maxTables=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":tableBucketARN",
+                        ":namespace"
+                      ],
+                      "query": [
+                        {
+                          "description": "The prefix of the table names.",
+                          "key": "prefix",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A continuation token for pagination.",
+                          "key": "continuationToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of tables to return.",
+                          "key": "maxTables",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "762ba6dd-a122-4148-97e9-43be0f62dd21",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        },
+                        {
+                          "id": "2ee3f4f9-5fd8-4fd0-a579-d4e9df5a3cb0",
+                          "key": "namespace",
+                          "value": "<string>",
+                          "description": "(Required) The name of the namespace."
+                        }
+                      ]
+                    },
+                    "description": "Lists the tables in the specified namespace within a table bucket."
+                  },
+                  "response": [
+                    {
+                      "id": "2dded13d-aa12-4771-9020-2d60c8fb4f7e",
+                      "name": "Successfully returned list of tables.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace?prefix=<string>&continuationToken=<string>&maxTables=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "query": [
+                            {
+                              "description": "The prefix of the table names.",
+                              "key": "prefix",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A continuation token for pagination.",
+                              "key": "continuationToken",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of tables to return.",
+                              "key": "maxTables",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tables\": [\n    {\n      \"namespace\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"type\": \"aws\",\n      \"tableARN\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\"\n    },\n    {\n      \"namespace\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"type\": \"customer\",\n      \"tableARN\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\"\n    }\n  ],\n  \"continuationToken\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-2dded13d-aa12-4771-9020-2d60c8fb4f7e"
+                    },
+                    {
+                      "id": "6c3fe2c8-d344-4865-94cd-7e3f1a68accf",
+                      "name": "The specified namespace does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace?prefix=<string>&continuationToken=<string>&maxTables=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "query": [
+                            {
+                              "description": "The prefix of the table names.",
+                              "key": "prefix",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "A continuation token for pagination.",
+                              "key": "continuationToken",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of tables to return.",
+                              "key": "maxTables",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-6c3fe2c8-d344-4865-94cd-7e3f1a68accf"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-2e2f95ae-2c9e-4eb2-a9a7-ad9c6727613f"
+                },
+                {
+                  "name": "Amazon S3 Create Table",
+                  "id": "54738914-6923-44ba-8a45-2200a869a0d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"format\": \"ICEBERG\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":tableBucketARN",
+                        ":namespace"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9a67507a-1c02-47ec-af84-f5a7d139fb68",
+                          "key": "tableBucketARN",
+                          "value": "<string>",
+                          "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                        },
+                        {
+                          "id": "82402d45-c94c-45ee-ba87-0ea74204782b",
+                          "key": "namespace",
+                          "value": "<string>",
+                          "description": "(Required) The name of the namespace."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new table in the specified namespace within a table bucket. The table is created in Apache Iceberg format and data is stored in Apache Parquet format."
+                  },
+                  "response": [
+                    {
+                      "id": "17f9fbf5-f989-4ba6-aac3-a5201ccee541",
+                      "name": "Table created successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"format\": \"ICEBERG\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tableARN\": \"<string>\",\n  \"versionToken\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-17f9fbf5-f989-4ba6-aac3-a5201ccee541"
+                    },
+                    {
+                      "id": "1259d987-1f60-47e8-8d59-19687e4f26d4",
+                      "name": "A table with this name already exists.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"format\": \"ICEBERG\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/tables/:tableBucketARN/:namespace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tables",
+                            ":tableBucketARN",
+                            ":namespace"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tableBucketARN"
+                            },
+                            {
+                              "key": "namespace"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:05.000Z",
+                      "updatedAt": "2026-06-05T15:05:05.000Z",
+                      "uid": "35240-1259d987-1f60-47e8-8d59-19687e4f26d4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:05.000Z",
+                  "updatedAt": "2026-06-05T15:05:05.000Z",
+                  "uid": "35240-54738914-6923-44ba-8a45-2200a869a0d7"
+                }
+              ],
+              "id": "3e3331dc-00ba-4cbc-8d3a-df9f05e354d3",
+              "createdAt": "2026-06-05T15:05:05.000Z",
+              "updatedAt": "2026-06-05T15:05:05.000Z",
+              "uid": "35240-3e3331dc-00ba-4cbc-8d3a-df9f05e354d3"
+            }
+          ],
+          "id": "e8e17261-7b6f-4686-b2e6-ee75f325b77e",
+          "createdAt": "2026-06-05T15:05:05.000Z",
+          "updatedAt": "2026-06-05T15:05:05.000Z",
+          "uid": "35240-e8e17261-7b6f-4686-b2e6-ee75f325b77e"
+        }
+      ],
+      "id": "b4456f5d-a761-4f35-b970-604b07b63605",
+      "createdAt": "2026-06-05T15:05:05.000Z",
+      "updatedAt": "2026-06-05T15:05:05.000Z",
+      "uid": "35240-b4456f5d-a761-4f35-b970-604b07b63605"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://s3tables.{{region}}.amazonaws.com"
+    }
+  ]
+}

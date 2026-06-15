@@ -1,0 +1,1437 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 REST API",
+    "version": "2006-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ]
+          },
+          "docs": "Returns a list of all buckets owned by the authenticated sender of the request. To use this operation, you must have the s3:ListAllMyBuckets permission. This operation uses the GET method on the service endpoint."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-bucket-object-lock-enabled",
+                "value": "true"
+              },
+              {
+                "name": "x-amz-object-ownership",
+                "value": "BucketOwnerPreferred"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and have a valid AWS Access Key ID. By default, buckets are created in the us-east-1 region. Use the LocationConstraint request element to specify a different region."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the S3 bucket. All objects in the bucket must be deleted before the bucket itself can be deleted. The bucket owner can always delete a bucket, regardless of bucket policies."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Head Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Determines if a bucket exists and you have permission to access it. A HEAD request returns 200 OK if the bucket exists and you have permission to access it. Returns 404 Not Found if the bucket does not exist or 403 Forbidden if you do not have permission."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Objects V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?list-type=2",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-optional-object-attributes",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "list-type",
+                "value": "2",
+                "type": "query",
+                "description": "Set to 2 to use the ListObjectsV2 API."
+              },
+              {
+                "name": "continuation-token",
+                "value": "example_value",
+                "type": "query",
+                "description": "ContinuationToken indicates to S3 that the list is being continued on this bucket with a token returned in a previous response."
+              },
+              {
+                "name": "delimiter",
+                "value": "example_value",
+                "type": "query",
+                "description": "A delimiter is a character that you use to group keys. All keys that contain the same string between the prefix and the first occurrence of the delimiter are grouped under a single CommonPrefixes element."
+              },
+              {
+                "name": "encoding-type",
+                "value": "url",
+                "type": "query",
+                "description": "Encoding type used by Amazon S3 to encode object keys in the response."
+              },
+              {
+                "name": "fetch-owner",
+                "value": "true",
+                "type": "query",
+                "description": "Set to true to include the owner field in the response."
+              },
+              {
+                "name": "max-keys",
+                "value": "10",
+                "type": "query",
+                "description": "Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000 key names."
+              },
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "Limits the response to keys that begin with the specified prefix."
+              },
+              {
+                "name": "start-after",
+                "value": "example_value",
+                "type": "query",
+                "description": "StartAfter is where you want Amazon S3 to start listing from. S3 starts listing after this specified key."
+              }
+            ]
+          },
+          "docs": "Returns some or all (up to 1,000) of the objects in a bucket with each request. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. This is the recommended approach for listing objects. ListObjectsV2 supersedes the older ListObjects API."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+",
+            "headers": [
+              {
+                "name": "Range",
+                "value": "example_value"
+              },
+              {
+                "name": "If-Match",
+                "value": "example_value"
+              },
+              {
+                "name": "If-None-Match",
+                "value": "example_value"
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "If-Unmodified-Since",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-algorithm",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-key",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-key-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-mode",
+                "value": "ENABLED"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "response-cache-control",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Cache-Control header of the response."
+              },
+              {
+                "name": "response-content-disposition",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Content-Disposition header of the response."
+              },
+              {
+                "name": "response-content-encoding",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Content-Encoding header of the response."
+              },
+              {
+                "name": "response-content-language",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Content-Language header of the response."
+              },
+              {
+                "name": "response-content-type",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Content-Type header of the response."
+              },
+              {
+                "name": "response-expires",
+                "value": "example_value",
+                "type": "query",
+                "description": "Sets the Expires header of the response."
+              },
+              {
+                "name": "versionId",
+                "value": "500123",
+                "type": "query",
+                "description": "VersionId used to reference a specific version of the object."
+              },
+              {
+                "name": "partNumber",
+                "value": "10",
+                "type": "query",
+                "description": "Part number of the object being read for a multipart object."
+              }
+            ]
+          },
+          "docs": "Retrieves objects from Amazon S3. To use GET, you must have READ access to the object. You can grant READ access using a bucket policy or an object ACL. Supports conditional retrieval using If-Match, If-None-Match, If-Modified-Since, and If-Unmodified-Since headers. Supports range reads with the Range header."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+",
+            "headers": [
+              {
+                "name": "Cache-Control",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Disposition",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Encoding",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Language",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Length",
+                "value": "10"
+              },
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Type",
+                "value": "example_value"
+              },
+              {
+                "name": "Expires",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-storage-class",
+                "value": "STANDARD"
+              },
+              {
+                "name": "x-amz-server-side-encryption",
+                "value": "AES256"
+              },
+              {
+                "name": "x-amz-server-side-encryption-aws-kms-key-id",
+                "value": "500123"
+              },
+              {
+                "name": "x-amz-server-side-encryption-context",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-server-side-encryption-bucket-key-enabled",
+                "value": "true"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-algorithm",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-key",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-server-side-encryption-customer-key-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-tagging",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-object-lock-mode",
+                "value": "GOVERNANCE"
+              },
+              {
+                "name": "x-amz-object-lock-retain-until-date",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-object-lock-legal-hold",
+                "value": "ON"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              },
+              {
+                "name": "x-amz-checksum-crc32",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-crc32c",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha1",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha256",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              }
+            ]
+          },
+          "docs": "Adds an object to a bucket. You must have WRITE permissions on a bucket to add an object to it. Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the entire object to the bucket. Objects can be up to 5 GiB in size when uploaded in a single PUT operation. For larger objects, use multipart upload."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+",
+            "headers": [
+              {
+                "name": "x-amz-mfa",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-bypass-governance-retention",
+                "value": "true"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "versionId",
+                "value": "500123",
+                "type": "query",
+                "description": "VersionId used to reference a specific version of the object."
+              }
+            ]
+          },
+          "docs": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there is no null version, Amazon S3 does not remove any objects but will still respond that the command was successful. To remove a specific version, you must use the versionId sub-resource."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Head Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              },
+              {
+                "name": "If-Match",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "If-Modified-Since",
+                "value": ""
+              },
+              {
+                "name": "If-Unmodified-Since",
+                "value": ""
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": ""
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": ""
+              },
+              {
+                "name": "x-amz-checksum-mode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "VersionId used to reference a specific version of the object."
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "query",
+                "description": "Part number of the object being read for multipart objects."
+              }
+            ]
+          },
+          "docs": "The HEAD action retrieves metadata from an object without returning the object itself. This action is useful if you are interested only in an object's metadata. A HEAD request has the same options as a GET action on an object."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Copy Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+?copy",
+            "headers": [
+              {
+                "name": "x-amz-copy-source",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-copy-source-if-match",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-copy-source-if-none-match",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-copy-source-if-modified-since",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-copy-source-if-unmodified-since",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-metadata-directive",
+                "value": "COPY"
+              },
+              {
+                "name": "x-amz-tagging-directive",
+                "value": "COPY"
+              },
+              {
+                "name": "x-amz-server-side-encryption",
+                "value": "AES256"
+              },
+              {
+                "name": "x-amz-storage-class",
+                "value": "STANDARD"
+              },
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-source-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              }
+            ]
+          },
+          "docs": "Creates a copy of an object that is already stored in Amazon S3. You can copy individual objects between general purpose buckets, between directory buckets, and between general purpose buckets and directory buckets. Objects up to 5 GiB can be copied in a single operation. For objects larger than 5 GiB, you must use the multipart upload Copy API."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?delete",
+            "headers": [
+              {
+                "name": "x-amz-mfa",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-bypass-governance-retention",
+                "value": "true"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This action enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys in a single request. The request body contains the list of object keys to delete."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Multipart Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Create Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+?uploads",
+            "headers": [
+              {
+                "name": "Cache-Control",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Disposition",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Encoding",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Type",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-storage-class",
+                "value": "STANDARD"
+              },
+              {
+                "name": "x-amz-server-side-encryption",
+                "value": "AES256"
+              },
+              {
+                "name": "x-amz-server-side-encryption-aws-kms-key-id",
+                "value": "500123"
+              },
+              {
+                "name": "x-amz-tagging",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-object-lock-mode",
+                "value": "GOVERNANCE"
+              },
+              {
+                "name": "x-amz-object-lock-retain-until-date",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-object-lock-legal-hold",
+                "value": "ON"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              }
+            ]
+          },
+          "docs": "This action initiates a multipart upload and returns an upload ID. This upload ID is used to associate all of the parts in the specific multipart upload. You specify this upload ID in each of your subsequent upload part requests. You also include this upload ID in the final request to either complete or abort the multipart upload request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Upload Part",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+?partNumber=:partNumber&uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "Content-Length",
+                "value": "10"
+              },
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "partNumber",
+                "value": "10",
+                "type": "query",
+                "description": "Part number identifying the part (1 to 10,000)."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload."
+              }
+            ]
+          },
+          "docs": "Uploads a part in a multipart upload. In this operation, you provide part data in your request. The part size must be between 5 MiB and 5 GiB. The last part can be smaller than 5 MiB. A multipart upload can have between 1 and 10,000 parts."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Complete Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+?uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-checksum-crc32",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-crc32c",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha1",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha256",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload."
+              }
+            ]
+          },
+          "docs": "Completes a multipart upload by assembling previously uploaded parts. You must include the upload ID and a list of both part numbers and corresponding ETag values. Upon receiving the complete multipart upload request, Amazon S3 concatenates all the parts in ascending order by part number to create a new object."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Abort Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket/:Key+?uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload to abort."
+              }
+            ]
+          },
+          "docs": "This action aborts a multipart upload. After a multipart upload is aborted, no additional parts can be uploaded using that upload ID. The storage consumed by any previously uploaded parts will be freed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Control",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Acl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?acl",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This implementation of the GET action uses the acl subresource to return the access control list (ACL) of a bucket. To use GET to return the ACL, you must have the READ_ACP access to the bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Acl",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?acl",
+            "headers": [
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-grant-full-control",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-grant-read",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-grant-read-acp",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-grant-write",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-grant-write-acp",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the permissions on an existing bucket using access control lists (ACL). You can set permissions to grant or revoke access at the bucket level using either the request body or request headers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bucket Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Versioning",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?versioning",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the versioning state of a bucket. To retrieve the versioning state of a bucket, you must be the bucket owner. This implementation also returns the MFA Delete status of a bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Versioning",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?versioning",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-mfa",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner. You can set the versioning state to Enabled or Suspended."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the default encryption configuration for an Amazon S3 bucket. By default, all buckets have a default encryption configuration that uses server-side encryption with Amazon S3 managed keys (SSE-S3)."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This action uses the encryption subresource to configure default encryption and Amazon S3 Bucket Keys for an existing bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This implementation of the DELETE action resets the default encryption for the bucket as server-side encryption with Amazon S3 managed keys (SSE-S3)."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Lifecycle Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the lifecycle configuration information set on the bucket. It returns the lifecycle configuration for the specified bucket or an error if the lifecycle configuration does not exist."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Lifecycle Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration. Lifecycle configuration manages objects so that they are stored cost effectively throughout their lifecycle."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Lifecycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the lifecycle configuration from the specified bucket. Amazon S3 removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the Cross-Origin Resource Sharing (CORS) configuration information set for the bucket. To use this operation, you must have permission to perform the s3:GetBucketCORS action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the CORS configuration for your bucket. If the configuration exists, Amazon S3 replaces it. To use this operation, you must be allowed to perform the s3:PutBucketCORS action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the CORS configuration information set for the bucket."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tagging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the tag set associated with the bucket. To use this operation, you must have permission to perform the s3:GetBucketTagging action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the tags for a bucket. Use tags to organize your AWS bill to reflect your own cost structure. To use this operation, you must have permission to perform the s3:PutBucketTagging action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the tags from the bucket. To use this operation, you must have permission to perform the s3:PutBucketTagging action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
