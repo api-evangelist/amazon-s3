@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amazon-s3-control-api-openapi.yml, openapi/amazon-s3-rest-api-openapi.yml, openapi/amazon-s3-tables-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: sigv4
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: AWS Signature Version 4 authentication. The S3 Control API uses the service name
+    s3 for signing.
+  sources:
+  - openapi/amazon-s3-control-api-openapi.yml
+  - openapi/amazon-s3-rest-api-openapi.yml
+  - openapi/amazon-s3-tables-api-openapi.yml

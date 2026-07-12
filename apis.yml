@@ -118,6 +118,14 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/s3/faqs/
 common:
+  - type: TrustCenter
+    url: security/amazon-s3-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-s3-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-s3-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-s3-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-s3/overview
   - type: Arazzo
