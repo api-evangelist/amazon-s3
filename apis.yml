@@ -118,6 +118,8 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/s3/faqs/
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-s3-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-s3-trust-center.yml
   - type: VulnerabilityDisclosure
