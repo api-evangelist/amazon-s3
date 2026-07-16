@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Amazon S3 Tables API
+  version: 1.0.0
+extends: openapi/amazon-s3-tables-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: amazon-s3
+      x-apievangelist-artifacts:
+        authentication: authentication/amazon-s3-authentication.yml
+        conventions: conventions/amazon-s3-conventions.yml
+        errors: errors/amazon-s3-problem-types.yml
+        lifecycle: lifecycle/amazon-s3-lifecycle.yml
+        data_model: data-model/amazon-s3-data-model.yml
+        agentic_access: agentic-access/amazon-s3-agentic-access.yml
+  - target: $.info
+    update:
+      x-apievangelist-auth: AWS Signature Version 4 (SigV4); see authentication/amazon-s3-authentication.yml

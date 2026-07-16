@@ -1,0 +1,45 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the schema $ref links and id-reference fields across openapi/*.yml
+  and the Amazon S3 API object reference
+  (docs.aws.amazon.com/AmazonS3/latest/API). Captures the core entity graph of
+  the object store (REST), account controls (Control), and tabular data (Tables)
+  surfaces. The visual product render lives in subway/amazon-s3-subway-map.svg;
+  this is the machine-readable graph.
+docs: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types.html
+notation: >-
+  relationships use has_one / has_many / belongs_to with the linking field or ARN;
+  direction is from the entity that owns the reference. S3 identifies resources by
+  name/key/ARN rather than opaque id prefixes.
+entities:
+  - {name: Bucket, key: bucket-name, domain: object, description: A container for objects; globally/region unique namespace.}
+  - {name: Object, key: bucket+key(+versionId), domain: object, description: A stored blob addressed by key within a bucket.}
+  - {name: MultipartUpload, key: uploadId, domain: object, description: An in-progress upload composed of parts.}
+  - {name: Part, key: uploadId+partNumber, domain: object, description: One part of a multipart upload.}
+  - {name: Owner, key: canonical-user-id, domain: object, description: The AWS account that owns a bucket/object.}
+  - {name: Grant, key: grantee, domain: object, description: An ACL grant of a permission to a grantee.}
+  - {name: LifecycleRule, key: rule-id, domain: object, description: A transition/expiration rule within a bucket lifecycle configuration.}
+  - {name: AccessPoint, key: access-point-arn, domain: control, description: A named network/IAM entry point to a bucket.}
+  - {name: MultiRegionAccessPoint, key: alias, domain: control, description: A global endpoint spanning buckets in multiple regions.}
+  - {name: BatchJob, key: job-id, domain: control, description: An S3 Batch Operations job over a manifest of objects.}
+  - {name: StorageLensConfiguration, key: config-id, domain: control, description: Organization/account storage analytics configuration.}
+  - {name: AccessGrantsInstance, key: account-region, domain: control, description: The S3 Access Grants instance for identity-based access.}
+  - {name: TableBucket, key: table-bucket-arn, domain: tables, description: A bucket that holds Iceberg tables.}
+  - {name: Namespace, key: table-bucket-arn+namespace, domain: tables, description: A logical grouping of tables within a table bucket.}
+  - {name: Table, key: table-arn, domain: tables, description: An Apache Iceberg table stored as Parquet.}
+relationships:
+  - {from: Bucket, to: Object, kind: has_many, via: bucket-name}
+  - {from: Object, to: Owner, kind: belongs_to, via: canonical-user-id}
+  - {from: Bucket, to: Owner, kind: belongs_to, via: canonical-user-id}
+  - {from: Bucket, to: Grant, kind: has_many, via: AccessControlPolicy}
+  - {from: Bucket, to: LifecycleRule, kind: has_many, via: BucketLifecycleConfiguration}
+  - {from: MultipartUpload, to: Part, kind: has_many, via: uploadId}
+  - {from: MultipartUpload, to: Object, kind: belongs_to, via: bucket+key}
+  - {from: AccessPoint, to: Bucket, kind: belongs_to, via: bucket-name}
+  - {from: MultiRegionAccessPoint, to: Bucket, kind: has_many, via: Regions}
+  - {from: BatchJob, to: Bucket, kind: belongs_to, via: manifest-bucket}
+  - {from: TableBucket, to: Namespace, kind: has_many, via: table-bucket-arn}
+  - {from: Namespace, to: Table, kind: has_many, via: namespace}
+  - {from: Table, to: TableBucket, kind: belongs_to, via: table-bucket-arn}
+render: subway/amazon-s3-subway-map.svg

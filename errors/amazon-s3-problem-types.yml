@@ -1,0 +1,99 @@
+generated: '2026-06-20'
+method: derived
+format: s3-xml-error
+source: >-
+  Derived from the 4xx/5xx responses across openapi/*.yml (REST: 403/404/409/412;
+  Control: 400/404/409; Tables: 400/403/404/409/429) and enriched from the Amazon
+  S3 error reference at
+  https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html. Amazon S3
+  does NOT use RFC 9457 application/problem+json. The REST/object API returns an
+  XML error document; the S3 Control and S3 Tables APIs return JSON errors. The
+  authoritative machine key is the S3 error Code string, not just the HTTP status.
+envelope:
+  rest_api:
+    media_type: application/xml
+    shape: "<Error><Code>string</Code><Message>string</Message><Resource>string</Resource><RequestId>string</RequestId></Error>"
+  control_and_tables_api:
+    media_type: application/json
+    shape: '{ "__type": "ErrorCode", "message": "string" }'
+problems:
+  - status: 400
+    code: BadRequest / InvalidRequest / MalformedXML
+    title: Bad Request
+    meaning: The request was malformed or a parameter was invalid.
+    source_operations:
+      - openapi/amazon-s3-control-api-openapi.yml#CreateAccessPoint
+      - openapi/amazon-s3-tables-api-openapi.yml#CreateTableBucket
+  - status: 403
+    code: AccessDenied
+    title: Access Denied
+    meaning: The SigV4 credentials are missing/invalid or the IAM/bucket policy denies the action.
+    remediation: Verify the SigV4 signature, credentials, and that the principal's IAM/bucket/access-point policy grants the action.
+    source_operations:
+      - openapi/amazon-s3-rest-api-openapi.yml#GetObject
+      - openapi/amazon-s3-rest-api-openapi.yml#PutObject
+  - status: 403
+    code: SignatureDoesNotMatch
+    title: Signature Does Not Match
+    meaning: The request signature computed by S3 does not match the signature provided.
+    remediation: Recompute the AWS Signature Version 4 canonical request; check clock skew and the signing key/region/service.
+  - status: 404
+    code: NoSuchBucket
+    title: No Such Bucket
+    meaning: The specified bucket does not exist.
+    source_operations:
+      - openapi/amazon-s3-rest-api-openapi.yml#HeadBucket
+      - openapi/amazon-s3-rest-api-openapi.yml#DeleteBucket
+  - status: 404
+    code: NoSuchKey
+    title: No Such Key
+    meaning: The specified object key does not exist.
+    source_operations:
+      - openapi/amazon-s3-rest-api-openapi.yml#GetObject
+  - status: 404
+    code: NoSuchUpload
+    title: No Such Upload
+    meaning: The specified multipart upload does not exist (already completed/aborted or bad UploadId).
+  - status: 404
+    code: NotFound
+    title: Not Found
+    meaning: The specified resource (access point, job, table bucket, namespace, table) was not found.
+    source_operations:
+      - openapi/amazon-s3-control-api-openapi.yml#GetAccessPoint
+      - openapi/amazon-s3-tables-api-openapi.yml#GetTable
+  - status: 409
+    code: BucketAlreadyExists / BucketAlreadyOwnedByYou
+    title: Conflict — Bucket Already Exists
+    meaning: The requested bucket name is not available or is already owned by you.
+    source_operations:
+      - openapi/amazon-s3-rest-api-openapi.yml#CreateBucket
+  - status: 409
+    code: ConflictException
+    title: Conflict
+    meaning: The resource is in a conflicting state (e.g. table bucket/namespace/table already exists or is being modified).
+    source_operations:
+      - openapi/amazon-s3-tables-api-openapi.yml#CreateTableBucket
+      - openapi/amazon-s3-control-api-openapi.yml#CreateAccessPoint
+  - status: 412
+    code: PreconditionFailed
+    title: Precondition Failed
+    meaning: A conditional request header (If-Match/If-None-Match/If-Unmodified-Since) evaluated to false.
+    source_operations:
+      - openapi/amazon-s3-rest-api-openapi.yml#GetObject
+      - openapi/amazon-s3-rest-api-openapi.yml#CopyObject
+  - status: 429
+    code: TooManyRequestsException
+    title: Too Many Requests
+    meaning: The request rate exceeded the S3 Tables throttling limit.
+    remediation: Back off and retry with exponential jitter; see rate-limits/amazon-s3-rate-limits.yml.
+    source_operations:
+      - openapi/amazon-s3-tables-api-openapi.yml#ListTableBuckets
+  - status: 500
+    code: InternalError
+    title: Internal Error
+    meaning: S3 encountered an internal error. Retry is safe (idempotent by key).
+  - status: 503
+    code: SlowDown / ServiceUnavailable
+    title: Slow Down
+    meaning: Request rate is too high for the prefix; reduce request rate.
+    remediation: Retry with exponential backoff; spread keys across prefixes for higher throughput.

@@ -1,0 +1,57 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/*.yml (securitySchemes, error schema, response codes,
+  pagination parameters) and Amazon S3 documentation claims
+  (docs.aws.amazon.com/AmazonS3/latest/API, /userguide/security.html,
+  aws.amazon.com/compliance). Amazon S3 authenticates with AWS Signature Version 4
+  rather than OAuth2/OIDC, returns XML (not RFC 9457) errors, and paginates with
+  continuation tokens.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: S3 uses AWS Signature Version 4 (SigV4), not OAuth2. No oauth2 securityScheme in any spec.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration; S3 is not an OIDC provider (IAM/STS handle federation upstream).
+  - id: aws-sigv4
+    conforms: true
+    evidence: All operations require AWS Signature Version 4; see authentication/amazon-s3-authentication.yml.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are returned as S3 XML <Error><Code><Message>...</Error>, not application/problem+json.
+  - id: rfc7234-http-caching
+    conforms: true
+    evidence: GetObject honors conditional headers (If-Match/If-None-Match/If-Modified-Since) and ETag; 304/412 supported.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      List operations paginate with continuation tokens (ListObjectsV2
+      ContinuationToken/NextContinuationToken; S3 Control and S3 Tables use
+      NextToken/maxResults).
+  - id: idempotency
+    conforms: partial
+    evidence: >-
+      PUT object/bucket operations are idempotent by S3 semantics (last-writer-wins
+      by key); there is no client-supplied Idempotency-Key header.
+  - id: multipart-upload
+    conforms: true
+    evidence: CreateMultipartUpload / UploadPart / CompleteMultipartUpload per the S3 REST API.
+  - id: pci-dss
+    conforms: true
+    evidence: AWS (incl. S3) is a PCI DSS Level 1 service provider (aws.amazon.com/compliance).
+  - id: hipaa
+    conforms: true
+    evidence: S3 is a HIPAA-eligible service under the AWS BAA (aws.amazon.com/compliance/hipaa-compliance).
+  - id: fedramp
+    conforms: true
+    evidence: S3 is authorized under FedRAMP (Moderate/High in GovCloud); aws.amazon.com/compliance/fedramp.
+  - id: iso-27001
+    conforms: true
+    evidence: AWS holds ISO 27001/27017/27018 certifications covering S3 (aws.amazon.com/compliance/iso-27001-faqs).
+  - id: soc2
+    conforms: true
+    evidence: AWS SOC 1/2/3 reports cover S3 (aws.amazon.com/compliance/soc-faqs).
+  - id: object-lock-worm
+    conforms: true
+    evidence: S3 Object Lock provides WORM retention assessed by Cohasset (SEC 17a-4/FINRA/CFTC).

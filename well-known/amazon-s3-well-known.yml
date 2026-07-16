@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the Amazon S3 base
+  hosts in apis.yml (s3.amazonaws.com, s3-control.amazonaws.com,
+  s3tables.amazonaws.com), the marketing/console host (aws.amazon.com), and the
+  docs host (docs.aws.amazon.com). Status is the HTTP code observed at fetch
+  time. The S3 data-plane hosts return 403 (AccessDenied XML) to unauthenticated
+  /.well-known/ requests — expected, they are SigV4 object stores, not identity
+  servers. Only the RFC 9116 security.txt at aws.amazon.com returned a real
+  document; it is saved verbatim.
+hosts:
+  - host: https://aws.amazon.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain
+        file: amazon-s3-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://s3.amazonaws.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: AccessDenied XML — SigV4 object store, no anonymous discovery surface.
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+  - host: https://docs.aws.amazon.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /llms.txt
+        status: 200
+        note: AWS-wide docs llms.txt; the S3-specific one is captured in llms/amazon-s3-llms.txt.

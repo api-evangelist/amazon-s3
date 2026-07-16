@@ -5,7 +5,7 @@ description: >-
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/s3/
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-06-20'
 apis:
   - name: Amazon S3 REST API
     description: RESTful API for Amazon S3 storage operations including bucket management, object operations, and access control.
@@ -22,6 +22,8 @@ apis:
         url: https://docs.aws.amazon.com/AmazonS3/latest/API/
       - type: OpenAPI
         url: openapi/amazon-s3-rest-api-openapi.yml
+      - type: Overlay
+        url: overlays/amazon-s3-rest-api-overlay.yaml
       - type: OpenAPI
         url: https://api.apis.guru/v2/specs/amazonaws.com/s3/2006-03-01/openapi.yaml
       - type: JSONSchema
@@ -69,6 +71,8 @@ apis:
         url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
       - type: OpenAPI
         url: openapi/amazon-s3-control-api-openapi.yml
+      - type: Overlay
+        url: overlays/amazon-s3-control-api-overlay.yaml
       - type: OpenAPI
         url: https://api.apis.guru/v2/specs/amazonaws.com/s3control/2018-08-20/openapi.yaml
       - type: JSONLD
@@ -103,6 +107,8 @@ apis:
         url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
       - type: OpenAPI
         url: openapi/amazon-s3-tables-api-openapi.yml
+      - type: Overlay
+        url: overlays/amazon-s3-tables-api-overlay.yaml
       - type: JSONLD
         url: json-ld/amazon-s3-context.jsonld
       - type: APIReference
@@ -128,6 +134,30 @@ common:
     url: security/amazon-s3-domain-security.yml
   - type: Authentication
     url: authentication/amazon-s3-authentication.yml
+  - type: Packages
+    url: packages/amazon-s3-packages.yml
+  - type: WellKnown
+    url: well-known/amazon-s3-well-known.yml
+  - type: SecurityTxt
+    url: well-known/amazon-s3-security.txt
+  - type: MCPServer
+    url: mcp/amazon-s3-mcp.yml
+  - type: LLMsTxt
+    url: llms/amazon-s3-llms.txt
+  - type: Conformance
+    url: conformance/amazon-s3-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-s3-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-s3-lifecycle.yml
+  - type: Conventions
+    url: conventions/amazon-s3-conventions.yml
+  - type: ChangeLog
+    url: changelog/amazon-s3-changelog.yml
+  - type: CLI
+    url: cli/amazon-s3-cli.yml
+  - type: DataModel
+    url: data-model/amazon-s3-data-model.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-s3/overview
   - type: Arazzo

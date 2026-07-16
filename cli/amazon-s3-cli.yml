@@ -1,0 +1,62 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/cli/latest/reference/s3/,
+  https://docs.aws.amazon.com/cli/latest/reference/s3api/,
+  https://docs.aws.amazon.com/cli/latest/reference/s3control/,
+  https://docs.aws.amazon.com/cli/latest/reference/s3tables/
+description: >-
+  The AWS CLI command surface for Amazon S3. The CLI ships three S3 command sets:
+  `aws s3` (high-level, human-friendly file operations), `aws s3api` (one
+  subcommand per low-level S3 REST API operation), plus `aws s3control` and
+  `aws s3tables` for the Control and Tables surfaces. The CLI binary is
+  catalogued in packages/amazon-s3-packages.yml (awscli / AWS CLI v2).
+docs: https://docs.aws.amazon.com/cli/latest/reference/s3/
+repo: https://github.com/aws/aws-cli
+install:
+  homebrew: brew install awscli
+  pip: pip install awscli
+  bundled_installer_v2: "curl https://awscli.amazonaws.com/AWSCLIV2.pkg (macOS) / awscli-exe-linux-x86_64.zip (Linux)"
+  windows_msi: https://awscli.amazonaws.com/AWSCLIV2.msi
+command_groups:
+  s3_high_level:
+    description: High-level file/directory-style commands over S3.
+    commands:
+      - {name: "aws s3 ls", description: List buckets or objects under a prefix.}
+      - {name: "aws s3 cp", description: Copy files to/from/within S3 (supports recursive and streaming).}
+      - {name: "aws s3 mv", description: Move (copy + delete) files to/from/within S3.}
+      - {name: "aws s3 sync", description: Recursively sync a directory tree with a bucket/prefix.}
+      - {name: "aws s3 rm", description: Delete objects.}
+      - {name: "aws s3 mb", description: Make (create) a bucket.}
+      - {name: "aws s3 rb", description: Remove (delete) a bucket.}
+      - {name: "aws s3 presign", description: Generate a presigned URL for an object.}
+  s3api_low_level:
+    description: One subcommand per S3 REST API operation (openapi/amazon-s3-rest-api-openapi.yml).
+    commands:
+      - {name: "aws s3api create-bucket", description: CreateBucket.}
+      - {name: "aws s3api put-object", description: PutObject.}
+      - {name: "aws s3api get-object", description: GetObject.}
+      - {name: "aws s3api list-objects-v2", description: ListObjectsV2.}
+      - {name: "aws s3api delete-object", description: DeleteObject.}
+      - {name: "aws s3api create-multipart-upload / upload-part / complete-multipart-upload", description: Multipart upload flow.}
+      - {name: "aws s3api put-bucket-versioning", description: Enable/suspend bucket versioning.}
+      - {name: "aws s3api put-bucket-encryption", description: Set default bucket encryption.}
+      - {name: "aws s3api put-bucket-policy / put-bucket-acl", description: Configure bucket access controls.}
+  s3control:
+    description: Account-level S3 Control operations (openapi/amazon-s3-control-api-openapi.yml).
+    commands:
+      - {name: "aws s3control create-access-point", description: CreateAccessPoint.}
+      - {name: "aws s3control create-job", description: Create an S3 Batch Operations job.}
+      - {name: "aws s3control put-public-access-block", description: Account-level public access block.}
+      - {name: "aws s3control list-storage-lens-configurations", description: Storage Lens configs.}
+  s3tables:
+    description: S3 Tables (Apache Iceberg) operations (openapi/amazon-s3-tables-api-openapi.yml).
+    commands:
+      - {name: "aws s3tables create-table-bucket", description: CreateTableBucket.}
+      - {name: "aws s3tables create-namespace", description: CreateNamespace.}
+      - {name: "aws s3tables create-table", description: CreateTable.}
+      - {name: "aws s3tables list-table-buckets", description: ListTableBuckets.}
+key_flows:
+  - {flow: bulk-upload, example: "aws s3 sync ./local s3://my-bucket/prefix"}
+  - {flow: presigned-download, example: "aws s3 presign s3://my-bucket/key --expires-in 3600"}
+  - {flow: server-side-copy, example: "aws s3 cp s3://src/key s3://dst/key"}

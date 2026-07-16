@@ -1,0 +1,47 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html,
+  https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html,
+  https://aws.amazon.com/s3/sla/, https://health.aws.amazon.com/health/status.
+  Amazon S3 pins its wire API to a stable dated version and evolves additively;
+  it does not deprecate operations behind RFC 8594 Sunset headers.
+versioning:
+  scheme: dated-api-version
+  current: '2006-03-01'
+  control_api_version: '2018-08-20'
+  mechanism: >-
+    The S3 REST API version is fixed at 2006-03-01 and encoded in the SDKs/signing,
+    not negotiated per request. New capabilities are added additively (new
+    headers, query subresources, and operations) without breaking the dated
+    contract. S3 Control uses the 2018-08-20 version; S3 Tables is a newer
+    additive surface.
+  docs: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+deprecation:
+  policy_url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  changelog: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  sunset_header: false
+  notes: >-
+    S3 favors long-lived backward compatibility over removals. Notable retirements
+    are handled at the feature level and pre-announced with long timelines (e.g.
+    path-style request endpoints deprecated in favor of virtual-hosted-style;
+    BitTorrent support removed; ListObjects (v1) superseded by ListObjectsV2 but
+    still served). Deprecations are communicated via the What's New feed and AWS
+    blog, not via Deprecation/Sunset response headers.
+sla:
+  url: https://aws.amazon.com/s3/sla/
+  monthly_uptime_targets:
+    S3 Standard: "99.9%"
+    S3 Standard-IA / One Zone-IA / Intelligent-Tiering / Glacier tiers: "99.9% (per-class commitment)"
+  service_credits: true
+  notes: >-
+    S3 publishes a monthly-uptime-percentage SLA with tiered service credits.
+    Durability is designed for 99.999999999% (11 nines) but is a design target,
+    not an SLA metric.
+status_page: https://health.aws.amazon.com/health/status
+rate_limits: rate-limits/amazon-s3-rate-limits.yml
+superseded_operations:
+  - name: ListObjects (GET Bucket, v1)
+    superseded_by: ListObjectsV2 (openapi/amazon-s3-rest-api-openapi.yml#ListObjectsV2)
+    evidence: AWS recommends ListObjectsV2 for all new development; v1 remains available for compatibility.
+deprecated_operations: []

@@ -1,0 +1,62 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/AmazonS3/latest/API/ (RESTCommonRequestHeaders,
+  RESTCommonResponseHeaders, sig-v4-authenticating-requests, ListObjectsV2,
+  ErrorResponses) plus derivation from openapi/*.yml. The cross-cutting
+  request/response semantics that apply to every Amazon S3 operation.
+description: >-
+  How Amazon S3 behaves across every operation: authentication style, request
+  signing, pagination, conditional requests, checksums/integrity, request
+  tracing, versioning, the error envelope, and throttling signals. These are the
+  runtime-semantics conventions that OpenAPI does not fully express.
+base_urls:
+  rest: https://s3.{region}.amazonaws.com  (and virtual-hosted https://{bucket}.s3.{region}.amazonaws.com)
+  control: https://s3-control.{region}.amazonaws.com
+  tables: https://s3tables.{region}.amazonaws.com
+api_style: REST over HTTPS; XML request/response bodies on the object API, JSON on Control/Tables.
+authentication:
+  scheme: AWS Signature Version 4 (SigV4)
+  mechanism: Authorization header (or presigned query string) computed over a canonical request; requires access key, secret key, region, and service name (s3 / s3-control / s3tables).
+  temporary_credentials: Supports STS session tokens via the x-amz-security-token header.
+  docs: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  detail: authentication/amazon-s3-authentication.yml
+idempotency:
+  supported: partial
+  mechanism: No client Idempotency-Key header. Object writes are idempotent by key (last-writer-wins); DELETE and PUT can be safely retried.
+  conditional_writes: Supports If-None-Match / If-Match on PUT/CopyObject for concurrency control (write-if-absent, write-if-match).
+pagination:
+  style: continuation-token
+  object_api:
+    request_params: [max-keys, continuation-token, start-after, prefix, delimiter]
+    response_fields: [IsTruncated, NextContinuationToken, KeyCount, MaxKeys]
+    operation: openapi/amazon-s3-rest-api-openapi.yml#ListObjectsV2
+  control_and_tables_api:
+    request_params: [maxResults, nextToken (or continuationToken)]
+    response_fields: [NextToken]
+  docs: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html
+conditional_requests:
+  supported: true
+  request_headers: [If-Match, If-None-Match, If-Modified-Since, If-Unmodified-Since]
+  response: 304 Not Modified / 412 Precondition Failed; entity tag via ETag.
+integrity:
+  etag: Every object returns an ETag (MD5 for single-part; composite for multipart).
+  checksums: Supports x-amz-checksum-{crc32,crc32c,crc64nvme,sha1,sha256} on upload and retrieval (Content-MD5 also accepted).
+  docs: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+request_tracing:
+  headers: [x-amz-request-id, x-amz-id-2]
+  detail: Every response carries x-amz-request-id and x-amz-id-2; supply both to AWS Support when reporting an issue.
+metadata:
+  user_metadata: Arbitrary object metadata via x-amz-meta-* request headers (returned on GET/HEAD).
+  system_metadata: Content-Type, Content-Length, ETag, Last-Modified, x-amz-storage-class, x-amz-version-id.
+versioning:
+  api_version: "2006-03-01 (object), 2018-08-20 (control); fixed, additive evolution — see lifecycle/amazon-s3-lifecycle.yml"
+  object_versioning: Bucket-level object versioning is a data feature (x-amz-version-id), distinct from API versioning.
+error_envelope:
+  object_api: "application/xml <Error><Code><Message><RequestId><Resource></Error>"
+  control_tables_api: 'JSON { "__type", "message" }'
+  detail: errors/amazon-s3-problem-types.yml
+rate_limit_signaling:
+  mechanism: 503 SlowDown (object) / 429 TooManyRequestsException (Tables) with exponential-backoff retry.
+  scaling: Throughput scales per prefix; no fixed published request-per-second ceiling.
+  detail: rate-limits/amazon-s3-rate-limits.yml

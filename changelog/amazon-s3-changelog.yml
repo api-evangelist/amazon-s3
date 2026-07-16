@@ -1,0 +1,38 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+description: >-
+  Structured capture of the Amazon S3 API "Document History / What's New" feed.
+  S3 keeps the wire API version pinned at 2006-03-01 and evolves additively, so
+  changelog entries are dated feature/documentation additions rather than API
+  version bumps. The live What's New page is the source of truth; this records the
+  recent window. AWS also publishes broader S3 announcements on the AWS What's New
+  and Storage blog feeds.
+docs: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+blog: https://aws.amazon.com/blogs/storage/
+versioning:
+  scheme: dated-api-version (additive)
+  current: '2006-03-01'
+  detail: lifecycle/amazon-s3-lifecycle.yml
+entries:
+  - date: '2025-12'
+    highlights:
+      - S3 Tables (Apache Iceberg) API surface — table buckets, namespaces, and tables with managed maintenance/compaction.
+      - S3 Metadata general availability for queryable object metadata tables.
+    breaking: []
+  - date: '2025-01'
+    highlights:
+      - S3 default data integrity protections with additional checksum algorithms (CRC64NVME) on upload/download.
+    breaking: []
+  - date: '2024-08'
+    highlights:
+      - S3 conditional writes — If-None-Match on PutObject to prevent overwriting existing objects.
+    breaking: []
+  - date: '2023-01'
+    highlights:
+      - Server-side encryption with Amazon S3 managed keys (SSE-S3) applied by default to all new objects.
+    breaking: []
+note: >-
+  Exact per-item dates on the WhatsNew page are documentation-revision dates;
+  entries here are grouped by the feature-release window. Consult the live feed
+  for authoritative dating.

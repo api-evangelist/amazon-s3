@@ -1,0 +1,111 @@
+generated: '2026-06-20'
+method: searched
+source: https://aws.amazon.com/developer/tools/
+description: >-
+  First-party AWS SDKs and tooling that expose Amazon S3 (REST, S3 Control, and
+  S3 Tables surfaces). AWS ships one modular SDK per language; the S3 client is a
+  package/module within that SDK. Verified against the public package registries
+  at fetch time (HTTP status recorded in the pipeline run). All packages are
+  maintained by Amazon Web Services under the github.com/aws organization.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@aws-sdk/client-s3"
+    url: https://www.npmjs.com/package/@aws-sdk/client-s3
+    source: https://github.com/aws/aws-sdk-js-v3
+    install: npm install @aws-sdk/client-s3
+    official: true
+    status: 200
+  - language: javascript
+    registry: npm
+    name: "@aws-sdk/client-s3-control"
+    url: https://www.npmjs.com/package/@aws-sdk/client-s3-control
+    source: https://github.com/aws/aws-sdk-js-v3
+    install: npm install @aws-sdk/client-s3-control
+    official: true
+    status: 200
+  - language: javascript
+    registry: npm
+    name: "@aws-sdk/client-s3tables"
+    url: https://www.npmjs.com/package/@aws-sdk/client-s3tables
+    source: https://github.com/aws/aws-sdk-js-v3
+    install: npm install @aws-sdk/client-s3tables
+    official: true
+    note: Client for the S3 Tables (Apache Iceberg) API surface.
+  - language: python
+    registry: pypi
+    name: boto3
+    url: https://pypi.org/project/boto3/
+    source: https://github.com/boto/boto3
+    install: pip install boto3
+    official: true
+    status: 200
+    note: "AWS SDK for Python; S3 access via boto3.client('s3') / .client('s3control') / .client('s3tables')."
+  - language: python
+    registry: pypi
+    name: botocore
+    url: https://pypi.org/project/botocore/
+    source: https://github.com/boto/botocore
+    install: pip install botocore
+    official: true
+    status: 200
+    note: Low-level core that boto3 is built on.
+  - language: java
+    registry: maven
+    name: software.amazon.awssdk:s3
+    url: https://central.sonatype.com/artifact/software.amazon.awssdk/s3
+    source: https://github.com/aws/aws-sdk-java-v2
+    install: "implementation 'software.amazon.awssdk:s3'"
+    official: true
+    status: 200
+  - language: csharp
+    registry: nuget
+    name: AWSSDK.S3
+    url: https://www.nuget.org/packages/AWSSDK.S3
+    source: https://github.com/aws/aws-sdk-net
+    install: dotnet add package AWSSDK.S3
+    official: true
+    status: 200
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/aws/aws-sdk-go-v2/service/s3
+    url: https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3
+    source: https://github.com/aws/aws-sdk-go-v2
+    install: go get github.com/aws/aws-sdk-go-v2/service/s3
+    official: true
+    status: 200
+  - language: ruby
+    registry: rubygems
+    name: aws-sdk-s3
+    url: https://rubygems.org/gems/aws-sdk-s3
+    source: https://github.com/aws/aws-sdk-ruby
+    install: gem install aws-sdk-s3
+    official: true
+    status: 200
+    version: 1.228.0
+  - language: php
+    registry: packagist
+    name: aws/aws-sdk-php
+    url: https://packagist.org/packages/aws/aws-sdk-php
+    source: https://github.com/aws/aws-sdk-php
+    install: composer require aws/aws-sdk-php
+    official: true
+    status: 200
+    note: Monolithic PHP SDK; S3 via Aws\S3\S3Client.
+  - language: rust
+    registry: crates.io
+    name: aws-sdk-s3
+    url: https://crates.io/crates/aws-sdk-s3
+    source: https://github.com/awslabs/aws-sdk-rust
+    install: cargo add aws-sdk-s3
+    official: true
+    status: 200
+    version: 1.138.1
+  - language: cli
+    registry: pypi
+    name: awscli
+    url: https://pypi.org/project/awscli/
+    source: https://github.com/aws/aws-cli
+    install: pip install awscli
+    official: true
+    note: "The AWS CLI binary; its S3 command surface is catalogued in cli/amazon-s3-cli.yml."
