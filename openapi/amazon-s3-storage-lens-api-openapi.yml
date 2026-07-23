@@ -1,0 +1,385 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Storage Lens API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Storage Lens
+  description: Operations for S3 Storage Lens configurations
+paths:
+  /v20180820/storagelens:
+    get:
+      operationId: ListStorageLensConfigurations
+      summary: Amazon S3 List Storage Lens Configurations
+      description: Gets a list of Amazon S3 Storage Lens configurations. To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action.
+      tags:
+      - Storage Lens
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: nextToken
+        in: query
+        description: A pagination token for the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully returned list of Storage Lens configurations.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListStorageLensConfigurationsResult'
+              examples:
+                Liststoragelensconfigurations200Example:
+                  summary: Default ListStorageLensConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    StorageLensConfigurationList:
+                    - Id: abc123
+                      StorageLensArn: example_value
+                      HomeRegion: example_value
+                      IsEnabled: true
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/storagelens/{storagelensid}:
+    get:
+      operationId: GetStorageLensConfiguration
+      summary: Amazon S3 Get Storage Lens Configuration
+      description: Gets the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action.
+      tags:
+      - Storage Lens
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Amazon S3 Storage Lens configuration.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Successfully returned Storage Lens configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StorageLensConfiguration'
+              examples:
+                Getstoragelensconfiguration200Example:
+                  summary: Default GetStorageLensConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: abc123
+                    AccountLevel:
+                      ActivityMetrics:
+                        IsEnabled: true
+                      BucketLevel:
+                        ActivityMetrics:
+                          IsEnabled: true
+                        PrefixLevel:
+                          StorageMetrics: {}
+                    Include:
+                      Buckets:
+                      - example_value
+                      Regions:
+                      - example_value
+                    Exclude:
+                      Buckets:
+                      - example_value
+                      Regions:
+                      - example_value
+                    DataExport:
+                      S3BucketDestination:
+                        Format: CSV
+                        OutputSchemaVersion: V_1
+                        AccountId: '500123'
+                        Arn: example_value
+                        Prefix: example_value
+                        Encryption: example_value
+                      CloudWatchMetrics:
+                        IsEnabled: true
+                    IsEnabled: true
+                    AwsOrg:
+                      Arn: example_value
+                    StorageLensArn: example_value
+        '404':
+          description: The specified Storage Lens configuration does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutStorageLensConfiguration
+      summary: Amazon S3 Put Storage Lens Configuration
+      description: Puts an Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action.
+      tags:
+      - Storage Lens
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Amazon S3 Storage Lens configuration.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StorageLensConfiguration'
+            examples:
+              PutstoragelensconfigurationRequestExample:
+                summary: Default PutStorageLensConfiguration request
+                x-microcks-default: true
+                value:
+                  Id: abc123
+                  AccountLevel:
+                    ActivityMetrics:
+                      IsEnabled: true
+                    BucketLevel:
+                      ActivityMetrics:
+                        IsEnabled: true
+                      PrefixLevel:
+                        StorageMetrics: {}
+                  Include:
+                    Buckets:
+                    - example_value
+                    Regions:
+                    - example_value
+                  Exclude:
+                    Buckets:
+                    - example_value
+                    Regions:
+                    - example_value
+                  DataExport:
+                    S3BucketDestination:
+                      Format: CSV
+                      OutputSchemaVersion: V_1
+                      AccountId: '500123'
+                      Arn: example_value
+                      Prefix: example_value
+                      Encryption: example_value
+                    CloudWatchMetrics:
+                      IsEnabled: true
+                  IsEnabled: true
+                  AwsOrg:
+                    Arn: example_value
+                  StorageLensArn: example_value
+      responses:
+        '200':
+          description: Storage Lens configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteStorageLensConfiguration
+      summary: Amazon S3 Delete Storage Lens Configuration
+      description: Deletes the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action.
+      tags:
+      - Storage Lens
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: storagelensid
+        in: path
+        required: true
+        description: The ID of the Storage Lens configuration to delete.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '204':
+          description: Storage Lens configuration deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  schemas:
+    StorageLensConfiguration:
+      type: object
+      description: A container for the Amazon S3 Storage Lens configuration.
+      required:
+      - Id
+      - AccountLevel
+      - IsEnabled
+      properties:
+        Id:
+          type: string
+          description: A container for the Storage Lens configuration ID.
+          example: abc123
+        AccountLevel:
+          type: object
+          description: A container for the account-level settings for S3 Storage Lens.
+          properties:
+            ActivityMetrics:
+              type: object
+              properties:
+                IsEnabled:
+                  type: boolean
+            BucketLevel:
+              type: object
+              properties:
+                ActivityMetrics:
+                  type: object
+                  properties:
+                    IsEnabled:
+                      type: boolean
+                PrefixLevel:
+                  type: object
+                  properties:
+                    StorageMetrics:
+                      type: object
+                      properties:
+                        IsEnabled:
+                          type: boolean
+                        SelectionCriteria:
+                          type: object
+                          properties:
+                            Delimiter:
+                              type: string
+                            MaxDepth:
+                              type: integer
+                            MinStorageBytesPercentage:
+                              type: number
+          example: example_value
+        Include:
+          type: object
+          properties:
+            Buckets:
+              type: array
+              items:
+                type: string
+            Regions:
+              type: array
+              items:
+                type: string
+          example: example_value
+        Exclude:
+          type: object
+          properties:
+            Buckets:
+              type: array
+              items:
+                type: string
+            Regions:
+              type: array
+              items:
+                type: string
+          example: example_value
+        DataExport:
+          type: object
+          properties:
+            S3BucketDestination:
+              type: object
+              properties:
+                Format:
+                  type: string
+                  enum:
+                  - CSV
+                  - Parquet
+                OutputSchemaVersion:
+                  type: string
+                  enum:
+                  - V_1
+                AccountId:
+                  type: string
+                Arn:
+                  type: string
+                Prefix:
+                  type: string
+                Encryption:
+                  type: object
+            CloudWatchMetrics:
+              type: object
+              properties:
+                IsEnabled:
+                  type: boolean
+          example: example_value
+        IsEnabled:
+          type: boolean
+          description: A container for whether the S3 Storage Lens configuration is enabled.
+          example: true
+        AwsOrg:
+          type: object
+          properties:
+            Arn:
+              type: string
+          example: example_value
+        StorageLensArn:
+          type: string
+          example: example_value
+    ListStorageLensConfigurationsResult:
+      type: object
+      properties:
+        StorageLensConfigurationList:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              StorageLensArn:
+                type: string
+              HomeRegion:
+                type: string
+              IsEnabled:
+                type: boolean
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

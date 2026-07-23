@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Access Grants API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Access Grants
+  description: Operations for S3 Access Grants management
+paths:
+  /v20180820/accessgrantsinstance:
+    get:
+      operationId: GetAccessGrantsInstance
+      summary: Amazon S3 Get Access Grants Instance
+      description: Retrieves the S3 Access Grants instance. You must have the s3:GetAccessGrantsInstance permission to use this operation.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Successfully returned Access Grants instance.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AccessGrantsInstance'
+              examples:
+                Getaccessgrantsinstance200Example:
+                  summary: Default GetAccessGrantsInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessGrantsInstanceId: '500123'
+                    AccessGrantsInstanceArn: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    IdentityCenterArn: example_value
+        '404':
+          description: The Access Grants instance does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: CreateAccessGrantsInstance
+      summary: Amazon S3 Create Access Grants Instance
+      description: Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                IdentityCenterArn:
+                  type: string
+                  description: The ARN of the IAM Identity Center instance to associate with the S3 Access Grants instance.
+                Tags:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
+            examples:
+              CreateaccessgrantsinstanceRequestExample:
+                summary: Default CreateAccessGrantsInstance request
+                x-microcks-default: true
+                value:
+                  IdentityCenterArn: example_value
+                  Tags:
+                  - Key: example_value
+                    Value: example_value
+      responses:
+        '200':
+          description: Access Grants instance created successfully.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AccessGrantsInstance'
+              examples:
+                Createaccessgrantsinstance200Example:
+                  summary: Default CreateAccessGrantsInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessGrantsInstanceId: '500123'
+                    AccessGrantsInstanceArn: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    IdentityCenterArn: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteAccessGrantsInstance
+      summary: Amazon S3 Delete Access Grants Instance
+      description: Deletes the S3 Access Grants instance. You must first delete all access grants and registered locations before you can delete the S3 Access Grants instance.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Access Grants instance deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AccessGrantsInstance:
+      type: object
+      properties:
+        AccessGrantsInstanceId:
+          type: string
+          description: The ID of the S3 Access Grants instance.
+          example: '500123'
+        AccessGrantsInstanceArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+          example: example_value
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the instance was created.
+          example: '2026-01-15T10:30:00Z'
+        IdentityCenterArn:
+          type: string
+          description: If you associated your S3 Access Grants instance with an IAM Identity Center instance, this field returns the ARN of the IAM Identity Center instance application.
+          example: example_value
+    S3Tag:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
+          type: string
+          maxLength: 256
+          example: example_value
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

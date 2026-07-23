@@ -1,0 +1,293 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Table Buckets API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Table Buckets
+  description: Operations for creating and managing S3 table buckets
+paths:
+  /buckets:
+    get:
+      operationId: ListTableBuckets
+      summary: Amazon S3 List Table Buckets
+      description: Lists table buckets for your account. Returns a list of table buckets that you have access to.
+      tags:
+      - Table Buckets
+      parameters:
+      - name: prefix
+        in: query
+        description: The prefix of the table buckets.
+        schema:
+          type: string
+        example: example_value
+      - name: continuationToken
+        in: query
+        description: ContinuationToken indicates to S3 Tables that the list is being continued with a token.
+        schema:
+          type: string
+        example: example_value
+      - name: maxBuckets
+        in: query
+        description: The maximum number of table buckets to return in the list.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
+      responses:
+        '200':
+          description: Successfully returned list of table buckets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTableBucketsResponse'
+              examples:
+                Listtablebuckets200Example:
+                  summary: Default ListTableBuckets 200 response
+                  x-microcks-default: true
+                  value:
+                    tableBuckets:
+                    - arn: example_value
+                      name: Example Title
+                      ownerAccountId: '500123'
+                      createdAt: '2026-01-15T10:30:00Z'
+                    continuationToken: example_value
+        '403':
+          description: Access denied.
+        '429':
+          description: Too many requests.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: CreateTableBucket
+      summary: Amazon S3 Create Table Bucket
+      description: Creates a table bucket. A table bucket is a resource that you can use to create and store tables. Each table bucket can contain tables in Apache Iceberg format stored as Apache Parquet files.
+      tags:
+      - Table Buckets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTableBucketRequest'
+            examples:
+              CreatetablebucketRequestExample:
+                summary: Default CreateTableBucket request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+      responses:
+        '200':
+          description: Table bucket created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  arn:
+                    type: string
+                    description: The Amazon Resource Name (ARN) of the table bucket.
+              examples:
+                Createtablebucket200Example:
+                  summary: Default CreateTableBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    arn: example_value
+        '409':
+          description: A table bucket with this name already exists.
+        '429':
+          description: Too many requests.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /buckets/{tableBucketARN}:
+    get:
+      operationId: GetTableBucket
+      summary: Amazon S3 Get Table Bucket
+      description: Gets details about a table bucket. Returns information about the specified table bucket including its name, ARN, owner, and creation date.
+      tags:
+      - Table Buckets
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      responses:
+        '200':
+          description: Successfully returned table bucket details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableBucket'
+              examples:
+                Gettablebucket200Example:
+                  summary: Default GetTableBucket 200 response
+                  x-microcks-default: true
+                  value:
+                    arn: example_value
+                    name: Example Title
+                    ownerAccountId: '500123'
+                    createdAt: '2026-01-15T10:30:00Z'
+                    unreferencedFileRemoval:
+                      status: Enabled
+                      settings:
+                        unreferencedDays: 10
+                        nonCurrentDays: 10
+        '404':
+          description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteTableBucket
+      summary: Amazon S3 Delete Table Bucket
+      description: Deletes a table bucket. The table bucket must be empty (all tables and namespaces must be deleted first) before it can be deleted.
+      tags:
+      - Table Buckets
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      responses:
+        '204':
+          description: Table bucket deleted successfully.
+        '404':
+          description: The specified table bucket does not exist.
+        '409':
+          description: The table bucket is not empty and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TableBucketARN:
+      name: tableBucketARN
+      in: path
+      required: true
+      description: The Amazon Resource Name (ARN) of the table bucket.
+      schema:
+        type: string
+  schemas:
+    TableBucket:
+      type: object
+      properties:
+        arn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the table bucket.
+          example: example_value
+        name:
+          type: string
+          description: The name of the table bucket.
+          example: Example Title
+        ownerAccountId:
+          type: string
+          description: The account ID of the owner.
+          example: '500123'
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the table bucket was created.
+          example: '2026-01-15T10:30:00Z'
+        unreferencedFileRemoval:
+          type: object
+          description: The unreferenced file removal settings for the table bucket.
+          properties:
+            status:
+              type: string
+              enum:
+              - Enabled
+              - Disabled
+            settings:
+              type: object
+              properties:
+                unreferencedDays:
+                  type: integer
+                  description: Number of days before unreferenced files are removed.
+                nonCurrentDays:
+                  type: integer
+                  description: Number of days for non-current data.
+          example: example_value
+    ListTableBucketsResponse:
+      type: object
+      properties:
+        tableBuckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableBucketSummary'
+          example: []
+        continuationToken:
+          type: string
+          description: A continuation token for paginating the list.
+          example: example_value
+    CreateTableBucketRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name for the table bucket.
+          minLength: 3
+          maxLength: 63
+          example: Example Title
+    TableBucketSummary:
+      type: object
+      properties:
+        arn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the table bucket.
+          example: example_value
+        name:
+          type: string
+          description: The name of the table bucket.
+          example: Example Title
+        ownerAccountId:
+          type: string
+          description: The account ID of the owner of the table bucket.
+          example: '500123'
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the table bucket was created.
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

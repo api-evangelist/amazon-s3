@@ -1,0 +1,625 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Multipart Upload API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Multipart Upload
+  description: Operations for multipart upload of large objects
+paths:
+  /{Bucket}/{Key+}?uploads:
+    post:
+      operationId: CreateMultipartUpload
+      summary: Amazon S3 Create Multipart Upload
+      description: This action initiates a multipart upload and returns an upload ID. This upload ID is used to associate all of the parts in the specific multipart upload. You specify this upload ID in each of your subsequent upload part requests. You also include this upload ID in the final request to either complete or abort the multipart upload request.
+      tags:
+      - Multipart Upload
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: Cache-Control
+        in: header
+        description: Specifies caching behavior along the request/reply chain.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Disposition
+        in: header
+        description: Specifies presentational information for the object.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Encoding
+        in: header
+        description: Specifies content encodings applied to the object.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Type
+        in: header
+        description: A standard MIME type describing the format of the object data.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-acl
+        in: header
+        description: The canned ACL to apply to the object.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+          - aws-exec-read
+          - bucket-owner-read
+          - bucket-owner-full-control
+        example: private
+      - name: x-amz-storage-class
+        in: header
+        description: The storage class for the object.
+        schema:
+          type: string
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - GLACIER
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+        example: STANDARD
+      - name: x-amz-server-side-encryption
+        in: header
+        description: The server-side encryption algorithm.
+        schema:
+          type: string
+          enum:
+          - AES256
+          - aws:kms
+          - aws:kms:dsse
+        example: AES256
+      - name: x-amz-server-side-encryption-aws-kms-key-id
+        in: header
+        description: Specifies the KMS key ID.
+        schema:
+          type: string
+        example: '500123'
+      - name: x-amz-tagging
+        in: header
+        description: The tag-set for the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-object-lock-mode
+        in: header
+        description: Specifies the Object Lock mode.
+        schema:
+          type: string
+          enum:
+          - GOVERNANCE
+          - COMPLIANCE
+        example: GOVERNANCE
+      - name: x-amz-object-lock-retain-until-date
+        in: header
+        description: Object Lock retention expiry.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-object-lock-legal-hold
+        in: header
+        description: Specifies whether a legal hold will be applied.
+        schema:
+          type: string
+          enum:
+          - 'ON'
+          - 'OFF'
+        example: 'ON'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-algorithm
+        in: header
+        description: Algorithm for object checksum.
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+        example: CRC32
+      responses:
+        '200':
+          description: Multipart upload initiated successfully.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/InitiateMultipartUploadResult'
+              examples:
+                Createmultipartupload200Example:
+                  summary: Default CreateMultipartUpload 200 response
+                  x-microcks-default: true
+                  value:
+                    Bucket: example_value
+                    Key: example_value
+                    UploadId: '500123'
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Createmultipartupload403Example:
+                  summary: Default CreateMultipartUpload 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /{Bucket}/{Key+}?partNumber={partNumber}&uploadId={uploadId}:
+    put:
+      operationId: UploadPart
+      summary: Amazon S3 Upload Part
+      description: Uploads a part in a multipart upload. In this operation, you provide part data in your request. The part size must be between 5 MiB and 5 GiB. The last part can be smaller than 5 MiB. A multipart upload can have between 1 and 10,000 parts.
+      tags:
+      - Multipart Upload
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: partNumber
+        in: query
+        required: true
+        description: Part number identifying the part (1 to 10,000).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+        example: 10
+      - name: uploadId
+        in: query
+        required: true
+        description: Upload ID identifying the multipart upload.
+        schema:
+          type: string
+        example: '500123'
+      - name: Content-Length
+        in: header
+        description: Size of the part in bytes.
+        schema:
+          type: integer
+        example: 10
+      - name: Content-MD5
+        in: header
+        description: The base64-encoded 128-bit MD5 digest of the part data.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      requestBody:
+        description: The part data to upload.
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              UploadpartRequestExample:
+                summary: Default UploadPart request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '200':
+          description: Part uploaded successfully.
+          headers:
+            ETag:
+              description: Entity tag for the uploaded part.
+              schema:
+                type: string
+            x-amz-server-side-encryption:
+              description: Server-side encryption algorithm used.
+              schema:
+                type: string
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Uploadpart403Example:
+                  summary: Default UploadPart 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /{Bucket}/{Key+}?uploadId={uploadId}:
+    post:
+      operationId: CompleteMultipartUpload
+      summary: Amazon S3 Complete Multipart Upload
+      description: Completes a multipart upload by assembling previously uploaded parts. You must include the upload ID and a list of both part numbers and corresponding ETag values. Upon receiving the complete multipart upload request, Amazon S3 concatenates all the parts in ascending order by part number to create a new object.
+      tags:
+      - Multipart Upload
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: uploadId
+        in: query
+        required: true
+        description: Upload ID identifying the multipart upload.
+        schema:
+          type: string
+        example: '500123'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      - name: x-amz-checksum-crc32
+        in: header
+        description: CRC32 checksum of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-crc32c
+        in: header
+        description: CRC32C checksum of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-sha1
+        in: header
+        description: SHA-1 digest of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-sha256
+        in: header
+        description: SHA-256 digest of the object.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CompleteMultipartUpload'
+            examples:
+              CompletemultipartuploadRequestExample:
+                summary: Default CompleteMultipartUpload request
+                x-microcks-default: true
+                value:
+                  Part:
+                  - ETag: example_value
+                    PartNumber: 10
+                    ChecksumCRC32: example_value
+                    ChecksumCRC32C: example_value
+                    ChecksumSHA1: example_value
+                    ChecksumSHA256: example_value
+      responses:
+        '200':
+          description: Multipart upload completed successfully.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompleteMultipartUploadResult'
+              examples:
+                Completemultipartupload200Example:
+                  summary: Default CompleteMultipartUpload 200 response
+                  x-microcks-default: true
+                  value:
+                    Location: example_value
+                    Bucket: example_value
+                    Key: example_value
+                    ETag: example_value
+                    ChecksumCRC32: example_value
+                    ChecksumCRC32C: example_value
+                    ChecksumSHA1: example_value
+                    ChecksumSHA256: example_value
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Completemultipartupload403Example:
+                  summary: Default CompleteMultipartUpload 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: AbortMultipartUpload
+      summary: Amazon S3 Abort Multipart Upload
+      description: This action aborts a multipart upload. After a multipart upload is aborted, no additional parts can be uploaded using that upload ID. The storage consumed by any previously uploaded parts will be freed.
+      tags:
+      - Multipart Upload
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: uploadId
+        in: query
+        required: true
+        description: Upload ID identifying the multipart upload to abort.
+        schema:
+          type: string
+        example: '500123'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      responses:
+        '204':
+          description: Multipart upload aborted successfully.
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Abortmultipartupload403Example:
+                  summary: Default AbortMultipartUpload 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '404':
+          description: The specified upload does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Abortmultipartupload404Example:
+                  summary: Default AbortMultipartUpload 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    InitiateMultipartUploadResult:
+      type: object
+      description: Container for response to initiate multipart upload.
+      xml:
+        name: InitiateMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket to which the multipart upload was initiated.
+          example: example_value
+        Key:
+          type: string
+          description: Object key for which the multipart upload was initiated.
+          example: example_value
+        UploadId:
+          type: string
+          description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
+          example: '500123'
+    CompleteMultipartUploadResult:
+      type: object
+      description: The container for the completed multipart upload response.
+      xml:
+        name: CompleteMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Location:
+          type: string
+          description: The URI that identifies the newly created object.
+          example: example_value
+        Bucket:
+          type: string
+          description: The name of the bucket that contains the newly created object.
+          example: example_value
+        Key:
+          type: string
+          description: The object key of the newly created object.
+          example: example_value
+        ETag:
+          type: string
+          description: Entity tag that identifies the newly created object's data.
+          example: example_value
+        ChecksumCRC32:
+          type: string
+          example: example_value
+        ChecksumCRC32C:
+          type: string
+          example: example_value
+        ChecksumSHA1:
+          type: string
+          example: example_value
+        ChecksumSHA256:
+          type: string
+          example: example_value
+    CompleteMultipartUpload:
+      type: object
+      description: The container for the completed multipart upload request.
+      xml:
+        name: CompleteMultipartUpload
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Part:
+          type: array
+          items:
+            type: object
+            required:
+            - ETag
+            - PartNumber
+            properties:
+              ETag:
+                type: string
+                description: Entity tag returned when the part was uploaded.
+              PartNumber:
+                type: integer
+                description: Part number that identifies the part.
+              ChecksumCRC32:
+                type: string
+              ChecksumCRC32C:
+                type: string
+              ChecksumSHA1:
+                type: string
+              ChecksumSHA256:
+                type: string
+          example: []
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Namespaces API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Namespaces
+  description: Operations for managing namespaces within table buckets
+paths:
+  /namespaces/{tableBucketARN}:
+    get:
+      operationId: ListNamespaces
+      summary: Amazon S3 List Namespaces
+      description: Lists the namespaces within a table bucket. Namespaces organize tables within a table bucket.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - name: prefix
+        in: query
+        description: The prefix of the namespaces.
+        schema:
+          type: string
+        example: example_value
+      - name: continuationToken
+        in: query
+        description: A continuation token for pagination.
+        schema:
+          type: string
+        example: example_value
+      - name: maxNamespaces
+        in: query
+        description: The maximum number of namespaces to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
+      responses:
+        '200':
+          description: Successfully returned list of namespaces.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNamespacesResponse'
+              examples:
+                Listnamespaces200Example:
+                  summary: Default ListNamespaces 200 response
+                  x-microcks-default: true
+                  value:
+                    namespaces:
+                    - namespace:
+                      - {}
+                      createdAt: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      ownerAccountId: '500123'
+                    continuationToken: example_value
+        '404':
+          description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: CreateNamespace
+      summary: Amazon S3 Create Namespace
+      description: Creates a namespace. A namespace is a logical grouping of tables within a table bucket.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - namespace
+              properties:
+                namespace:
+                  type: array
+                  description: A name for the namespace. The namespace must be unique within the table bucket.
+                  items:
+                    type: string
+            examples:
+              CreatenamespaceRequestExample:
+                summary: Default CreateNamespace request
+                x-microcks-default: true
+                value:
+                  namespace:
+                  - example_value
+      responses:
+        '200':
+          description: Namespace created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  namespace:
+                    type: array
+                    items:
+                      type: string
+                  tableBucketARN:
+                    type: string
+              examples:
+                Createnamespace200Example:
+                  summary: Default CreateNamespace 200 response
+                  x-microcks-default: true
+                  value:
+                    namespace:
+                    - example_value
+                    tableBucketARN: example_value
+        '409':
+          description: A namespace with this name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /namespaces/{tableBucketARN}/{namespace}:
+    get:
+      operationId: GetNamespace
+      summary: Amazon S3 Get Namespace
+      description: Gets details about a namespace within a table bucket.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      responses:
+        '200':
+          description: Successfully returned namespace details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceDetail'
+              examples:
+                Getnamespace200Example:
+                  summary: Default GetNamespace 200 response
+                  x-microcks-default: true
+                  value:
+                    namespace:
+                    - example_value
+                    createdAt: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    ownerAccountId: '500123'
+                    tableBucketARN: example_value
+        '404':
+          description: The specified namespace does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteNamespace
+      summary: Amazon S3 Delete Namespace
+      description: Deletes a namespace. The namespace must be empty (all tables must be deleted first) before it can be deleted.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      responses:
+        '204':
+          description: Namespace deleted successfully.
+        '404':
+          description: The specified namespace does not exist.
+        '409':
+          description: The namespace is not empty and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TableBucketARN:
+      name: tableBucketARN
+      in: path
+      required: true
+      description: The Amazon Resource Name (ARN) of the table bucket.
+      schema:
+        type: string
+    Namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The name of the namespace.
+      schema:
+        type: string
+  schemas:
+    ListNamespacesResponse:
+      type: object
+      properties:
+        namespaces:
+          type: array
+          items:
+            type: object
+            properties:
+              namespace:
+                type: array
+                items:
+                  type: string
+              createdAt:
+                type: string
+                format: date-time
+              createdBy:
+                type: string
+              ownerAccountId:
+                type: string
+          example: []
+        continuationToken:
+          type: string
+          example: example_value
+    NamespaceDetail:
+      type: object
+      properties:
+        namespace:
+          type: array
+          items:
+            type: string
+          example: []
+        createdAt:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        createdBy:
+          type: string
+          example: example_value
+        ownerAccountId:
+          type: string
+          example: '500123'
+        tableBucketARN:
+          type: string
+          example: example_value
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

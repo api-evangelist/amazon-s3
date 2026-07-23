@@ -1,0 +1,1541 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Objects API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Objects
+  description: Operations for uploading, downloading, copying, and deleting objects
+paths:
+  /{Bucket}?list-type=2:
+    get:
+      operationId: ListObjectsV2
+      summary: Amazon S3 List Objects V2
+      description: Returns some or all (up to 1,000) of the objects in a bucket with each request. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. This is the recommended approach for listing objects. ListObjectsV2 supersedes the older ListObjects API.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: list-type
+        in: query
+        required: true
+        description: Set to 2 to use the ListObjectsV2 API.
+        schema:
+          type: integer
+          enum:
+          - 2
+        example: 2
+      - name: continuation-token
+        in: query
+        description: ContinuationToken indicates to S3 that the list is being continued on this bucket with a token returned in a previous response.
+        schema:
+          type: string
+        example: example_value
+      - name: delimiter
+        in: query
+        description: A delimiter is a character that you use to group keys. All keys that contain the same string between the prefix and the first occurrence of the delimiter are grouped under a single CommonPrefixes element.
+        schema:
+          type: string
+        example: example_value
+      - name: encoding-type
+        in: query
+        description: Encoding type used by Amazon S3 to encode object keys in the response.
+        schema:
+          type: string
+          enum:
+          - url
+        example: url
+      - name: fetch-owner
+        in: query
+        description: Set to true to include the owner field in the response.
+        schema:
+          type: boolean
+        example: true
+      - name: max-keys
+        in: query
+        description: Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000 key names.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 1000
+        example: 10
+      - name: prefix
+        in: query
+        description: Limits the response to keys that begin with the specified prefix.
+        schema:
+          type: string
+        example: example_value
+      - name: start-after
+        in: query
+        description: StartAfter is where you want Amazon S3 to start listing from. S3 starts listing after this specified key.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged for the request.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      - name: x-amz-optional-object-attributes
+        in: header
+        description: Specifies the optional metadata attributes to include in the response.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully returned list of objects.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListBucketResult'
+              examples:
+                Listobjectsv2200Example:
+                  summary: Default ListObjectsV2 200 response
+                  x-microcks-default: true
+                  value:
+                    IsTruncated: true
+                    Contents:
+                    - Key: example_value
+                      LastModified: '2026-01-15T10:30:00Z'
+                      ETag: example_value
+                      Size: 10
+                      StorageClass: STANDARD
+                      ChecksumAlgorithm: {}
+                      RestoreStatus: {}
+                    Name: Example Title
+                    Prefix: example_value
+                    Delimiter: example_value
+                    MaxKeys: 10
+                    CommonPrefixes:
+                    - Prefix: example_value
+                    EncodingType: example_value
+                    KeyCount: 10
+                    ContinuationToken: example_value
+                    NextContinuationToken: example_value
+                    StartAfter: example_value
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Listobjectsv2403Example:
+                  summary: Default ListObjectsV2 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '404':
+          description: The specified bucket does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Listobjectsv2404Example:
+                  summary: Default ListObjectsV2 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /{Bucket}/{Key+}:
+    get:
+      operationId: GetObject
+      summary: Amazon S3 Get Object
+      description: Retrieves objects from Amazon S3. To use GET, you must have READ access to the object. You can grant READ access using a bucket policy or an object ACL. Supports conditional retrieval using If-Match, If-None-Match, If-Modified-Since, and If-Unmodified-Since headers. Supports range reads with the Range header.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: response-cache-control
+        in: query
+        description: Sets the Cache-Control header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: response-content-disposition
+        in: query
+        description: Sets the Content-Disposition header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: response-content-encoding
+        in: query
+        description: Sets the Content-Encoding header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: response-content-language
+        in: query
+        description: Sets the Content-Language header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: response-content-type
+        in: query
+        description: Sets the Content-Type header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: response-expires
+        in: query
+        description: Sets the Expires header of the response.
+        schema:
+          type: string
+        example: example_value
+      - name: versionId
+        in: query
+        description: VersionId used to reference a specific version of the object.
+        schema:
+          type: string
+        example: '500123'
+      - name: partNumber
+        in: query
+        description: Part number of the object being read for a multipart object.
+        schema:
+          type: integer
+        example: 10
+      - name: Range
+        in: header
+        description: Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.
+        schema:
+          type: string
+        example: example_value
+      - name: If-Match
+        in: header
+        description: Return the object only if its entity tag (ETag) matches the specified tag.
+        schema:
+          type: string
+        example: example_value
+      - name: If-None-Match
+        in: header
+        description: Return the object only if its entity tag (ETag) differs from the specified tag.
+        schema:
+          type: string
+        example: example_value
+      - name: If-Modified-Since
+        in: header
+        description: Return the object only if it has been modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: If-Unmodified-Since
+        in: header
+        description: Return the object only if it has not been modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-server-side-encryption-customer-algorithm
+        in: header
+        description: Specifies the algorithm to use to when decrypting the object (AES256).
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-server-side-encryption-customer-key
+        in: header
+        description: Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-server-side-encryption-customer-key-MD5
+        in: header
+        description: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows that they will be charged for the request.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-mode
+        in: header
+        description: To retrieve the checksum, this mode must be enabled. Set to ENABLED.
+        schema:
+          type: string
+          enum:
+          - ENABLED
+        example: ENABLED
+      responses:
+        '200':
+          description: Successfully retrieved the object.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Getobject200Example:
+                  summary: Default GetObject 200 response
+                  x-microcks-default: true
+                  value: example_value
+          headers:
+            Content-Length:
+              description: Size of the body in bytes.
+              schema:
+                type: integer
+            Content-Type:
+              description: A standard MIME type describing the format of the object data.
+              schema:
+                type: string
+            ETag:
+              description: An opaque identifier assigned to the object.
+              schema:
+                type: string
+            Last-Modified:
+              description: Date and time the object was last modified.
+              schema:
+                type: string
+                format: date-time
+            x-amz-version-id:
+              description: Version of the object.
+              schema:
+                type: string
+            x-amz-delete-marker:
+              description: Specifies whether the object retrieved was a delete marker.
+              schema:
+                type: boolean
+            x-amz-storage-class:
+              description: Amazon S3 storage class of the object.
+              schema:
+                type: string
+            x-amz-server-side-encryption:
+              description: The server-side encryption algorithm used when storing this object.
+              schema:
+                type: string
+            Cache-Control:
+              description: Specifies caching behavior along the request/reply chain.
+              schema:
+                type: string
+            Content-Disposition:
+              description: Specifies presentational information for the object.
+              schema:
+                type: string
+            Content-Encoding:
+              description: Specifies what content encodings have been applied to the object.
+              schema:
+                type: string
+            Content-Language:
+              description: The language the content is in.
+              schema:
+                type: string
+            x-amz-expiration:
+              description: If the object expiration is configured, the response includes this header.
+              schema:
+                type: string
+            x-amz-restore:
+              description: Provides information about object restoration action and expiration time of the restored copy.
+              schema:
+                type: string
+            x-amz-object-lock-mode:
+              description: The Object Lock mode applied to the object.
+              schema:
+                type: string
+            x-amz-object-lock-retain-until-date:
+              description: The date and time when the Object Lock retention period expires.
+              schema:
+                type: string
+                format: date-time
+            x-amz-object-lock-legal-hold:
+              description: Specifies whether a legal hold is in effect for the object.
+              schema:
+                type: string
+            x-amz-replication-status:
+              description: Replication status of the object.
+              schema:
+                type: string
+        '206':
+          description: Partial content returned for range request.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Getobject206Example:
+                  summary: Default GetObject 206 response
+                  x-microcks-default: true
+                  value: example_value
+        '304':
+          description: Not modified.
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getobject403Example:
+                  summary: Default GetObject 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '404':
+          description: The specified key does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getobject404Example:
+                  summary: Default GetObject 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '412':
+          description: Precondition failed.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getobject412Example:
+                  summary: Default GetObject 412 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutObject
+      summary: Amazon S3 Put Object
+      description: Adds an object to a bucket. You must have WRITE permissions on a bucket to add an object to it. Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the entire object to the bucket. Objects can be up to 5 GiB in size when uploaded in a single PUT operation. For larger objects, use multipart upload.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: Cache-Control
+        in: header
+        description: Can be used to specify caching behavior along the request/reply chain.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Disposition
+        in: header
+        description: Specifies presentational information for the object.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Encoding
+        in: header
+        description: Specifies what content encodings have been applied to the object.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Language
+        in: header
+        description: The language the content is in.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Length
+        in: header
+        description: Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.
+        schema:
+          type: integer
+        example: 10
+      - name: Content-MD5
+        in: header
+        description: The base64-encoded 128-bit MD5 digest of the message.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-Type
+        in: header
+        description: A standard MIME type describing the format of the contents.
+        schema:
+          type: string
+        example: example_value
+      - name: Expires
+        in: header
+        description: The date and time at which the object is no longer cacheable.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-acl
+        in: header
+        description: The canned ACL to apply to the object.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+          - aws-exec-read
+          - bucket-owner-read
+          - bucket-owner-full-control
+        example: private
+      - name: x-amz-storage-class
+        in: header
+        description: Amazon S3 storage class to use for storing the object.
+        schema:
+          type: string
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - GLACIER
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+        example: STANDARD
+      - name: x-amz-server-side-encryption
+        in: header
+        description: The server-side encryption algorithm used when storing this object in Amazon S3.
+        schema:
+          type: string
+          enum:
+          - AES256
+          - aws:kms
+          - aws:kms:dsse
+        example: AES256
+      - name: x-amz-server-side-encryption-aws-kms-key-id
+        in: header
+        description: If x-amz-server-side-encryption is aws:kms or aws:kms:dsse, specifies the ID of the KMS key.
+        schema:
+          type: string
+        example: '500123'
+      - name: x-amz-server-side-encryption-context
+        in: header
+        description: Specifies the AWS KMS Encryption Context to use for object encryption.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-server-side-encryption-bucket-key-enabled
+        in: header
+        description: Specifies whether S3 should use an S3 Bucket Key for object encryption with server-side encryption using AWS KMS.
+        schema:
+          type: boolean
+        example: true
+      - name: x-amz-server-side-encryption-customer-algorithm
+        in: header
+        description: Specifies the algorithm to use to encrypt the object (AES256).
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-server-side-encryption-customer-key
+        in: header
+        description: Specifies the customer-provided encryption key.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-server-side-encryption-customer-key-MD5
+        in: header
+        description: Specifies the 128-bit MD5 digest of the encryption key.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-tagging
+        in: header
+        description: The tag-set for the object. Must be encoded as URL query parameters.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-object-lock-mode
+        in: header
+        description: The Object Lock mode that you want to apply to the uploaded object.
+        schema:
+          type: string
+          enum:
+          - GOVERNANCE
+          - COMPLIANCE
+        example: GOVERNANCE
+      - name: x-amz-object-lock-retain-until-date
+        in: header
+        description: The date and time when you want the Object Lock retention period to expire.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-object-lock-legal-hold
+        in: header
+        description: Specifies whether a legal hold will be applied to the uploaded object.
+        schema:
+          type: string
+          enum:
+          - 'ON'
+          - 'OFF'
+        example: 'ON'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-algorithm
+        in: header
+        description: Indicates the algorithm used to create the checksum for the object.
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+        example: CRC32
+      - name: x-amz-checksum-crc32
+        in: header
+        description: The base64-encoded, 32-bit CRC32 checksum of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-crc32c
+        in: header
+        description: The base64-encoded, 32-bit CRC32C checksum of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-sha1
+        in: header
+        description: The base64-encoded, 160-bit SHA-1 digest of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-sha256
+        in: header
+        description: The base64-encoded, 256-bit SHA-256 digest of the object.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      requestBody:
+        description: The object data to upload.
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+            examples:
+              PutobjectRequestExample:
+                summary: Default PutObject request
+                x-microcks-default: true
+                value: example_value
+      responses:
+        '200':
+          description: Object uploaded successfully.
+          headers:
+            ETag:
+              description: Entity tag for the uploaded object.
+              schema:
+                type: string
+            x-amz-version-id:
+              description: Version of the object.
+              schema:
+                type: string
+            x-amz-server-side-encryption:
+              description: The server-side encryption algorithm used.
+              schema:
+                type: string
+            x-amz-server-side-encryption-aws-kms-key-id:
+              description: If present, specifies the ID of the KMS key used.
+              schema:
+                type: string
+            x-amz-expiration:
+              description: If the object expiration is configured, includes expiry-date and rule-id.
+              schema:
+                type: string
+            x-amz-request-charged:
+              description: If present, indicates that the requester was charged for the request.
+              schema:
+                type: string
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Putobject403Example:
+                  summary: Default PutObject 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteObject
+      summary: Amazon S3 Delete Object
+      description: Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there is no null version, Amazon S3 does not remove any objects but will still respond that the command was successful. To remove a specific version, you must use the versionId sub-resource.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: versionId
+        in: query
+        description: VersionId used to reference a specific version of the object.
+        schema:
+          type: string
+        example: '500123'
+      - name: x-amz-mfa
+        in: header
+        description: The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device. Required for permanently deleting a versioned object with MFA delete enabled.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      - name: x-amz-bypass-governance-retention
+        in: header
+        description: Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.
+        schema:
+          type: boolean
+        example: true
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Object deleted successfully.
+          headers:
+            x-amz-delete-marker:
+              description: Specifies whether the versioned object was a delete marker.
+              schema:
+                type: boolean
+            x-amz-version-id:
+              description: Returns the version ID of the delete marker created.
+              schema:
+                type: string
+            x-amz-request-charged:
+              description: If present, indicates the requester was charged for the request.
+              schema:
+                type: string
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deleteobject403Example:
+                  summary: Default DeleteObject 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '404':
+          description: The specified key does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deleteobject404Example:
+                  summary: Default DeleteObject 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    head:
+      operationId: HeadObject
+      summary: Amazon S3 Head Object
+      description: The HEAD action retrieves metadata from an object without returning the object itself. This action is useful if you are interested only in an object's metadata. A HEAD request has the same options as a GET action on an object.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: versionId
+        in: query
+        description: VersionId used to reference a specific version of the object.
+        schema:
+          type: string
+      - name: Range
+        in: header
+        description: HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.
+        schema:
+          type: string
+      - name: If-Match
+        in: header
+        description: Return the object only if its ETag matches the specified tag.
+        schema:
+          type: string
+      - name: If-None-Match
+        in: header
+        description: Return the object only if its ETag differs from the specified tag.
+        schema:
+          type: string
+      - name: If-Modified-Since
+        in: header
+        description: Return the object only if modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+      - name: If-Unmodified-Since
+        in: header
+        description: Return the object only if not modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-checksum-mode
+        in: header
+        description: To retrieve the checksum, set to ENABLED.
+        schema:
+          type: string
+          enum:
+          - ENABLED
+      - name: partNumber
+        in: query
+        description: Part number of the object being read for multipart objects.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully returned object metadata.
+          headers:
+            Content-Length:
+              description: Size of the body in bytes.
+              schema:
+                type: integer
+            Content-Type:
+              description: A standard MIME type describing the format.
+              schema:
+                type: string
+            ETag:
+              description: An opaque identifier assigned to the object.
+              schema:
+                type: string
+            Last-Modified:
+              description: Date and time the object was last modified.
+              schema:
+                type: string
+                format: date-time
+            x-amz-version-id:
+              description: Version of the object.
+              schema:
+                type: string
+            x-amz-delete-marker:
+              description: Whether the object is a delete marker.
+              schema:
+                type: boolean
+            x-amz-storage-class:
+              description: Storage class of the object.
+              schema:
+                type: string
+            x-amz-server-side-encryption:
+              description: Server-side encryption algorithm used.
+              schema:
+                type: string
+            x-amz-object-lock-mode:
+              description: The Object Lock mode applied.
+              schema:
+                type: string
+            x-amz-object-lock-retain-until-date:
+              description: The Object Lock retention expiration date.
+              schema:
+                type: string
+                format: date-time
+            x-amz-object-lock-legal-hold:
+              description: Whether a legal hold is in effect.
+              schema:
+                type: string
+            x-amz-replication-status:
+              description: Replication status of the object.
+              schema:
+                type: string
+            x-amz-expiration:
+              description: Lifecycle expiration info.
+              schema:
+                type: string
+            x-amz-restore:
+              description: Restore status for archived objects.
+              schema:
+                type: string
+            x-amz-archive-status:
+              description: Archive status of the object.
+              schema:
+                type: string
+        '304':
+          description: Not modified.
+        '403':
+          description: Access denied.
+        '404':
+          description: The specified key does not exist.
+        '412':
+          description: Precondition failed.
+  /{Bucket}/{Key+}?copy:
+    put:
+      operationId: CopyObject
+      summary: Amazon S3 Copy Object
+      description: Creates a copy of an object that is already stored in Amazon S3. You can copy individual objects between general purpose buckets, between directory buckets, and between general purpose buckets and directory buckets. Objects up to 5 GiB can be copied in a single operation. For objects larger than 5 GiB, you must use the multipart upload Copy API.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - $ref: '#/components/parameters/ObjectKey'
+      - name: x-amz-copy-source
+        in: header
+        required: true
+        description: Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode the path.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-copy-source-if-match
+        in: header
+        description: Copies the object only if its ETag matches the specified value.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-copy-source-if-none-match
+        in: header
+        description: Copies the object only if its ETag does not match the specified value.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-copy-source-if-modified-since
+        in: header
+        description: Copies the object only if it has been modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-copy-source-if-unmodified-since
+        in: header
+        description: Copies the object only if it has not been modified since the specified time.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: x-amz-metadata-directive
+        in: header
+        description: Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
+        schema:
+          type: string
+          enum:
+          - COPY
+          - REPLACE
+        example: COPY
+      - name: x-amz-tagging-directive
+        in: header
+        description: Specifies whether the object tag-set is copied or replaced.
+        schema:
+          type: string
+          enum:
+          - COPY
+          - REPLACE
+        example: COPY
+      - name: x-amz-server-side-encryption
+        in: header
+        description: The server-side encryption algorithm used.
+        schema:
+          type: string
+          enum:
+          - AES256
+          - aws:kms
+          - aws:kms:dsse
+        example: AES256
+      - name: x-amz-storage-class
+        in: header
+        description: Amazon S3 storage class for the destination object.
+        schema:
+          type: string
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - GLACIER
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+        example: STANDARD
+      - name: x-amz-acl
+        in: header
+        description: The canned ACL to apply to the object.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+          - aws-exec-read
+          - bucket-owner-read
+          - bucket-owner-full-control
+        example: private
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-source-expected-bucket-owner
+        in: header
+        description: The account ID of the expected source bucket owner.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Object copied successfully.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CopyObjectResult'
+              examples:
+                Copyobject200Example:
+                  summary: Default CopyObject 200 response
+                  x-microcks-default: true
+                  value:
+                    ETag: example_value
+                    LastModified: '2026-01-15T10:30:00Z'
+                    ChecksumCRC32: example_value
+                    ChecksumCRC32C: example_value
+                    ChecksumSHA1: example_value
+                    ChecksumSHA256: example_value
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Copyobject403Example:
+                  summary: Default CopyObject 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '404':
+          description: The specified source key does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Copyobject404Example:
+                  summary: Default CopyObject 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /{Bucket}?delete:
+    post:
+      operationId: DeleteObjects
+      summary: Amazon S3 Delete Objects
+      description: This action enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys in a single request. The request body contains the list of object keys to delete.
+      tags:
+      - Objects
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-mfa
+        in: header
+        description: The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-request-payer
+        in: header
+        description: Confirms that the requester knows they will be charged.
+        schema:
+          type: string
+          enum:
+          - requester
+        example: requester
+      - name: x-amz-bypass-governance-retention
+        in: header
+        description: Indicates whether S3 Object Lock should bypass governance-mode restrictions.
+        schema:
+          type: boolean
+        example: true
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-checksum-algorithm
+        in: header
+        description: The algorithm used to create the checksum.
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+        example: CRC32
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Delete'
+            examples:
+              DeleteobjectsRequestExample:
+                summary: Default DeleteObjects request
+                x-microcks-default: true
+                value:
+                  Object:
+                  - Key: example_value
+                    VersionId: '500123'
+                  Quiet: true
+      responses:
+        '200':
+          description: Successfully processed delete request.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteResult'
+              examples:
+                Deleteobjects200Example:
+                  summary: Default DeleteObjects 200 response
+                  x-microcks-default: true
+                  value:
+                    Deleted:
+                    - Key: example_value
+                      VersionId: '500123'
+                      DeleteMarker: true
+                      DeleteMarkerVersionId: '500123'
+                    Error:
+                    - Key: example_value
+                      VersionId: '500123'
+                      Code: example_value
+                      Message: example_value
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deleteobjects403Example:
+                  summary: Default DeleteObjects 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Object:
+      type: object
+      description: An object consists of data and its descriptive metadata.
+      properties:
+        Key:
+          type: string
+          description: The name assigned to an object which identifies it in the bucket.
+          example: example_value
+        LastModified:
+          type: string
+          format: date-time
+          description: Date and time the object was last modified.
+          example: '2026-01-15T10:30:00Z'
+        ETag:
+          type: string
+          description: The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.
+          example: example_value
+        Size:
+          type: integer
+          format: int64
+          description: Size in bytes of the object.
+          example: 10
+        StorageClass:
+          type: string
+          description: The class of storage used to store the object.
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - GLACIER
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+          example: STANDARD
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        ChecksumAlgorithm:
+          type: array
+          items:
+            type: string
+            enum:
+            - CRC32
+            - CRC32C
+            - SHA1
+            - SHA256
+          example: []
+        RestoreStatus:
+          type: object
+          properties:
+            IsRestoreInProgress:
+              type: boolean
+            RestoreExpiryDate:
+              type: string
+              format: date-time
+          example: example_value
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
+    CommonPrefix:
+      type: object
+      description: Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.
+      properties:
+        Prefix:
+          type: string
+          description: Container for the specified common prefix.
+          example: example_value
+    CopyObjectResult:
+      type: object
+      description: Container for all response elements.
+      xml:
+        name: CopyObjectResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        ETag:
+          type: string
+          description: Returns the ETag of the new object.
+          example: example_value
+        LastModified:
+          type: string
+          format: date-time
+          description: Creation date of the object.
+          example: '2026-01-15T10:30:00Z'
+        ChecksumCRC32:
+          type: string
+          example: example_value
+        ChecksumCRC32C:
+          type: string
+          example: example_value
+        ChecksumSHA1:
+          type: string
+          example: example_value
+        ChecksumSHA256:
+          type: string
+          example: example_value
+    ListBucketResult:
+      type: object
+      description: Container for the result of the ListObjectsV2 operation.
+      xml:
+        name: ListBucketResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        IsTruncated:
+          type: boolean
+          description: Set to false if all of the results were returned. Set to true if more keys are available to return.
+          example: true
+        Contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object'
+          example: []
+        Name:
+          type: string
+          description: Bucket name.
+          example: Example Title
+        Prefix:
+          type: string
+          description: Keys that begin with the indicated prefix.
+          example: example_value
+        Delimiter:
+          type: string
+          description: Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element.
+          example: example_value
+        MaxKeys:
+          type: integer
+          description: Sets the maximum number of keys returned in the response.
+          example: 10
+        CommonPrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonPrefix'
+          example: []
+        EncodingType:
+          type: string
+          description: Encoding type used by Amazon S3 to encode object key names.
+          example: example_value
+        KeyCount:
+          type: integer
+          description: The number of keys returned with this request.
+          example: 10
+        ContinuationToken:
+          type: string
+          description: If ContinuationToken was sent with the request, it is included in the response.
+          example: example_value
+        NextContinuationToken:
+          type: string
+          description: NextContinuationToken is sent when isTruncated is true, which indicates that there are more keys to return.
+          example: example_value
+        StartAfter:
+          type: string
+          description: If StartAfter was sent with the request, it is included in the response.
+          example: example_value
+    Delete:
+      type: object
+      description: Container for the objects to delete.
+      xml:
+        name: Delete
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Object
+      properties:
+        Object:
+          type: array
+          description: Container element that describes the delete request for an object.
+          items:
+            type: object
+            required:
+            - Key
+            properties:
+              Key:
+                type: string
+                description: Key name of the object to delete.
+              VersionId:
+                type: string
+                description: VersionId for the specific version of the object to delete.
+          example: []
+        Quiet:
+          type: boolean
+          description: Element to enable quiet mode for the request. When added, it must be set to true.
+          default: false
+          example: true
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+    DeleteResult:
+      type: object
+      description: Container for the response of the DeleteObjects operation.
+      xml:
+        name: DeleteResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Deleted:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+              VersionId:
+                type: string
+              DeleteMarker:
+                type: boolean
+              DeleteMarkerVersionId:
+                type: string
+          example: []
+        Error:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+              VersionId:
+                type: string
+              Code:
+                type: string
+              Message:
+                type: string
+          example: []
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

@@ -1,0 +1,476 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Access Points API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Access Points
+  description: Operations for creating and managing S3 access points
+paths:
+  /v20180820/accesspoint/{name}:
+    get:
+      operationId: GetAccessPoint
+      summary: Amazon S3 Get Access Point
+      description: Returns configuration information about the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point, or the ARN of the access point for S3 on Outposts.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully returned access point configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GetAccessPointResult'
+              examples:
+                Getaccesspoint200Example:
+                  summary: Default GetAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    Name: Example Title
+                    Bucket: example_value
+                    NetworkOrigin: Internet
+                    VpcConfiguration:
+                      VpcId: '500123'
+                    PublicAccessBlockConfiguration:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    CreationDate: '2026-01-15T10:30:00Z'
+                    Alias: example_value
+                    AccessPointArn: example_value
+                    Endpoints: example_value
+                    BucketAccountId: '500123'
+        '404':
+          description: The specified access point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: CreateAccessPoint
+      summary: Amazon S3 Create Access Point
+      description: Creates an access point and associates it with the specified bucket. You can use access points to manage access to shared data sets. Access points simplify managing data access at scale for applications using shared data sets on S3.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name you want to assign to this access point.
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 50
+        example: Example Title
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateAccessPointRequest'
+            examples:
+              CreateaccesspointRequestExample:
+                summary: Default CreateAccessPoint request
+                x-microcks-default: true
+                value:
+                  Bucket: example_value
+                  VpcConfiguration:
+                    VpcId: '500123'
+                  PublicAccessBlockConfiguration:
+                    BlockPublicAcls: true
+                    IgnorePublicAcls: true
+                    BlockPublicPolicy: true
+                    RestrictPublicBuckets: true
+                  BucketAccountId: '500123'
+      responses:
+        '200':
+          description: Access point created successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  AccessPointArn:
+                    type: string
+                  Alias:
+                    type: string
+              examples:
+                Createaccesspoint200Example:
+                  summary: Default CreateAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPointArn: example_value
+                    Alias: example_value
+        '409':
+          description: An access point with this name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteAccessPoint
+      summary: Amazon S3 Delete Access Point
+      description: Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point you want to delete.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '204':
+          description: Access point deleted successfully.
+        '404':
+          description: The specified access point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/accesspoint:
+    get:
+      operationId: ListAccessPoints
+      summary: Amazon S3 List Access Points
+      description: Returns a list of the access points that are associated with the specified bucket. You can retrieve up to 1000 access points per call.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: bucket
+        in: query
+        description: The name of the bucket whose associated access points you want to list.
+        schema:
+          type: string
+        example: example_value
+      - name: nextToken
+        in: query
+        description: A continuation token. If a previous call produced a truncated list, pass this value to get the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: The maximum number of access points to return (1-1000).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
+      responses:
+        '200':
+          description: Successfully returned list of access points.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListAccessPointsResult'
+              examples:
+                Listaccesspoints200Example:
+                  summary: Default ListAccessPoints 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPointList:
+                    - Name: Example Title
+                      NetworkOrigin: Internet
+                      VpcConfiguration:
+                        VpcId: '500123'
+                      Bucket: example_value
+                      AccessPointArn: example_value
+                      Alias: example_value
+                      BucketAccountId: '500123'
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/accesspoint/{name}/policy:
+    get:
+      operationId: GetAccessPointPolicy
+      summary: Amazon S3 Get Access Point Policy
+      description: Returns the access point policy associated with the specified access point.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully returned access point policy.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  Policy:
+                    type: string
+              examples:
+                Getaccesspointpolicy200Example:
+                  summary: Default GetAccessPointPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    Policy: example_value
+        '404':
+          description: The access point policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutAccessPointPolicy
+      summary: Amazon S3 Put Access Point Policy
+      description: Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              required:
+              - Policy
+              properties:
+                Policy:
+                  type: string
+                  description: The policy that you want to apply to the specified access point.
+            examples:
+              PutaccesspointpolicyRequestExample:
+                summary: Default PutAccessPointPolicy request
+                x-microcks-default: true
+                value:
+                  Policy: example_value
+      responses:
+        '200':
+          description: Access point policy updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteAccessPointPolicy
+      summary: Amazon S3 Delete Access Point Policy
+      description: Deletes the access point policy for the specified access point.
+      tags:
+      - Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: name
+        in: path
+        required: true
+        description: The name of the access point.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '204':
+          description: Access point policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GetAccessPointResult:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the access point.
+          example: Example Title
+        Bucket:
+          type: string
+          description: The name of the bucket associated with the access point.
+          example: example_value
+        NetworkOrigin:
+          type: string
+          description: Indicates whether this access point allows access from the public internet.
+          enum:
+          - Internet
+          - VPC
+          example: Internet
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: The ID of the VPC.
+          example: example_value
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time when the access point was created.
+          example: '2026-01-15T10:30:00Z'
+        Alias:
+          type: string
+          description: The alias for the access point.
+          example: example_value
+        AccessPointArn:
+          type: string
+          description: The ARN for the access point.
+          example: example_value
+        Endpoints:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
+    PublicAccessBlockConfiguration:
+      type: object
+      description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
+      xml:
+        name: PublicAccessBlockConfiguration
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      properties:
+        BlockPublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account.
+          example: true
+        IgnorePublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should ignore public ACLs for buckets in this account.
+          example: true
+        BlockPublicPolicy:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public bucket policies for buckets in this account.
+          example: true
+        RestrictPublicBuckets:
+          type: boolean
+          description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
+          example: true
+    ListAccessPointsResult:
+      type: object
+      properties:
+        AccessPointList:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              NetworkOrigin:
+                type: string
+                enum:
+                - Internet
+                - VPC
+              VpcConfiguration:
+                type: object
+                properties:
+                  VpcId:
+                    type: string
+              Bucket:
+                type: string
+              AccessPointArn:
+                type: string
+              Alias:
+                type: string
+              BucketAccountId:
+                type: string
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+    CreateAccessPointRequest:
+      type: object
+      xml:
+        name: CreateAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+      - Bucket
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket you want to associate with the access point.
+          example: example_value
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: If specified, the access point will only allow connections from the specified VPC ID.
+          example: example_value
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

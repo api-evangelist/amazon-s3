@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Multi-Region Access Points API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Multi-Region Access Points
+  description: Operations for Multi-Region Access Points
+paths:
+  /v20180820/async-requests/mrap/create:
+    post:
+      operationId: CreateMultiRegionAccessPoint
+      summary: Amazon S3 Create Multi-region Access Point
+      description: Creates a Multi-Region Access Point and associates it with the specified buckets. Multi-Region Access Points provide a single global endpoint that applications can use to request data regardless of the location of the requester. This is an asynchronous request.
+      tags:
+      - Multi-Region Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateMultiRegionAccessPointRequest'
+            examples:
+              CreatemultiregionaccesspointRequestExample:
+                summary: Default CreateMultiRegionAccessPoint request
+                x-microcks-default: true
+                value:
+                  ClientToken: example_value
+                  Details:
+                    Name: Example Title
+                    PublicAccessBlock:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    Regions:
+                    - Bucket: example_value
+                      BucketAccountId: '500123'
+      responses:
+        '200':
+          description: Request accepted. Multi-Region Access Point creation is asynchronous.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  RequestTokenARN:
+                    type: string
+                    description: The request token associated with the asynchronous request used to track the status of the create request.
+              examples:
+                Createmultiregionaccesspoint200Example:
+                  summary: Default CreateMultiRegionAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    RequestTokenARN: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/mrap/instances:
+    get:
+      operationId: ListMultiRegionAccessPoints
+      summary: Amazon S3 List Multi-region Access Points
+      description: Returns a list of the Multi-Region Access Points currently associated with the specified AWS account.
+      tags:
+      - Multi-Region Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: nextToken
+        in: query
+        description: A pagination token for the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: Number of results to return per call.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
+      responses:
+        '200':
+          description: Successfully returned list of Multi-Region Access Points.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListMultiRegionAccessPointsResult'
+              examples:
+                Listmultiregionaccesspoints200Example:
+                  summary: Default ListMultiRegionAccessPoints 200 response
+                  x-microcks-default: true
+                  value:
+                    AccessPoints:
+                    - Name: Example Title
+                      Alias: example_value
+                      CreatedAt: '2026-01-15T10:30:00Z'
+                      Status: READY
+                      Regions: {}
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/mrap/instances/{mrap_name+}:
+    get:
+      operationId: GetMultiRegionAccessPoint
+      summary: Amazon S3 Get Multi-region Access Point
+      description: Returns configuration information about the specified Multi-Region Access Point.
+      tags:
+      - Multi-Region Access Points
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: mrap_name+
+        in: path
+        required: true
+        description: The name of the Multi-Region Access Point.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully returned Multi-Region Access Point configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MultiRegionAccessPointReport'
+              examples:
+                Getmultiregionaccesspoint200Example:
+                  summary: Default GetMultiRegionAccessPoint 200 response
+                  x-microcks-default: true
+                  value:
+                    Name: Example Title
+                    Alias: example_value
+                    CreatedAt: '2026-01-15T10:30:00Z'
+                    PublicAccessBlock:
+                      BlockPublicAcls: true
+                      IgnorePublicAcls: true
+                      BlockPublicPolicy: true
+                      RestrictPublicBuckets: true
+                    Status: READY
+                    Regions:
+                    - Bucket: example_value
+                      Region: example_value
+                      BucketAccountId: '500123'
+        '404':
+          description: The specified Multi-Region Access Point does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ListMultiRegionAccessPointsResult:
+      type: object
+      properties:
+        AccessPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiRegionAccessPointReport'
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+    PublicAccessBlockConfiguration:
+      type: object
+      description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
+      xml:
+        name: PublicAccessBlockConfiguration
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      properties:
+        BlockPublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account.
+          example: true
+        IgnorePublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should ignore public ACLs for buckets in this account.
+          example: true
+        BlockPublicPolicy:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public bucket policies for buckets in this account.
+          example: true
+        RestrictPublicBuckets:
+          type: boolean
+          description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
+          example: true
+    CreateMultiRegionAccessPointRequest:
+      type: object
+      xml:
+        name: CreateMultiRegionAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+      - Details
+      - ClientToken
+      properties:
+        ClientToken:
+          type: string
+          description: An idempotency token used to identify the request.
+          example: example_value
+        Details:
+          type: object
+          required:
+          - Name
+          - Regions
+          properties:
+            Name:
+              type: string
+              description: The name of the Multi-Region Access Point.
+            PublicAccessBlock:
+              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            Regions:
+              type: array
+              description: The buckets in different Regions that are associated with the Multi-Region Access Point.
+              items:
+                type: object
+                required:
+                - Bucket
+                properties:
+                  Bucket:
+                    type: string
+                  BucketAccountId:
+                    type: string
+          example: example_value
+    MultiRegionAccessPointReport:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the Multi-Region Access Point.
+          example: Example Title
+        Alias:
+          type: string
+          description: The alias for the Multi-Region Access Point.
+          example: example_value
+        CreatedAt:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        PublicAccessBlock:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        Status:
+          type: string
+          enum:
+          - READY
+          - INCONSISTENT_ACROSS_REGIONS
+          - CREATING
+          - PARTIALLY_CREATED
+          - PARTIALLY_DELETED
+          - DELETING
+          example: READY
+        Regions:
+          type: array
+          items:
+            type: object
+            properties:
+              Bucket:
+                type: string
+              Region:
+                type: string
+              BucketAccountId:
+                type: string
+          example: []
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

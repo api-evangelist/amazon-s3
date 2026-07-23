@@ -1,0 +1,305 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Access Control
+  description: Operations for managing bucket and object access control lists (ACLs)
+paths:
+  /{Bucket}?acl:
+    get:
+      operationId: GetBucketAcl
+      summary: Amazon S3 Get Bucket Acl
+      description: This implementation of the GET action uses the acl subresource to return the access control list (ACL) of a bucket. To use GET to return the ACL, you must have the READ_ACP access to the bucket.
+      tags:
+      - Access Control
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully returned the bucket ACL.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+              examples:
+                Getbucketacl200Example:
+                  summary: Default GetBucketAcl 200 response
+                  x-microcks-default: true
+                  value:
+                    Owner:
+                      DisplayName: example_value
+                      ID: abc123
+                    AccessControlList:
+                      Grant:
+                      - {}
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Getbucketacl403Example:
+                  summary: Default GetBucketAcl 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutBucketAcl
+      summary: Amazon S3 Put Bucket Acl
+      description: Sets the permissions on an existing bucket using access control lists (ACL). You can set permissions to grant or revoke access at the bucket level using either the request body or request headers.
+      tags:
+      - Access Control
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-acl
+        in: header
+        description: The canned ACL to apply to the bucket.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+        example: private
+      - name: x-amz-grant-full-control
+        in: header
+        description: Allows grantee full control of the bucket.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-grant-read
+        in: header
+        description: Allows grantee to list the objects in the bucket.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-grant-read-acp
+        in: header
+        description: Allows grantee to read the bucket ACL.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-grant-write
+        in: header
+        description: Allows grantee to create objects in the bucket.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-grant-write-acp
+        in: header
+        description: Allows grantee to write the ACL for the applicable bucket.
+        schema:
+          type: string
+        example: example_value
+      - name: Content-MD5
+        in: header
+        description: The base64-encoded 128-bit MD5 digest of the data.
+        schema:
+          type: string
+        example: example_value
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AccessControlPolicy'
+            examples:
+              PutbucketaclRequestExample:
+                summary: Default PutBucketAcl request
+                x-microcks-default: true
+                value:
+                  Owner:
+                    DisplayName: example_value
+                    ID: abc123
+                  AccessControlList:
+                    Grant:
+                    - {}
+      responses:
+        '200':
+          description: Bucket ACL updated successfully.
+        '403':
+          description: Access denied.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Putbucketacl403Example:
+                  summary: Default PutBucketAcl 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
+  schemas:
+    AccessControlPolicy:
+      type: object
+      description: Contains the elements that set the ACL permissions for an object per grantee.
+      xml:
+        name: AccessControlPolicy
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        AccessControlList:
+          type: object
+          properties:
+            Grant:
+              type: array
+              items:
+                $ref: '#/components/schemas/Grant'
+          example: example_value
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
+    Grant:
+      type: object
+      description: Container for grant information.
+      properties:
+        Grantee:
+          type: object
+          description: The person being granted permissions.
+          properties:
+            DisplayName:
+              type: string
+            EmailAddress:
+              type: string
+            ID:
+              type: string
+            Type:
+              type: string
+              enum:
+              - CanonicalUser
+              - AmazonCustomerByEmail
+              - Group
+            URI:
+              type: string
+          example: example_value
+        Permission:
+          type: string
+          description: Specifies the permission given to the grantee.
+          enum:
+          - FULL_CONTROL
+          - WRITE
+          - WRITE_ACP
+          - READ
+          - READ_ACP
+          example: FULL_CONTROL
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

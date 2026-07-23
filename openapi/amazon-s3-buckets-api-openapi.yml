@@ -1,0 +1,412 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Buckets API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Buckets
+  description: Operations for creating, listing, and managing S3 buckets
+paths:
+  /:
+    get:
+      operationId: ListBuckets
+      summary: Amazon S3 List Buckets
+      description: Returns a list of all buckets owned by the authenticated sender of the request. To use this operation, you must have the s3:ListAllMyBuckets permission. This operation uses the GET method on the service endpoint.
+      tags:
+      - Buckets
+      parameters:
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully returned list of buckets.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListAllMyBucketsResult'
+              examples:
+                Listbuckets200Example:
+                  summary: Default ListBuckets 200 response
+                  x-microcks-default: true
+                  value:
+                    Owner:
+                      DisplayName: example_value
+                      ID: abc123
+                    Buckets:
+                      Bucket:
+                      - {}
+          headers:
+            x-amz-request-id:
+              description: Unique identifier for the request.
+              schema:
+                type: string
+        '403':
+          description: Access denied. The requester does not have permission.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Listbuckets403Example:
+                  summary: Default ListBuckets 403 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /{Bucket}:
+    put:
+      operationId: CreateBucket
+      summary: Amazon S3 Create Bucket
+      description: Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and have a valid AWS Access Key ID. By default, buckets are created in the us-east-1 region. Use the LocationConstraint request element to specify a different region.
+      tags:
+      - Buckets
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-acl
+        in: header
+        description: The canned ACL to apply to the bucket.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+        example: private
+      - name: x-amz-bucket-object-lock-enabled
+        in: header
+        description: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+        schema:
+          type: boolean
+        example: true
+      - name: x-amz-object-ownership
+        in: header
+        description: The container element for object ownership.
+        schema:
+          type: string
+          enum:
+          - BucketOwnerPreferred
+          - ObjectWriter
+          - BucketOwnerEnforced
+        example: BucketOwnerPreferred
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateBucketConfiguration'
+            examples:
+              CreatebucketRequestExample:
+                summary: Default CreateBucket request
+                x-microcks-default: true
+                value:
+                  LocationConstraint: af-south-1
+                  Location:
+                    Name: Example Title
+                    Type: AvailabilityZone
+                  Bucket:
+                    DataRedundancy: SingleAvailabilityZone
+                    Type: Directory
+      responses:
+        '200':
+          description: Bucket created successfully.
+          headers:
+            Location:
+              description: The URI of the newly created bucket, including the path-style endpoint.
+              schema:
+                type: string
+        '409':
+          description: BucketAlreadyExists or BucketAlreadyOwnedByYou. The requested bucket name is not available.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Createbucket409Example:
+                  summary: Default CreateBucket 409 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteBucket
+      summary: Amazon S3 Delete Bucket
+      description: Deletes the S3 bucket. All objects in the bucket must be deleted before the bucket itself can be deleted. The bucket owner can always delete a bucket, regardless of bucket policies.
+      tags:
+      - Buckets
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Bucket deleted successfully.
+        '404':
+          description: The specified bucket does not exist.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deletebucket404Example:
+                  summary: Default DeleteBucket 404 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+        '409':
+          description: The bucket you tried to delete is not empty.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Deletebucket409Example:
+                  summary: Default DeleteBucket 409 response
+                  x-microcks-default: true
+                  value:
+                    Code: example_value
+                    Message: example_value
+                    Resource: example_value
+                    RequestId: '500123'
+                    HostId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    head:
+      operationId: HeadBucket
+      summary: Amazon S3 Head Bucket
+      description: Determines if a bucket exists and you have permission to access it. A HEAD request returns 200 OK if the bucket exists and you have permission to access it. Returns 404 Not Found if the bucket does not exist or 403 Forbidden if you do not have permission.
+      tags:
+      - Buckets
+      parameters:
+      - $ref: '#/components/parameters/BucketName'
+      - name: x-amz-expected-bucket-owner
+        in: header
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The bucket exists and you have access.
+          headers:
+            x-amz-bucket-region:
+              description: The region where the bucket is located.
+              schema:
+                type: string
+            x-amz-access-point-alias:
+              description: Indicates whether the bucket name is an access point alias.
+              schema:
+                type: boolean
+        '301':
+          description: The bucket exists in a different region.
+        '403':
+          description: Forbidden. You do not have permission to access this bucket.
+        '404':
+          description: The specified bucket does not exist.
+components:
+  schemas:
+    ListAllMyBucketsResult:
+      type: object
+      description: Container for the result of the ListBuckets operation.
+      xml:
+        name: ListAllMyBucketsResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        Buckets:
+          type: object
+          properties:
+            Bucket:
+              type: array
+              items:
+                $ref: '#/components/schemas/Bucket'
+          example: example_value
+    Bucket:
+      type: object
+      description: In terms of implementation, a Bucket is a resource.
+      properties:
+        Name:
+          type: string
+          description: The name of the bucket.
+          example: Example Title
+        CreationDate:
+          type: string
+          format: date-time
+          description: Date the bucket was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+    CreateBucketConfiguration:
+      type: object
+      description: The configuration information for the bucket.
+      xml:
+        name: CreateBucketConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        LocationConstraint:
+          type: string
+          description: Specifies the Region where the bucket will be created. If you do not specify a Region, the bucket is created in the us-east-1 Region.
+          enum:
+          - af-south-1
+          - ap-east-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-south-1
+          - ap-south-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-southeast-3
+          - ca-central-1
+          - eu-central-1
+          - eu-north-1
+          - eu-south-1
+          - eu-south-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - me-south-1
+          - sa-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          example: af-south-1
+        Location:
+          type: object
+          description: Specifies the location of the bucket.
+          properties:
+            Name:
+              type: string
+            Type:
+              type: string
+              enum:
+              - AvailabilityZone
+          example: example_value
+        Bucket:
+          type: object
+          description: Specifies the information about the bucket to create.
+          properties:
+            DataRedundancy:
+              type: string
+              enum:
+              - SingleAvailabilityZone
+            Type:
+              type: string
+              enum:
+              - Directory
+          example: example_value
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

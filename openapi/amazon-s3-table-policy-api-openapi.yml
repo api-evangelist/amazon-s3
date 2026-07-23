@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Table Policy API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Table Policy
+  description: Operations for managing table and table bucket policies
+paths:
+  /buckets/{tableBucketARN}/policy:
+    get:
+      operationId: GetTableBucketPolicy
+      summary: Amazon S3 Get Table Bucket Policy
+      description: Gets details about a table bucket policy. Returns the policy document associated with the specified table bucket.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      responses:
+        '200':
+          description: Successfully returned table bucket policy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resourcePolicy:
+                    type: string
+                    description: The resource policy document in JSON format.
+              examples:
+                Gettablebucketpolicy200Example:
+                  summary: Default GetTableBucketPolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    resourcePolicy: example_value
+        '404':
+          description: The table bucket policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutTableBucketPolicy
+      summary: Amazon S3 Put Table Bucket Policy
+      description: Creates or replaces a table bucket policy for a table bucket.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resourcePolicy
+              properties:
+                resourcePolicy:
+                  type: string
+                  description: The resource policy document in JSON format.
+            examples:
+              PuttablebucketpolicyRequestExample:
+                summary: Default PutTableBucketPolicy request
+                x-microcks-default: true
+                value:
+                  resourcePolicy: example_value
+      responses:
+        '200':
+          description: Table bucket policy updated successfully.
+        '400':
+          description: Invalid policy document.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteTableBucketPolicy
+      summary: Amazon S3 Delete Table Bucket Policy
+      description: Deletes a table bucket policy for a table bucket.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      responses:
+        '204':
+          description: Table bucket policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tables/{tableBucketARN}/{namespace}/{name}/policy:
+    get:
+      operationId: GetTablePolicy
+      summary: Amazon S3 Get Table Policy
+      description: Gets the resource policy for a table.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully returned table policy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resourcePolicy:
+                    type: string
+              examples:
+                Gettablepolicy200Example:
+                  summary: Default GetTablePolicy 200 response
+                  x-microcks-default: true
+                  value:
+                    resourcePolicy: example_value
+        '404':
+          description: The table policy does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutTablePolicy
+      summary: Amazon S3 Put Table Policy
+      description: Creates or replaces the resource policy for a table.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resourcePolicy
+              properties:
+                resourcePolicy:
+                  type: string
+                  description: The resource policy document in JSON format.
+            examples:
+              PuttablepolicyRequestExample:
+                summary: Default PutTablePolicy request
+                x-microcks-default: true
+                value:
+                  resourcePolicy: example_value
+      responses:
+        '200':
+          description: Table policy updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteTablePolicy
+      summary: Amazon S3 Delete Table Policy
+      description: Deletes the resource policy for a table.
+      tags:
+      - Table Policy
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '204':
+          description: Table policy deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TableBucketARN:
+      name: tableBucketARN
+      in: path
+      required: true
+      description: The Amazon Resource Name (ARN) of the table bucket.
+      schema:
+        type: string
+    Namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The name of the namespace.
+      schema:
+        type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Public Access Block API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Public Access Block
+  description: Operations for managing public access block settings
+paths:
+  /v20180820/configuration/publicAccessBlock:
+    get:
+      operationId: GetPublicAccessBlock
+      summary: Amazon S3 Get Public Access Block
+      description: Retrieves the PublicAccessBlock configuration for an AWS account. For using this operation with S3 on Outposts, you must provide the Outpost bucket ARN.
+      tags:
+      - Public Access Block
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Successfully returned public access block configuration.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+              examples:
+                Getpublicaccessblock200Example:
+                  summary: Default GetPublicAccessBlock 200 response
+                  x-microcks-default: true
+                  value:
+                    BlockPublicAcls: true
+                    IgnorePublicAcls: true
+                    BlockPublicPolicy: true
+                    RestrictPublicBuckets: true
+        '404':
+          description: The public access block configuration does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutPublicAccessBlock
+      summary: Amazon S3 Put Public Access Block
+      description: Creates or modifies the PublicAccessBlock configuration for an AWS account. To use this operation, you must have the s3:PutAccountPublicAccessBlock permission.
+      tags:
+      - Public Access Block
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            examples:
+              PutpublicaccessblockRequestExample:
+                summary: Default PutPublicAccessBlock request
+                x-microcks-default: true
+                value:
+                  BlockPublicAcls: true
+                  IgnorePublicAcls: true
+                  BlockPublicPolicy: true
+                  RestrictPublicBuckets: true
+      responses:
+        '200':
+          description: Public access block configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeletePublicAccessBlock
+      summary: Amazon S3 Delete Public Access Block
+      description: Removes the PublicAccessBlock configuration for an AWS account. For this operation, you must have the s3:PutAccountPublicAccessBlock permission.
+      tags:
+      - Public Access Block
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Public access block configuration deleted successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  schemas:
+    PublicAccessBlockConfiguration:
+      type: object
+      description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
+      xml:
+        name: PublicAccessBlockConfiguration
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      properties:
+        BlockPublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account.
+          example: true
+        IgnorePublicAcls:
+          type: boolean
+          description: Specifies whether Amazon S3 should ignore public ACLs for buckets in this account.
+          example: true
+        BlockPublicPolicy:
+          type: boolean
+          description: Specifies whether Amazon S3 should block public bucket policies for buckets in this account.
+          example: true
+        RestrictPublicBuckets:
+          type: boolean
+          description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
+          example: true
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

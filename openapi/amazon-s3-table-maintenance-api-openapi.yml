@@ -1,0 +1,355 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Table Maintenance API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Table Maintenance
+  description: Operations for managing table maintenance configurations
+paths:
+  /buckets/{tableBucketARN}/maintenance:
+    get:
+      operationId: GetTableBucketMaintenanceConfiguration
+      summary: Amazon S3 Get Table Bucket Maintenance Configuration
+      description: Gets details about a table bucket maintenance configuration, including Iceberg compaction and snapshot management settings.
+      tags:
+      - Table Maintenance
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      responses:
+        '200':
+          description: Successfully returned maintenance configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableBucketMaintenanceConfiguration'
+              examples:
+                Gettablebucketmaintenanceconfiguration200Example:
+                  summary: Default GetTableBucketMaintenanceConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    tableBucketARN: example_value
+                    configuration: example_value
+        '404':
+          description: The specified table bucket does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutTableBucketMaintenanceConfiguration
+      summary: Amazon S3 Put Table Bucket Maintenance Configuration
+      description: Creates or updates a table bucket maintenance configuration for the specified table bucket. This includes Iceberg compaction and snapshot management.
+      tags:
+      - Table Maintenance
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTableBucketMaintenanceConfigurationRequest'
+            examples:
+              PuttablebucketmaintenanceconfigurationRequestExample:
+                summary: Default PutTableBucketMaintenanceConfiguration request
+                x-microcks-default: true
+                value:
+                  type: icebergUnreferencedFileRemoval
+                  value:
+                    status: Enabled
+                    settings:
+                      unreferencedDays: 10
+                      nonCurrentDays: 10
+      responses:
+        '200':
+          description: Maintenance configuration updated successfully.
+        '400':
+          description: Invalid maintenance configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tables/{tableBucketARN}/{namespace}/{name}/maintenance:
+    get:
+      operationId: GetTableMaintenanceConfiguration
+      summary: Amazon S3 Get Table Maintenance Configuration
+      description: Gets details about the maintenance configuration of a table, including Iceberg compaction and snapshot management settings.
+      tags:
+      - Table Maintenance
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully returned table maintenance configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableMaintenanceConfiguration'
+              examples:
+                Gettablemaintenanceconfiguration200Example:
+                  summary: Default GetTableMaintenanceConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    tableARN: example_value
+                    configuration: example_value
+        '404':
+          description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: PutTableMaintenanceConfiguration
+      summary: Amazon S3 Put Table Maintenance Configuration
+      description: Creates or updates the maintenance configuration for the specified table.
+      tags:
+      - Table Maintenance
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTableMaintenanceConfigurationRequest'
+            examples:
+              PuttablemaintenanceconfigurationRequestExample:
+                summary: Default PutTableMaintenanceConfiguration request
+                x-microcks-default: true
+                value:
+                  type: icebergCompaction
+                  value:
+                    status: Enabled
+                    settings: example_value
+      responses:
+        '200':
+          description: Table maintenance configuration updated successfully.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tables/{tableBucketARN}/{namespace}/{name}/maintenance-job-status:
+    get:
+      operationId: GetTableMaintenanceJobStatus
+      summary: Amazon S3 Get Table Maintenance Job Status
+      description: Gets the status of a maintenance job for a table, including the last run timestamp and status.
+      tags:
+      - Table Maintenance
+      parameters:
+      - $ref: '#/components/parameters/TableBucketARN'
+      - $ref: '#/components/parameters/Namespace'
+      - name: name
+        in: path
+        required: true
+        description: The name of the table.
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully returned maintenance job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableMaintenanceJobStatus'
+              examples:
+                Gettablemaintenancejobstatus200Example:
+                  summary: Default GetTableMaintenanceJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    tableARN: example_value
+                    status: example_value
+        '404':
+          description: The specified table does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TableBucketARN:
+      name: tableBucketARN
+      in: path
+      required: true
+      description: The Amazon Resource Name (ARN) of the table bucket.
+      schema:
+        type: string
+    Namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The name of the namespace.
+      schema:
+        type: string
+  schemas:
+    PutTableMaintenanceConfigurationRequest:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: The type of maintenance configuration.
+          enum:
+          - icebergCompaction
+          - icebergSnapshotManagement
+          example: icebergCompaction
+        value:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - Enabled
+              - Disabled
+            settings:
+              type: object
+              description: Settings specific to the maintenance type. For icebergCompaction, includes targetFileSizeMB. For icebergSnapshotManagement, includes minSnapshotsToKeep and maxSnapshotAgeHours.
+          example: example_value
+    TableBucketMaintenanceConfiguration:
+      type: object
+      properties:
+        tableBucketARN:
+          type: string
+          example: example_value
+        configuration:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - Enabled
+                - Disabled
+              settings:
+                type: object
+          example: example_value
+    TableMaintenanceJobStatus:
+      type: object
+      properties:
+        tableARN:
+          type: string
+          example: example_value
+        status:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - Not_Yet_Run
+                - Successful
+                - Failed
+                - Disabled
+              lastRunTimestamp:
+                type: string
+                format: date-time
+              failureMessage:
+                type: string
+          example: example_value
+    TableMaintenanceConfiguration:
+      type: object
+      properties:
+        tableARN:
+          type: string
+          example: example_value
+        configuration:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - Enabled
+                - Disabled
+              settings:
+                type: object
+          example: example_value
+    PutTableBucketMaintenanceConfigurationRequest:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: The type of maintenance configuration.
+          enum:
+          - icebergUnreferencedFileRemoval
+          example: icebergUnreferencedFileRemoval
+        value:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+              - Enabled
+              - Disabled
+            settings:
+              type: object
+              properties:
+                unreferencedDays:
+                  type: integer
+                nonCurrentDays:
+                  type: integer
+          example: example_value
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html

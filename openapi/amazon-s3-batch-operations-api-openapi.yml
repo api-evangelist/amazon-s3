@@ -1,0 +1,672 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Control Access Control Batch Operations API
+  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
+  version: '2018-08-20'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://aws.amazon.com/service-terms/
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://s3-control.{region}.amazonaws.com
+  description: Amazon S3 Control regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- sigv4: []
+tags:
+- name: Batch Operations
+  description: Operations for creating and managing S3 Batch Operations jobs
+paths:
+  /v20180820/jobs:
+    get:
+      operationId: ListJobs
+      summary: Amazon S3 List Batch Operations Jobs
+      description: Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the AWS account making the request.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: jobStatuses
+        in: query
+        description: The List Jobs request returns jobs that match the statuses listed.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Active
+            - Cancelled
+            - Cancelling
+            - Complete
+            - Completing
+            - Failed
+            - Failing
+            - New
+            - Paused
+            - Pausing
+            - Preparing
+            - Ready
+            - Suspended
+        example: []
+      - name: nextToken
+        in: query
+        description: A pagination token to request the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: The maximum number of jobs to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        example: 10
+      responses:
+        '200':
+          description: Successfully returned list of jobs.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ListJobsResult'
+              examples:
+                Listjobs200Example:
+                  summary: Default ListJobs 200 response
+                  x-microcks-default: true
+                  value:
+                    Jobs:
+                    - JobId: '500123'
+                      Description: A sample description.
+                      Operation: LambdaInvoke
+                      Priority: 10
+                      Status: Active
+                      CreationTime: '2026-01-15T10:30:00Z'
+                      TerminationDate: '2026-01-15T10:30:00Z'
+                      ProgressSummary:
+                        TotalNumberOfTasks: 10
+                        NumberOfTasksSucceeded: 10
+                        NumberOfTasksFailed: 10
+                        Timers: {}
+                    NextToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: CreateJob
+      summary: Amazon S3 Create Batch Operations Job
+      description: Creates an S3 Batch Operations job to perform the specified operation on every object in the specified manifest. You can create a job that performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier restore, replace tagging, delete objects, or replicate objects.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+            examples:
+              CreatejobRequestExample:
+                summary: Default CreateJob request
+                x-microcks-default: true
+                value:
+                  Operation:
+                    LambdaInvoke:
+                      FunctionArn: example_value
+                    S3PutObjectCopy:
+                      TargetResource: example_value
+                      StorageClass: example_value
+                    S3PutObjectAcl:
+                      AccessControlPolicy: example_value
+                    S3PutObjectTagging:
+                      TagSet:
+                      - {}
+                    S3DeleteObjectTagging: example_value
+                    S3InitiateRestoreObject:
+                      ExpirationInDays: 10
+                      GlacierJobTier: BULK
+                  Report:
+                    Bucket: example_value
+                    Format: Report_CSV_20180820
+                    Enabled: true
+                    Prefix: example_value
+                    ReportScope: AllTasks
+                  Manifest:
+                    Spec:
+                      Format: S3BatchOperations_CSV_20180820
+                      Fields:
+                      - {}
+                    Location:
+                      ObjectArn: example_value
+                      ObjectVersionId: '500123'
+                      ETag: example_value
+                  Priority: 10
+                  RoleArn: example_value
+                  Description: A sample description.
+                  ConfirmationRequired: true
+                  Tags:
+                  - Key: example_value
+                    Value: example_value
+      responses:
+        '200':
+          description: Job created successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                    description: The ID for this job.
+              examples:
+                Createjob200Example:
+                  summary: Default CreateJob 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+        '400':
+          description: Bad request. Invalid job configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/jobs/{id}:
+    get:
+      operationId: DescribeJob
+      summary: Amazon S3 Describe Batch Operations Job
+      description: Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID for the job whose information you want to retrieve.
+        schema:
+          type: string
+        example: abc123
+      responses:
+        '200':
+          description: Successfully returned job details.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobDescriptor'
+              examples:
+                Describejob200Example:
+                  summary: Default DescribeJob 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Description: A sample description.
+                    Operation: example_value
+                    Manifest: example_value
+                    Priority: 10
+                    RoleArn: example_value
+                    Status: Active
+                    CreationTime: '2026-01-15T10:30:00Z'
+                    TerminationDate: '2026-01-15T10:30:00Z'
+                    ProgressSummary:
+                      TotalNumberOfTasks: 10
+                      NumberOfTasksSucceeded: 10
+                      NumberOfTasksFailed: 10
+                    FailureReasons:
+                    - FailureCode: example_value
+                      FailureReason: example_value
+                    Report: example_value
+                    ConfirmationRequired: true
+                    StatusUpdateReason: example_value
+                    SuspendedDate: '2026-01-15T10:30:00Z'
+                    SuspendedCause: example_value
+        '404':
+          description: The specified job does not exist.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/jobs/{id}/priority:
+    post:
+      operationId: UpdateJobPriority
+      summary: Amazon S3 Update Job Priority
+      description: Updates an existing S3 Batch Operations job's priority. You can use this operation to increase or decrease the priority of a job. Higher number priorities are processed first.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID for the job whose priority you want to update.
+        schema:
+          type: string
+        example: abc123
+      - name: priority
+        in: query
+        required: true
+        description: The priority you want to assign to this job.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2147483647
+        example: 10
+      responses:
+        '200':
+          description: Job priority updated successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                  Priority:
+                    type: integer
+              examples:
+                Updatejobpriority200Example:
+                  summary: Default UpdateJobPriority 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Priority: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v20180820/jobs/{id}/status:
+    post:
+      operationId: UpdateJobStatus
+      summary: Amazon S3 Update Job Status
+      description: Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        description: The ID of the job whose status you want to update.
+        schema:
+          type: string
+        example: abc123
+      - name: requestedJobStatus
+        in: query
+        required: true
+        description: The status that you want to move the specified job to.
+        schema:
+          type: string
+          enum:
+          - Cancelled
+          - Ready
+        example: Cancelled
+      - name: statusUpdateReason
+        in: query
+        description: A description of the reason why you want to change the job status.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Job status updated successfully.
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  JobId:
+                    type: string
+                  Status:
+                    type: string
+                  StatusUpdateReason:
+                    type: string
+              examples:
+                Updatejobstatus200Example:
+                  summary: Default UpdateJobStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    JobId: '500123'
+                    Status: example_value
+                    StatusUpdateReason: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ListJobsResult:
+      type: object
+      properties:
+        Jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              JobId:
+                type: string
+              Description:
+                type: string
+              Operation:
+                type: string
+                enum:
+                - LambdaInvoke
+                - S3PutObjectCopy
+                - S3PutObjectAcl
+                - S3PutObjectTagging
+                - S3DeleteObjectTagging
+                - S3InitiateRestoreObject
+                - S3PutObjectLegalHold
+                - S3PutObjectRetention
+                - S3ReplicateObject
+              Priority:
+                type: integer
+              Status:
+                type: string
+                enum:
+                - Active
+                - Cancelled
+                - Cancelling
+                - Complete
+                - Completing
+                - Failed
+                - Failing
+                - New
+                - Paused
+                - Pausing
+                - Preparing
+                - Ready
+                - Suspended
+              CreationTime:
+                type: string
+                format: date-time
+              TerminationDate:
+                type: string
+                format: date-time
+              ProgressSummary:
+                type: object
+                properties:
+                  TotalNumberOfTasks:
+                    type: integer
+                    format: int64
+                  NumberOfTasksSucceeded:
+                    type: integer
+                    format: int64
+                  NumberOfTasksFailed:
+                    type: integer
+                    format: int64
+                  Timers:
+                    type: object
+                    properties:
+                      ElapsedTimeInActiveSeconds:
+                        type: integer
+                        format: int64
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+    S3Tag:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
+          type: string
+          maxLength: 256
+          example: example_value
+    JobDescriptor:
+      type: object
+      properties:
+        JobId:
+          type: string
+          example: '500123'
+        Description:
+          type: string
+          example: A sample description.
+        Operation:
+          type: object
+          example: example_value
+        Manifest:
+          type: object
+          example: example_value
+        Priority:
+          type: integer
+          example: 10
+        RoleArn:
+          type: string
+          example: example_value
+        Status:
+          type: string
+          enum:
+          - Active
+          - Cancelled
+          - Cancelling
+          - Complete
+          - Completing
+          - Failed
+          - Failing
+          - New
+          - Paused
+          - Pausing
+          - Preparing
+          - Ready
+          - Suspended
+          example: Active
+        CreationTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        TerminationDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        ProgressSummary:
+          type: object
+          properties:
+            TotalNumberOfTasks:
+              type: integer
+              format: int64
+            NumberOfTasksSucceeded:
+              type: integer
+              format: int64
+            NumberOfTasksFailed:
+              type: integer
+              format: int64
+          example: example_value
+        FailureReasons:
+          type: array
+          items:
+            type: object
+            properties:
+              FailureCode:
+                type: string
+              FailureReason:
+                type: string
+          example: []
+        Report:
+          type: object
+          example: example_value
+        ConfirmationRequired:
+          type: boolean
+          example: true
+        StatusUpdateReason:
+          type: string
+          example: example_value
+        SuspendedDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        SuspendedCause:
+          type: string
+          example: example_value
+    CreateJobRequest:
+      type: object
+      xml:
+        name: CreateJobRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+      - Operation
+      - Report
+      - Priority
+      - RoleArn
+      - Manifest
+      properties:
+        Operation:
+          type: object
+          description: The action that you want the job to perform on each object.
+          properties:
+            LambdaInvoke:
+              type: object
+              properties:
+                FunctionArn:
+                  type: string
+            S3PutObjectCopy:
+              type: object
+              properties:
+                TargetResource:
+                  type: string
+                StorageClass:
+                  type: string
+            S3PutObjectAcl:
+              type: object
+              properties:
+                AccessControlPolicy:
+                  type: object
+            S3PutObjectTagging:
+              type: object
+              properties:
+                TagSet:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
+            S3DeleteObjectTagging:
+              type: object
+            S3InitiateRestoreObject:
+              type: object
+              properties:
+                ExpirationInDays:
+                  type: integer
+                GlacierJobTier:
+                  type: string
+                  enum:
+                  - BULK
+                  - STANDARD
+          example: example_value
+        Report:
+          type: object
+          description: Configuration parameters for the optional completion report for the job.
+          required:
+          - Enabled
+          properties:
+            Bucket:
+              type: string
+            Format:
+              type: string
+              enum:
+              - Report_CSV_20180820
+            Enabled:
+              type: boolean
+            Prefix:
+              type: string
+            ReportScope:
+              type: string
+              enum:
+              - AllTasks
+              - FailedTasksOnly
+          example: example_value
+        Manifest:
+          type: object
+          description: Configuration parameters for the manifest.
+          properties:
+            Spec:
+              type: object
+              properties:
+                Format:
+                  type: string
+                  enum:
+                  - S3BatchOperations_CSV_20180820
+                  - S3InventoryReport_CSV_20161130
+                Fields:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - Ignore
+                    - Bucket
+                    - Key
+                    - VersionId
+            Location:
+              type: object
+              properties:
+                ObjectArn:
+                  type: string
+                ObjectVersionId:
+                  type: string
+                ETag:
+                  type: string
+          example: example_value
+        Priority:
+          type: integer
+          description: The numerical priority for this job.
+          example: 10
+        RoleArn:
+          type: string
+          description: The Amazon Resource Name (ARN) for the IAM role.
+          example: example_value
+        Description:
+          type: string
+          description: A description for this job.
+          maxLength: 256
+          example: A sample description.
+        ConfirmationRequired:
+          type: boolean
+          description: Indicates whether confirmation is required before Amazon S3 runs the job.
+          example: true
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3Tag'
+          example: []
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+externalDocs:
+  description: Amazon S3 Control API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
