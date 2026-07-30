@@ -2,127 +2,731 @@ name: Amazon S3
 description: >-
   Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability, data
   availability, security, and performance.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/s3/
 created: '2024-01-15'
 modified: '2026-06-20'
 apis:
-  - name: Amazon S3 REST API
-    description: RESTful API for Amazon S3 storage operations including bucket management, object operations, and access control.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/s3/
-    baseURL: https://s3.amazonaws.com
-    tags:
-      - AWS
-      - Cloud Storage
-      - Object Storage
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/
-      - type: OpenAPI
-        url: openapi/amazon-s3-rest-api-openapi.yml
-      - type: Overlay
-        url: overlays/amazon-s3-rest-api-overlay.yaml
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/s3/2006-03-01/openapi.yaml
-      - type: JSONSchema
-        url: json-schema/amazon-s3-bucket-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-s3-object-schema.json
-      - type: JSONLD
-        url: json-ld/amazon-s3-context.jsonld
-      - type: Pricing
-        url: https://aws.amazon.com/s3/pricing/
-      - type: GettingStarted
-        url: https://aws.amazon.com/s3/getting-started/
-      - type: Authentication
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-      - type: SDKs
-        url: https://aws.amazon.com/tools/
-      - type: StatusPage
-        url: https://status.aws.amazon.com/
-      - type: BestPractices
-        url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
-      - type: FAQ
-        url: https://aws.amazon.com/s3/faqs/
-      - type: APIReference
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
-      - type: ChangeLog
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-      - type: CodeExamples
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
-      - type: Security
-        url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-  - name: Amazon S3 Control API
-    description: >-
-      Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations
-      jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-    baseURL: https://s3-control.amazonaws.com
-    tags:
-      - Access Control
-      - AWS
-      - Batch Operations
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-      - type: OpenAPI
-        url: openapi/amazon-s3-control-api-openapi.yml
-      - type: Overlay
-        url: overlays/amazon-s3-control-api-overlay.yaml
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/s3control/2018-08-20/openapi.yaml
-      - type: JSONLD
-        url: json-ld/amazon-s3-context.jsonld
-      - type: Pricing
-        url: https://aws.amazon.com/s3/pricing/
-      - type: GettingStarted
-        url: https://aws.amazon.com/s3/getting-started/
-      - type: Authentication
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-      - type: SDKs
-        url: https://aws.amazon.com/tools/
-      - type: FAQ
-        url: https://aws.amazon.com/s3/faqs/
-      - type: ChangeLog
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - name: Amazon S3 Tables API
-    description: >-
-      Amazon S3 Tables API provides operations for managing table buckets and tables stored in Apache Iceberg format,
-      enabling structured tabular data storage in Apache Parquet format within Amazon S3.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-    baseURL: https://s3tables.amazonaws.com
-    tags:
-      - Apache Iceberg
-      - AWS
-      - Data Lake
-      - Storage
-      - Tables
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-      - type: OpenAPI
-        url: openapi/amazon-s3-tables-api-openapi.yml
-      - type: Overlay
-        url: overlays/amazon-s3-tables-api-overlay.yaml
-      - type: JSONLD
-        url: json-ld/amazon-s3-context.jsonld
-      - type: APIReference
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
-      - type: Pricing
-        url: https://aws.amazon.com/s3/pricing/
-      - type: GettingStarted
-        url: https://aws.amazon.com/s3/getting-started/
-      - type: Authentication
-        url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-      - type: SDKs
-        url: https://aws.amazon.com/tools/
-      - type: FAQ
-        url: https://aws.amazon.com/s3/faqs/
+- name: Amazon S3 Tables API
+  description: >-
+    Amazon S3 Tables API provides operations for managing table buckets and tables stored in Apache Iceberg
+    format, enabling structured tabular data storage in Apache Parquet format within Amazon S3.
+  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  humanURL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+  baseURL: https://s3tables.amazonaws.com
+  tags:
+  - Apache Iceberg
+  - AWS
+  - Data Lake
+  - Storage
+  - Tables
+  properties:
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+  - type: OpenAPI
+    url: openapi/amazon-s3-tables-api-openapi.yml
+  - type: Overlay
+    url: overlays/amazon-s3-tables-api-overlay.yaml
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_S3_Tables.html
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+- aid: amazon-s3:amazon-s3-access-control-api
+  name: Amazon S3 Access Control API
+  description: Operations for managing bucket and object access control lists (ACLs)
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Access Control
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-access-control-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-access-grants-api
+  name: Amazon S3 Access Grants API
+  description: Operations for S3 Access Grants management
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Access Grants
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-access-grants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-access-points-api
+  name: Amazon S3 Access Points API
+  description: Operations for creating and managing S3 access points
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Access Points
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-access-points-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-batch-operations-api
+  name: Amazon S3 Batch Operations API
+  description: Operations for creating and managing S3 Batch Operations jobs
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Batch Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-batch-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-bucket-configuration-api
+  name: Amazon S3 Bucket Configuration API
+  description: >-
+    Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Bucket Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-bucket-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-buckets-api
+  name: Amazon S3 Buckets API
+  description: Operations for creating, listing, and managing S3 buckets
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-multi-region-access-points-api
+  name: Amazon S3 Multi-Region Access Points API
+  description: Operations for Multi-Region Access Points
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Multi-Region Access Points
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-multi-region-access-points-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-multipart-upload-api
+  name: Amazon S3 Multipart Upload API
+  description: Operations for multipart upload of large objects
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Multipart Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-multipart-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-namespaces-api
+  name: Amazon S3 Namespaces API
+  description: Operations for managing namespaces within table buckets
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Namespaces
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-namespaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-objects-api
+  name: Amazon S3 Objects API
+  description: Operations for uploading, downloading, copying, and deleting objects
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-objects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-public-access-block-api
+  name: Amazon S3 Public Access Block API
+  description: Operations for managing public access block settings
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Public Access Block
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-public-access-block-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-storage-lens-api
+  name: Amazon S3 Storage Lens API
+  description: Operations for S3 Storage Lens configurations
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Storage Lens
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-storage-lens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-table-buckets-api
+  name: Amazon S3 Table Buckets API
+  description: Operations for creating and managing S3 table buckets
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Table Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-table-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-table-maintenance-api
+  name: Amazon S3 Table Maintenance API
+  description: Operations for managing table maintenance configurations
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Table Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-table-maintenance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-table-policy-api
+  name: Amazon S3 Table Policy API
+  description: Operations for managing table and table bucket policies
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Table Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-table-policy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-tagging-api
+  name: Amazon S3 Tagging API
+  description: Operations for managing bucket and object tags
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Tagging
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-tagging-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-s3-agentic-access.yml
