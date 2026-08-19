@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Batch Operations API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Batch Operations Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobStatuses",
+                "value": "",
+                "type": "query",
+                "description": "The List Jobs request returns jobs that match the statuses listed."
+              },
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token to request the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of jobs to return."
+              }
+            ]
+          },
+          "docs": "Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the AWS account making the request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Batch Operations Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an S3 Batch Operations job to perform the specified operation on every object in the specified manifest. You can create a job that performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier restore, replace tagging, delete objects, or replicate objects."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Describe Batch Operations Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID for the job whose information you want to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Update Job Priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id/priority",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID for the job whose priority you want to update."
+              },
+              {
+                "name": "priority",
+                "value": "10",
+                "type": "query",
+                "description": "The priority you want to assign to this job."
+              }
+            ]
+          },
+          "docs": "Updates an existing S3 Batch Operations job's priority. You can use this operation to increase or decrease the priority of a job. Higher number priorities are processed first."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Update Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/jobs/:id/status",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The ID of the job whose status you want to update."
+              },
+              {
+                "name": "requestedJobStatus",
+                "value": "Cancelled",
+                "type": "query",
+                "description": "The status that you want to move the specified job to."
+              },
+              {
+                "name": "statusUpdateReason",
+                "value": "example_value",
+                "type": "query",
+                "description": "A description of the reason why you want to change the job status."
+              }
+            ]
+          },
+          "docs": "Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

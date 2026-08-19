@@ -1,0 +1,2191 @@
+{
+  "item": [
+    {
+      "id": "8e8f958a-0453-43d2-9ff4-65588ca72724",
+      "name": "Bucket Configuration",
+      "description": {
+        "content": "Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a99b0b88-5520-4863-a7e9-e68da205faa1",
+          "name": "Amazon S3 Get Bucket Versioning",
+          "request": {
+            "name": "Amazon S3 Get Bucket Versioning",
+            "description": {
+              "content": "Returns the versioning state of a bucket. To retrieve the versioning state of a bucket, you must be the bucket owner. This implementation also returns the MFA Delete status of a bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "versioning",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "727e9dfc-212b-4405-a216-af6edd856ded",
+              "name": "Successfully returned versioning configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e3cc29d3-9c6b-4513-8399-af98008f6ac7",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f7496b7-ac8f-4086-ac7f-644f5d0076f6",
+          "name": "Amazon S3 Put Bucket Versioning",
+          "request": {
+            "name": "Amazon S3 Put Bucket Versioning",
+            "description": {
+              "content": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner. You can set the versioning state to Enabled or Suspended.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "versioning",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                "key": "Content-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                "key": "x-amz-mfa",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<VersioningConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Status>(string)</Status>\n  <MFADelete>(string)</MFADelete>\n</VersioningConfiguration>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ec799dc-6088-4aa1-a467-d3addce4bf28",
+              "name": "Versioning configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<VersioningConfiguration>\n  <Status>Enabled</Status>\n  <MFADelete>Enabled</MFADelete>\n</VersioningConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53fbb2fd-41a0-4c39-a89c-235e1cce575c",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<VersioningConfiguration>\n  <Status>Enabled</Status>\n  <MFADelete>Enabled</MFADelete>\n</VersioningConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f4f53d2-819b-4a89-990d-4457cf31bcb8",
+          "name": "Amazon S3 Get Bucket Encryption",
+          "request": {
+            "name": "Amazon S3 Get Bucket Encryption",
+            "description": {
+              "content": "Returns the default encryption configuration for an Amazon S3 bucket. By default, all buckets have a default encryption configuration that uses server-side encryption with Amazon S3 managed keys (SSE-S3).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "encryption",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "980b31fd-7bf9-4395-9484-ccbf325f3e29",
+              "name": "Successfully returned encryption configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "a14557c1-e7f5-40ea-93cd-ff18cbf6ddcf",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3230d2e-be1d-4654-ac75-2857287cac56",
+          "name": "Amazon S3 Put Bucket Encryption",
+          "request": {
+            "name": "Amazon S3 Put Bucket Encryption",
+            "description": {
+              "content": "This action uses the encryption subresource to configure default encryption and Amazon S3 Bucket Keys for an existing bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "encryption",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The base64-encoded 128-bit MD5 digest.",
+                "key": "Content-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Algorithm used to create the checksum.",
+                "key": "x-amz-checksum-algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ServerSideEncryptionConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Rule>\n    <ApplyServerSideEncryptionByDefault>\n      <SSEAlgorithm>(string)</SSEAlgorithm>\n      <KMSMasterKeyID>(string)</KMSMasterKeyID>\n    </ApplyServerSideEncryptionByDefault>\n    <BucketKeyEnabled>(boolean)</BucketKeyEnabled>\n  </Rule>\n  <Rule>\n    <ApplyServerSideEncryptionByDefault>\n      <SSEAlgorithm>(string)</SSEAlgorithm>\n      <KMSMasterKeyID>(string)</KMSMasterKeyID>\n    </ApplyServerSideEncryptionByDefault>\n    <BucketKeyEnabled>(boolean)</BucketKeyEnabled>\n  </Rule>\n</ServerSideEncryptionConfiguration>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c336a1c6-75ff-4c86-a77f-31be8e9b167a",
+              "name": "Encryption configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ServerSideEncryptionConfiguration>\n  <Rule>\n    <ApplyServerSideEncryptionByDefault>\n      <SSEAlgorithm>AES256</SSEAlgorithm>\n      <KMSMasterKeyID>500123</KMSMasterKeyID>\n    </ApplyServerSideEncryptionByDefault>\n    <BucketKeyEnabled>true</BucketKeyEnabled>\n  </Rule>\n</ServerSideEncryptionConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88713733-b8e4-4641-9fd2-30f639df8ca7",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ServerSideEncryptionConfiguration>\n  <Rule>\n    <ApplyServerSideEncryptionByDefault>\n      <SSEAlgorithm>AES256</SSEAlgorithm>\n      <KMSMasterKeyID>500123</KMSMasterKeyID>\n    </ApplyServerSideEncryptionByDefault>\n    <BucketKeyEnabled>true</BucketKeyEnabled>\n  </Rule>\n</ServerSideEncryptionConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05c9d631-6106-4f41-86ba-0e196eb4686d",
+          "name": "Amazon S3 Delete Bucket Encryption",
+          "request": {
+            "name": "Amazon S3 Delete Bucket Encryption",
+            "description": {
+              "content": "This implementation of the DELETE action resets the default encryption for the bucket as server-side encryption with Amazon S3 managed keys (SSE-S3).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "encryption",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79e17646-5139-4d09-add9-007a605e1b1d",
+              "name": "Encryption configuration deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef2d9f65-c35c-4da1-8dcd-bb8f978eaf13",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "631c9c13-e9ba-43fe-a58e-822e194f4183",
+          "name": "Amazon S3 Get Bucket Lifecycle Configuration",
+          "request": {
+            "name": "Amazon S3 Get Bucket Lifecycle Configuration",
+            "description": {
+              "content": "Returns the lifecycle configuration information set on the bucket. It returns the lifecycle configuration for the specified bucket or an error if the lifecycle configuration does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "lifecycle",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9d1c84d-7e11-41dd-9149-52cd89a6c5cf",
+              "name": "Successfully returned lifecycle configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "37da3f2d-c03a-4e5e-b993-91f3f38130f4",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "6d3563a8-64eb-4187-b91d-c03103f35498",
+              "name": "The lifecycle configuration does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47c1689f-f55a-4448-b1b8-4bdfa86b7cd6",
+          "name": "Amazon S3 Put Bucket Lifecycle Configuration",
+          "request": {
+            "name": "Amazon S3 Put Bucket Lifecycle Configuration",
+            "description": {
+              "content": "Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration. Lifecycle configuration manages objects so that they are stored cost effectively throughout their lifecycle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "lifecycle",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Algorithm used to create the checksum.",
+                "key": "x-amz-checksum-algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LifecycleConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Rule>\n    <ID>(string)</ID>\n    <Filter>\n      <Prefix>(string)</Prefix>\n      <Tag>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </Tag>\n      <And>\n        <Prefix>(string)</Prefix>\n        <Tags>\n          <Key>(string)</Key>\n          <Value>(string)</Value>\n        </Tags>\n        <Tags>\n          <Key>(string)</Key>\n          <Value>(string)</Value>\n        </Tags>\n        <ObjectSizeGreaterThan>(integer)</ObjectSizeGreaterThan>\n        <ObjectSizeLessThan>(integer)</ObjectSizeLessThan>\n      </And>\n      <ObjectSizeGreaterThan>(integer)</ObjectSizeGreaterThan>\n      <ObjectSizeLessThan>(integer)</ObjectSizeLessThan>\n    </Filter>\n    <Status>(string)</Status>\n    <Expiration>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <ExpiredObjectDeleteMarker>(boolean)</ExpiredObjectDeleteMarker>\n    </Expiration>\n    <Transition>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <StorageClass>(string)</StorageClass>\n    </Transition>\n    <Transition>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <StorageClass>(string)</StorageClass>\n    </Transition>\n    <NoncurrentVersionExpiration>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionExpiration>\n    <NoncurrentVersionTransition>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <StorageClass>(string)</StorageClass>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionTransition>\n    <NoncurrentVersionTransition>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <StorageClass>(string)</StorageClass>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionTransition>\n    <AbortIncompleteMultipartUpload>\n      <DaysAfterInitiation>(integer)</DaysAfterInitiation>\n    </AbortIncompleteMultipartUpload>\n  </Rule>\n  <Rule>\n    <ID>(string)</ID>\n    <Filter>\n      <Prefix>(string)</Prefix>\n      <Tag>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </Tag>\n      <And>\n        <Prefix>(string)</Prefix>\n        <Tags>\n          <Key>(string)</Key>\n          <Value>(string)</Value>\n        </Tags>\n        <Tags>\n          <Key>(string)</Key>\n          <Value>(string)</Value>\n        </Tags>\n        <ObjectSizeGreaterThan>(integer)</ObjectSizeGreaterThan>\n        <ObjectSizeLessThan>(integer)</ObjectSizeLessThan>\n      </And>\n      <ObjectSizeGreaterThan>(integer)</ObjectSizeGreaterThan>\n      <ObjectSizeLessThan>(integer)</ObjectSizeLessThan>\n    </Filter>\n    <Status>(string)</Status>\n    <Expiration>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <ExpiredObjectDeleteMarker>(boolean)</ExpiredObjectDeleteMarker>\n    </Expiration>\n    <Transition>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <StorageClass>(string)</StorageClass>\n    </Transition>\n    <Transition>\n      <Date>(string)</Date>\n      <Days>(integer)</Days>\n      <StorageClass>(string)</StorageClass>\n    </Transition>\n    <NoncurrentVersionExpiration>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionExpiration>\n    <NoncurrentVersionTransition>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <StorageClass>(string)</StorageClass>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionTransition>\n    <NoncurrentVersionTransition>\n      <NoncurrentDays>(integer)</NoncurrentDays>\n      <StorageClass>(string)</StorageClass>\n      <NewerNoncurrentVersions>(integer)</NewerNoncurrentVersions>\n    </NoncurrentVersionTransition>\n    <AbortIncompleteMultipartUpload>\n      <DaysAfterInitiation>(integer)</DaysAfterInitiation>\n    </AbortIncompleteMultipartUpload>\n  </Rule>\n</LifecycleConfiguration>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e5f2f95-4bc8-48ba-9557-d7540d19e9c3",
+              "name": "Lifecycle configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LifecycleConfiguration>\n  <Rule>\n    <ID>abc123</ID>\n    <Filter/>\n    <Status>Enabled</Status>\n    <Expiration/>\n    <Transition/>\n    <NoncurrentVersionExpiration/>\n    <NoncurrentVersionTransition/>\n    <AbortIncompleteMultipartUpload/>\n  </Rule>\n</LifecycleConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c20906a-17d2-4a79-9a06-acdb74045ddd",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LifecycleConfiguration>\n  <Rule>\n    <ID>abc123</ID>\n    <Filter/>\n    <Status>Enabled</Status>\n    <Expiration/>\n    <Transition/>\n    <NoncurrentVersionExpiration/>\n    <NoncurrentVersionTransition/>\n    <AbortIncompleteMultipartUpload/>\n  </Rule>\n</LifecycleConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86fcb90d-dd9a-41fb-b26b-7ba83714b0fb",
+          "name": "Amazon S3 Delete Bucket Lifecycle",
+          "request": {
+            "name": "Amazon S3 Delete Bucket Lifecycle",
+            "description": {
+              "content": "Deletes the lifecycle configuration from the specified bucket. Amazon S3 removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "lifecycle",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13fbab3e-83e2-410f-807b-2bfb0cf60b81",
+              "name": "Lifecycle configuration deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f626bcf-497a-43cf-830e-52444cae6dd3",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "884d202c-df15-42ef-b39a-f7d87d1edf27",
+          "name": "Amazon S3 Get Bucket Cors",
+          "request": {
+            "name": "Amazon S3 Get Bucket Cors",
+            "description": {
+              "content": "Returns the Cross-Origin Resource Sharing (CORS) configuration information set for the bucket. To use this operation, you must have permission to perform the s3:GetBucketCORS action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cors",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ffdff90-86ef-434d-8ade-e2a67bcdd01c",
+              "name": "Successfully returned CORS configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "fdc9f9fb-7f6b-410f-a35d-4d5b6fdf2e09",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "44c91c90-5d10-4190-afc8-7aeda8b8bad3",
+              "name": "CORS configuration does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fdeaa12-8439-4ceb-aefa-30f8fd12a3c3",
+          "name": "Amazon S3 Put Bucket Cors",
+          "request": {
+            "name": "Amazon S3 Put Bucket Cors",
+            "description": {
+              "content": "Sets the CORS configuration for your bucket. If the configuration exists, Amazon S3 replaces it. To use this operation, you must be allowed to perform the s3:PutBucketCORS action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cors",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The base64-encoded 128-bit MD5 digest.",
+                "key": "Content-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CORSConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <CORSRule>\n    <ID>(string)</ID>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <ExposeHeaders>(string)</ExposeHeaders>\n    <ExposeHeaders>(string)</ExposeHeaders>\n    <MaxAgeSeconds>(integer)</MaxAgeSeconds>\n  </CORSRule>\n  <CORSRule>\n    <ID>(string)</ID>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <ExposeHeaders>(string)</ExposeHeaders>\n    <ExposeHeaders>(string)</ExposeHeaders>\n    <MaxAgeSeconds>(integer)</MaxAgeSeconds>\n  </CORSRule>\n</CORSConfiguration>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92539dd3-8b71-46f9-8bc8-8af5f7cbed10",
+              "name": "CORS configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CORSConfiguration>\n  <CORSRule>\n    <ID>abc123</ID>\n    <AllowedHeaders/>\n    <AllowedMethods/>\n    <AllowedOrigins/>\n    <ExposeHeaders/>\n    <MaxAgeSeconds>10</MaxAgeSeconds>\n  </CORSRule>\n</CORSConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e3dce6d-d91c-410d-8574-1b2438817706",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CORSConfiguration>\n  <CORSRule>\n    <ID>abc123</ID>\n    <AllowedHeaders/>\n    <AllowedMethods/>\n    <AllowedOrigins/>\n    <ExposeHeaders/>\n    <MaxAgeSeconds>10</MaxAgeSeconds>\n  </CORSRule>\n</CORSConfiguration>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbf2e039-fee0-4092-8878-8dd8b01111c9",
+          "name": "Amazon S3 Delete Bucket Cors",
+          "request": {
+            "name": "Amazon S3 Delete Bucket Cors",
+            "description": {
+              "content": "Deletes the CORS configuration information set for the bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "cors",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ece772e7-438a-4bc6-b64f-e11ca17988a4",
+              "name": "CORS configuration deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67db9078-c938-4925-8eb2-00337252e5ad",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://s3-control.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Bucket"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3303c47f-f262-4cd5-9584-29624391a7b4",
+    "name": "Amazon S3 Control Access Control Bucket Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

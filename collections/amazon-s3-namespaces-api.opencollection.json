@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Namespaces API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/namespaces/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "The prefix of the namespaces."
+              },
+              {
+                "name": "continuationToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A continuation token for pagination."
+              },
+              {
+                "name": "maxNamespaces",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of namespaces to return."
+              }
+            ]
+          },
+          "docs": "Lists the namespaces within a table bucket. Namespaces organize tables within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/namespaces/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a namespace. A namespace is a logical grouping of tables within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/namespaces/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Gets details about a namespace within a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/namespaces/:tableBucketARN/:namespace",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              }
+            ]
+          },
+          "docs": "Deletes a namespace. The namespace must be empty (all tables must be deleted first) before it can be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

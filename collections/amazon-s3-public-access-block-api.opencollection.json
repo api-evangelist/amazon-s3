@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Public Access Block API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Public Access Block",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the PublicAccessBlock configuration for an AWS account. For using this operation with S3 on Outposts, you must provide the Outpost bucket ARN."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates or modifies the PublicAccessBlock configuration for an AWS account. To use this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Public Access Block",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/configuration/publicAccessBlock",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Removes the PublicAccessBlock configuration for an AWS account. For this operation, you must have the s3:PutAccountPublicAccessBlock permission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

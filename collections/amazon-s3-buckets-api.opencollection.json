@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Buckets API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ]
+          },
+          "docs": "Returns a list of all buckets owned by the authenticated sender of the request. To use this operation, you must have the s3:ListAllMyBuckets permission. This operation uses the GET method on the service endpoint."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-bucket-object-lock-enabled",
+                "value": "true"
+              },
+              {
+                "name": "x-amz-object-ownership",
+                "value": "BucketOwnerPreferred"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and have a valid AWS Access Key ID. By default, buckets are created in the us-east-1 region. Use the LocationConstraint request element to specify a different region."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the S3 bucket. All objects in the bucket must be deleted before the bucket itself can be deleted. The bucket owner can always delete a bucket, regardless of bucket policies."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Head Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Determines if a bucket exists and you have permission to access it. A HEAD request returns 200 OK if the bucket exists and you have permission to access it. Returns 404 Not Found if the bucket does not exist or 403 Forbidden if you do not have permission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

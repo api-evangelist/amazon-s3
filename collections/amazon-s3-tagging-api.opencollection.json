@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Tagging API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tagging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the tag set associated with the bucket. To use this operation, you must have permission to perform the s3:GetBucketTagging action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the tags for a bucket. Use tags to organize your AWS bill to reflect your own cost structure. To use this operation, you must have permission to perform the s3:PutBucketTagging action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Tagging",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?tagging",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the tags from the bucket. To use this operation, you must have permission to perform the s3:PutBucketTagging action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

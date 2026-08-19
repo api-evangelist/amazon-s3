@@ -1,0 +1,325 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Bucket Configuration API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bucket Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Versioning",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?versioning",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the versioning state of a bucket. To retrieve the versioning state of a bucket, you must be the bucket owner. This implementation also returns the MFA Delete status of a bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Versioning",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?versioning",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-mfa",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner. You can set the versioning state to Enabled or Suspended."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the default encryption configuration for an Amazon S3 bucket. By default, all buckets have a default encryption configuration that uses server-side encryption with Amazon S3 managed keys (SSE-S3)."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This action uses the encryption subresource to configure default encryption and Amazon S3 Bucket Keys for an existing bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?encryption",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "This implementation of the DELETE action resets the default encryption for the bucket as server-side encryption with Amazon S3 managed keys (SSE-S3)."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Lifecycle Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the lifecycle configuration information set on the bucket. It returns the lifecycle configuration for the specified bucket or an error if the lifecycle configuration does not exist."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Lifecycle Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration. Lifecycle configuration manages objects so that they are stored cost effectively throughout their lifecycle."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Lifecycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?lifecycle",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the lifecycle configuration from the specified bucket. Amazon S3 removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Returns the Cross-Origin Resource Sharing (CORS) configuration information set for the bucket. To use this operation, you must have permission to perform the s3:GetBucketCORS action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Sets the CORS configuration for your bucket. If the configuration exists, Amazon S3 replaces it. To use this operation, you must be allowed to perform the s3:PutBucketCORS action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Bucket Cors",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket?cors",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              }
+            ]
+          },
+          "docs": "Deletes the CORS configuration information set for the bucket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

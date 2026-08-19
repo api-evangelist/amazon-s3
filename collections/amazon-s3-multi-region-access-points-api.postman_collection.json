@@ -1,0 +1,505 @@
+{
+  "item": [
+    {
+      "id": "16c4beed-8508-4c5b-83eb-868f8ab2833d",
+      "name": "Multi-Region Access Points",
+      "description": {
+        "content": "Operations for Multi-Region Access Points",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a2e7b88-751e-434f-b5d3-cf70d5b80973",
+          "name": "Amazon S3 Create Multi-region Access Point",
+          "request": {
+            "name": "Amazon S3 Create Multi-region Access Point",
+            "description": {
+              "content": "Creates a Multi-Region Access Point and associates it with the specified buckets. Multi-Region Access Points provide a single global endpoint that applications can use to request data regardless of the location of the requester. This is an asynchronous request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "async-requests",
+                "mrap",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateMultiRegionAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <ClientToken>(string)</ClientToken>\n  <Details>\n    <Name>(string)</Name>\n    <PublicAccessBlockConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n      <BlockPublicAcls>(boolean)</BlockPublicAcls>\n      <IgnorePublicAcls>(boolean)</IgnorePublicAcls>\n      <BlockPublicPolicy>(boolean)</BlockPublicPolicy>\n      <RestrictPublicBuckets>(boolean)</RestrictPublicBuckets>\n    </PublicAccessBlockConfiguration>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n    <Regions>\n      <Bucket>(string)</Bucket>\n      <BucketAccountId>(string)</BucketAccountId>\n    </Regions>\n  </Details>\n</CreateMultiRegionAccessPointRequest>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4238346-67f8-4311-a725-23c3d1697b43",
+              "name": "Request accepted. Multi-Region Access Point creation is asynchronous.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "async-requests",
+                    "mrap",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateMultiRegionAccessPointRequest>\n  <ClientToken>example_value</ClientToken>\n  <Details>\n    <Name>Example Title</Name>\n    <PublicAccessBlock>\n      <BlockPublicAcls>true</BlockPublicAcls>\n      <IgnorePublicAcls>true</IgnorePublicAcls>\n      <BlockPublicPolicy>true</BlockPublicPolicy>\n      <RestrictPublicBuckets>true</RestrictPublicBuckets>\n    </PublicAccessBlock>\n    <Regions>\n      <Bucket>example_value</Bucket>\n      <BucketAccountId>500123</BucketAccountId>\n    </Regions>\n  </Details>\n</CreateMultiRegionAccessPointRequest>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <RequestTokenARN>example_value</RequestTokenARN>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9aea80a-8530-40c3-94e4-6f68accf6b24",
+          "name": "Amazon S3 List Multi-region Access Points",
+          "request": {
+            "name": "Amazon S3 List Multi-region Access Points",
+            "description": {
+              "content": "Returns a list of the Multi-Region Access Points currently associated with the specified AWS account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "mrap",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "A pagination token for the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "Number of results to return per call."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13b0040e-9828-457d-bcf1-c280ee8736d2",
+              "name": "Successfully returned list of Multi-Region Access Points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "mrap",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41d293e4-8057-42d1-9edc-521fae137bde",
+          "name": "Amazon S3 Get Multi-region Access Point",
+          "request": {
+            "name": "Amazon S3 Get Multi-region Access Point",
+            "description": {
+              "content": "Returns configuration information about the specified Multi-Region Access Point.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "mrap",
+                "instances",
+                ":mrap_name+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mrap_name+",
+                  "description": "(Required) The name of the Multi-Region Access Point."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "912cc701-ab58-4550-ba73-3d0a64babe8b",
+              "name": "Successfully returned Multi-Region Access Point configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "mrap",
+                    "instances",
+                    ":mrap_name+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrap_name+",
+                      "description": "(Required) The name of the Multi-Region Access Point."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "89543183-e91f-4000-8f63-c9985c369534",
+              "name": "The specified Multi-Region Access Point does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "mrap",
+                    "instances",
+                    ":mrap_name+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrap_name+",
+                      "description": "(Required) The name of the Multi-Region Access Point."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://s3-control.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "631c13e4-9f1f-43d5-a3aa-6d948388576e",
+    "name": "Amazon S3 Control Access Control Multi-Region Access Points API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

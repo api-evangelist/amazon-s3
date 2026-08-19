@@ -1,51 +1,32 @@
 {
   "item": [
     {
-      "id": "639d1ef4-e4c8-4294-9879-a873c265145b",
-      "name": "Tables",
+      "id": "92d0a6d3-95d4-4eca-97d8-ce5c4da9e084",
+      "name": "Table Policy",
       "description": {
-        "content": "Operations for creating and managing tables within table buckets",
+        "content": "Operations for managing table and table bucket policies",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "a3b2f8ac-f00b-4db5-9b40-4c5d3ea85532",
-          "name": "Amazon S3 List Tables",
+          "id": "3435f5c2-0946-431e-95bc-250bdc755a05",
+          "name": "Amazon S3 Get Table Bucket Policy",
           "request": {
-            "name": "Amazon S3 List Tables",
+            "name": "Amazon S3 Get Table Bucket Policy",
             "description": {
-              "content": "Lists the tables in the specified namespace within a table bucket.",
+              "content": "Gets details about a table bucket policy. Returns the policy document associated with the specified table bucket.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "tables",
+                "buckets",
                 ":tableBucketARN",
-                ":namespace"
+                "policy"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "prefix",
-                  "value": "<string>",
-                  "description": "The prefix of the table names."
-                },
-                {
-                  "disabled": false,
-                  "key": "continuationToken",
-                  "value": "<string>",
-                  "description": "A continuation token for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "maxTables",
-                  "value": "<integer>",
-                  "description": "The maximum number of tables to return."
-                }
-              ],
+              "query": [],
               "variable": [
                 {
                   "disabled": false,
@@ -53,13 +34,6 @@
                   "value": "<string>",
                   "key": "tableBucketARN",
                   "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
                 },
                 {
                   "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -80,32 +54,19 @@
           },
           "response": [
             {
-              "id": "17dbfeaf-af67-40bc-8e23-fd083652c186",
-              "name": "Successfully returned list of tables.",
+              "id": "5326dfc6-d53f-4175-b2ca-ae022d923a51",
+              "name": "Successfully returned table bucket policy.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "tables",
+                    "buckets",
                     ":tableBucketARN",
-                    ":namespace"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": "example_value"
-                    },
-                    {
-                      "key": "continuationToken",
-                      "value": "example_value"
-                    },
-                    {
-                      "key": "maxTables",
-                      "value": "10"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
@@ -113,13 +74,6 @@
                       "value": "<string>",
                       "key": "tableBucketARN",
                       "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
                     },
                     {
                       "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -154,37 +108,24 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"tables\": [\n    {\n      \"namespace\": {},\n      \"name\": \"Example Title\",\n      \"type\": \"customer\",\n      \"tableARN\": \"example_value\",\n      \"createdAt\": \"2026-01-15T10:30:00Z\",\n      \"modifiedAt\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"continuationToken\": \"example_value\"\n}",
+              "body": "{\n  \"resourcePolicy\": \"example_value\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "974787b7-31a8-4fdb-bb72-dd5f9688191f",
-              "name": "The specified namespace does not exist.",
+              "id": "e666f147-4dfb-4b88-8763-3230e704449d",
+              "name": "The table bucket policy does not exist.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "tables",
+                    "buckets",
                     ":tableBucketARN",
-                    ":namespace"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": "example_value"
-                    },
-                    {
-                      "key": "continuationToken",
-                      "value": "example_value"
-                    },
-                    {
-                      "key": "maxTables",
-                      "value": "10"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
@@ -192,13 +133,6 @@
                       "value": "<string>",
                       "key": "tableBucketARN",
                       "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
                     },
                     {
                       "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -240,19 +174,19 @@
           }
         },
         {
-          "id": "09deb331-fa05-47b6-ac96-66cfa8825f5b",
-          "name": "Amazon S3 Create Table",
+          "id": "292c009a-68cf-433d-8373-3fd079339ef7",
+          "name": "Amazon S3 Put Table Bucket Policy",
           "request": {
-            "name": "Amazon S3 Create Table",
+            "name": "Amazon S3 Put Table Bucket Policy",
             "description": {
-              "content": "Creates a new table in the specified namespace within a table bucket. The table is created in Apache Iceberg format and data is stored in Apache Parquet format.",
+              "content": "Creates or replaces a table bucket policy for a table bucket.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "tables",
+                "buckets",
                 ":tableBucketARN",
-                ":namespace"
+                "policy"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -265,13 +199,6 @@
                   "value": "<string>",
                   "key": "tableBucketARN",
                   "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
                 },
                 {
                   "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -285,17 +212,13 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
               }
             ],
             "method": "PUT",
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"format\": \"<string>\"\n}",
+              "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -305,14 +228,14 @@
           },
           "response": [
             {
-              "id": "dab2e08d-9497-48c7-83ba-479a5726f952",
-              "name": "Table created successfully.",
+              "id": "1925ac62-2e31-492f-8b7c-0259c9c124d4",
+              "name": "Table bucket policy updated successfully.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "tables",
+                    "buckets",
                     ":tableBucketARN",
-                    ":namespace"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -325,13 +248,6 @@
                       "value": "<string>",
                       "key": "tableBucketARN",
                       "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
                     },
                     {
                       "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -349,16 +265,12 @@
                     },
                     "key": "Authorization",
                     "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
                   }
                 ],
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Example Title\",\n  \"format\": \"ICEBERG\"\n}",
+                  "raw": "{\n  \"resourcePolicy\": \"example_value\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -371,22 +283,22 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json"
+                  "value": "text/plain"
                 }
               ],
-              "body": "{\n  \"tableARN\": \"example_value\",\n  \"versionToken\": \"example_value\"\n}",
+              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "_postman_previewlanguage": "text"
             },
             {
-              "id": "2a781edc-de6a-4700-82cc-ebe2a7b685c2",
-              "name": "A table with this name already exists.",
+              "id": "f55806b4-9a4d-4b12-b358-949a59bfed68",
+              "name": "Invalid policy document.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "tables",
+                    "buckets",
                     ":tableBucketARN",
-                    ":namespace"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -399,13 +311,6 @@
                       "value": "<string>",
                       "key": "tableBucketARN",
                       "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
                     },
                     {
                       "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -428,7 +333,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Example Title\",\n  \"format\": \"ICEBERG\"\n}",
+                  "raw": "{\n  \"resourcePolicy\": \"example_value\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -436,8 +341,8 @@
                   }
                 }
               },
-              "status": "Conflict",
-              "code": 409,
+              "status": "Bad Request",
+              "code": 400,
               "header": [
                 {
                   "key": "Content-Type",
@@ -455,20 +360,19 @@
           }
         },
         {
-          "id": "d32d0bc4-440f-44db-b840-e2ad1c5ed435",
-          "name": "Amazon S3 Get Table",
+          "id": "bd55df30-206d-4885-b6e3-1607ecdd9d8f",
+          "name": "Amazon S3 Delete Table Bucket Policy",
           "request": {
-            "name": "Amazon S3 Get Table",
+            "name": "Amazon S3 Delete Table Bucket Policy",
             "description": {
-              "content": "Gets details about a table in the specified namespace within a table bucket.",
+              "content": "Deletes a table bucket policy for a table bucket.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "tables",
+                "buckets",
                 ":tableBucketARN",
-                ":namespace",
-                ":name"
+                "policy"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -481,237 +385,6 @@
                   "value": "<string>",
                   "key": "tableBucketARN",
                   "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) The name of the table."
-                },
-                {
-                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                  "type": "any",
-                  "value": "{{region}}",
-                  "key": "region"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "0512a2a9-ce0c-49bf-afa9-9995bc806c19",
-              "name": "Successfully returned table details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The name of the table."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"Example Title\",\n  \"tableARN\": \"example_value\",\n  \"namespace\": [\n    \"example_value\"\n  ],\n  \"versionToken\": \"example_value\",\n  \"metadataLocation\": \"example_value\",\n  \"warehouseLocation\": \"example_value\",\n  \"createdAt\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"modifiedAt\": \"2026-01-15T10:30:00Z\",\n  \"modifiedBy\": \"example_value\",\n  \"managedByService\": \"example_value\",\n  \"ownerAccountId\": \"500123\",\n  \"type\": \"customer\",\n  \"format\": \"ICEBERG\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e4f63d69-4d98-4dd1-9a6b-f6f81cda1d58",
-              "name": "The specified table does not exist.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The name of the table."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "73b68c85-46c3-423d-9375-0582ad44d266",
-          "name": "Amazon S3 Delete Table",
-          "request": {
-            "name": "Amazon S3 Delete Table",
-            "description": {
-              "content": "Deletes a table from the specified namespace within a table bucket.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tables",
-                ":tableBucketARN",
-                ":namespace",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "versionToken",
-                  "value": "<string>",
-                  "description": "The version token of the table."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tableBucketARN",
-                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) The name of the table to delete."
                 },
                 {
                   "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -726,25 +399,19 @@
           },
           "response": [
             {
-              "id": "baa2b31d-ac23-4a5b-b5c4-ad9abba717b2",
-              "name": "Table deleted successfully.",
+              "id": "9f0e0a3c-abeb-41c1-ab01-ddcb17871b49",
+              "name": "Table bucket policy deleted successfully.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "tables",
+                    "buckets",
                     ":tableBucketARN",
-                    ":namespace",
-                    ":name"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "versionToken",
-                      "value": "example_value"
-                    }
-                  ],
+                  "query": [],
                   "variable": [
                     {
                       "disabled": false,
@@ -752,20 +419,6 @@
                       "value": "<string>",
                       "key": "tableBucketARN",
                       "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The name of the table to delete."
                     },
                     {
                       "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
@@ -799,81 +452,6 @@
               "body": "",
               "cookie": [],
               "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "3ff060f6-7277-4db8-a44a-c730c5113484",
-              "name": "The specified table does not exist.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "versionToken",
-                      "value": "example_value"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The name of the table to delete."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
             }
           ],
           "event": [],
@@ -882,321 +460,12 @@
           }
         },
         {
-          "id": "b89826ea-3378-4341-8382-f12e3945b54b",
-          "name": "Amazon S3 Rename Table",
+          "id": "a86b6e6d-b60d-40e2-a910-7ae4308585ae",
+          "name": "Amazon S3 Get Table Policy",
           "request": {
-            "name": "Amazon S3 Rename Table",
+            "name": "Amazon S3 Get Table Policy",
             "description": {
-              "content": "Renames a table or moves a table to a different namespace within a table bucket.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tables",
-                ":tableBucketARN",
-                ":namespace",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tableBucketARN",
-                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) The current name of the table."
-                },
-                {
-                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                  "type": "any",
-                  "value": "{{region}}",
-                  "key": "region"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"newNamespaceName\": \"<string>\",\n  \"newName\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f45896a2-d04e-4886-ad5c-9cb8e91e81ed",
-              "name": "Table renamed successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The current name of the table."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"versionToken\": \"example_value\",\n  \"newNamespaceName\": \"example_value\",\n  \"newName\": \"example_value\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "8335e575-fa55-4781-aa38-571ecb196781",
-              "name": "The specified table does not exist.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The current name of the table."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"versionToken\": \"example_value\",\n  \"newNamespaceName\": \"example_value\",\n  \"newName\": \"example_value\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c2b5b77c-fdc5-4110-b809-a55563dcd3a9",
-              "name": "A table with the new name already exists.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tables",
-                    ":tableBucketARN",
-                    ":namespace",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tableBucketARN",
-                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "namespace",
-                      "description": "(Required) The name of the namespace."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) The current name of the table."
-                    },
-                    {
-                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                      "type": "any",
-                      "value": "{{region}}",
-                      "key": "region"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"versionToken\": \"example_value\",\n  \"newNamespaceName\": \"example_value\",\n  \"newName\": \"example_value\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e1f6c1de-fe7f-4e98-94de-eadb288c10c5",
-          "name": "Amazon S3 Get Table Metadata Location",
-          "request": {
-            "name": "Amazon S3 Get Table Metadata Location",
-            "description": {
-              "content": "Gets the location of the table metadata in S3.",
+              "content": "Gets the resource policy for a table.",
               "type": "text/plain"
             },
             "url": {
@@ -1205,7 +474,7 @@
                 ":tableBucketARN",
                 ":namespace",
                 ":name",
-                "metadata-location"
+                "policy"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -1252,8 +521,8 @@
           },
           "response": [
             {
-              "id": "7960c871-6eb2-45a9-b3da-a9725c5e89da",
-              "name": "Successfully returned table metadata location.",
+              "id": "9e01ae42-2c4d-4976-9e56-fe3afc758986",
+              "name": "Successfully returned table policy.",
               "originalRequest": {
                 "url": {
                   "path": [
@@ -1261,7 +530,7 @@
                     ":tableBucketARN",
                     ":namespace",
                     ":name",
-                    "metadata-location"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -1322,93 +591,13 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"versionToken\": \"example_value\",\n  \"metadataLocation\": \"example_value\",\n  \"warehouseLocation\": \"example_value\"\n}",
+              "body": "{\n  \"resourcePolicy\": \"example_value\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bac7a4cf-6d57-451c-9c1f-84d2afd87b47",
-          "name": "Amazon S3 Update Table Metadata Location",
-          "request": {
-            "name": "Amazon S3 Update Table Metadata Location",
-            "description": {
-              "content": "Updates the metadata location for a table. Used to point the table to a new Iceberg metadata file after a metadata update.",
-              "type": "text/plain"
             },
-            "url": {
-              "path": [
-                "tables",
-                ":tableBucketARN",
-                ":namespace",
-                ":name",
-                "metadata-location"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tableBucketARN",
-                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "namespace",
-                  "description": "(Required) The name of the namespace."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) The name of the table."
-                },
-                {
-                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
-                  "type": "any",
-                  "value": "{{region}}",
-                  "key": "region"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"versionToken\": \"<string>\",\n  \"metadataLocation\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
             {
-              "id": "bb439f39-5acc-4060-9613-5e76573d5a86",
-              "name": "Table metadata location updated successfully.",
+              "id": "e6470035-5a10-45f8-9a38-7d7bdb1a8705",
+              "name": "The table policy does not exist.",
               "originalRequest": {
                 "url": {
                   "path": [
@@ -1416,7 +605,7 @@
                     ":tableBucketARN",
                     ":namespace",
                     ":name",
-                    "metadata-location"
+                    "policy"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -1460,16 +649,159 @@
                     },
                     "key": "Authorization",
                     "value": "<API Key>"
-                  },
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74b56f8e-d1cf-4113-a358-c034d9618afc",
+          "name": "Amazon S3 Put Table Policy",
+          "request": {
+            "name": "Amazon S3 Put Table Policy",
+            "description": {
+              "content": "Creates or replaces the resource policy for a table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables",
+                ":tableBucketARN",
+                ":namespace",
+                ":name",
+                "policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableBucketARN",
+                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The name of the namespace."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the table."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourcePolicy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bac8bf4-a6db-41ac-a0bd-35345c132417",
+              "name": "Table policy updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":tableBucketARN",
+                    ":namespace",
+                    ":name",
+                    "policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableBucketARN",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The name of the namespace."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the table."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
                   {
-                    "key": "Accept",
-                    "value": "application/json"
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
                   }
                 ],
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"versionToken\": \"example_value\",\n  \"metadataLocation\": \"example_value\"\n}",
+                  "raw": "{\n  \"resourcePolicy\": \"example_value\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1482,12 +814,144 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json"
+                  "value": "text/plain"
                 }
               ],
-              "body": "{\n  \"name\": \"Example Title\",\n  \"tableARN\": \"example_value\",\n  \"versionToken\": \"example_value\",\n  \"metadataLocation\": \"example_value\"\n}",
+              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cb1f8b1-7fd9-469c-8a08-dc7c41aeda2a",
+          "name": "Amazon S3 Delete Table Policy",
+          "request": {
+            "name": "Amazon S3 Delete Table Policy",
+            "description": {
+              "content": "Deletes the resource policy for a table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables",
+                ":tableBucketARN",
+                ":namespace",
+                ":name",
+                "policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tableBucketARN",
+                  "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The name of the namespace."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the table."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ec4638c-c7e4-434b-a355-e86b7d310320",
+              "name": "Table policy deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":tableBucketARN",
+                    ":namespace",
+                    ":name",
+                    "policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tableBucketARN",
+                      "description": "(Required) The Amazon Resource Name (ARN) of the table bucket."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The name of the namespace."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the table."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
             }
           ],
           "event": [],
@@ -1534,8 +998,8 @@
     ]
   },
   "info": {
-    "_postman_id": "cfd0f904-0fa7-4b4e-b883-5945ab033a84",
-    "name": "Amazon S3 Control Access Control Tables API",
+    "_postman_id": "4a411baf-66a2-4d0b-82fe-c4c122aefcc3",
+    "name": "Amazon S3 Control Access Control Table Policy API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",

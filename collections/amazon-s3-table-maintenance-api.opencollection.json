@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Table Maintenance API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket maintenance configuration, including Iceberg compaction and snapshot management settings."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Bucket Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a table bucket maintenance configuration for the specified table bucket. This includes Iceberg compaction and snapshot management."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets details about the maintenance configuration of a table, including Iceberg compaction and snapshot management settings."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Maintenance Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the maintenance configuration for the specified table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Maintenance Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/maintenance-job-status",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets the status of a maintenance job for a table, including the last run timestamp and status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

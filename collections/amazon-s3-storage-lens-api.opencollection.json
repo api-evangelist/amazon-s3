@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Storage Lens API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Storage Lens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Storage Lens Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token for the next page of results."
+              }
+            ]
+          },
+          "docs": "Gets a list of Amazon S3 Storage Lens configurations. To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Amazon S3 Storage Lens configuration."
+              }
+            ]
+          },
+          "docs": "Gets the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Amazon S3 Storage Lens configuration."
+              }
+            ]
+          },
+          "docs": "Puts an Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Storage Lens Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/storagelens/:storagelensid",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "storagelensid",
+                "value": "500123",
+                "type": "path",
+                "description": "The ID of the Storage Lens configuration to delete."
+              }
+            ]
+          },
+          "docs": "Deletes the Amazon S3 Storage Lens configuration. To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

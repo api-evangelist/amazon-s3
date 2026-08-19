@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Multi-Region Access Points API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Multi-Region Access Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Create Multi-region Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/async-requests/mrap/create",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a Multi-Region Access Point and associates it with the specified buckets. Multi-Region Access Points provide a single global endpoint that applications can use to request data regardless of the location of the requester. This is an asynchronous request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 List Multi-region Access Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/mrap/instances",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A pagination token for the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results to return per call."
+              }
+            ]
+          },
+          "docs": "Returns a list of the Multi-Region Access Points currently associated with the specified AWS account."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Multi-region Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/mrap/instances/:mrap_name+",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mrap_name+",
+                "value": "example_value",
+                "type": "path",
+                "description": "The name of the Multi-Region Access Point."
+              }
+            ]
+          },
+          "docs": "Returns configuration information about the specified Multi-Region Access Point."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

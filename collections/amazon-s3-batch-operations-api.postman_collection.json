@@ -1,0 +1,851 @@
+{
+  "item": [
+    {
+      "id": "8c884c7d-8e8d-4094-9a1a-3120295b6815",
+      "name": "Batch Operations",
+      "description": {
+        "content": "Operations for creating and managing S3 Batch Operations jobs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "95452708-7da9-4314-b902-86b03c904892",
+          "name": "Amazon S3 List Batch Operations Jobs",
+          "request": {
+            "name": "Amazon S3 List Batch Operations Jobs",
+            "description": {
+              "content": "Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the AWS account making the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "jobStatuses",
+                  "value": "<string>",
+                  "description": "The List Jobs request returns jobs that match the statuses listed."
+                },
+                {
+                  "disabled": false,
+                  "key": "jobStatuses",
+                  "value": "<string>",
+                  "description": "The List Jobs request returns jobs that match the statuses listed."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "A pagination token to request the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "The maximum number of jobs to return."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0a2702c-1c22-408c-aea9-ca52bc574757",
+              "name": "Successfully returned list of jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nextToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4e06dab-5406-4738-8539-1faab417fdd8",
+          "name": "Amazon S3 Create Batch Operations Job",
+          "request": {
+            "name": "Amazon S3 Create Batch Operations Job",
+            "description": {
+              "content": "Creates an S3 Batch Operations job to perform the specified operation on every object in the specified manifest. You can create a job that performs PUT copy, invoke an AWS Lambda function, initiate S3 Glacier restore, replace tagging, delete objects, or replicate objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>(string)</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>(string)</TargetResource>\n      <StorageClass>(string)</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>\n      </AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n      <TagSet>\n        <Key>(string)</Key>\n        <Value>(string)</Value>\n      </TagSet>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>\n    </S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>(integer)</ExpirationInDays>\n      <GlacierJobTier>(string)</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>(string)</Bucket>\n    <Format>(string)</Format>\n    <Enabled>(boolean)</Enabled>\n    <Prefix>(string)</Prefix>\n    <ReportScope>(string)</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>(string)</Format>\n      <Fields>(string)</Fields>\n      <Fields>(string)</Fields>\n    </Spec>\n    <Location>\n      <ObjectArn>(string)</ObjectArn>\n      <ObjectVersionId>(string)</ObjectVersionId>\n      <ETag>(string)</ETag>\n    </Location>\n  </Manifest>\n  <Priority>(integer)</Priority>\n  <RoleArn>(string)</RoleArn>\n  <Description>(string)</Description>\n  <ConfirmationRequired>(boolean)</ConfirmationRequired>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n  <Tags>\n    <Key>(string)</Key>\n    <Value>(string)</Value>\n  </Tags>\n</CreateJobRequest>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66f89949-71f4-449d-88be-e5a7d77dd061",
+              "name": "Job created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest>\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>example_value</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>example_value</TargetResource>\n      <StorageClass>example_value</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>example_value</AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet/>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>example_value</S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>10</ExpirationInDays>\n      <GlacierJobTier>BULK</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>example_value</Bucket>\n    <Format>Report_CSV_20180820</Format>\n    <Enabled>true</Enabled>\n    <Prefix>example_value</Prefix>\n    <ReportScope>AllTasks</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>S3BatchOperations_CSV_20180820</Format>\n      <Fields/>\n    </Spec>\n    <Location>\n      <ObjectArn>example_value</ObjectArn>\n      <ObjectVersionId>500123</ObjectVersionId>\n      <ETag>example_value</ETag>\n    </Location>\n  </Manifest>\n  <Priority>10</Priority>\n  <RoleArn>example_value</RoleArn>\n  <Description>A sample description.</Description>\n  <ConfirmationRequired>true</ConfirmationRequired>\n  <Tags>\n    <Key>example_value</Key>\n    <Value>example_value</Value>\n  </Tags>\n</CreateJobRequest>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>500123</JobId>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "2b797325-8ef0-4e63-8ac7-9afddd63a5c4",
+              "name": "Bad request. Invalid job configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CreateJobRequest>\n  <Operation>\n    <LambdaInvoke>\n      <FunctionArn>example_value</FunctionArn>\n    </LambdaInvoke>\n    <S3PutObjectCopy>\n      <TargetResource>example_value</TargetResource>\n      <StorageClass>example_value</StorageClass>\n    </S3PutObjectCopy>\n    <S3PutObjectAcl>\n      <AccessControlPolicy>example_value</AccessControlPolicy>\n    </S3PutObjectAcl>\n    <S3PutObjectTagging>\n      <TagSet/>\n    </S3PutObjectTagging>\n    <S3DeleteObjectTagging>example_value</S3DeleteObjectTagging>\n    <S3InitiateRestoreObject>\n      <ExpirationInDays>10</ExpirationInDays>\n      <GlacierJobTier>BULK</GlacierJobTier>\n    </S3InitiateRestoreObject>\n  </Operation>\n  <Report>\n    <Bucket>example_value</Bucket>\n    <Format>Report_CSV_20180820</Format>\n    <Enabled>true</Enabled>\n    <Prefix>example_value</Prefix>\n    <ReportScope>AllTasks</ReportScope>\n  </Report>\n  <Manifest>\n    <Spec>\n      <Format>S3BatchOperations_CSV_20180820</Format>\n      <Fields/>\n    </Spec>\n    <Location>\n      <ObjectArn>example_value</ObjectArn>\n      <ObjectVersionId>500123</ObjectVersionId>\n      <ETag>example_value</ETag>\n    </Location>\n  </Manifest>\n  <Priority>10</Priority>\n  <RoleArn>example_value</RoleArn>\n  <Description>A sample description.</Description>\n  <ConfirmationRequired>true</ConfirmationRequired>\n  <Tags>\n    <Key>example_value</Key>\n    <Value>example_value</Value>\n  </Tags>\n</CreateJobRequest>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37412ae4-def6-4c51-9983-9e7cff854b29",
+          "name": "Amazon S3 Describe Batch Operations Job",
+          "request": {
+            "name": "Amazon S3 Describe Batch Operations Job",
+            "description": {
+              "content": "Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID for the job whose information you want to retrieve."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36da4af9-d026-4c16-9b23-9aee5b9008ca",
+              "name": "Successfully returned job details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID for the job whose information you want to retrieve."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "d2f27beb-4350-4c8c-8137-6edd81e44f03",
+              "name": "The specified job does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID for the job whose information you want to retrieve."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97176310-730d-484f-a2dc-de532802beba",
+          "name": "Amazon S3 Update Job Priority",
+          "request": {
+            "name": "Amazon S3 Update Job Priority",
+            "description": {
+              "content": "Updates an existing S3 Batch Operations job's priority. You can use this operation to increase or decrease the priority of a job. Higher number priorities are processed first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "jobs",
+                ":id",
+                "priority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<integer>",
+                  "description": "(Required) The priority you want to assign to this job."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID for the job whose priority you want to update."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4393e964-d34b-4579-a4c7-ddd82bc875b5",
+              "name": "Job priority updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs",
+                    ":id",
+                    "priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "priority",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID for the job whose priority you want to update."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>500123</JobId>\n  <Priority>10</Priority>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28e6a465-b20b-4a02-96a3-4d1305836420",
+          "name": "Amazon S3 Update Job Status",
+          "request": {
+            "name": "Amazon S3 Update Job Status",
+            "description": {
+              "content": "Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v20180820",
+                "jobs",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "requestedJobStatus",
+                  "value": "<string>",
+                  "description": "(Required) The status that you want to move the specified job to."
+                },
+                {
+                  "disabled": false,
+                  "key": "statusUpdateReason",
+                  "value": "<string>",
+                  "description": "A description of the reason why you want to change the job status."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the job whose status you want to update."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                "key": "x-amz-account-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca450d9b-1552-4166-ae46-843eb7a41de4",
+              "name": "Job status updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v20180820",
+                    "jobs",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "requestedJobStatus",
+                      "value": "Cancelled"
+                    },
+                    {
+                      "key": "statusUpdateReason",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the job whose status you want to update."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS account ID of the S3 Control API caller.",
+                    "key": "x-amz-account-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <JobId>500123</JobId>\n  <Status>example_value</Status>\n  <StatusUpdateReason>example_value</StatusUpdateReason>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://s3-control.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af61c260-0cd1-41f4-9079-d004a89097eb",
+    "name": "Amazon S3 Control Access Control Batch Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

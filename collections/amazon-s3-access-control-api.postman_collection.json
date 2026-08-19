@@ -1,0 +1,549 @@
+{
+  "item": [
+    {
+      "id": "64ae1864-f397-418f-95b2-cd075de8afdf",
+      "name": "Access Control",
+      "description": {
+        "content": "Operations for managing bucket and object access control lists (ACLs)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d22110a5-a9d9-456e-b385-8e72de440a19",
+          "name": "Amazon S3 Get Bucket Acl",
+          "request": {
+            "name": "Amazon S3 Get Bucket Acl",
+            "description": {
+              "content": "This implementation of the GET action uses the acl subresource to return the access control list (ACL) of a bucket. To use GET to return the ACL, you must have the READ_ACP access to the bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "acl",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8732b51a-bc95-43a2-af6a-71fdbb57c29b",
+              "name": "Successfully returned the bucket ACL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "dbf7ee1c-abf3-4b08-a25c-3fc2b08439e2",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9030be6c-f967-4a78-b549-acecb743a592",
+          "name": "Amazon S3 Put Bucket Acl",
+          "request": {
+            "name": "Amazon S3 Put Bucket Acl",
+            "description": {
+              "content": "Sets the permissions on an existing bucket using access control lists (ACL). You can set permissions to grant or revoke access at the bucket level using either the request body or request headers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "acl",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The canned ACL to apply to the bucket.",
+                "key": "x-amz-acl",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Allows grantee full control of the bucket.",
+                "key": "x-amz-grant-full-control",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Allows grantee to list the objects in the bucket.",
+                "key": "x-amz-grant-read",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Allows grantee to read the bucket ACL.",
+                "key": "x-amz-grant-read-acp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Allows grantee to create objects in the bucket.",
+                "key": "x-amz-grant-write",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Allows grantee to write the ACL for the applicable bucket.",
+                "key": "x-amz-grant-write-acp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                "key": "Content-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AccessControlPolicy xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Owner>\n    <DisplayName>(string)</DisplayName>\n    <ID>(string)</ID>\n  </Owner>\n  <AccessControlList>\n    <Grant>\n      <Grantee>\n        <DisplayName>(string)</DisplayName>\n        <EmailAddress>(string)</EmailAddress>\n        <ID>(string)</ID>\n        <Type>(string)</Type>\n        <URI>(string)</URI>\n      </Grantee>\n      <Permission>(string)</Permission>\n    </Grant>\n    <Grant>\n      <Grantee>\n        <DisplayName>(string)</DisplayName>\n        <EmailAddress>(string)</EmailAddress>\n        <ID>(string)</ID>\n        <Type>(string)</Type>\n        <URI>(string)</URI>\n      </Grantee>\n      <Permission>(string)</Permission>\n    </Grant>\n  </AccessControlList>\n</AccessControlPolicy>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09134658-c636-441b-9dc0-9a76f13e6f79",
+              "name": "Bucket ACL updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the bucket.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee full control of the bucket.",
+                    "key": "x-amz-grant-full-control",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to list the objects in the bucket.",
+                    "key": "x-amz-grant-read",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to read the bucket ACL.",
+                    "key": "x-amz-grant-read-acp",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to create objects in the bucket.",
+                    "key": "x-amz-grant-write",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to write the ACL for the applicable bucket.",
+                    "key": "x-amz-grant-write-acp",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AccessControlPolicy>\n  <Owner>\n    <DisplayName>example_value</DisplayName>\n    <ID>abc123</ID>\n  </Owner>\n  <AccessControlList>\n    <Grant/>\n  </AccessControlList>\n</AccessControlPolicy>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17261e9b-cc0b-4a72-ad72-ab4383ff553e",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the bucket.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee full control of the bucket.",
+                    "key": "x-amz-grant-full-control",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to list the objects in the bucket.",
+                    "key": "x-amz-grant-read",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to read the bucket ACL.",
+                    "key": "x-amz-grant-read-acp",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to create objects in the bucket.",
+                    "key": "x-amz-grant-write",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Allows grantee to write the ACL for the applicable bucket.",
+                    "key": "x-amz-grant-write-acp",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the data.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AccessControlPolicy>\n  <Owner>\n    <DisplayName>example_value</DisplayName>\n    <ID>abc123</ID>\n  </Owner>\n  <AccessControlList>\n    <Grant/>\n  </AccessControlList>\n</AccessControlPolicy>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://s3-control.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Bucket"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40e07640-7f80-4540-8d6c-9df24a2c4e74",
+    "name": "Amazon S3 Control Access Control API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

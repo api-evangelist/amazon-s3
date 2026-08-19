@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Access Grants API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Grants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the S3 Access Grants instance. You must have the s3:GetAccessGrantsInstance permission to use this operation."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Grants Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accessgrantsinstance",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deletes the S3 Access Grants instance. You must first delete all access grants and registered locations before you can delete the S3 Access Grants instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

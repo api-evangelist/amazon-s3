@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Access Points API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point, or the ARN of the access point for S3 on Outposts."
+              }
+            ]
+          },
+          "docs": "Returns configuration information about the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name you want to assign to this access point."
+              }
+            ]
+          },
+          "docs": "Creates an access point and associates it with the specified bucket. You can use access points to manage access to shared data sets. Access points simplify managing data access at scale for applications using shared data sets on S3."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point you want to delete."
+              }
+            ]
+          },
+          "docs": "Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 List Access Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "bucket",
+                "value": "example_value",
+                "type": "query",
+                "description": "The name of the bucket whose associated access points you want to list."
+              },
+              {
+                "name": "nextToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "A continuation token. If a previous call produced a truncated list, pass this value to get the next page of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of access points to return (1-1000)."
+              }
+            ]
+          },
+          "docs": "Returns a list of the access points that are associated with the specified bucket. You can retrieve up to 1000 access points per call."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Returns the access point policy associated with the specified access point."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Access Point Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/v20180820/accesspoint/:name/policy",
+            "headers": [
+              {
+                "name": "x-amz-account-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the access point."
+              }
+            ]
+          },
+          "docs": "Deletes the access point policy for the specified access point."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

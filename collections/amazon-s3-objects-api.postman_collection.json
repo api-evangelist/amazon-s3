@@ -1,0 +1,4434 @@
+{
+  "item": [
+    {
+      "id": "a501dc3c-aed4-4739-95ef-f044597727f5",
+      "name": "Objects",
+      "description": {
+        "content": "Operations for uploading, downloading, copying, and deleting objects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "568ebb16-ba9d-48d0-9e94-43f034b96356",
+          "name": "Amazon S3 List Objects V2",
+          "request": {
+            "name": "Amazon S3 List Objects V2",
+            "description": {
+              "content": "Returns some or all (up to 1,000) of the objects in a bucket with each request. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. This is the recommended approach for listing objects. ListObjectsV2 supersedes the older ListObjects API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "list-type",
+                  "value": "2"
+                },
+                {
+                  "disabled": false,
+                  "key": "list-type",
+                  "value": "<integer>",
+                  "description": "(Required) Set to 2 to use the ListObjectsV2 API."
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation-token",
+                  "value": "<string>",
+                  "description": "ContinuationToken indicates to S3 that the list is being continued on this bucket with a token returned in a previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "delimiter",
+                  "value": "<string>",
+                  "description": "A delimiter is a character that you use to group keys. All keys that contain the same string between the prefix and the first occurrence of the delimiter are grouped under a single CommonPrefixes element."
+                },
+                {
+                  "disabled": false,
+                  "key": "encoding-type",
+                  "value": "<string>",
+                  "description": "Encoding type used by Amazon S3 to encode object keys in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fetch-owner",
+                  "value": "<boolean>",
+                  "description": "Set to true to include the owner field in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "max-keys",
+                  "value": "1000",
+                  "description": "Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000 key names."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>",
+                  "description": "Limits the response to keys that begin with the specified prefix."
+                },
+                {
+                  "disabled": false,
+                  "key": "start-after",
+                  "value": "<string>",
+                  "description": "StartAfter is where you want Amazon S3 to start listing from. S3 starts listing after this specified key."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows they will be charged for the request.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the optional metadata attributes to include in the response.",
+                "key": "x-amz-optional-object-attributes",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b8d8fcc-2160-4e9b-a8b4-53fcb3f5803b",
+              "name": "Successfully returned list of objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "list-type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "continuation-token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "delimiter",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "encoding-type",
+                      "value": "url"
+                    },
+                    {
+                      "key": "fetch-owner",
+                      "value": "true"
+                    },
+                    {
+                      "key": "max-keys",
+                      "value": "10"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "start-after",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the optional metadata attributes to include in the response.",
+                    "key": "x-amz-optional-object-attributes",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "28693cd5-f2a9-44cd-b8d9-d6fc62cfb5e2",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "list-type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "continuation-token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "delimiter",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "encoding-type",
+                      "value": "url"
+                    },
+                    {
+                      "key": "fetch-owner",
+                      "value": "true"
+                    },
+                    {
+                      "key": "max-keys",
+                      "value": "10"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "start-after",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the optional metadata attributes to include in the response.",
+                    "key": "x-amz-optional-object-attributes",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "42adbd07-01ef-442b-92d8-4543e5cd5eea",
+              "name": "The specified bucket does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "list-type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "continuation-token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "delimiter",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "encoding-type",
+                      "value": "url"
+                    },
+                    {
+                      "key": "fetch-owner",
+                      "value": "true"
+                    },
+                    {
+                      "key": "max-keys",
+                      "value": "10"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "start-after",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the optional metadata attributes to include in the response.",
+                    "key": "x-amz-optional-object-attributes",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ed5f972-a365-45b5-8f10-44b97292b7b4",
+          "name": "Amazon S3 Get Object",
+          "request": {
+            "name": "Amazon S3 Get Object",
+            "description": {
+              "content": "Retrieves objects from Amazon S3. To use GET, you must have READ access to the object. You can grant READ access using a bucket policy or an object ACL. Supports conditional retrieval using If-Match, If-None-Match, If-Modified-Since, and If-Unmodified-Since headers. Supports range reads with the Range header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":Bucket",
+                ":Key+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "response-cache-control",
+                  "value": "<string>",
+                  "description": "Sets the Cache-Control header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "response-content-disposition",
+                  "value": "<string>",
+                  "description": "Sets the Content-Disposition header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "response-content-encoding",
+                  "value": "<string>",
+                  "description": "Sets the Content-Encoding header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "response-content-language",
+                  "value": "<string>",
+                  "description": "Sets the Content-Language header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "response-content-type",
+                  "value": "<string>",
+                  "description": "Sets the Content-Type header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "response-expires",
+                  "value": "<string>",
+                  "description": "Sets the Expires header of the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "versionId",
+                  "value": "<string>",
+                  "description": "VersionId used to reference a specific version of the object."
+                },
+                {
+                  "disabled": false,
+                  "key": "partNumber",
+                  "value": "<integer>",
+                  "description": "Part number of the object being read for a multipart object."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Bucket",
+                  "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Key+",
+                  "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if it has been modified since the specified time.",
+                "key": "If-Modified-Since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if it has not been modified since the specified time.",
+                "key": "If-Unmodified-Since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                "key": "x-amz-server-side-encryption-customer-algorithm",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                "key": "x-amz-server-side-encryption-customer-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                "key": "x-amz-server-side-encryption-customer-key-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows that they will be charged for the request.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                "key": "x-amz-checksum-mode",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36d46db1-ed2c-48b6-bc8c-4f1bd3c5e597",
+              "name": "Successfully retrieved the object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Size of the body in bytes.",
+                  "key": "Content-Length",
+                  "value": "6507"
+                },
+                {
+                  "disabled": false,
+                  "description": "An opaque identifier assigned to the object.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Date and time the object was last modified.",
+                  "key": "Last-Modified",
+                  "value": "2013-05-02T04:47:43.878Z"
+                },
+                {
+                  "disabled": false,
+                  "description": "Version of the object.",
+                  "key": "x-amz-version-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Specifies whether the object retrieved was a delete marker.",
+                  "key": "x-amz-delete-marker",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "description": "Amazon S3 storage class of the object.",
+                  "key": "x-amz-storage-class",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The server-side encryption algorithm used when storing this object.",
+                  "key": "x-amz-server-side-encryption",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Specifies caching behavior along the request/reply chain.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Specifies presentational information for the object.",
+                  "key": "Content-Disposition",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Specifies what content encodings have been applied to the object.",
+                  "key": "Content-Encoding",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The language the content is in.",
+                  "key": "Content-Language",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "If the object expiration is configured, the response includes this header.",
+                  "key": "x-amz-expiration",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides information about object restoration action and expiration time of the restored copy.",
+                  "key": "x-amz-restore",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The Object Lock mode applied to the object.",
+                  "key": "x-amz-object-lock-mode",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The date and time when the Object Lock retention period expires.",
+                  "key": "x-amz-object-lock-retain-until-date",
+                  "value": "2013-05-02T04:47:43.878Z"
+                },
+                {
+                  "disabled": false,
+                  "description": "Specifies whether a legal hold is in effect for the object.",
+                  "key": "x-amz-object-lock-legal-hold",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Replication status of the object.",
+                  "key": "x-amz-replication-status",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "example_value",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a3de62f-e8a5-4f13-b454-b311a8ea41eb",
+              "name": "Partial content returned for range request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "example_value",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "440d4b43-4f4b-468f-80c0-e699383d1b30",
+              "name": "Not modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd9f66d3-6cfa-4fe2-b883-08cf222fd32a",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "78b60bc3-1fb8-46c0-9130-4b7b975e66e2",
+              "name": "The specified key does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "8d2e9008-013a-4d38-a60c-f226823c761a",
+              "name": "Precondition failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "response-cache-control",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-disposition",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-encoding",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-language",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-content-type",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "response-expires",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Downloads the specified range bytes of an object. For more information, see RFC 9110 Section 14.2.",
+                    "key": "Range",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its entity tag (ETag) differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has been modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if it has not been modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to when decrypting the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows that they will be charged for the request.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, this mode must be enabled. Set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "ENABLED"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c21b97b-8ef7-4021-a3bc-a33857fd027a",
+          "name": "Amazon S3 Put Object",
+          "request": {
+            "name": "Amazon S3 Put Object",
+            "description": {
+              "content": "Adds an object to a bucket. You must have WRITE permissions on a bucket to add an object to it. Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the entire object to the bucket. Objects can be up to 5 GiB in size when uploaded in a single PUT operation. For larger objects, use multipart upload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":Bucket",
+                ":Key+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Bucket",
+                  "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Key+",
+                  "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Can be used to specify caching behavior along the request/reply chain.",
+                "key": "Cache-Control",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies presentational information for the object.",
+                "key": "Content-Disposition",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies what content encodings have been applied to the object.",
+                "key": "Content-Encoding",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The language the content is in.",
+                "key": "Content-Language",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.",
+                "key": "Content-Length",
+                "value": "<integer>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded 128-bit MD5 digest of the message.",
+                "key": "Content-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The date and time at which the object is no longer cacheable.",
+                "key": "Expires",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "The canned ACL to apply to the object.",
+                "key": "x-amz-acl",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Amazon S3 storage class to use for storing the object.",
+                "key": "x-amz-storage-class",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The server-side encryption algorithm used when storing this object in Amazon S3.",
+                "key": "x-amz-server-side-encryption",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "If x-amz-server-side-encryption is aws:kms or aws:kms:dsse, specifies the ID of the KMS key.",
+                "key": "x-amz-server-side-encryption-aws-kms-key-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the AWS KMS Encryption Context to use for object encryption.",
+                "key": "x-amz-server-side-encryption-context",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies whether S3 should use an S3 Bucket Key for object encryption with server-side encryption using AWS KMS.",
+                "key": "x-amz-server-side-encryption-bucket-key-enabled",
+                "value": "<boolean>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the algorithm to use to encrypt the object (AES256).",
+                "key": "x-amz-server-side-encryption-customer-algorithm",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the customer-provided encryption key.",
+                "key": "x-amz-server-side-encryption-customer-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies the 128-bit MD5 digest of the encryption key.",
+                "key": "x-amz-server-side-encryption-customer-key-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The tag-set for the object. Must be encoded as URL query parameters.",
+                "key": "x-amz-tagging",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The Object Lock mode that you want to apply to the uploaded object.",
+                "key": "x-amz-object-lock-mode",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The date and time when you want the Object Lock retention period to expire.",
+                "key": "x-amz-object-lock-retain-until-date",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies whether a legal hold will be applied to the uploaded object.",
+                "key": "x-amz-object-lock-legal-hold",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Indicates the algorithm used to create the checksum for the object.",
+                "key": "x-amz-checksum-algorithm",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded, 32-bit CRC32 checksum of the object.",
+                "key": "x-amz-checksum-crc32",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded, 32-bit CRC32C checksum of the object.",
+                "key": "x-amz-checksum-crc32c",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded, 160-bit SHA-1 digest of the object.",
+                "key": "x-amz-checksum-sha1",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The base64-encoded, 256-bit SHA-256 digest of the object.",
+                "key": "x-amz-checksum-sha256",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows they will be charged.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "2626442d-286d-40af-b8ab-668934abd18f",
+              "name": "Object uploaded successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Can be used to specify caching behavior along the request/reply chain.",
+                    "key": "Cache-Control",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies presentational information for the object.",
+                    "key": "Content-Disposition",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies what content encodings have been applied to the object.",
+                    "key": "Content-Encoding",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language the content is in.",
+                    "key": "Content-Language",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.",
+                    "key": "Content-Length",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the message.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A standard MIME type describing the format of the contents.",
+                    "key": "Content-Type",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The date and time at which the object is no longer cacheable.",
+                    "key": "Expires",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the object.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Amazon S3 storage class to use for storing the object.",
+                    "key": "x-amz-storage-class",
+                    "value": "STANDARD"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server-side encryption algorithm used when storing this object in Amazon S3.",
+                    "key": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If x-amz-server-side-encryption is aws:kms or aws:kms:dsse, specifies the ID of the KMS key.",
+                    "key": "x-amz-server-side-encryption-aws-kms-key-id",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the AWS KMS Encryption Context to use for object encryption.",
+                    "key": "x-amz-server-side-encryption-context",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether S3 should use an S3 Bucket Key for object encryption with server-side encryption using AWS KMS.",
+                    "key": "x-amz-server-side-encryption-bucket-key-enabled",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to encrypt the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The tag-set for the object. Must be encoded as URL query parameters.",
+                    "key": "x-amz-tagging",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Object Lock mode that you want to apply to the uploaded object.",
+                    "key": "x-amz-object-lock-mode",
+                    "value": "GOVERNANCE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The date and time when you want the Object Lock retention period to expire.",
+                    "key": "x-amz-object-lock-retain-until-date",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether a legal hold will be applied to the uploaded object.",
+                    "key": "x-amz-object-lock-legal-hold",
+                    "value": "ON"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the algorithm used to create the checksum for the object.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 32-bit CRC32 checksum of the object.",
+                    "key": "x-amz-checksum-crc32",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 32-bit CRC32C checksum of the object.",
+                    "key": "x-amz-checksum-crc32c",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 160-bit SHA-1 digest of the object.",
+                    "key": "x-amz-checksum-sha1",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 256-bit SHA-256 digest of the object.",
+                    "key": "x-amz-checksum-sha256",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example_value"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Entity tag for the uploaded object.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Version of the object.",
+                  "key": "x-amz-version-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The server-side encryption algorithm used.",
+                  "key": "x-amz-server-side-encryption",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "If present, specifies the ID of the KMS key used.",
+                  "key": "x-amz-server-side-encryption-aws-kms-key-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "If the object expiration is configured, includes expiry-date and rule-id.",
+                  "key": "x-amz-expiration",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "If present, indicates that the requester was charged for the request.",
+                  "key": "x-amz-request-charged",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c3b601c-ec40-4669-b859-f34c319302d7",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Can be used to specify caching behavior along the request/reply chain.",
+                    "key": "Cache-Control",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies presentational information for the object.",
+                    "key": "Content-Disposition",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies what content encodings have been applied to the object.",
+                    "key": "Content-Encoding",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language the content is in.",
+                    "key": "Content-Language",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.",
+                    "key": "Content-Length",
+                    "value": "10"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded 128-bit MD5 digest of the message.",
+                    "key": "Content-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A standard MIME type describing the format of the contents.",
+                    "key": "Content-Type",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The date and time at which the object is no longer cacheable.",
+                    "key": "Expires",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the object.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Amazon S3 storage class to use for storing the object.",
+                    "key": "x-amz-storage-class",
+                    "value": "STANDARD"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server-side encryption algorithm used when storing this object in Amazon S3.",
+                    "key": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If x-amz-server-side-encryption is aws:kms or aws:kms:dsse, specifies the ID of the KMS key.",
+                    "key": "x-amz-server-side-encryption-aws-kms-key-id",
+                    "value": "500123"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the AWS KMS Encryption Context to use for object encryption.",
+                    "key": "x-amz-server-side-encryption-context",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether S3 should use an S3 Bucket Key for object encryption with server-side encryption using AWS KMS.",
+                    "key": "x-amz-server-side-encryption-bucket-key-enabled",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the algorithm to use to encrypt the object (AES256).",
+                    "key": "x-amz-server-side-encryption-customer-algorithm",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the customer-provided encryption key.",
+                    "key": "x-amz-server-side-encryption-customer-key",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies the 128-bit MD5 digest of the encryption key.",
+                    "key": "x-amz-server-side-encryption-customer-key-MD5",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The tag-set for the object. Must be encoded as URL query parameters.",
+                    "key": "x-amz-tagging",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Object Lock mode that you want to apply to the uploaded object.",
+                    "key": "x-amz-object-lock-mode",
+                    "value": "GOVERNANCE"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The date and time when you want the Object Lock retention period to expire.",
+                    "key": "x-amz-object-lock-retain-until-date",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether a legal hold will be applied to the uploaded object.",
+                    "key": "x-amz-object-lock-legal-hold",
+                    "value": "ON"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the algorithm used to create the checksum for the object.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 32-bit CRC32 checksum of the object.",
+                    "key": "x-amz-checksum-crc32",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 32-bit CRC32C checksum of the object.",
+                    "key": "x-amz-checksum-crc32c",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 160-bit SHA-1 digest of the object.",
+                    "key": "x-amz-checksum-sha1",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The base64-encoded, 256-bit SHA-256 digest of the object.",
+                    "key": "x-amz-checksum-sha256",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "example_value"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0aca1c85-a648-419f-a139-a10c203b09eb",
+          "name": "Amazon S3 Delete Object",
+          "request": {
+            "name": "Amazon S3 Delete Object",
+            "description": {
+              "content": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there is no null version, Amazon S3 does not remove any objects but will still respond that the command was successful. To remove a specific version, you must use the versionId sub-resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":Bucket",
+                ":Key+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "versionId",
+                  "value": "<string>",
+                  "description": "VersionId used to reference a specific version of the object."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Bucket",
+                  "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Key+",
+                  "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device. Required for permanently deleting a versioned object with MFA delete enabled.",
+                "key": "x-amz-mfa",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows they will be charged.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.",
+                "key": "x-amz-bypass-governance-retention",
+                "value": "<boolean>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4b130b8-d60e-46c1-bffa-f7f1d0af3179",
+              "name": "Object deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device. Required for permanently deleting a versioned object with MFA delete enabled.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.",
+                    "key": "x-amz-bypass-governance-retention",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Specifies whether the versioned object was a delete marker.",
+                  "key": "x-amz-delete-marker",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "description": "Returns the version ID of the delete marker created.",
+                  "key": "x-amz-version-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "If present, indicates the requester was charged for the request.",
+                  "key": "x-amz-request-charged",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e211b38-e1ae-47e3-9644-c3979eaa165f",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device. Required for permanently deleting a versioned object with MFA delete enabled.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.",
+                    "key": "x-amz-bypass-governance-retention",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "6ccc20ac-20a1-4646-bdc1-07fdc75c5dee",
+              "name": "The specified key does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device. Required for permanently deleting a versioned object with MFA delete enabled.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions to process this operation.",
+                    "key": "x-amz-bypass-governance-retention",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7afbc2e1-125c-44f3-a919-7ce317d2ca58",
+          "name": "Amazon S3 Head Object",
+          "request": {
+            "name": "Amazon S3 Head Object",
+            "description": {
+              "content": "The HEAD action retrieves metadata from an object without returning the object itself. This action is useful if you are interested only in an object's metadata. A HEAD request has the same options as a GET action on an object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":Bucket",
+                ":Key+"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "versionId",
+                  "value": "<string>",
+                  "description": "VersionId used to reference a specific version of the object."
+                },
+                {
+                  "disabled": false,
+                  "key": "partNumber",
+                  "value": "<integer>",
+                  "description": "Part number of the object being read for multipart objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Bucket",
+                  "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Key+",
+                  "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if its ETag matches the specified tag.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if its ETag differs from the specified tag.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if modified since the specified time.",
+                "key": "If-Modified-Since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Return the object only if not modified since the specified time.",
+                "key": "If-Unmodified-Since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows they will be charged.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "To retrieve the checksum, set to ENABLED.",
+                "key": "x-amz-checksum-mode",
+                "value": "<string>"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6d5d401-8fab-49fd-a0d0-e5f8ff115634",
+              "name": "Successfully returned object metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if not modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Size of the body in bytes.",
+                  "key": "Content-Length",
+                  "value": "6507"
+                },
+                {
+                  "disabled": false,
+                  "description": "An opaque identifier assigned to the object.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Date and time the object was last modified.",
+                  "key": "Last-Modified",
+                  "value": "2013-05-02T04:47:43.878Z"
+                },
+                {
+                  "disabled": false,
+                  "description": "Version of the object.",
+                  "key": "x-amz-version-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Whether the object is a delete marker.",
+                  "key": "x-amz-delete-marker",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "description": "Storage class of the object.",
+                  "key": "x-amz-storage-class",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Server-side encryption algorithm used.",
+                  "key": "x-amz-server-side-encryption",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The Object Lock mode applied.",
+                  "key": "x-amz-object-lock-mode",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The Object Lock retention expiration date.",
+                  "key": "x-amz-object-lock-retain-until-date",
+                  "value": "2013-05-02T04:47:43.878Z"
+                },
+                {
+                  "disabled": false,
+                  "description": "Whether a legal hold is in effect.",
+                  "key": "x-amz-object-lock-legal-hold",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Replication status of the object.",
+                  "key": "x-amz-replication-status",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Lifecycle expiration info.",
+                  "key": "x-amz-expiration",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Restore status for archived objects.",
+                  "key": "x-amz-restore",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Archive status of the object.",
+                  "key": "x-amz-archive-status",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3bafe7c-be62-439d-a05e-93ef503c570d",
+              "name": "Not modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if not modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a4ac003-3b16-426f-98c8-5d9fd812c05d",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if not modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53658df8-c192-480a-bbfe-a053fd715791",
+              "name": "The specified key does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if not modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7437e469-c08c-4414-badd-2c5e5fcea65f",
+              "name": "Precondition failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    ":Key+"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Key+",
+                      "description": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "HeadObject returns only the metadata for an object. A Range header in a HeadObject request will return the Content-Length for the range.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag matches the specified tag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if its ETag differs from the specified tag.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if modified since the specified time.",
+                    "key": "If-Modified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return the object only if not modified since the specified time.",
+                    "key": "If-Unmodified-Since",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "To retrieve the checksum, set to ENABLED.",
+                    "key": "x-amz-checksum-mode",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be1b0e84-2f64-498b-96bd-d72d91aacd76",
+          "name": "Amazon S3 Copy Object",
+          "request": {
+            "name": "Amazon S3 Copy Object",
+            "description": {
+              "content": "Creates a copy of an object that is already stored in Amazon S3. You can copy individual objects between general purpose buckets, between directory buckets, and between general purpose buckets and directory buckets. Objects up to 5 GiB can be copied in a single operation. For objects larger than 5 GiB, you must use the multipart upload Copy API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":Bucket",
+                "{{Key+}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "copy",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Bucket",
+                  "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                },
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode the path.",
+                "key": "x-amz-copy-source",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Copies the object only if its ETag matches the specified value.",
+                "key": "x-amz-copy-source-if-match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Copies the object only if its ETag does not match the specified value.",
+                "key": "x-amz-copy-source-if-none-match",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Copies the object only if it has been modified since the specified time.",
+                "key": "x-amz-copy-source-if-modified-since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Copies the object only if it has not been modified since the specified time.",
+                "key": "x-amz-copy-source-if-unmodified-since",
+                "value": "<dateTime>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.",
+                "key": "x-amz-metadata-directive",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Specifies whether the object tag-set is copied or replaced.",
+                "key": "x-amz-tagging-directive",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The server-side encryption algorithm used.",
+                "key": "x-amz-server-side-encryption",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Amazon S3 storage class for the destination object.",
+                "key": "x-amz-storage-class",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The canned ACL to apply to the object.",
+                "key": "x-amz-acl",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected source bucket owner.",
+                "key": "x-amz-source-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01419a97-1632-4b8c-8784-50bb43ff941a",
+              "name": "Object copied successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    "{{Key+}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode the path.",
+                    "key": "x-amz-copy-source",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag matches the specified value.",
+                    "key": "x-amz-copy-source-if-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag does not match the specified value.",
+                    "key": "x-amz-copy-source-if-none-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-modified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has not been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-unmodified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.",
+                    "key": "x-amz-metadata-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the object tag-set is copied or replaced.",
+                    "key": "x-amz-tagging-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server-side encryption algorithm used.",
+                    "key": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Amazon S3 storage class for the destination object.",
+                    "key": "x-amz-storage-class",
+                    "value": "STANDARD"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the object.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected source bucket owner.",
+                    "key": "x-amz-source-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "794639e8-6d28-43c0-8f20-24934da577f2",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    "{{Key+}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode the path.",
+                    "key": "x-amz-copy-source",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag matches the specified value.",
+                    "key": "x-amz-copy-source-if-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag does not match the specified value.",
+                    "key": "x-amz-copy-source-if-none-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-modified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has not been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-unmodified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.",
+                    "key": "x-amz-metadata-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the object tag-set is copied or replaced.",
+                    "key": "x-amz-tagging-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server-side encryption algorithm used.",
+                    "key": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Amazon S3 storage class for the destination object.",
+                    "key": "x-amz-storage-class",
+                    "value": "STANDARD"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the object.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected source bucket owner.",
+                    "key": "x-amz-source-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "78061b85-2c77-4ae7-8e78-c466ea7595ee",
+              "name": "The specified source key does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":Bucket",
+                    "{{Key+}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Bucket",
+                      "description": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+                    },
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the source object for the copy operation, in the form /sourcebucket/sourcekey. URL-encode the path.",
+                    "key": "x-amz-copy-source",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag matches the specified value.",
+                    "key": "x-amz-copy-source-if-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if its ETag does not match the specified value.",
+                    "key": "x-amz-copy-source-if-none-match",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-modified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Copies the object only if it has not been modified since the specified time.",
+                    "key": "x-amz-copy-source-if-unmodified-since",
+                    "value": "2026-01-15T10:30:00Z"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.",
+                    "key": "x-amz-metadata-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Specifies whether the object tag-set is copied or replaced.",
+                    "key": "x-amz-tagging-directive",
+                    "value": "COPY"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server-side encryption algorithm used.",
+                    "key": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Amazon S3 storage class for the destination object.",
+                    "key": "x-amz-storage-class",
+                    "value": "STANDARD"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The canned ACL to apply to the object.",
+                    "key": "x-amz-acl",
+                    "value": "private"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected source bucket owner.",
+                    "key": "x-amz-source-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255a2c3e-9201-43e9-a2f9-6fa6838ddbd2",
+          "name": "Amazon S3 Delete Objects",
+          "request": {
+            "name": "Amazon S3 Delete Objects",
+            "description": {
+              "content": "This action enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys in a single request. The request body contains the list of object keys to delete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{Bucket}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "delete",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                "key": "x-amz-mfa",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Confirms that the requester knows they will be charged.",
+                "key": "x-amz-request-payer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions.",
+                "key": "x-amz-bypass-governance-retention",
+                "value": "<boolean>"
+              },
+              {
+                "disabled": false,
+                "description": "The account ID of the expected bucket owner.",
+                "key": "x-amz-expected-bucket-owner",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The algorithm used to create the checksum.",
+                "key": "x-amz-checksum-algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Delete xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n  <Object>\n    <Key>(string)</Key>\n    <VersionId>(string)</VersionId>\n  </Object>\n  <Object>\n    <Key>(string)</Key>\n    <VersionId>(string)</VersionId>\n  </Object>\n  <Quiet>(boolean)</Quiet>\n</Delete>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d88191a-f8be-413f-94b9-96f892b9fa18",
+              "name": "Successfully processed delete request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions.",
+                    "key": "x-amz-bypass-governance-retention",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Delete>\n  <Object>\n    <Key>example_value</Key>\n    <VersionId>500123</VersionId>\n  </Object>\n  <Quiet>true</Quiet>\n</Delete>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "06d8f21a-b3f6-4301-b7b0-5b81b355dcca",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{Bucket}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The concatenation of the authentication device serial number, a space, and the value displayed on your authentication device.",
+                    "key": "x-amz-mfa",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Confirms that the requester knows they will be charged.",
+                    "key": "x-amz-request-payer",
+                    "value": "requester"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates whether S3 Object Lock should bypass governance-mode restrictions.",
+                    "key": "x-amz-bypass-governance-retention",
+                    "value": "true"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The account ID of the expected bucket owner.",
+                    "key": "x-amz-expected-bucket-owner",
+                    "value": "example_value"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The algorithm used to create the checksum.",
+                    "key": "x-amz-checksum-algorithm",
+                    "value": "CRC32"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Delete>\n  <Object>\n    <Key>example_value</Key>\n    <VersionId>500123</VersionId>\n  </Object>\n  <Quiet>true</Quiet>\n</Delete>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-northeast-1,ap-northeast-2,ap-southeast-1,ap-southeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://s3-control.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Bucket"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Key+"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c915e786-959f-460e-877a-235b41da337a",
+    "name": "Amazon S3 Control Access Control Objects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

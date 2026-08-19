@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Table Policy API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket policy. Returns the policy document associated with the specified table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or replaces a table bucket policy for a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Bucket Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Deletes a table bucket policy for a table bucket."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Gets the resource policy for a table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Put Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or replaces the resource policy for a table."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/tables/:tableBucketARN/:namespace/:name/policy",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The name of the namespace."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path",
+                "description": "The name of the table."
+              }
+            ]
+          },
+          "docs": "Deletes the resource policy for a table."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

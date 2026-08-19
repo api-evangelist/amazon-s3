@@ -1,0 +1,262 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Multipart Upload API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Multipart Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 Create Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket/:Key+?uploads",
+            "headers": [
+              {
+                "name": "Cache-Control",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Disposition",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Encoding",
+                "value": "example_value"
+              },
+              {
+                "name": "Content-Type",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-acl",
+                "value": "private"
+              },
+              {
+                "name": "x-amz-storage-class",
+                "value": "STANDARD"
+              },
+              {
+                "name": "x-amz-server-side-encryption",
+                "value": "AES256"
+              },
+              {
+                "name": "x-amz-server-side-encryption-aws-kms-key-id",
+                "value": "500123"
+              },
+              {
+                "name": "x-amz-tagging",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-object-lock-mode",
+                "value": "GOVERNANCE"
+              },
+              {
+                "name": "x-amz-object-lock-retain-until-date",
+                "value": "2026-01-15T10:30:00Z"
+              },
+              {
+                "name": "x-amz-object-lock-legal-hold",
+                "value": "ON"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-algorithm",
+                "value": "CRC32"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              }
+            ]
+          },
+          "docs": "This action initiates a multipart upload and returns an upload ID. This upload ID is used to associate all of the parts in the specific multipart upload. You specify this upload ID in each of your subsequent upload part requests. You also include this upload ID in the final request to either complete or abort the multipart upload request."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Upload Part",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket/:Key+?partNumber=:partNumber&uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "Content-Length",
+                "value": "10"
+              },
+              {
+                "name": "Content-MD5",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "partNumber",
+                "value": "10",
+                "type": "query",
+                "description": "Part number identifying the part (1 to 10,000)."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload."
+              }
+            ]
+          },
+          "docs": "Uploads a part in a multipart upload. In this operation, you provide part data in your request. The part size must be between 5 MiB and 5 GiB. The last part can be smaller than 5 MiB. A multipart upload can have between 1 and 10,000 parts."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Complete Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket/:Key+?uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              },
+              {
+                "name": "x-amz-checksum-crc32",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-crc32c",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha1",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-checksum-sha256",
+                "value": "example_value"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload."
+              }
+            ]
+          },
+          "docs": "Completes a multipart upload by assembling previously uploaded parts. You must include the upload ID and a list of both part numbers and corresponding ETag values. Upon receiving the complete multipart upload request, Amazon S3 concatenates all the parts in ascending order by part number to create a new object."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Abort Multipart Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/:Bucket/:Key+?uploadId=:uploadId",
+            "headers": [
+              {
+                "name": "x-amz-expected-bucket-owner",
+                "value": "example_value"
+              },
+              {
+                "name": "x-amz-request-payer",
+                "value": "requester"
+              }
+            ],
+            "params": [
+              {
+                "name": "Bucket",
+                "value": "",
+                "type": "path",
+                "description": "The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number."
+              },
+              {
+                "name": "Key+",
+                "value": "",
+                "type": "path",
+                "description": "Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters."
+              },
+              {
+                "name": "uploadId",
+                "value": "500123",
+                "type": "query",
+                "description": "Upload ID identifying the multipart upload to abort."
+              }
+            ]
+          },
+          "docs": "This action aborts a multipart upload. After a multipart upload is aborted, no additional parts can be uploaded using that upload ID. The storage consumed by any previously uploaded parts will be freed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

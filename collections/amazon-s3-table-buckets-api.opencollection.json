@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon S3 Control Access Control Table Buckets API",
+    "version": "2018-08-20"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon S3 List Table Buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "example_value",
+                "type": "query",
+                "description": "The prefix of the table buckets."
+              },
+              {
+                "name": "continuationToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "ContinuationToken indicates to S3 Tables that the list is being continued with a token."
+              },
+              {
+                "name": "maxBuckets",
+                "value": "10",
+                "type": "query",
+                "description": "The maximum number of table buckets to return in the list."
+              }
+            ]
+          },
+          "docs": "Lists table buckets for your account. Returns a list of table buckets that you have access to."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Create Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a table bucket. A table bucket is a resource that you can use to create and store tables. Each table bucket can contain tables in Apache Iceberg format stored as Apache Parquet files."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Get Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Gets details about a table bucket. Returns information about the specified table bucket including its name, ARN, owner, and creation date."
+        },
+        {
+          "info": {
+            "name": "Amazon S3 Delete Table Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://s3-control.{region}.amazonaws.com/buckets/:tableBucketARN",
+            "params": [
+              {
+                "name": "tableBucketARN",
+                "value": "",
+                "type": "path",
+                "description": "The Amazon Resource Name (ARN) of the table bucket."
+              }
+            ]
+          },
+          "docs": "Deletes a table bucket. The table bucket must be empty (all tables and namespaces must be deleted first) before it can be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

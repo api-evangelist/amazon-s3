@@ -2,51 +2,56 @@ generated: '2026-06-20'
 method: searched
 status: published
 source: https://awslabs.github.io/mcp/servers/s3-tables-mcp-server/
-description: >-
-  AWS Labs publishes an official Model Context Protocol server for the Amazon S3
-  Tables surface (awslabs.s3-tables-mcp-server), distributed on PyPI and run
-  locally over stdio via uvx. It exposes S3 Tables (Apache Iceberg) operations —
-  table bucket / namespace / table management and read/write query — to MCP
-  clients. AWS does not (at capture time) publish a hosted remote MCP server for
-  the core S3 object REST API or the S3 Control API; the tools[] block below
-  records the published S3 Tables server plus candidate coverage derived from the
-  repo's OpenAPI for the object/control surfaces (status: candidate on those).
+description: 'AWS Labs publishes an official Model Context Protocol server for the Amazon S3 Tables surface
+  (awslabs.s3-tables-mcp-server), distributed on PyPI and run locally over stdio via uvx. It exposes S3
+  Tables (Apache Iceberg) operations — table bucket / namespace / table management and read/write query
+  — to MCP clients. AWS does not (at capture time) publish a hosted remote MCP server for the core S3
+  object REST API or the S3 Control API; the tools[] block below records the published S3 Tables server
+  plus candidate coverage derived from the repo''s OpenAPI for the object/control surfaces (status: candidate
+  on those).'
 servers:
-  - name: awslabs.s3-tables-mcp-server
-    published: true
-    transport: stdio
-    install: uvx awslabs.s3-tables-mcp-server@latest
-    registry: https://pypi.org/project/awslabs.s3-tables-mcp-server/
-    source: https://github.com/awslabs/mcp/tree/main/src/s3-tables-mcp-server
-    docs: https://awslabs.github.io/mcp/servers/s3-tables-mcp-server/
-    covers: Amazon S3 Tables API (openapi/amazon-s3-tables-api-openapi.yml)
-    tools:
-      - name: create_table_bucket
-        description: Create a new S3 table bucket for storing Iceberg tables.
-        source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateTableBucket
-      - name: list_table_buckets
-        description: List the caller's S3 table buckets.
-        source_operation: openapi/amazon-s3-tables-api-openapi.yml#ListTableBuckets
-      - name: create_namespace
-        description: Create a namespace within a table bucket.
-        source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateNamespace
-      - name: create_table
-        description: Create an Iceberg table within a namespace.
-        source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateTable
-      - name: query_database
-        description: Run read/write SQL against S3 Tables via the Iceberg REST endpoint.
+- name: awslabs.s3-tables-mcp-server
+  published: true
+  transport: stdio
+  install: uvx awslabs.s3-tables-mcp-server@latest
+  registry: https://pypi.org/project/awslabs.s3-tables-mcp-server/
+  source: https://github.com/awslabs/mcp/tree/main/src/s3-tables-mcp-server
+  docs: https://awslabs.github.io/mcp/servers/s3-tables-mcp-server/
+  covers: Amazon S3 Tables API (openapi/amazon-s3-tables-api-openapi.yml)
+  tools:
+  - name: create_table_bucket
+    description: Create a new S3 table bucket for storing Iceberg tables.
+    source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateTableBucket
+  - name: list_table_buckets
+    description: List the caller's S3 table buckets.
+    source_operation: openapi/amazon-s3-tables-api-openapi.yml#ListTableBuckets
+  - name: create_namespace
+    description: Create a namespace within a table bucket.
+    source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateNamespace
+  - name: create_table
+    description: Create an Iceberg table within a namespace.
+    source_operation: openapi/amazon-s3-tables-api-openapi.yml#CreateTable
+  - name: query_database
+    description: Run read/write SQL against S3 Tables via the Iceberg REST endpoint.
 candidate_servers:
-  - name: amazon-s3-rest
-    status: candidate
-    transport: stdio
-    covers: Amazon S3 REST API (openapi/amazon-s3-rest-api-openapi.yml)
-    note: >-
-      No official hosted MCP server published for the core object API; a candidate
-      tool list can be derived one-tool-per-operationId from the OpenAPI
-      (ListBuckets, CreateBucket, GetObject, PutObject, DeleteObject,
-      CreateMultipartUpload, CompleteMultipartUpload, ...).
-  - name: amazon-s3-control
-    status: candidate
-    transport: stdio
-    covers: Amazon S3 Control API (openapi/amazon-s3-control-api-openapi.yml)
-    note: Candidate coverage for access points, Batch Operations jobs, Storage Lens, Access Grants.
+- name: amazon-s3-rest
+  status: candidate
+  transport: stdio
+  covers: Amazon S3 REST API (openapi/amazon-s3-rest-api-openapi.yml)
+  note: No official hosted MCP server published for the core object API; a candidate tool list can be
+    derived one-tool-per-operationId from the OpenAPI (ListBuckets, CreateBucket, GetObject, PutObject,
+    DeleteObject, CreateMultipartUpload, CompleteMultipartUpload, ...).
+- name: amazon-s3-control
+  status: candidate
+  transport: stdio
+  covers: Amazon S3 Control API (openapi/amazon-s3-control-api-openapi.yml)
+  note: Candidate coverage for access points, Batch Operations jobs, Storage Lens, Access Grants.
+deployment:
+  mode: none
+  endpoint: https://awslabs.github.io/mcp/servers/s3-tables-mcp-server/
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census
