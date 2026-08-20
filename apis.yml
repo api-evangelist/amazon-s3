@@ -186,7 +186,8 @@ apis:
   description: Operations for creating and managing S3 Batch Operations jobs
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - Batch Operations
   properties:
   - type: OpenAPI
