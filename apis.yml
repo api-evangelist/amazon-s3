@@ -2,6 +2,18 @@ name: Amazon S3
 description: >-
   Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability, data
   availability, security, and performance.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: freemium
@@ -730,6 +742,9 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 common:
+  - type: CapabilityMap
+    url: capabilities/amazon-s3-capability-edges.yml
+    name: Amazon S3 Business Capability Map
   - type: AgenticAccess
     url: agentic-access/amazon-s3-agentic-access.yml
   - type: TrustCenter
