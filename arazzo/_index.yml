@@ -1,7 +1,7 @@
-generated: '2026-06-20'
-method: derived
-source: Derived from the arazzo/*.yml native workflow files in this repo.
-description: >-
+x-generated: '2026-06-20'
+x-method: derived
+x-source: Derived from the arazzo/*.yml native workflow files in this repo.
+x-description: >-
   Browseable catalog of the native Arazzo 1.0.1 workflows that stitch Amazon S3
   operations into real multi-step use cases. One entry per workflow file.
 workflows:

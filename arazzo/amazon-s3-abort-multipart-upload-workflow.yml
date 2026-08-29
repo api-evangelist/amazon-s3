@@ -11,8 +11,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: s3RestApi
-  url: ../openapi/amazon-s3-rest-api-openapi.yml
+- name: multipartUploadApi
+  url: ../openapi/amazon-s3-multipart-upload-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: start-and-abort-multipart-upload
