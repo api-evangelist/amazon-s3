@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon S3 Control Access Control Table Buckets API
   description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
@@ -191,15 +191,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    TableBucketARN:
-      name: tableBucketARN
-      in: path
-      required: true
-      description: The Amazon Resource Name (ARN) of the table bucket.
-      schema:
-        type: string
   schemas:
+    ListTableBucketsResponse:
+      type: object
+      properties:
+        tableBuckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableBucketSummary'
+          example: []
+        continuationToken:
+          type: string
+          description: A continuation token for paginating the list.
+          example: example_value
     TableBucket:
       type: object
       properties:
@@ -239,18 +243,6 @@ components:
                   type: integer
                   description: Number of days for non-current data.
           example: example_value
-    ListTableBucketsResponse:
-      type: object
-      properties:
-        tableBuckets:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableBucketSummary'
-          example: []
-        continuationToken:
-          type: string
-          description: A continuation token for paginating the list.
-          example: example_value
     CreateTableBucketRequest:
       type: object
       required:
@@ -282,6 +274,14 @@ components:
           format: date-time
           description: The date and time when the table bucket was created.
           example: '2026-01-15T10:30:00Z'
+  parameters:
+    TableBucketARN:
+      name: tableBucketARN
+      in: path
+      required: true
+      description: The Amazon Resource Name (ARN) of the table bucket.
+      schema:
+        type: string
   securitySchemes:
     sigv4:
       type: apiKey

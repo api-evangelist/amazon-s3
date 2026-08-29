@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon S3 Control Access Control Multipart Upload API
-  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
-  version: '2018-08-20'
+  title: Amazon S3 REST Multipart Upload API
+  description: Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. The Amazon S3 REST API uses standard HTTP requests to create, fetch, and delete buckets and objects. All S3 REST API operations are authenticated using AWS Signature Version 4.
+  version: '2006-03-01'
   contact:
     name: AWS Support
     url: https://aws.amazon.com/premiumsupport/
@@ -13,8 +13,8 @@ info:
   x-logo:
     url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 servers:
-- url: https://s3-control.{region}.amazonaws.com
-  description: Amazon S3 Control regional endpoint
+- url: https://s3.{region}.amazonaws.com
+  description: Amazon S3 regional endpoint
   variables:
     region:
       default: us-east-1
@@ -31,11 +31,23 @@ servers:
       - eu-north-1
       - ap-northeast-1
       - ap-northeast-2
+      - ap-northeast-3
       - ap-southeast-1
       - ap-southeast-2
       - ap-south-1
       - sa-east-1
       - ca-central-1
+      - af-south-1
+      - me-south-1
+- url: https://{bucket}.s3.{region}.amazonaws.com
+  description: Amazon S3 virtual-hosted-style endpoint
+  variables:
+    bucket:
+      default: my-bucket
+      description: The name of the S3 bucket
+    region:
+      default: us-east-1
+      description: AWS region
 security:
 - sigv4: []
 tags:
@@ -484,6 +496,32 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
     InitiateMultipartUploadResult:
       type: object
       description: Container for response to initiate multipart upload.
@@ -503,6 +541,36 @@ components:
           type: string
           description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
           example: '500123'
+    CompleteMultipartUpload:
+      type: object
+      description: The container for the completed multipart upload request.
+      xml:
+        name: CompleteMultipartUpload
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Part:
+          type: array
+          items:
+            type: object
+            required:
+            - ETag
+            - PartNumber
+            properties:
+              ETag:
+                type: string
+                description: Entity tag returned when the part was uploaded.
+              PartNumber:
+                type: integer
+                description: Part number that identifies the part.
+              ChecksumCRC32:
+                type: string
+              ChecksumCRC32C:
+                type: string
+              ChecksumSHA1:
+                type: string
+              ChecksumSHA256:
+                type: string
+          example: []
     CompleteMultipartUploadResult:
       type: object
       description: The container for the completed multipart upload response.
@@ -538,63 +606,16 @@ components:
         ChecksumSHA256:
           type: string
           example: example_value
-    CompleteMultipartUpload:
-      type: object
-      description: The container for the completed multipart upload request.
-      xml:
-        name: CompleteMultipartUpload
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Part:
-          type: array
-          items:
-            type: object
-            required:
-            - ETag
-            - PartNumber
-            properties:
-              ETag:
-                type: string
-                description: Entity tag returned when the part was uploaded.
-              PartNumber:
-                type: integer
-                description: Part number that identifies the part.
-              ChecksumCRC32:
-                type: string
-              ChecksumCRC32C:
-                type: string
-              ChecksumSHA1:
-                type: string
-              ChecksumSHA256:
-                type: string
-          example: []
-    Error:
-      type: object
-      description: Container for all error elements.
-      xml:
-        name: Error
-      properties:
-        Code:
-          type: string
-          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
-          example: example_value
-        Message:
-          type: string
-          description: A human-readable description of the error.
-          example: example_value
-        Resource:
-          type: string
-          description: The bucket or object that is involved in the error.
-          example: example_value
-        RequestId:
-          type: string
-          description: Unique identifier for the request.
-          example: '500123'
-        HostId:
-          type: string
-          description: A special token to help AWS troubleshoot problems.
-          example: '500123'
   parameters:
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
     BucketName:
       name: Bucket
       in: path
@@ -605,21 +626,12 @@ components:
         minLength: 3
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
-    ObjectKey:
-      name: Key+
-      in: path
-      required: true
-      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 1024
   securitySchemes:
     sigv4:
       type: apiKey
       name: Authorization
       in: header
-      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+      description: AWS Signature Version 4 authentication. All S3 REST API requests must be signed using AWS Signature Version 4. The signature includes the request date, region, service name (s3), and request hash.
 externalDocs:
-  description: Amazon S3 Control API Reference
-  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html

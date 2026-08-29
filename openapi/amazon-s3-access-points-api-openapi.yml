@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon S3 Control Access Control Access Points API
+  title: Amazon S3 Control Access Points API
   description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
   version: '2018-08-20'
   contact:
@@ -327,55 +327,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetAccessPointResult:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: The name of the access point.
-          example: Example Title
-        Bucket:
-          type: string
-          description: The name of the bucket associated with the access point.
-          example: example_value
-        NetworkOrigin:
-          type: string
-          description: Indicates whether this access point allows access from the public internet.
-          enum:
-          - Internet
-          - VPC
-          example: Internet
-        VpcConfiguration:
-          type: object
-          properties:
-            VpcId:
-              type: string
-              description: The ID of the VPC.
-          example: example_value
-        PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-        CreationDate:
-          type: string
-          format: date-time
-          description: The date and time when the access point was created.
-          example: '2026-01-15T10:30:00Z'
-        Alias:
-          type: string
-          description: The alias for the access point.
-          example: example_value
-        AccessPointArn:
-          type: string
-          description: The ARN for the access point.
-          example: example_value
-        Endpoints:
-          type: object
-          additionalProperties:
-            type: string
-          example: example_value
-        BucketAccountId:
-          type: string
-          description: The AWS account ID associated with the S3 bucket.
-          example: '500123'
     PublicAccessBlockConfiguration:
       type: object
       description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
@@ -431,6 +382,55 @@ components:
         NextToken:
           type: string
           example: example_value
+    GetAccessPointResult:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the access point.
+          example: Example Title
+        Bucket:
+          type: string
+          description: The name of the bucket associated with the access point.
+          example: example_value
+        NetworkOrigin:
+          type: string
+          description: Indicates whether this access point allows access from the public internet.
+          enum:
+          - Internet
+          - VPC
+          example: Internet
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: The ID of the VPC.
+          example: example_value
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time when the access point was created.
+          example: '2026-01-15T10:30:00Z'
+        Alias:
+          type: string
+          description: The alias for the access point.
+          example: example_value
+        AccessPointArn:
+          type: string
+          description: The ARN for the access point.
+          example: example_value
+        Endpoints:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
     CreateAccessPointRequest:
       type: object
       xml:

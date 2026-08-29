@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon S3 Control Access Control Access Grants API
+  title: Amazon S3 Control Access Grants API
   description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
   version: '2018-08-20'
   contact:
@@ -136,7 +136,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   schemas:
+    S3Tag:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
+          type: string
+          maxLength: 256
+          example: example_value
     AccessGrantsInstance:
       type: object
       properties:
@@ -157,30 +181,6 @@ components:
           type: string
           description: If you associated your S3 Access Grants instance with an IAM Identity Center instance, this field returns the ARN of the IAM Identity Center instance application.
           example: example_value
-    S3Tag:
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          minLength: 1
-          maxLength: 128
-          example: example_value
-        Value:
-          type: string
-          maxLength: 256
-          example: example_value
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey

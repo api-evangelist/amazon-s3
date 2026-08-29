@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon S3 Control Access Control Objects API
-  description: Amazon S3 Control provides API operations for managing S3 account-level settings, access points, Batch Operations jobs, S3 Access Grants, Multi-Region Access Points, and Storage Lens configurations. The S3 Control API uses a separate endpoint from the standard S3 API and requires an account ID in the host header.
-  version: '2018-08-20'
+  title: Amazon S3 REST Objects API
+  description: Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. The Amazon S3 REST API uses standard HTTP requests to create, fetch, and delete buckets and objects. All S3 REST API operations are authenticated using AWS Signature Version 4.
+  version: '2006-03-01'
   contact:
     name: AWS Support
     url: https://aws.amazon.com/premiumsupport/
@@ -13,8 +13,8 @@ info:
   x-logo:
     url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 servers:
-- url: https://s3-control.{region}.amazonaws.com
-  description: Amazon S3 Control regional endpoint
+- url: https://s3.{region}.amazonaws.com
+  description: Amazon S3 regional endpoint
   variables:
     region:
       default: us-east-1
@@ -31,11 +31,23 @@ servers:
       - eu-north-1
       - ap-northeast-1
       - ap-northeast-2
+      - ap-northeast-3
       - ap-southeast-1
       - ap-southeast-2
       - ap-south-1
       - sa-east-1
       - ca-central-1
+      - af-south-1
+      - me-south-1
+- url: https://{bucket}.s3.{region}.amazonaws.com
+  description: Amazon S3 virtual-hosted-style endpoint
+  variables:
+    bucket:
+      default: my-bucket
+      description: The name of the S3 bucket
+    region:
+      default: us-east-1
+      description: AWS region
 security:
 - sigv4: []
 tags:
@@ -1256,85 +1268,32 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Object:
+    Error:
       type: object
-      description: An object consists of data and its descriptive metadata.
+      description: Container for all error elements.
+      xml:
+        name: Error
       properties:
-        Key:
+        Code:
           type: string
-          description: The name assigned to an object which identifies it in the bucket.
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
           example: example_value
-        LastModified:
+        Message:
           type: string
-          format: date-time
-          description: Date and time the object was last modified.
-          example: '2026-01-15T10:30:00Z'
-        ETag:
-          type: string
-          description: The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.
+          description: A human-readable description of the error.
           example: example_value
-        Size:
-          type: integer
-          format: int64
-          description: Size in bytes of the object.
-          example: 10
-        StorageClass:
+        Resource:
           type: string
-          description: The class of storage used to store the object.
-          enum:
-          - STANDARD
-          - REDUCED_REDUNDANCY
-          - GLACIER
-          - STANDARD_IA
-          - ONEZONE_IA
-          - INTELLIGENT_TIERING
-          - DEEP_ARCHIVE
-          - OUTPOSTS
-          - GLACIER_IR
-          - SNOW
-          - EXPRESS_ONEZONE
-          example: STANDARD
-        Owner:
-          $ref: '#/components/schemas/Owner'
-        ChecksumAlgorithm:
-          type: array
-          items:
-            type: string
-            enum:
-            - CRC32
-            - CRC32C
-            - SHA1
-            - SHA256
-          example: []
-        RestoreStatus:
-          type: object
-          properties:
-            IsRestoreInProgress:
-              type: boolean
-            RestoreExpiryDate:
-              type: string
-              format: date-time
+          description: The bucket or object that is involved in the error.
           example: example_value
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
+        RequestId:
           type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
           type: string
-          description: Container for the ID of the owner.
-          example: abc123
-    CommonPrefix:
-      type: object
-      description: Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.
-      properties:
-        Prefix:
-          type: string
-          description: Container for the specified common prefix.
-          example: example_value
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
     CopyObjectResult:
       type: object
       description: Container for all response elements.
@@ -1363,6 +1322,26 @@ components:
         ChecksumSHA256:
           type: string
           example: example_value
+    CommonPrefix:
+      type: object
+      description: Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.
+      properties:
+        Prefix:
+          type: string
+          description: Container for the specified common prefix.
+          example: example_value
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
     ListBucketResult:
       type: object
       description: Container for the result of the ListObjectsV2 operation.
@@ -1449,32 +1428,65 @@ components:
           description: Element to enable quiet mode for the request. When added, it must be set to true.
           default: false
           example: true
-    Error:
+    Object:
       type: object
-      description: Container for all error elements.
-      xml:
-        name: Error
+      description: An object consists of data and its descriptive metadata.
       properties:
-        Code:
+        Key:
           type: string
-          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          description: The name assigned to an object which identifies it in the bucket.
           example: example_value
-        Message:
+        LastModified:
           type: string
-          description: A human-readable description of the error.
+          format: date-time
+          description: Date and time the object was last modified.
+          example: '2026-01-15T10:30:00Z'
+        ETag:
+          type: string
+          description: The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.
           example: example_value
-        Resource:
+        Size:
+          type: integer
+          format: int64
+          description: Size in bytes of the object.
+          example: 10
+        StorageClass:
           type: string
-          description: The bucket or object that is involved in the error.
+          description: The class of storage used to store the object.
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - GLACIER
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+          example: STANDARD
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        ChecksumAlgorithm:
+          type: array
+          items:
+            type: string
+            enum:
+            - CRC32
+            - CRC32C
+            - SHA1
+            - SHA256
+          example: []
+        RestoreStatus:
+          type: object
+          properties:
+            IsRestoreInProgress:
+              type: boolean
+            RestoreExpiryDate:
+              type: string
+              format: date-time
           example: example_value
-        RequestId:
-          type: string
-          description: Unique identifier for the request.
-          example: '500123'
-        HostId:
-          type: string
-          description: A special token to help AWS troubleshoot problems.
-          example: '500123'
     DeleteResult:
       type: object
       description: Container for the response of the DeleteObjects operation.
@@ -1511,6 +1523,15 @@ components:
                 type: string
           example: []
   parameters:
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
     BucketName:
       name: Bucket
       in: path
@@ -1521,21 +1542,12 @@ components:
         minLength: 3
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
-    ObjectKey:
-      name: Key+
-      in: path
-      required: true
-      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 1024
   securitySchemes:
     sigv4:
       type: apiKey
       name: Authorization
       in: header
-      description: AWS Signature Version 4 authentication. The S3 Control API uses the service name s3 for signing.
+      description: AWS Signature Version 4 authentication. All S3 REST API requests must be signed using AWS Signature Version 4. The signature includes the request date, region, service name (s3), and request hash.
 externalDocs:
-  description: Amazon S3 Control API Reference
-  url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
