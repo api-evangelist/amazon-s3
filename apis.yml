@@ -744,3 +744,5 @@ tags:
   - Data Storage
   - Object Storage
   - Scalable Storage
+x-parent: aws
+x-relationship: product
