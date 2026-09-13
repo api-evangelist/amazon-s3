@@ -1,0 +1,366 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Uploads (object-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `uploads` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: uploads
+paths:
+  /{Bucket}/{Key}:
+    post:
+      operationId: CreateMultipartUpload
+      summary: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email
+        Grantee Access Control Lists '
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for
+        Email Grantee Access Control Lists (ACLs). If you attempt to use an Email Grantee ACL in a request
+        after October 1, 2025, the request will receive an HTTP 405 (Method Not Allowed) error. This change
+        affects the following Amazon Web Services Regions: US East (N. Virginia), US West (N. California),
+        US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe
+        (Ireland), and South America (São Paulo). This action initiates a multipart upload and returns
+        an upload ID. This upload ID is used to associate all of the parts in the specific multipart upload.
+        You specify this upload ID in each of your subsequent upload part requests (see UploadPart). You
+        also include this upload ID in the final request to either complete or abort the multipart upload
+        request. For more information about multipart uploads, see Multipart Upload Overview in the Amazon
+        S3 User Guide. After you initiate a multipart upload and upload one or more parts, to stop being
+        charged for storing the uploaded parts, you must either complete or abort the multipart upload.
+        Amazon S3 frees up the space used to s'
+      tags:
+      - uploads
+      parameters:
+      - name: uploads
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `uploads` subresource.
+        schema:
+          type: string
+      - name: x-amz-acl
+        in: header
+        required: false
+        description: The canned ACL to apply to the object. Amazon S3 supports a set of predefined ACLs,
+          known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. For
+          more information, see Ca
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+          - aws-exec-read
+          - bucket-owner-read
+          - bucket-owner-full-control
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket where the multipart upload is initiated and where the object
+          is uploaded. Directory buckets - When you use this operation with a directory bucket, you must
+          use virtual-hosted-st
+        schema:
+          type: string
+      - name: Cache-Control
+        in: header
+        required: false
+        description: Specifies caching behavior along the request/reply chain.
+        schema:
+          type: string
+      - name: Content-Disposition
+        in: header
+        required: false
+        description: Specifies presentational information for the object.
+        schema:
+          type: string
+      - name: Content-Encoding
+        in: header
+        required: false
+        description: Specifies what content encodings have been applied to the object and thus what decoding
+          mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
+          For directory b
+        schema:
+          type: string
+      - name: Content-Language
+        in: header
+        required: false
+        description: The language that the content is in.
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        required: false
+        description: A standard MIME type describing the format of the object data.
+        schema:
+          type: string
+      - name: Expires
+        in: header
+        required: false
+        description: The date and time at which the object is no longer cacheable.
+        schema:
+          type: string
+      - name: x-amz-grant-full-control
+        in: header
+        required: false
+        description: Specify access permissions explicitly to give the grantee READ, READ_ACP, and WRITE_ACP
+          permissions on the object. By default, all objects are private. Only the owner has full access
+          control. When upl
+        schema:
+          type: string
+      - name: x-amz-grant-read
+        in: header
+        required: false
+        description: 'Specify access permissions explicitly to allow grantee to read the object data and
+          its metadata. By default, all objects are private. Only the owner has full access control. When
+          uploading an object, '
+        schema:
+          type: string
+      - name: x-amz-grant-read-acp
+        in: header
+        required: false
+        description: 'Specify access permissions explicitly to allows grantee to read the object ACL.
+          By default, all objects are private. Only the owner has full access control. When uploading
+          an object, you can use this '
+        schema:
+          type: string
+      - name: x-amz-grant-write-acp
+        in: header
+        required: false
+        description: Specify access permissions explicitly to allows grantee to allow grantee to write
+          the ACL for the applicable object. By default, all objects are private. Only the owner has full
+          access control. When u
+        schema:
+          type: string
+      - name: Key
+        in: path
+        required: true
+        description: Object key for which the multipart upload is to be initiated.
+        schema:
+          type: string
+      - name: x-amz-meta-
+        in: header
+        required: false
+        description: A map of metadata to store with the object in S3.
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption
+        in: header
+        required: false
+        description: The server-side encryption algorithm used when you store this object in Amazon S3
+          or Amazon FSx. Directory buckets - For directory buckets, there are only two supported options
+          for server-side encrypt
+        schema:
+          type: string
+          enum:
+          - AES256
+          - aws:fsx
+          - aws:backup
+          - aws:kms
+          - aws:kms:dsse
+      - name: x-amz-storage-class
+        in: header
+        required: false
+        description: By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects.
+          The STANDARD storage class provides high durability and high availability. Depending on performance
+          needs, you can
+        schema:
+          type: string
+          enum:
+          - STANDARD
+          - REDUCED_REDUNDANCY
+          - STANDARD_IA
+          - ONEZONE_IA
+          - INTELLIGENT_TIERING
+          - GLACIER
+          - DEEP_ARCHIVE
+          - OUTPOSTS
+          - GLACIER_IR
+          - SNOW
+          - EXPRESS_ONEZONE
+          - FSX_OPENZFS
+          - FSX_ONTAP
+          - AWS_BACKUP_WARM
+          - AWS_BACKUP_LOW_COST_WARM
+      - name: x-amz-website-redirect-location
+        in: header
+        required: false
+        description: If the bucket is configured as a website, redirects requests for this object to another
+          object in the same bucket or to an external URL. Amazon S3 stores the value of this header in
+          the object metadat
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-algorithm
+        in: header
+        required: false
+        description: Specifies the algorithm to use when encrypting the object (for example, AES256).
+          This functionality is not supported for directory buckets.
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key
+        in: header
+        required: false
+        description: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting
+          data. This value is used to store the object and then it is discarded; Amazon S3 does not store
+          the encryption key. Th
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key-MD5
+        in: header
+        required: false
+        description: Specifies the 128-bit MD5 digest of the customer-provided encryption key according
+          to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption
+          key was transmitt
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-aws-kms-key-id
+        in: header
+        required: false
+        description: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
+          If the KMS key doesn't exist in the same account that's issuing the command, you must use the
+          full Key ARN not th
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-context
+        in: header
+        required: false
+        description: Specifies the Amazon Web Services KMS Encryption Context to use for object encryption.
+          The value of this header is a Base64 encoded string of a UTF-8 encoded JSON, which contains
+          the encryption contex
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-bucket-key-enabled
+        in: header
+        required: false
+        description: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with
+          server-side encryption using Key Management Service (KMS) keys (SSE-KMS). General purpose buckets
+          - Setting this head
+        schema:
+          type: boolean
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-tagging
+        in: header
+        required: false
+        description: The tag-set for the object. The tag-set must be encoded as URL Query parameters.
+          This functionality is not supported for directory buckets.
+        schema:
+          type: string
+      - name: x-amz-object-lock-mode
+        in: header
+        required: false
+        description: Specifies the Object Lock mode that you want to apply to the uploaded object. This
+          functionality is not supported for directory buckets.
+        schema:
+          type: string
+          enum:
+          - GOVERNANCE
+          - COMPLIANCE
+      - name: x-amz-object-lock-retain-until-date
+        in: header
+        required: false
+        description: Specifies the date and time when you want the Object Lock to expire. This functionality
+          is not supported for directory buckets.
+        schema:
+          type: string
+      - name: x-amz-object-lock-legal-hold
+        in: header
+        required: false
+        description: Specifies whether you want to apply a legal hold to the uploaded object. This functionality
+          is not supported for directory buckets.
+        schema:
+          type: string
+          enum:
+          - 'ON'
+          - 'OFF'
+      - name: x-amz-object-lock-event-hold
+        in: header
+        required: false
+        description: Specifies the event hold status to apply to the uploaded object. Set to ON to enable
+          or OFF to disable. This functionality is not supported for directory buckets.
+        schema:
+          type: string
+          enum:
+          - 'ON'
+          - 'OFF'
+      - name: x-amz-object-lock-event-hold-duration-days
+        in: header
+        required: false
+        description: Specifies the event hold duration in days to apply to the uploaded object. You cannot
+          specify a duration in both days and years. This functionality is not supported for directory
+          buckets.
+        schema:
+          type: integer
+      - name: x-amz-object-lock-event-hold-duration-years
+        in: header
+        required: false
+        description: Specifies the event hold duration in years to apply to the uploaded object. You cannot
+          specify a duration in both days and years. This functionality is not supported for directory
+          buckets.
+        schema:
+          type: integer
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      - name: x-amz-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm that you want Amazon S3 to use to create the checksum for
+          the object. For more information, see Checking object integrity in the Amazon S3 User Guide.
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-checksum-type
+        in: header
+        required: false
+        description: Indicates the checksum type that you want Amazon S3 to use to calculate the object’s
+          checksum value. For more information, see Checking object integrity in the Amazon S3 User Guide.
+        schema:
+          type: string
+          enum:
+          - COMPOSITE
+          - FULL_OBJECT
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: CreateMultipartUploadOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+      x-s3-greedy-path-segment: 'AWS writes this route as `/{Bucket}/{Key+}`. The trailing `+` marks a
+        greedy segment, which OpenAPI templating cannot express: an S3 object key may contain slashes,
+        so this parameter is not a single path component.'

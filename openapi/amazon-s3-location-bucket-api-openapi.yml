@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Location (bucket-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `location` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: location
+paths:
+  /{Bucket}:
+    get:
+      operationId: GetBucketLocation
+      summary: Using the GetBucketLocation operation is no longer a best practice. To return the Region
+        that a bucket resides in, we re
+      description: Using the GetBucketLocation operation is no longer a best practice. To return the Region
+        that a bucket resides in, we recommend that you use the HeadBucket operation instead. For backward
+        compatibility, Amazon S3 continues to support the GetBucketLocation operation. Returns the Region
+        the bucket resides in. You set the bucket's Region using the LocationConstraint request parameter
+        in a CreateBucket request. For more information, see CreateBucket. In a bucket's home Region,
+        calls to the GetBucketLocation operation are governed by the bucket's policy. In other Regions,
+        the bucket policy doesn't apply, which means that cross-account access won't be authorized. However,
+        calls to the HeadBucket operation always return the bucket’s location through an HTTP response
+        header, whether access to the bucket is authorized or not. Therefore, we recommend using the HeadBucket
+        operation for bucket Region discovery and to avoid using the GetBucketLocation operation. When
+        you use this API operation with an access point, provide the alias of the access point in place
+        of the bucket name. When you use this API operation with an Object Lambda access point, provide
+        the alias of the Object Lambda access p
+      tags:
+      - location
+      parameters:
+      - name: location
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `location` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket for which to get the location. When you use this API operation
+          with an access point, provide the alias of the access point in place of the bucket name. When
+          you use this API ope
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketLocationOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.

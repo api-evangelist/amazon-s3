@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Notification (bucket-level)
+  description: '2 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `notification` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    2 further operation(s) share a method, path and subresource with one described here and are recorded
+    in `x-s3-sibling-operations`: S3 separates them by a request header or an id parameter, which OpenAPI
+    cannot express.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: notification
+paths:
+  /{Bucket}:
+    get:
+      operationId: GetBucketNotification
+      summary: This operation is not supported for directory buckets. No longer used, see GetBucketNotificationConfiguration.
+      description: This operation is not supported for directory buckets. No longer used, see GetBucketNotificationConfiguration.
+      tags:
+      - notification
+      parameters:
+      - name: notification
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `notification` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket for which to get the notification configuration. When you
+          use this API operation with an access point, provide the alias of the access point in place
+          of the bucket name. When yo
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: NotificationConfigurationDeprecated
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketNotification
+      summary: This operation is not supported for directory buckets. No longer used, see the PutBucketNotificationConfiguration
+        operat
+      description: This operation is not supported for directory buckets. No longer used, see the PutBucketNotificationConfiguration
+        operation.
+      tags:
+      - notification
+      parameters:
+      - name: notification
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `notification` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket.
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The MD5 hash of the PutPublicAccessBlock request body. For requests made using the
+          Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+          calculated automatically.
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm used to create the checksum for the request when you use
+          the SDK. This header will not provide any additional functionality if you don't use the SDK.
+          When you send this header,
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+x-s3-sibling-operations:
+- operation: GetBucketNotificationConfiguration
+  shadows: GetBucketNotification
+  summary: This operation is not supported for directory buckets. Returns the notification configuration
+    of a bucket. If notifications are not enabled on the bucket, the action returns an empty NotificationConfi
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request
+    header or by the presence of an id parameter, neither of which an OpenAPI path can express.
+- operation: PutBucketNotificationConfiguration
+  shadows: PutBucketNotification
+  summary: This operation is not supported for directory buckets. Enables notifications of specified events
+    for a bucket. For more information about event notifications, see Configuring Event Notifications.
+    Usin
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request
+    header or by the presence of an id parameter, neither of which an OpenAPI path can express.

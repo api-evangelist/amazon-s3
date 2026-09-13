@@ -714,70 +714,7 @@ artifacts:
   json-structure/amazon-s3-tables-table-summary-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-23T094130.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-23T182523.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-26T223651.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-27T083119.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-27T190208.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T115055.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T170848.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T172558.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T192327.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T200725.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T133250.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T151044.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T162206.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T202106.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T163141.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T163302.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T171935.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-03T113057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-03T161012.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-04T083143.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-05T153418.yml:
+  kin/checks-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-06T210741.yml:
@@ -861,6 +798,57 @@ artifacts:
   kin/score-2026-08-28T221322.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-29T213958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-29T230545.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T203505.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T220315.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-31T223420.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T063623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T210448.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T222808.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T224043.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T161828.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T174231.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T062714.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T212454.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T224856.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T055819.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T072335.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/amazon-s3-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -870,42 +858,396 @@ artifacts:
   mcp/amazon-s3-mcp.yml:
     method: searched
     evidence: declared in the artifact
-  openapi/amazon-s3-access-control-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-access-grants-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-access-points-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-batch-operations-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-bucket-configuration-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-buckets-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-multi-region-access-points-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-multipart-upload-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-objects-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-public-access-block-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-storage-lens-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
-  openapi/amazon-s3-tagging-api-openapi.yml:
-    method: unknown
-    evidence: no authorship recorded
+  openapi/_original/amazon-s3-control-api-openapi.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/amazon-s3-rest-api-openapi.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_superseded/amazon-s3-access-control-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-access-grants-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-access-points-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-batch-operations-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-bucket-configuration-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-buckets-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-multi-region-access-points-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-multipart-upload-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-objects-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-public-access-block-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-storage-lens-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/_superseded/amazon-s3-tagging-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec) Superseded 2026-09-13
+      by documents generated from the AWS service model; retained for comparison.
+  openapi/amazon-s3-abac-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-accelerate-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-acl-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-acl-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-analytics-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-annotation-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-attributes-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-core-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-core-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-core-service-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-cors-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-delete-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-encryption-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-encryption-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-intelligent-tiering-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-inventory-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-legal-hold-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-lifecycle-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-list-type-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-location-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-logging-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metadata-able-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metadata-nnotation-able-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metadata-nventory-able-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metadata-onfiguration-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metadata-ournal-able-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-metrics-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-notification-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-object-lock-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-ownership-ontrols-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-policy-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-policy-tatus-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-public-ccess-lock-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-rename-bject-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-replication-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-request-ayment-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-restore-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-retention-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-select-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-session-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-tagging-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-tagging-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-torrent-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-uploads-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-uploads-object-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-versioning-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-versions-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
+  openapi/amazon-s3-website-bucket-api-openapi.yml:
+    method: derived
+    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
+      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
+      come from that model; no operation is described that the model does not define. Grouped by query
+      subresource and path level because S3 identifies operations by method, path, subresource and sometimes
+      a request header, and an OpenAPI path key carries only the first two.
   overlays/amazon-s3-control-api-overlay.yaml:
     method: unknown
     evidence: no authorship recorded

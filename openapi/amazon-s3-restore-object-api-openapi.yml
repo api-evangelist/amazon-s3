@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Restore (object-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `restore` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: restore
+paths:
+  /{Bucket}/{Key}:
+    post:
+      operationId: RestoreObject
+      summary: This operation is not supported for directory buckets. Restores an archived copy of an
+        object back into Amazon S3 This f
+      description: 'This operation is not supported for directory buckets. Restores an archived copy of
+        an object back into Amazon S3 This functionality is not supported for Amazon S3 on Outposts. This
+        action performs the following types of requests: restore an archive - Restore an archived object
+        For more information about the S3 structure in the request body, see the following: PutObject
+        Managing Access with ACLs in the Amazon S3 User Guide Protecting Data Using Server-Side Encryption
+        in the Amazon S3 User Guide Permissions To use this operation, you must have permissions to perform
+        the s3:RestoreObject action. The bucket owner has this permission by default and can grant this
+        permission to others. For more information about permissions, see Permissions Related to Bucket
+        Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources in the Amazon
+        S3 User Guide. Restoring objects Objects that you archive to the S3 Glacier Flexible Retrieval
+        or S3 Glacier Deep Archive storage class, and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering
+        Deep Archive tiers, are not accessible in real time. For objects in the S3 Glacier Flexible Retrieval
+        or S3 Glacier Deep Archive storage clas'
+      tags:
+      - restore
+      parameters:
+      - name: restore
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `restore` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: 'The bucket name containing the object to restore. Access points - When you use this
+          action with an access point for general purpose buckets, you must provide the alias of the access
+          point in place of '
+        schema:
+          type: string
+      - name: Key
+        in: path
+        required: true
+        description: Object key for which the action was initiated.
+        schema:
+          type: string
+      - name: versionId
+        in: query
+        required: false
+        description: VersionId used to reference a specific version of the object.
+        schema:
+          type: string
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: 'Indicates the algorithm used to create the checksum for the object when you use
+          the SDK. This header will not provide any additional functionality if you don''t use the SDK.
+          When you send this header, '
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: RestoreObjectOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+      x-s3-greedy-path-segment: 'AWS writes this route as `/{Bucket}/{Key+}`. The trailing `+` marks a
+        greedy segment, which OpenAPI templating cannot express: an S3 object key may contain slashes,
+        so this parameter is not a single path component.'

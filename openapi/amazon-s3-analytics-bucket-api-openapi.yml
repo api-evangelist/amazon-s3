@@ -1,0 +1,193 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Analytics (bucket-level)
+  description: '3 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `analytics` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    1 further operation(s) share a method, path and subresource with one described here and are recorded
+    in `x-s3-sibling-operations`: S3 separates them by a request header or an id parameter, which OpenAPI
+    cannot express.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: analytics
+paths:
+  /{Bucket}:
+    delete:
+      operationId: DeleteBucketAnalyticsConfiguration
+      summary: This operation is not supported for directory buckets. Deletes an analytics configuration
+        for the bucket (specified by t
+      description: 'This operation is not supported for directory buckets. Deletes an analytics configuration
+        for the bucket (specified by the analytics configuration ID). To use this operation, you must
+        have permissions to perform the s3:PutAnalyticsConfiguration action. The bucket owner has this
+        permission by default. The bucket owner can grant this permission to others. For more information
+        about permissions, see Permissions Related to Bucket Subresource Operations and Managing Access
+        Permissions to Your Amazon S3 Resources. For information about the Amazon S3 analytics feature,
+        see Amazon S3 Analytics – Storage Class Analysis. The following operations are related to DeleteBucketAnalyticsConfiguration:
+        GetBucketAnalyticsConfiguration ListBucketAnalyticsConfigurations PutBucketAnalyticsConfiguration
+        You must URL encode any signed header values that contain spaces. For example, if your header
+        value is my file.txt, containing two spaces after my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - analytics
+      parameters:
+      - name: analytics
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `analytics` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket from which an analytics configuration is deleted.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: true
+        description: The ID that identifies the analytics configuration.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    get:
+      operationId: GetBucketAnalyticsConfiguration
+      summary: This operation is not supported for directory buckets. This implementation of the GET action
+        returns an analytics config
+      description: 'This operation is not supported for directory buckets. This implementation of the
+        GET action returns an analytics configuration (identified by the analytics configuration ID) from
+        the bucket. To use this operation, you must have permissions to perform the s3:GetAnalyticsConfiguration
+        action. The bucket owner has this permission by default. The bucket owner can grant this permission
+        to others. For more information about permissions, see Permissions Related to Bucket Subresource
+        Operations and Managing Access Permissions to Your Amazon S3 Resources in the Amazon S3 User Guide.
+        For information about Amazon S3 analytics feature, see Amazon S3 Analytics – Storage Class Analysis
+        in the Amazon S3 User Guide. The following operations are related to GetBucketAnalyticsConfiguration:
+        DeleteBucketAnalyticsConfiguration ListBucketAnalyticsConfigurations PutBucketAnalyticsConfiguration
+        You must URL encode any signed header values that contain spaces. For example, if your header
+        value is my file.txt, containing two spaces after my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - analytics
+      parameters:
+      - name: analytics
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `analytics` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket from which an analytics configuration is retrieved.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: true
+        description: The ID that identifies the analytics configuration.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketAnalyticsConfigurationOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketAnalyticsConfiguration
+      summary: 'This operation is not supported for directory buckets. Sets an analytics configuration
+        for the bucket (specified by the '
+      description: This operation is not supported for directory buckets. Sets an analytics configuration
+        for the bucket (specified by the analytics configuration ID). You can have up to 1,000 analytics
+        configurations per bucket. You can choose to have storage class analysis export analysis reports
+        sent to a comma-separated values (CSV) flat file. See the DataExport request element. Reports
+        are updated daily and are based on the object filters that you configure. When selecting data
+        export, you specify a destination bucket and an optional destination prefix where the file is
+        written. You can export the data to a destination bucket in a different account. However, the
+        destination bucket must be in the same Region as the bucket that you are making the PUT analytics
+        configuration to. For more information, see Amazon S3 Analytics – Storage Class Analysis. You
+        must create a bucket policy on the destination bucket where the exported file is written to grant
+        permissions to Amazon S3 to write objects to the bucket. For an example policy, see Granting Permissions
+        for Amazon S3 Inventory and Storage Class Analysis. To use this operation, you must have permissions
+        to perform the s3:PutAnalyticsConfiguration act
+      tags:
+      - analytics
+      parameters:
+      - name: analytics
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `analytics` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket to which an analytics configuration is stored.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: true
+        description: The ID that identifies the analytics configuration.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+x-s3-sibling-operations:
+- operation: ListBucketAnalyticsConfigurations
+  shadows: GetBucketAnalyticsConfiguration
+  summary: This operation is not supported for directory buckets. Lists the analytics configurations for
+    the bucket. You can have up to 1,000 analytics configurations per bucket. This action supports list
+    pagina
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request
+    header or by the presence of an id parameter, neither of which an OpenAPI path can express.

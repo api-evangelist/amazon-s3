@@ -1,0 +1,189 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Website (bucket-level)
+  description: '3 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `website` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: website
+paths:
+  /{Bucket}:
+    delete:
+      operationId: DeleteBucketWebsite
+      summary: This operation is not supported for directory buckets. This action removes the website
+        configuration for a bucket. Amazo
+      description: 'This operation is not supported for directory buckets. This action removes the website
+        configuration for a bucket. Amazon S3 returns a 200 OK response upon successfully deleting a website
+        configuration on the specified bucket. You will get a 200 OK response if the website configuration
+        you are trying to delete does not exist on the bucket. Amazon S3 returns a 404 response if the
+        bucket specified in the request does not exist. This DELETE action requires the S3:DeleteBucketWebsite
+        permission. By default, only the bucket owner can delete the website configuration attached to
+        a bucket. However, bucket owners can grant other users permission to delete the website configuration
+        by writing a bucket policy granting them the S3:DeleteBucketWebsite permission. For more information
+        about hosting websites, see Hosting Websites on Amazon S3. The following operations are related
+        to DeleteBucketWebsite: GetBucketWebsite PutBucketWebsite You must URL encode any signed header
+        values that contain spaces. For example, if your header value is my file.txt, containing two spaces
+        after my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - website
+      parameters:
+      - name: website
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `website` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name for which you want to remove the website configuration.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    get:
+      operationId: GetBucketWebsite
+      summary: This operation is not supported for directory buckets. Returns the website configuration
+        for a bucket. To host website o
+      description: 'This operation is not supported for directory buckets. Returns the website configuration
+        for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a
+        website configuration. For more information about hosting websites, see Hosting Websites on Amazon
+        S3. This GET action requires the S3:GetBucketWebsite permission. By default, only the bucket owner
+        can read the bucket website configuration. However, bucket owners can allow other users to read
+        the website configuration by writing a bucket policy granting them the S3:GetBucketWebsite permission.
+        The following operations are related to GetBucketWebsite: DeleteBucketWebsite PutBucketWebsite
+        You must URL encode any signed header values that contain spaces. For example, if your header
+        value is my file.txt, containing two spaces after my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - website
+      parameters:
+      - name: website
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `website` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name for which to get the website configuration.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketWebsiteOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketWebsite
+      summary: This operation is not supported for directory buckets. Sets the configuration of the website
+        that is specified in the we
+      description: This operation is not supported for directory buckets. Sets the configuration of the
+        website that is specified in the website subresource. To configure a bucket as a website, you
+        can add this subresource on the bucket with website configuration information such as the file
+        name of the index document and any redirect rules. For more information, see Hosting Websites
+        on Amazon S3. This PUT action requires the S3:PutBucketWebsite permission. By default, only the
+        bucket owner can configure the website attached to a bucket; however, bucket owners can allow
+        other users to set the website configuration by writing a bucket policy that grants them the S3:PutBucketWebsite
+        permission. To redirect all website requests sent to the bucket's website endpoint, you add a
+        website configuration with the following elements. Because all requests are sent to another website,
+        you don't need to provide index document name for the bucket. WebsiteConfiguration RedirectAllRequestsTo
+        HostName Protocol If you want granular control over redirects, you can use the following elements
+        to add routing rules that describe conditions for redirecting requests and information about the
+        redirect destination. In this case
+      tags:
+      - website
+      parameters:
+      - name: website
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `website` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name.
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The Base64 encoded 128-bit MD5 digest of the data. You must use this header as a
+          message integrity check to verify that the request body was not corrupted in transit. For more
+          information, see RFC 186
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm used to create the checksum for the request when you use
+          the SDK. This header will not provide any additional functionality if you don't use the SDK.
+          When you send this header,
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
