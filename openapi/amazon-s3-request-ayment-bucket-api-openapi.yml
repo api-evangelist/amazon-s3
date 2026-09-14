@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Requestpayment (bucket-level)
+  description: '2 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `requestPayment` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: requestPayment
+paths:
+  /{Bucket}:
+    get:
+      operationId: GetBucketRequestPayment
+      summary: This operation is not supported for directory buckets. Returns the request payment configuration
+        of a bucket. To use thi
+      description: 'This operation is not supported for directory buckets. Returns the request payment
+        configuration of a bucket. To use this version of the operation, you must be the bucket owner.
+        For more information, see Requester Pays Buckets. The following operations are related to GetBucketRequestPayment:
+        ListObjects You must URL encode any signed header values that contain spaces. For example, if
+        your header value is my file.txt, containing two spaces after my, you must URL encode this value
+        to my%20%20file.txt.'
+      tags:
+      - requestPayment
+      parameters:
+      - name: requestPayment
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `requestPayment` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket for which to get the payment request configuration
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketRequestPaymentOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketRequestPayment
+      summary: 'This operation is not supported for directory buckets. Sets the request payment configuration
+        for a bucket. By default, '
+      description: 'This operation is not supported for directory buckets. Sets the request payment configuration
+        for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration
+        parameter enables the bucket owner (only) to specify that the person requesting the download will
+        be charged for the download. For more information, see Requester Pays Buckets. The following operations
+        are related to PutBucketRequestPayment: CreateBucket GetBucketRequestPayment You must URL encode
+        any signed header values that contain spaces. For example, if your header value is my file.txt,
+        containing two spaces after my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - requestPayment
+      parameters:
+      - name: requestPayment
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `requestPayment` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name.
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The Base64 encoded 128-bit MD5 digest of the data. You must use this header as a
+          message integrity check to verify that the request body was not corrupted in transit. For more
+          information, see RFC 186
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm used to create the checksum for the request when you use
+          the SDK. This header will not provide any additional functionality if you don't use the SDK.
+          When you send this header,
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.

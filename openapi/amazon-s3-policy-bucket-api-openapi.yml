@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Policy (bucket-level)
+  description: '3 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `policy` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: policy
+paths:
+  /{Bucket}:
+    delete:
+      operationId: DeleteBucketPolicy
+      summary: Deletes the policy of a specified bucket. Directory buckets - For directory buckets, you
+        must make requests for this API
+      description: Deletes the policy of a specified bucket. Directory buckets - For directory buckets,
+        you must make requests for this API operation to the Regional endpoint. These endpoints support
+        path-style requests in the format https://s3express-control.region-code.amazonaws.com/bucket-name
+        . Virtual-hosted-style requests aren't supported. For more information about endpoints in Availability
+        Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon
+        S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory
+        buckets in Local Zones in the Amazon S3 User Guide. Permissions If you are using an identity other
+        than the root user of the Amazon Web Services account that owns the bucket, the calling identity
+        must both have the DeleteBucketPolicy permissions on the specified bucket and belong to the bucket
+        owner's account in order to use this operation. If you don't have DeleteBucketPolicy permissions,
+        Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not
+        using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not
+        Allowed error. To ensure that bucket o
+      tags:
+      - policy
+      parameters:
+      - name: policy
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `policy` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name. Directory buckets - When you use this operation with a directory
+          bucket, you must use path-style requests in the format https://s3express-control.region-code.amazonaws.com/bucket-name
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    get:
+      operationId: GetBucketPolicy
+      summary: Returns the policy of a specified bucket. Directory buckets - For directory buckets, you
+        must make requests for this API
+      description: 'Returns the policy of a specified bucket. Directory buckets - For directory buckets,
+        you must make requests for this API operation to the Regional endpoint. These endpoints support
+        path-style requests in the format https://s3express-control.region-code.amazonaws.com/bucket-name
+        . Virtual-hosted-style requests aren''t supported. For more information about endpoints in Availability
+        Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon
+        S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory
+        buckets in Local Zones in the Amazon S3 User Guide. Permissions If you are using an identity other
+        than the root user of the Amazon Web Services account that owns the bucket, the calling identity
+        must both have the GetBucketPolicy permissions on the specified bucket and belong to the bucket
+        owner''s account in order to use this operation. If you don''t have GetBucketPolicy permissions,
+        Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you''re
+        not using an identity that belongs to the bucket owner''s account, Amazon S3 returns a 405 Method
+        Not Allowed error. To ensure that bucket owners '
+      tags:
+      - policy
+      parameters:
+      - name: policy
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `policy` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket name to get the bucket policy for. Directory buckets - When you use this
+          operation with a directory bucket, you must use path-style requests in the format https://s3express-control.region-c
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketPolicyOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketPolicy
+      summary: Applies an Amazon S3 bucket policy to an Amazon S3 bucket. Directory buckets - For directory
+        buckets, you must make requ
+      description: Applies an Amazon S3 bucket policy to an Amazon S3 bucket. Directory buckets - For
+        directory buckets, you must make requests for this API operation to the Regional endpoint. These
+        endpoints support path-style requests in the format https://s3express-control.region-code.amazonaws.com/bucket-name
+        . Virtual-hosted-style requests aren't supported. For more information about endpoints in Availability
+        Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon
+        S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory
+        buckets in Local Zones in the Amazon S3 User Guide. Permissions If you are using an identity other
+        than the root user of the Amazon Web Services account that owns the bucket, the calling identity
+        must both have the PutBucketPolicy permissions on the specified bucket and belong to the bucket
+        owner's account in order to use this operation. If you don't have PutBucketPolicy permissions,
+        Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not
+        using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not
+        Allowed error. To ensure th
+      tags:
+      - policy
+      parameters:
+      - name: policy
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `policy` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket. Directory buckets - When you use this operation with a directory
+          bucket, you must use path-style requests in the format https://s3express-control.region-code.amazonaws.com/buck
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The MD5 hash of the request body. For requests made using the Amazon Web Services
+          Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+          This functionality i
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm used to create the checksum for the request when you use
+          the SDK. This header will not provide any additional functionality if you don't use the SDK.
+          When you send this header,
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-confirm-remove-self-bucket-access
+        in: header
+        required: false
+        description: Set this parameter to true to confirm that you want to remove your permissions to
+          change this bucket policy in the future. This functionality is not supported for directory buckets.
+        schema:
+          type: boolean
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.

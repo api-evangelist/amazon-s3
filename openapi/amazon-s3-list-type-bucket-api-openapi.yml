@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 List Type (bucket-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `list-type` query subresource, which is declared as a required
+    query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: list-type
+paths:
+  /{Bucket}:
+    get:
+      operationId: ListObjectsV2
+      summary: Returns some or all (up to 1,000) of the objects in a bucket with each request. You can
+        use the request parameters as se
+      description: Returns some or all (up to 1,000) of the objects in a bucket with each request. You
+        can use the request parameters as selection criteria to return a subset of the objects in a bucket.
+        A 200 OK response can contain valid or invalid XML. Make sure to design your application to parse
+        the contents of the response and handle it appropriately. For more information about listing objects,
+        see Listing object keys programmatically in the Amazon S3 User Guide. To get a list of your buckets,
+        see ListBuckets. General purpose bucket - For general purpose buckets, ListObjectsV2 doesn't return
+        prefixes that are related only to in-progress multipart uploads. Directory buckets - For directory
+        buckets, ListObjectsV2 response includes the prefixes that are related only to in-progress multipart
+        uploads. Directory buckets - For directory buckets, you must make requests for this API operation
+        to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name
+        . Path-style requests are not supported. For more information about endpoints in Availability
+        Zones, see Regional and Zonal endpoints for directo
+      tags:
+      - list-type
+      parameters:
+      - name: list-type
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `list-type` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: Directory buckets - When you use this operation with a directory bucket, you must
+          use virtual-hosted-style requests in the format Bucket-name.s3express-zone-id.region-code.amazonaws.com.
+          Path-style re
+        schema:
+          type: string
+      - name: delimiter
+        in: query
+        required: false
+        description: A delimiter is a character that you use to group keys. CommonPrefixes is filtered
+          out from results if it is not lexicographically greater than the StartAfter value. Directory
+          buckets - For directory b
+        schema:
+          type: string
+      - name: encoding-type
+        in: query
+        required: false
+        description: Encoding type used by Amazon S3 to encode the object keys in the response. Responses
+          are encoded only in UTF-8. An object key can contain any Unicode character. However, the XML
+          1.0 parser can't parse
+        schema:
+          type: string
+          enum:
+          - url
+      - name: max-keys
+        in: query
+        required: false
+        description: Sets the maximum number of keys returned in the response. By default, the action
+          returns up to 1,000 key names. The response might contain fewer keys but will never contain
+          more.
+        schema:
+          type: integer
+      - name: prefix
+        in: query
+        required: false
+        description: Limits the response to keys that begin with the specified prefix. Directory buckets
+          - For directory buckets, only prefixes that end in a delimiter (/) are supported.
+        schema:
+          type: string
+      - name: continuation-token
+        in: query
+        required: false
+        description: ContinuationToken indicates to Amazon S3 that the list is being continued on this
+          bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this
+          ContinuationToken for pag
+        schema:
+          type: string
+      - name: fetch-owner
+        in: query
+        required: false
+        description: 'The owner field is not present in ListObjectsV2 by default. If you want to return
+          the owner field with each key in the result, then set the FetchOwner field to true. Directory
+          buckets - For directory '
+        schema:
+          type: boolean
+      - name: start-after
+        in: query
+        required: false
+        description: StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing
+          after this specified key. StartAfter can be any key in the bucket. This functionality is not
+          supported for direct
+        schema:
+          type: string
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        description: Confirms that the requester knows that she or he will be charged for the list objects
+          request in V2 style. Bucket owners need not specify this parameter in their requests. This functionality
+          is not su
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      - name: x-amz-optional-object-attributes
+        in: header
+        required: false
+        description: Specifies the optional fields that you want returned in the response. Fields that
+          you do not specify are not returned. This functionality is not supported for directory buckets.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: ListObjectsV2Output
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.

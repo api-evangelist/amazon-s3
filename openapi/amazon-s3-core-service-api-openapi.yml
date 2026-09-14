@@ -1,0 +1,92 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Core (service-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    1 further operation(s) share a method, path and subresource with one described here and are recorded
+    in `x-s3-sibling-operations`: S3 separates them by a request header or an id parameter, which OpenAPI
+    cannot express.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: service
+paths:
+  /:
+    get:
+      operationId: ListBuckets
+      summary: This operation is not supported for directory buckets. Returns a list of all buckets owned
+        by the authenticated sender o
+      description: This operation is not supported for directory buckets. Returns a list of all buckets
+        owned by the authenticated sender of the request. To grant IAM permission to use this operation,
+        you must add the s3:ListAllMyBuckets policy action. For information about Amazon S3 buckets, see
+        Creating, configuring, and working with Amazon S3 buckets. We strongly recommend using only paginated
+        ListBuckets requests. Unpaginated ListBuckets requests are only supported for Amazon Web Services
+        accounts set to the default general purpose bucket quota of 10,000. If you have an approved general
+        purpose bucket quota above 10,000, you must send paginated ListBuckets requests to list your account’s
+        buckets. All unpaginated ListBuckets requests will be rejected for Amazon Web Services accounts
+        with a general purpose bucket quota greater than 10,000. You must URL encode any signed header
+        values that contain spaces. For example, if your header value is my file.txt, containing two spaces
+        after my, you must URL encode this value to my%20%20file.txt.
+      tags:
+      - service
+      parameters:
+      - name: max-buckets
+        in: query
+        required: false
+        description: Maximum number of buckets to be returned in response. When the number is more than
+          the count of buckets that are owned by an Amazon Web Services account, return all the buckets
+          in response.
+        schema:
+          type: integer
+      - name: continuation-token
+        in: query
+        required: false
+        description: ContinuationToken indicates to Amazon S3 that the list is being continued on this
+          bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this
+          ContinuationToken for pag
+        schema:
+          type: string
+      - name: prefix
+        in: query
+        required: false
+        description: Limits the response to bucket names that begin with the specified bucket name prefix.
+        schema:
+          type: string
+      - name: bucket-region
+        in: query
+        required: false
+        description: 'Limits the response to buckets that are located in the specified Amazon Web Services
+          Region. The Amazon Web Services Region must be expressed according to the Amazon Web Services
+          Region code, such as '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: ListBucketsOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+x-s3-sibling-operations:
+- operation: ListDirectoryBuckets
+  shadows: ListBuckets
+  summary: Returns a list of all Amazon S3 directory buckets owned by the authenticated sender of the
+    request. For more information about directory buckets, see Directory buckets in the Amazon S3 User
+    Guide. Dir
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request
+    header or by the presence of an id parameter, neither of which an OpenAPI path can express.

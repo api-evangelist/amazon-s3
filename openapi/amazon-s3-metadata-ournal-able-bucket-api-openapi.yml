@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Metadatajournaltable (bucket-level)
+  description: '1 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `metadataJournalTable` query subresource, which is declared
+    as a required query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: metadataJournalTable
+paths:
+  /{Bucket}:
+    put:
+      operationId: UpdateBucketMetadataJournalTableConfiguration
+      summary: Enables or disables journal table record expiration for an S3 Metadata configuration on
+        a general purpose bucket. For mo
+      description: 'Enables or disables journal table record expiration for an S3 Metadata configuration
+        on a general purpose bucket. For more information, see Accelerating data discovery with S3 Metadata
+        in the Amazon S3 User Guide. Permissions To use this operation, you must have the s3:UpdateBucketMetadataJournalTableConfiguration
+        permission. For more information, see Setting up permissions for configuring metadata tables in
+        the Amazon S3 User Guide. The following operations are related to UpdateBucketMetadataJournalTableConfiguration:
+        CreateBucketMetadataConfiguration DeleteBucketMetadataConfiguration GetBucketMetadataConfiguration
+        UpdateBucketMetadataInventoryTableConfiguration You must URL encode any signed header values that
+        contain spaces. For example, if your header value is my file.txt, containing two spaces after
+        my, you must URL encode this value to my%20%20file.txt.'
+      tags:
+      - metadataJournalTable
+      parameters:
+      - name: metadataJournalTable
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `metadataJournalTable` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The general purpose bucket that corresponds to the metadata configuration that you
+          want to enable or disable journal table record expiration for.
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The Content-MD5 header for the journal table configuration.
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: The checksum algorithm to use with your journal table configuration.
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The expected owner of the general purpose bucket that corresponds to the metadata
+          table configuration that you want to enable or disable journal table record expiration for.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.

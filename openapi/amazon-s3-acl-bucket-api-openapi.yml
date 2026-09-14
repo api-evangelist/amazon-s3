@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Amazon S3 Acl (bucket-level)
+  description: '2 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `acl` query subresource, which is declared as a required query
+    parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0).
+    Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: acl
+paths:
+  /{Bucket}:
+    get:
+      operationId: GetBucketAcl
+      summary: This operation is not supported for directory buckets. This implementation of the GET action
+        uses the acl subresource to
+      description: 'This operation is not supported for directory buckets. This implementation of the
+        GET action uses the acl subresource to return the access control list (ACL) of a bucket. To use
+        GET to return the ACL of the bucket, you must have the READ_ACP access to the bucket. If READ_ACP
+        permission is granted to the anonymous user, you can return the ACL of the bucket without using
+        an authorization header. When you use this API operation with an access point, provide the alias
+        of the access point in place of the bucket name. When you use this API operation with an Object
+        Lambda access point, provide the alias of the Object Lambda access point in place of the bucket
+        name. If the Object Lambda access point alias in a request is not valid, the error code InvalidAccessPointAliasError
+        is returned. For more information about InvalidAccessPointAliasError, see List of Error Codes.
+        If your bucket uses the bucket owner enforced setting for S3 Object Ownership, requests to read
+        ACLs are still supported and return the bucket-owner-full-control ACL with the owner being the
+        account that created the bucket. For more information, see Controlling object ownership and disabling
+        ACLs in the Amazon S3 User Guide. '
+      tags:
+      - acl
+      parameters:
+      - name: acl
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `acl` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: Specifies the S3 bucket whose ACL is being requested. When you use this API operation
+          with an access point, provide the alias of the access point in place of the bucket name. When
+          you use this API ope
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketAclOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
+    put:
+      operationId: PutBucketAcl
+      summary: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email
+        Grantee Access Control Lists '
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for
+        Email Grantee Access Control Lists (ACLs). If you attempt to use an Email Grantee ACL in a request
+        after October 1, 2025, the request will receive an HTTP 405 (Method Not Allowed) error. This change
+        affects the following Amazon Web Services Regions: US East (N. Virginia), US West (N. California),
+        US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe
+        (Ireland), and South America (São Paulo). This operation is not supported for directory buckets.
+        Sets the permissions on an existing bucket using access control lists (ACL). For more information,
+        see Using ACLs. To set the ACL of a bucket, you must have the WRITE_ACP permission. You can use
+        one of the following two ways to set a bucket''s permissions: Specify the ACL in the request body
+        Specify permissions using request headers You cannot specify access permission using both the
+        body and the request headers. Depending on your application needs, you may choose to set the ACL
+        on a bucket using either the request body or the headers. For example, if you have an existing
+        application that updates a bucket ACL using th'
+      tags:
+      - acl
+      parameters:
+      - name: acl
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `acl` subresource.
+        schema:
+          type: string
+      - name: x-amz-acl
+        in: header
+        required: false
+        description: The canned ACL to apply to the bucket.
+        schema:
+          type: string
+          enum:
+          - private
+          - public-read
+          - public-read-write
+          - authenticated-read
+      - name: Bucket
+        in: path
+        required: true
+        description: The bucket to which to apply the ACL.
+        schema:
+          type: string
+      - name: Content-MD5
+        in: header
+        required: false
+        description: The Base64 encoded 128-bit MD5 digest of the data. This header must be used as a
+          message integrity check to verify that the request body was not corrupted in transit. For more
+          information, go to RFC 1
+        schema:
+          type: string
+      - name: x-amz-sdk-checksum-algorithm
+        in: header
+        required: false
+        description: Indicates the algorithm used to create the checksum for the request when you use
+          the SDK. This header will not provide any additional functionality if you don't use the SDK.
+          When you send this header,
+        schema:
+          type: string
+          enum:
+          - CRC32
+          - CRC32C
+          - SHA1
+          - SHA256
+          - CRC64NVME
+          - SHA512
+          - MD5
+          - XXHASH64
+          - XXHASH3
+          - XXHASH128
+      - name: x-amz-grant-full-control
+        in: header
+        required: false
+        description: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
+        schema:
+          type: string
+      - name: x-amz-grant-read
+        in: header
+        required: false
+        description: Allows grantee to list the objects in the bucket.
+        schema:
+          type: string
+      - name: x-amz-grant-read-acp
+        in: header
+        required: false
+        description: Allows grantee to read the bucket ACL.
+        schema:
+          type: string
+      - name: x-amz-grant-write
+        in: header
+        required: false
+        description: Allows grantee to create new objects in the bucket. For the bucket and object owners
+          of existing objects, also allows deletions and overwrites of those objects.
+        schema:
+          type: string
+      - name: x-amz-grant-write-acp
+        in: header
+        required: false
+        description: Allows grantee to write the ACL for the applicable bucket.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does
+          not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden
+          (access denied)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this
+            does not distinguish an unsupported operation from an unauthorised one.
