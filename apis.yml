@@ -30,1337 +30,768 @@ accessModel:
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/s3/
 created: '2024-01-15'
-modified: '2026-09-13'
+modified: '2026-09-16'
 apis:
-- aid: amazon-s3:amazon-s3-abac-bucket-api
-  name: Amazon S3 Abac (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+- aid: amazon-s3:amazon-s3-abac-api
+  name: Amazon S3 Abac API
+  description: The abac API from Amazon S3 — 1 operation(s) for abac.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Abac
+  - abac
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-abac-bucket-api-openapi.yml
-  - &id001
-    type: Documentation
+    url: openapi/amazon-s3-abac-api-openapi.yml
+  - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/
-  - &id002
-    type: JSONSchema
+  - type: JSONSchema
     url: json-schema/amazon-s3-bucket-schema.json
-  - &id003
-    type: JSONSchema
+  - type: JSONSchema
     url: json-schema/amazon-s3-object-schema.json
-  - &id004
-    type: JSONLD
+  - type: JSONLD
     url: json-ld/amazon-s3-context.jsonld
-  - &id005
-    type: Pricing
+  - type: Pricing
     url: https://aws.amazon.com/s3/pricing/
-  - &id006
-    type: GettingStarted
+  - type: GettingStarted
     url: https://aws.amazon.com/s3/getting-started/
-  - &id007
-    type: Authentication
+  - type: Authentication
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - &id008
-    type: SDKs
+  - type: SDKs
     url: https://aws.amazon.com/tools/
-  - &id009
-    type: StatusPage
+  - type: StatusPage
     url: https://status.aws.amazon.com/
-  - &id010
-    type: BestPractices
+  - type: BestPractices
     url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
-  - &id011
-    type: FAQ
+  - type: FAQ
     url: https://aws.amazon.com/s3/faqs/
-  - &id012
-    type: APIReference
+  - type: APIReference
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
-  - &id013
-    type: ChangeLog
+  - type: ChangeLog
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - &id014
-    type: CodeExamples
+  - type: CodeExamples
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
-  - &id015
-    type: Security
+  - type: Security
     url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-  - &id016
-    type: Documentation
+  - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-- aid: amazon-s3:amazon-s3-accelerate-bucket-api
-  name: Amazon S3 Accelerate (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+- aid: amazon-s3:amazon-s3-access-control-api
+  name: Amazon S3 Access Control API
+  description: Operations for managing bucket and object access control lists (ACLs)
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Accelerate
+  - Access Control
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-accelerate-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-acl-bucket-api
-  name: Amazon S3 Acl (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-access-control-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-access-grants-api
+  name: Amazon S3 Access Grants API
+  description: Operations for S3 Access Grants management
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Acl
+  - Access Grants
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-acl-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-acl-object-api
-  name: Amazon S3 Acl (object-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-access-grants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-access-points-api
+  name: Amazon S3 Access Points API
+  description: Operations for creating and managing S3 access points
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Acl
+  - Access Points
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-acl-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-analytics-bucket-api
-  name: Amazon S3 Analytics (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-access-points-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-acl-api
+  name: Amazon S3 Acl API
+  description: The acl API from Amazon S3 — 1 operation(s) for acl.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Analytics
+  - acl
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-analytics-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-annotation-object-api
-  name: Amazon S3 Annotation (object-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-acl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-annotation-api
+  name: Amazon S3 Annotation API
+  description: The annotation API from Amazon S3 — 1 operation(s) for annotation.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Annotation
+  - annotation
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-annotation-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-attributes-object-api
-  name: Amazon S3 Attributes (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-annotation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-batch-operations-api
+  name: Amazon S3 Batch Operations API
+  description: Operations for creating and managing S3 Batch Operations jobs
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Attributes
+  - Batch Operations
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-attributes-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-core-bucket-api
-  name: Amazon S3 Core (bucket-level)
-  description: 5 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-batch-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-bucket-api
+  name: Amazon S3 Bucket API
+  description: The bucket API from Amazon S3 — 1 operation(s) for bucket.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Bucket
+  - bucket
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-core-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-core-object-api
-  name: Amazon S3 Core (object-level)
-  description: 5 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-bucket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-bucket-configuration-api
+  name: Amazon S3 Bucket Configuration API
+  description: Operations for managing bucket-level configuration such as versioning, lifecycle, CORS,
+    and encryption
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Object
+  - Bucket Configuration
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-core-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-core-service-api
-  name: Amazon S3 Core (service-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-bucket-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-buckets-api
+  name: Amazon S3 Buckets API
+  description: Operations for creating, listing, and managing S3 buckets
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Service
+  - Buckets
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-core-service-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-cors-bucket-api
-  name: Amazon S3 Cors (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-delete-api
+  name: Amazon S3 Delete API
+  description: The delete API from Amazon S3 — 1 operation(s) for delete.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Cors
+  - delete
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-cors-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-delete-bucket-api
-  name: Amazon S3 Delete (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-delete-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-multi-region-access-points-api
+  name: Amazon S3 Multi-Region Access Points API
+  description: Operations for Multi-Region Access Points
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Delete
+  - Multi-Region Access Points
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-delete-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-encryption-bucket-api
-  name: Amazon S3 Encryption (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-multi-region-access-points-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-multipart-upload-api
+  name: Amazon S3 Multipart Upload API
+  description: Operations for multipart upload of large objects
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Encryption
+  - Multipart Upload
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-encryption-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-encryption-object-api
-  name: Amazon S3 Encryption (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-multipart-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-object-api
+  name: Amazon S3 Object API
+  description: The object API from Amazon S3 — 1 operation(s) for object.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Encryption
+  - object
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-encryption-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-intelligent-tiering-bucket-api
-  name: Amazon S3 Intelligent Tiering (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-object-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-objects-api
+  name: Amazon S3 Objects API
+  description: Operations for uploading, downloading, copying, and deleting objects
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Intelligent Tiering
+  - Objects
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-intelligent-tiering-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-inventory-bucket-api
-  name: Amazon S3 Inventory (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-objects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-public-access-block-api
+  name: Amazon S3 Public Access Block API
+  description: Operations for managing public access block settings
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Inventory
+  - Public Access Block
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-inventory-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-legal-hold-object-api
-  name: Amazon S3 Legal Hold (object-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-public-access-block-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-storage-lens-api
+  name: Amazon S3 Storage Lens API
+  description: Operations for S3 Storage Lens configurations
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
-  - Legal Hold
+  - Storage Lens
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-legal-hold-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-lifecycle-bucket-api
-  name: Amazon S3 Lifecycle (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Lifecycle
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-lifecycle-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-list-type-bucket-api
-  name: Amazon S3 List Type (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - List Type
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-list-type-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-location-bucket-api
-  name: Amazon S3 Location (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Location
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-location-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-logging-bucket-api
-  name: Amazon S3 Logging (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Logging
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-logging-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metadata-able-bucket-api
-  name: Amazon S3 Metadatatable (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metadatatable
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metadata-able-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metadata-nnotation-able-bucket-api
-  name: Amazon S3 Metadataannotationtable (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metadataannotationtable
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metadata-nnotation-able-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metadata-nventory-able-bucket-api
-  name: Amazon S3 Metadatainventorytable (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metadatainventorytable
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metadata-nventory-able-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metadata-onfiguration-bucket-api
-  name: Amazon S3 Metadataconfiguration (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metadataconfiguration
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metadata-onfiguration-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metadata-ournal-able-bucket-api
-  name: Amazon S3 Metadatajournaltable (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metadatajournaltable
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metadata-ournal-able-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-metrics-bucket-api
-  name: Amazon S3 Metrics (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Metrics
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-metrics-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-notification-bucket-api
-  name: Amazon S3 Notification (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Notification
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-notification-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-object-lock-bucket-api
-  name: Amazon S3 Object Lock (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Object Lock
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-object-lock-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-ownership-ontrols-bucket-api
-  name: Amazon S3 Ownershipcontrols (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Ownershipcontrols
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-ownership-ontrols-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-policy-bucket-api
-  name: Amazon S3 Policy (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Policy
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-policy-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-policy-tatus-bucket-api
-  name: Amazon S3 Policystatus (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Policystatus
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-policy-tatus-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-public-ccess-lock-bucket-api
-  name: Amazon S3 Publicaccessblock (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Publicaccessblock
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-public-ccess-lock-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-rename-bject-object-api
-  name: Amazon S3 Renameobject (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Renameobject
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-rename-bject-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-replication-bucket-api
-  name: Amazon S3 Replication (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Replication
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-replication-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-request-ayment-bucket-api
-  name: Amazon S3 Requestpayment (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Requestpayment
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-request-ayment-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-restore-object-api
-  name: Amazon S3 Restore (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Restore
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-restore-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-retention-object-api
-  name: Amazon S3 Retention (object-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Retention
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-retention-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-select-object-api
-  name: Amazon S3 Select (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Select
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-select-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-session-bucket-api
-  name: Amazon S3 Session (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Session
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-session-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-tagging-bucket-api
-  name: Amazon S3 Tagging (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
+    url: openapi/amazon-s3-storage-lens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
+- aid: amazon-s3:amazon-s3-tagging-api
+  name: Amazon S3 Tagging API
+  description: Operations for managing bucket and object tags
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
   - Tagging
   properties:
   - type: OpenAPI
-    url: openapi/amazon-s3-tagging-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-tagging-object-api
-  name: Amazon S3 Tagging (object-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Tagging
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-tagging-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-torrent-object-api
-  name: Amazon S3 Torrent (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Torrent
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-torrent-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-uploads-bucket-api
-  name: Amazon S3 Uploads (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Uploads
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-uploads-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-uploads-object-api
-  name: Amazon S3 Uploads (object-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Uploads
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-uploads-object-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-versioning-bucket-api
-  name: Amazon S3 Versioning (bucket-level)
-  description: 2 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Versioning
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-versioning-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-versions-bucket-api
-  name: Amazon S3 Versions (bucket-level)
-  description: 1 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Versions
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-versions-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
-- aid: amazon-s3:amazon-s3-website-bucket-api
-  name: Amazon S3 Website (bucket-level)
-  description: 3 operation(s) from the Amazon S3 REST API, generated from the authoritative AWS service
-    model.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Website
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-website-bucket-api-openapi.yml
-  - *id001
-  - *id002
-  - *id003
-  - *id004
-  - *id005
-  - *id006
-  - *id007
-  - *id008
-  - *id009
-  - *id010
-  - *id011
-  - *id012
-  - *id013
-  - *id014
-  - *id015
-  - *id016
+    url: openapi/amazon-s3-tagging-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+  - type: JSONSchema
+    url: json-schema/amazon-s3-bucket-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-object-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-s3-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/s3/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/s3/getting-started/
+  - type: Authentication
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/s3/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
+  - type: ChangeLog
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+  - type: CodeExamples
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
+  - type: Security
+    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+  - type: Documentation
+    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 common:
+- type: Website
+  url: https://amazon.com
 - type: Overlay
   url: overlays/amazon-s3-tables-api-overlay.yaml
 - type: CapabilityMap
