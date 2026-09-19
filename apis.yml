@@ -1,6 +1,6 @@
 name: Amazon S3
-description: Amazon Simple Storage Service (S3) is an object storage service offering industry-leading
-  scalability, data availability, security, and performance.
+description: Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability,
+  data availability, security, and performance.
 deliveryModel:
   model: saas
   open_source: false
@@ -38,6 +38,8 @@ apis:
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
+  - ABAC
+  tags_raw:
   - abac
   properties:
   - type: OpenAPI
@@ -206,6 +208,8 @@ apis:
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
+  - ACL
+  tags_raw:
   - acl
   properties:
   - type: OpenAPI
@@ -248,6 +252,8 @@ apis:
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
+  - Annotation
+  tags_raw:
   - annotation
   properties:
   - type: OpenAPI
@@ -289,7 +295,8 @@ apis:
   description: Operations for creating and managing S3 Batch Operations jobs
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - Batch Operations
   properties:
   - type: OpenAPI
@@ -332,6 +339,8 @@ apis:
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
+  - Bucket
+  tags_raw:
   - bucket
   properties:
   - type: OpenAPI
@@ -370,8 +379,7 @@ apis:
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 - aid: amazon-s3:amazon-s3-bucket-configuration-api
   name: Amazon S3 Bucket Configuration API
-  description: Operations for managing bucket-level configuration such as versioning, lifecycle, CORS,
-    and encryption
+  description: Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
@@ -458,7 +466,8 @@ apis:
   description: The delete API from Amazon S3 — 1 operation(s) for delete.
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - delete
   properties:
   - type: OpenAPI
@@ -585,6 +594,8 @@ apis:
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
+  - Object
+  tags_raw:
   - object
   properties:
   - type: OpenAPI
@@ -815,10 +826,10 @@ common:
   url: well-known/amazon-s3-security.txt
 - type: X-MCPServerCandidate
   url: mcp/amazon-s3-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
-    — a tool list derived from the published API contracts, not an existing server. The scorer already
-    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
-    surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool
+    list derived from the published API contracts, not an existing server. The scorer already read the manifest
+    and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server
+    that does not exist.'
 - type: LLMsTxt
   url: llms/amazon-s3-llms.txt
 - type: Conformance
@@ -965,6 +976,8 @@ common:
   - Amazon EventBridge
 - type: Integrations
   url: https://aws.amazon.com/marketplace/
+- type: Website
+  url: https://aws.amazon.com/s3/
 properties:
 - type: Capabilities
   url: capabilities/storage-management.yaml
@@ -993,6 +1006,14 @@ maintainers:
   email: kin@apievangelist.com
   url: https://apievangelist.com
 tags:
+- Archives
+- AWS
+- Backup
+- Cloud Storage
+- Data Storage
+- Object Storage
+- Scalable Storage
+tags_raw:
 - Archive
 - AWS
 - Backup
