@@ -1,239 +1,83 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Amazon S3
-providerId: amazon-s3
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Amazon
-  - AWS
-  - Object Storage
-  - Cloud Storage
-  - Archive
-  - Backup
-description: Amazon S3 prices independently on storage (per GB-month, by storage class), requests (per
-  1,000 by verb and class), data transfer (egress to internet beyond the 100 GB/month free pool), and
-  optional features such as replication, S3 Tables, Glacier retrieval, and inventory. New customers receive
-  up to $200 in AWS Free Tier credits valid 6 months. Prices listed are us-east-1 standard tier where
-  applicable.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://aws.amazon.com/s3/pricing/
 sources:
-  - https://aws.amazon.com/s3/pricing/
+- https://aws.amazon.com/s3/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+published: true
+note: 'Most storage/request price cells are unrendered template tokens ({priceOf!...}) in the captured
+  text, so headline per-GB storage and per-1,000-request rates are not readable. Numeric prices appear
+  in Multi-Region Access Points tables and in worked pricing examples (e.g., S3 Tables $0.0265 per GB,
+  S3 Vectors $0.06/GB storage, $0.20/GB PUT, $2.50/MM queries). Page states ''Pay only for what you use.
+  There is no minimum charge.'' Free allowances noted: first 100GB data transfer out to internet per month;
+  first 512KB of data returned per vector query.'
+plan_count: 10
+currency: USD
 plans:
-  - id: amazon-s3-storage-classes
-    name: Storage Classes
-    type: usage-based
-    description: Per-GB-month storage rates by class. Choose by access frequency and durability requirements.
-    entries:
-      - label: S3 Standard - First 50 TB / month
-        name: storage_standard
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Intelligent-Tiering
-        name: storage_intelligent
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Standard-IA
-        name: storage_standard_ia
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 One Zone-IA
-        name: storage_onezone_ia
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Express One Zone
-        name: storage_express
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Glacier Instant Retrieval
-        name: storage_glacier_instant
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Glacier Flexible Retrieval
-        name: storage_glacier_flexible
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: S3 Glacier Deep Archive
-        name: storage_glacier_deep
-        type: metered
-        metric: gb-month
-        limit: -1
-        timeFrame: month
-        geo: US
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-    elements:
-      - name: 8 storage classes for different access patterns
-      - name: Per-GB-month metering
-      - name: Lifecycle transitions between classes
-  - id: amazon-s3-requests
-    name: Request Pricing
-    type: usage-based
-    description: Per-1,000-request rates differ by verb and storage class. Standard tier rates listed.
-    entries:
-      - label: PUT, COPY, POST, LIST (Standard)
-        name: req_put_standard
-        type: metered
-        metric: request
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1000
-        price: '0.005'
-        userMultiplied: false
-      - label: GET, SELECT (Standard)
-        name: req_get_standard
-        type: metered
-        metric: request
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1000
-        price: '0.0004'
-        userMultiplied: false
-      - label: Glacier retrieval requests
-        name: req_glacier
-        type: metered
-        metric: request
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1000
-        price: see vendor pricing calculator
-        userMultiplied: false
-    elements:
-      - name: Different rates for IA, One Zone-IA, Glacier classes
-      - name: SELECT, retrieval, lifecycle transitions metered separately
-  - id: amazon-s3-data-transfer
-    name: Data Transfer
-    type: usage-based
-    description: Inbound is free; outbound to internet is metered after a 100 GB/month aggregated free
-      pool.
-    entries:
-      - label: Data IN
-        name: dt_in
-        type: flat
-        metric: gb
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Data OUT - first 100 GB/month
-        name: dt_out_free
-        type: quota
-        metric: gb
-        limit: 100
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Data OUT to internet - tiered
-        name: dt_out_paid
-        type: tiered
-        metric: gb
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: see vendor pricing calculator
-        userMultiplied: false
-      - label: Cross-Region replication / transfer
-        name: dt_cross_region
-        type: metered
-        metric: gb
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.01'
-        userMultiplied: false
-      - label: Same-Region S3-to-S3
-        name: dt_same_region
-        type: flat
-        metric: gb
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Free 100 GB/month outbound aggregated across services
-      - name: Tiered egress pricing
-  - id: amazon-s3-free-tier
-    name: AWS Free Tier
-    type: freemium
-    description: New AWS customers receive up to $200 in AWS Free Tier credits applicable to S3 and other
-      services for 6 months.
-    entries:
-      - label: AWS Free Tier credits
-        name: free_credits
-        type: quota
-        metric: usd
-        limit: 200
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Available to new accounts
-      - name: 6-month expiry
-      - name: Applies across S3 storage, requests, transfer
-maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
-    url: https://apievangelist.com
-  - name: Amazon Web Services
-    email: support@aws.amazon.com
-    url: https://aws.amazon.com
+- name: S3 Multi-Region Access Points data routing
+  price_text: $0.0033 per GB
+  price: 0.0033
+  currency: USD
+  period: per-use
+  unit: GB processed
+- name: Internet acceleration WITHIN North America – Data transfer IN
+  price_text: $0.0025 per GB
+  price: 0.0025
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN North America – Data transfer OUT
+  price_text: $0.0050 per GB
+  price: 0.005
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration BETWEEN North America AND any other location – IN/OUT
+  price_text: $0.0500 per GB
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN Asia Pacific – Data transfer IN
+  price_text: $0.0100 per GB
+  price: 0.01
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN Asia Pacific – Data transfer OUT
+  price_text: $0.0150 per GB
+  price: 0.015
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN South America – Data transfer IN
+  price_text: $0.0250 per GB
+  price: 0.025
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN South America – Data transfer OUT
+  price_text: $0.0400 per GB
+  price: 0.04
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration BETWEEN Asia Pacific/South America AND any other location
+  price_text: $0.0600 per GB
+  price: 0.06
+  currency: USD
+  period: per-use
+  unit: GB
+- name: S3 Files – File reads directly from S3 bucket
+  price_text: FREE
+  period: per-use
+  unit: GB
+rate_limit_statements:
+- Each provisioned capacity unit can provide at least three expedited retrievals every five minutes and
+  up to 150 MB/s of retrieval throughput.
