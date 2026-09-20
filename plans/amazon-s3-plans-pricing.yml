@@ -10,6 +10,10 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
 published: true
 note: 'Most storage/request price cells are unrendered template tokens ({priceOf!...}) in the captured
   text, so headline per-GB storage and per-1,000-request rates are not readable. Numeric prices appear
