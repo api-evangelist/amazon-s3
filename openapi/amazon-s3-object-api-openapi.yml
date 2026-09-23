@@ -1,0 +1,340 @@
+openapi: 3.2.0
+info:
+  title: Amazon S3 Core (-level) Object API
+  description: '5 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    5 further operation(s) share a method, path and subresource with one described here and are recorded in `x-s3-sibling-operations`: S3 separates them by a request header or an id parameter, which OpenAPI cannot express.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0). Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: Object
+paths:
+  /{Bucket}/{Key}:
+    post:
+      operationId: CompleteMultipartUpload
+      summary: Completes a multipart upload by assembling previously uploaded parts
+      description: Completes a multipart upload by assembling previously uploaded parts. You first initiate the multipart upload and then upload all parts using the UploadPart operation or the UploadPartCopy operation. After successfully uploading all relevant parts of an upload, you call this CompleteMultipartUpload operation to complete the upload. Upon receiving this request, Amazon S3 concatenates all the parts in ascending order by part number to create a new object. In the CompleteMultipartUpload request, you must provide the parts list and ensure that the parts list is complete. The CompleteMultipartUpload API operation concatenates the parts that you provide in the list. For each part in the list, you must provide the PartNumber value and the ETag value that are returned after that part was uploaded. The processing of a CompleteMultipartUpload request could take several minutes to finalize. After Amazon S3 begins processing the request, it sends an HTTP response header that specifies a 200 OK response. While processing is in progress, Amazon S3 periodically sends white space characters to keep the connection from timing out. A request could fail after the initial 200 OK response has been sent
+      tags:
+      - Object
+      parameters:
+      - name: Bucket
+        in: path
+        required: true
+        description: Name of the bucket to which the multipart upload was initiated. Directory buckets - When you use this operation with a directory bucket, you must use virtual-hosted-style requests in the format Bucket
+        schema:
+          type: string
+      - name: Key
+        in: path
+        required: true
+        description: Object key for which the multipart upload was initiated.
+        schema:
+          type: string
+      - name: uploadId
+        in: query
+        required: true
+        description: ID for the initiated multipart upload.
+        schema:
+          type: string
+      - name: x-amz-checksum-crc32
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 32-bit CRC32 checksum of the obj
+        schema:
+          type: string
+      - name: x-amz-checksum-crc32c
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 32-bit CRC32C checksum of the ob
+        schema:
+          type: string
+      - name: x-amz-checksum-crc64nvme
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 64-bit CRC64NVME checksum of the
+        schema:
+          type: string
+      - name: x-amz-checksum-sha1
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 160-bit SHA1 digest of the objec
+        schema:
+          type: string
+      - name: x-amz-checksum-sha256
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 256-bit SHA256 digest of the obj
+        schema:
+          type: string
+      - name: x-amz-checksum-sha512
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 512-bit SHA512 digest of the obj
+        schema:
+          type: string
+      - name: x-amz-checksum-md5
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 128-bit MD5 digest of the object
+        schema:
+          type: string
+      - name: x-amz-checksum-xxhash64
+        in: header
+        required: false
+        description: 'This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 64-bit XXHASH64 checksum of the '
+        schema:
+          type: string
+      - name: x-amz-checksum-xxhash3
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 64-bit XXHASH3 checksum of the o
+        schema:
+          type: string
+      - name: x-amz-checksum-xxhash128
+        in: header
+        required: false
+        description: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent. This header specifies the Base64 encoded, 128-bit XXHASH128 checksum of th
+        schema:
+          type: string
+      - name: x-amz-checksum-type
+        in: header
+        required: false
+        description: This header specifies the checksum type of the object, which determines how part-level checksums are combined to create an object-level checksum for multipart objects. You can use this header as a dat
+        schema:
+          type: string
+          enum:
+          - COMPOSITE
+          - FULL_OBJECT
+      - name: x-amz-mp-object-size
+        in: header
+        required: false
+        description: The expected total object size of the multipart upload request. If there’s a mismatch between the specified object size value and the actual object size value, it results in an HTTP 400 InvalidRequest
+        schema:
+          type: integer
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden (access denied)
+        schema:
+          type: string
+      - name: If-Match
+        in: header
+        required: false
+        description: Uploads the object only if the ETag (entity tag) value provided during the WRITE operation matches the ETag of the object in S3. If the ETag values do not match, the operation returns a 412 Preconditi
+        schema:
+          type: string
+      - name: If-None-Match
+        in: header
+        required: false
+        description: Uploads the object only if the object key name does not already exist in the bucket specified. Otherwise, Amazon S3 returns a 412 Precondition Failed error. If a conflicting operation occurs during th
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-algorithm
+        in: header
+        required: false
+        description: 'The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is required only when the object was created using a checksum algorithm or if your bucket policy requires the use '
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key
+        in: header
+        required: false
+        description: 'The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. For more information, see Protecting data using SSE-C keys '
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key-MD5
+        in: header
+        required: false
+        description: The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. For more information, see Protecting data using SSE-C k
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: CompleteMultipartUploadOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this does not distinguish an unsupported operation from an unauthorised one.
+      x-s3-greedy-path-segment: 'AWS writes this route as `/{Bucket}/{Key+}`. The trailing `+` marks a greedy segment, which OpenAPI templating cannot express: an S3 object key may contain slashes, so this parameter is not a single path component.'
+    head:
+      operationId: HeadObject
+      summary: The HEAD operation retrieves metadata from an object without returning the…
+      description: The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're interested only in an object's metadata. A HEAD request has the same options as a GET operation on an object. The response is identical to the GET response except that there is no response body. Because of this, if the HEAD request generates an error, it returns a generic code, such as 400 Bad Request, 403 Forbidden, 404 Not Found, 405 Method Not Allowed, 412 Precondition Failed, or 304 Not Modified. It's not possible to retrieve the exact exception of these error codes. Request headers are limited to 8 KB in size. For more information, see Common Request Headers. Permissions General purpose bucket permissions - To use HEAD, you must have the s3:GetObject permission. You need the relevant read object (or version) permission for this operation. For more information, see Actions, resources, and condition keys for Amazon S3 in the Amazon S3 User Guide. For more information about the permissions to S3 API operations by S3 resource types, see Required permissions for Amazon S3 API operations in the Amazon S3 User Guide. If the object you request doesn't exist, the
+      tags:
+      - Object
+      parameters:
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket that contains the object. Directory buckets - When you use this operation with a directory bucket, you must use virtual-hosted-style requests in the format Bucket-name.s3express
+        schema:
+          type: string
+      - name: If-Match
+        in: header
+        required: false
+        description: Return the object only if its entity tag (ETag) is the same as the one specified; otherwise, return a 412 (precondition failed) error. If both of the If-Match and If-Unmodified-Since headers are prese
+        schema:
+          type: string
+      - name: If-Modified-Since
+        in: header
+        required: false
+        description: Return the object only if it has been modified since the specified time; otherwise, return a 304 (not modified) error. If both of the If-None-Match and If-Modified-Since headers are present in the req
+        schema:
+          type: string
+      - name: If-None-Match
+        in: header
+        required: false
+        description: Return the object only if its entity tag (ETag) is different from the one specified; otherwise, return a 304 (not modified) error. If both of the If-None-Match and If-Modified-Since headers are presen
+        schema:
+          type: string
+      - name: If-Unmodified-Since
+        in: header
+        required: false
+        description: Return the object only if it has not been modified since the specified time; otherwise, return a 412 (precondition failed) error. If both of the If-Match and If-Unmodified-Since headers are present in
+        schema:
+          type: string
+      - name: Key
+        in: path
+        required: true
+        description: The object key.
+        schema:
+          type: string
+      - name: Range
+        in: header
+        required: false
+        description: HeadObject returns only the metadata for an object. If the Range is satisfiable, only the ContentLength is affected in the response. If the Range is not satisfiable, S3 returns a 416 - Requested Range
+        schema:
+          type: string
+      - name: response-cache-control
+        in: query
+        required: false
+        description: Sets the Cache-Control header of the response.
+        schema:
+          type: string
+      - name: response-content-disposition
+        in: query
+        required: false
+        description: Sets the Content-Disposition header of the response.
+        schema:
+          type: string
+      - name: response-content-encoding
+        in: query
+        required: false
+        description: Sets the Content-Encoding header of the response.
+        schema:
+          type: string
+      - name: response-content-language
+        in: query
+        required: false
+        description: Sets the Content-Language header of the response.
+        schema:
+          type: string
+      - name: response-content-type
+        in: query
+        required: false
+        description: Sets the Content-Type header of the response.
+        schema:
+          type: string
+      - name: response-expires
+        in: query
+        required: false
+        description: Sets the Expires header of the response.
+        schema:
+          type: string
+      - name: versionId
+        in: query
+        required: false
+        description: Version ID used to reference a specific version of the object. For directory buckets in this API operation, only the null value of the version ID is supported.
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-algorithm
+        in: header
+        required: false
+        description: Specifies the algorithm to use when encrypting the object (for example, AES256). This functionality is not supported for directory buckets.
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key
+        in: header
+        required: false
+        description: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. Th
+        schema:
+          type: string
+      - name: x-amz-server-side-encryption-customer-key-MD5
+        in: header
+        required: false
+        description: 'Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error. '
+        schema:
+          type: string
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: partNumber
+        in: query
+        required: false
+        description: Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part a
+        schema:
+          type: integer
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden (access denied)
+        schema:
+          type: string
+      - name: x-amz-checksum-mode
+        in: header
+        required: false
+        description: 'To retrieve the checksum, this parameter must be enabled. General purpose buckets - If you enable checksum mode and the object is uploaded with a checksum and encrypted with an Key Management Service '
+        schema:
+          type: string
+          enum:
+          - ENABLED
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: HeadObjectOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this does not distinguish an unsupported operation from an unauthorised one.
+      x-s3-greedy-path-segment: 'AWS writes this route as `/{Bucket}/{Key+}`. The trailing `+` marks a greedy segment, which OpenAPI templating cannot express: an S3 object key may contain slashes, so this parameter is not a single path component.'
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+x-s3-sibling-operations:
+- operation: DeleteObject
+  shadows: AbortMultipartUpload
+  summary: 'Removes an object from a bucket. The behavior depends on the bucket''s versioning state: If bucket versioning is not enabled, the operation permanently deletes the object. If bucket versioning is enabl'
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.
+- operation: ListParts
+  shadows: GetObject
+  summary: Lists the parts that have been uploaded for a specific multipart upload. To use this operation, you must provide the upload ID in the request. You obtain this uploadID by sending the initiate multipar
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.
+- operation: PutObject
+  shadows: CopyObject
+  summary: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs). If you attempt to use an Email Grantee ACL in a request after October 1,'
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.
+- operation: UploadPart
+  shadows: CopyObject
+  summary: Uploads a part in a multipart upload. In this operation, you provide new data as a part of an object in your request. However, you have an option to specify your existing Amazon S3 object as a data so
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.
+- operation: UploadPartCopy
+  shadows: CopyObject
+  summary: Uploads a part by copying data from an existing object as data source. To specify the data source, you add the request header x-amz-copy-source in your request. To specify a byte range, you add the re
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.

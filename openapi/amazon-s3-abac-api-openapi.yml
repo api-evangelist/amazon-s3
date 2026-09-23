@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Amazon S3 (bucket-level) Abac API
+  description: '2 operations from the Amazon S3 REST API, generated from the authoritative service model.
+
+
+    S3 identifies these operations by the `abac` query subresource, which is declared as a required query parameter on each one because an OpenAPI path cannot carry a query string.
+
+
+    Generated from boto/botocore `service-2.json` at `aeb03fc4ae530e0b3f47d588b6021581db870c8c` (Apache-2.0). Responses are XML.'
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: abac
+paths:
+  /{Bucket}:
+    get:
+      operationId: GetBucketAbac
+      summary: Returns the attribute-based access control (ABAC) property of the general…
+      description: Returns the attribute-based access control (ABAC) property of the general purpose bucket. If ABAC is enabled on your bucket, you can use tags on the bucket for access control. For more information, see Enabling ABAC in general purpose buckets.
+      tags:
+      - abac
+      parameters:
+      - name: abac
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `abac` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the general purpose bucket.
+        schema:
+          type: string
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The Amazon Web Services account ID of the general purpose bucket's owner.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: GetBucketAbacOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this does not distinguish an unsupported operation from an unauthorised one.
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/

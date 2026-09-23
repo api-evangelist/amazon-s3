@@ -2,7 +2,13 @@
   "provider": "amazon-s3",
   "sources": [
     "_original/amazon-s3-control-api-openapi.yml",
-    "_original/amazon-s3-rest-api-openapi.yml"
+    "_original/amazon-s3-rest-api-openapi.yml",
+    "amazon-s3-abac-api-openapi.yml",
+    "amazon-s3-acl-api-openapi.yml",
+    "amazon-s3-annotation-api-openapi.yml",
+    "amazon-s3-bucket-api-openapi.yml",
+    "amazon-s3-delete-api-openapi.yml",
+    "amazon-s3-object-api-openapi.yml"
   ],
   "outputs": [
     "amazon-s3-access-grants-api-openapi.yml",
@@ -16,15 +22,29 @@
     "amazon-s3-buckets-api-openapi.yml",
     "amazon-s3-multipart-upload-api-openapi.yml",
     "amazon-s3-objects-api-openapi.yml",
-    "amazon-s3-tagging-api-openapi.yml"
+    "amazon-s3-tagging-api-openapi.yml",
+    "amazon-s3-abac-api-openapi.yml",
+    "amazon-s3-acl-api-openapi.yml",
+    "amazon-s3-annotation-api-openapi.yml",
+    "amazon-s3-bucket-api-openapi.yml",
+    "amazon-s3-delete-api-openapi.yml",
+    "amazon-s3-object-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "amazon-s3-abac-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /{Bucket} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "amazon-s3-acl-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /{Bucket}/{Key} get, /{Bucket}/{Key} put); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "amazon-s3-annotation-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /{Bucket}/{Key} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "amazon-s3-bucket-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /WriteGetObjectResponse post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "amazon-s3-delete-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /{Bucket} post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "amazon-s3-object-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /{Bucket}/{Key} head, /{Bucket}/{Key} post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "amazon-s3-control-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "amazon-s3-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "amazon-s3-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "amazon-s3-access-control-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -35,14 +55,9 @@
     "amazon-s3-buckets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-multi-region-access-points-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-multipart-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-s3-namespaces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-objects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-public-access-block-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-storage-lens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-s3-table-buckets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-s3-table-maintenance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-s3-table-policy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-s3-tables-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-s3-tagging-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

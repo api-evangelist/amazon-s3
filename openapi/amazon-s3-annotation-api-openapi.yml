@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: Amazon S3 (object-level) Annotation API
+  description: 3 operations from the Amazon S3 REST API, generated from the authoritative service model.
+  version: '2006-03-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+servers:
+- url: https://s3.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+tags:
+- name: Annotation
+paths:
+  /{Bucket}/{Key}:
+    delete:
+      operationId: DeleteObjectAnnotation
+      summary: Deletes a specific annotation from an Amazon S3 object
+      description: 'Deletes a specific annotation from an Amazon S3 object. Use the x-amz-object-if-match header to perform a conditional delete that only succeeds if the object''s ETag matches the provided value, preventing race conditions during concurrent updates. Deleting an annotation is permanent. Annotations are not independently versioned, so there is no delete marker or way to recover a deleted annotation. To use this operation, you must have the s3:DeleteObjectAnnotation permission. If the object is protected by Object Lock in governance mode, you must also include the x-amz-bypass-governance-retention header. Annotations are not supported by the following features: S3 Inventory Reports, API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on Outposts, and S3 Express One Zone (directory buckets). The following operations are related to DeleteObjectAnnotation: PutObjectAnnotation GetObjectAnnotation ListObjectAnnotations'
+      tags:
+      - Annotation
+      parameters:
+      - name: annotation
+        in: query
+        required: true
+        description: Selects this operation. S3 identifies it by the `annotation` subresource.
+        schema:
+          type: string
+      - name: Bucket
+        in: path
+        required: true
+        description: The name of the bucket that contains the object.
+        schema:
+          type: string
+      - name: Key
+        in: path
+        required: true
+        description: The object key.
+        schema:
+          type: string
+      - name: annotationName
+        in: query
+        required: true
+        description: 'The name of the annotation to delete. Annotation names are UTF-8 encoded and cannot start with aws or s3 (case-insensitive). Length Constraints: Minimum length of 1. Maximum length of 512 bytes.'
+        schema:
+          type: string
+      - name: versionId
+        in: query
+        required: false
+        description: The version ID of the object.
+        schema:
+          type: string
+      - name: x-amz-request-payer
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - requester
+      - name: x-amz-expected-bucket-owner
+        in: header
+        required: false
+        description: The account ID of the expected bucket owner.
+        schema:
+          type: string
+      - name: x-amz-object-if-match
+        in: header
+        required: false
+        description: If specified, the operation only succeeds if the object's ETag matches the provided value.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. S3 answers in XML, not JSON.
+          x-output-shape: DeleteObjectAnnotationOutput
+        '403':
+          description: AccessDenied. S3 validates the signature before it routes the operation, so this does not distinguish an unsupported operation from an unauthorised one.
+      x-s3-greedy-path-segment: 'AWS writes this route as `/{Bucket}/{Key+}`. The trailing `+` marks a greedy segment, which OpenAPI templating cannot express: an S3 object key may contain slashes, so this parameter is not a single path component.'
+externalDocs:
+  description: Amazon S3 API Reference
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/
+x-s3-sibling-operations:
+- operation: ListObjectAnnotations
+  shadows: GetObjectAnnotation
+  summary: Lists the annotations attached to an Amazon S3 object. Results are paginated, with a maximum of 1,000 annotations per object. Use the AnnotationPrefix parameter to filter the results by name prefix. T
+  why: Same method, path and query subresource as the operation above. S3 separates them by a request header or by the presence of an id parameter, neither of which an OpenAPI path can express.
