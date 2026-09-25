@@ -72,6 +72,9 @@ artifacts:
   authentication/amazon-s3-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  capabilities/amazon-s3-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/amazon-s3-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -79,41 +82,41 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   collections/amazon-s3-access-control-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-control-api
   collections/amazon-s3-access-control-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-control-api
   collections/amazon-s3-access-grants-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-grants-api
   collections/amazon-s3-access-grants-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-grants-api
   collections/amazon-s3-access-points-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-points-api
   collections/amazon-s3-access-points-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-access-points-api
   collections/amazon-s3-batch-operations-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-batch-operations-api
   collections/amazon-s3-batch-operations-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-batch-operations-api
   collections/amazon-s3-bucket-configuration-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-bucket-configuration-api
   collections/amazon-s3-bucket-configuration-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-bucket-configuration-api
   collections/amazon-s3-buckets-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-buckets-api
   collections/amazon-s3-buckets-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-buckets-api
   collections/amazon-s3-control-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -121,17 +124,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amazon-s3-multi-region-access-points-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-multi-region-access-points-api
   collections/amazon-s3-multi-region-access-points-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-multi-region-access-points-api
   collections/amazon-s3-multipart-upload-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-multipart-upload-api
   collections/amazon-s3-multipart-upload-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-multipart-upload-api
   collections/amazon-s3-namespaces-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -139,17 +142,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amazon-s3-objects-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-objects-api
   collections/amazon-s3-objects-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-objects-api
   collections/amazon-s3-public-access-block-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-public-access-block-api
   collections/amazon-s3-public-access-block-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-public-access-block-api
   collections/amazon-s3-rest-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -157,11 +160,11 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amazon-s3-storage-lens-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-storage-lens-api
   collections/amazon-s3-storage-lens-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-storage-lens-api
   collections/amazon-s3-table-buckets-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -187,11 +190,11 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amazon-s3-tagging-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-tagging-api
   collections/amazon-s3-tagging-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-tagging-api
   conformance/amazon-s3-conformance.yml:
     method: derived
     evidence: declared in the artifact
@@ -369,6 +372,9 @@ artifacts:
   finops/amazon-s3-finops.yml:
     method: generated
     evidence: declared in the artifact
+  front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-ld/amazon-s3-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -711,37 +717,7 @@ artifacts:
   json-structure/amazon-s3-tables-table-summary-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-14T064754.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-17T064519.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T080027.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T082702.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T114122.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T165047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T191845.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T205517.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-21T110057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T064859.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T171257.yml:
+  kin/checks-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T125852.yml:
@@ -882,6 +858,69 @@ artifacts:
   kin/score-2026-09-14T064754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T210656.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T225847.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T211329.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T230249.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T210549.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T225339.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T211151.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T233623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T205255.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T231945.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T165737.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T193153.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T205903.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T232958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T211425.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T233935.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-22T213221.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-23T000603.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T064009.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T090406.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/amazon-s3-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -893,298 +932,66 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/amazon-s3-control-api-openapi.yml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/amazon-s3-rest-api-openapi.yml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
-  openapi/amazon-s3-abac-bucket-api-openapi.yml:
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
+  openapi/amazon-s3-abac-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-accelerate-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-access-control-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-acl-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-access-grants-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-acl-object-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-access-points-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-analytics-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-acl-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-annotation-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-batch-operations-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-annotation-object-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-bucket-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-bucket-configuration-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-attributes-object-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-buckets-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-core-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-delete-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-core-object-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-multi-region-access-points-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-core-service-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-multipart-upload-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-cors-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-object-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-objects-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-delete-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-public-access-block-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-encryption-bucket-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-storage-lens-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-encryption-object-api-openapi.yml:
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amazon-s3-tagging-api-openapi.yml:
     method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-intelligent-tiering-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-inventory-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-legal-hold-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-lifecycle-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-list-type-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-location-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-logging-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metadata-able-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metadata-nnotation-able-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metadata-nventory-able-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metadata-onfiguration-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metadata-ournal-able-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-metrics-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-notification-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-object-lock-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-ownership-ontrols-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-policy-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-policy-tatus-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-public-ccess-lock-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-rename-bject-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-replication-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-request-ayment-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-restore-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-retention-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-select-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-session-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-tagging-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-tagging-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-torrent-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-uploads-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-uploads-object-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-versioning-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-versions-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
-  openapi/amazon-s3-website-bucket-api-openapi.yml:
-    method: derived
-    evidence: Generated from boto/botocore botocore/data/s3/2006-03-01/service-2.json at commit aeb03fc4ae530e0b3f47d588b6021581db870c8c
-      (Apache-2.0), the authoritative AWS service model. Operation ids, routes, parameters and their locations
-      come from that model; no operation is described that the model does not define. NOT split from openapi/_original/
-      — that harvested spec covered 15 paths and is retained under openapi/_superseded/.
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   overlays/amazon-s3-control-api-overlay.yaml:
     method: unknown
     evidence: no authorship recorded
@@ -1198,7 +1005,7 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   plans/amazon-s3-plans-pricing.yml:
-    method: generated
+    method: searched
     evidence: declared in the artifact
   postman/amazon-s3-control-api.postman_collection.json:
     method: unknown
