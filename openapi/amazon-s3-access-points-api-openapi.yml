@@ -326,32 +326,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   schemas:
-    CreateAccessPointRequest:
-      type: object
-      xml:
-        name: CreateAccessPointRequest
-        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
-      required:
-      - Bucket
-      properties:
-        Bucket:
-          type: string
-          description: The name of the bucket you want to associate with the access point.
-          example: example_value
-        VpcConfiguration:
-          type: object
-          properties:
-            VpcId:
-              type: string
-              description: If specified, the access point will only allow connections from the specified VPC ID.
-          example: example_value
-        PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-        BucketAccountId:
-          type: string
-          description: The AWS account ID associated with the S3 bucket.
-          example: '500123'
     ListAccessPointsResult:
       type: object
       properties:
@@ -456,15 +440,31 @@ components:
           type: string
           description: The AWS account ID associated with the S3 bucket.
           example: '500123'
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
+    CreateAccessPointRequest:
+      type: object
+      xml:
+        name: CreateAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+      - Bucket
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket you want to associate with the access point.
+          example: example_value
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: If specified, the access point will only allow connections from the specified VPC ID.
+          example: example_value
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
   securitySchemes:
     sigv4:
       type: apiKey

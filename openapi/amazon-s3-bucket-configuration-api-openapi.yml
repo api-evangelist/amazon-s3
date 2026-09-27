@@ -668,160 +668,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ServerSideEncryptionConfiguration:
-      type: object
-      description: Specifies the default server-side-encryption configuration.
-      xml:
-        name: ServerSideEncryptionConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - Rule
-      properties:
-        Rule:
-          type: array
-          items:
-            type: object
-            properties:
-              ApplyServerSideEncryptionByDefault:
-                type: object
-                properties:
-                  SSEAlgorithm:
-                    type: string
-                    description: Server-side encryption algorithm to use for the default encryption.
-                    enum:
-                    - AES256
-                    - aws:kms
-                    - aws:kms:dsse
-                  KMSMasterKeyID:
-                    type: string
-                    description: AWS Key Management Service (KMS) customer managed key ID to use for the default encryption.
-              BucketKeyEnabled:
-                type: boolean
-                description: Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS).
-          example: []
-    Error:
-      type: object
-      description: Container for all error elements.
-      xml:
-        name: Error
-      properties:
-        Code:
-          type: string
-          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
-          example: example_value
-        Message:
-          type: string
-          description: A human-readable description of the error.
-          example: example_value
-        Resource:
-          type: string
-          description: The bucket or object that is involved in the error.
-          example: example_value
-        RequestId:
-          type: string
-          description: Unique identifier for the request.
-          example: '500123'
-        HostId:
-          type: string
-          description: A special token to help AWS troubleshoot problems.
-          example: '500123'
-    BucketLifecycleConfiguration:
-      type: object
-      description: Container for lifecycle rules.
-      xml:
-        name: LifecycleConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - Rule
-      properties:
-        Rule:
-          type: array
-          items:
-            $ref: '#/components/schemas/LifecycleRule'
-          example: []
-    Tag:
-      type: object
-      description: A container of a key value name pair.
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          description: Name of the object key.
-          minLength: 1
-          maxLength: 128
-          example: example_value
-        Value:
-          type: string
-          description: Value of the tag.
-          maxLength: 256
-          example: example_value
-    VersioningConfiguration:
-      type: object
-      description: Container for setting the versioning state.
-      xml:
-        name: VersioningConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Status:
-          type: string
-          description: The versioning state of the bucket.
-          enum:
-          - Enabled
-          - Suspended
-          example: Enabled
-        MFADelete:
-          type: string
-          description: Specifies whether MFA delete is enabled in the bucket versioning configuration.
-          enum:
-          - Enabled
-          - Disabled
-          example: Enabled
-    CORSConfiguration:
-      type: object
-      description: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
-      xml:
-        name: CORSConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - CORSRule
-      properties:
-        CORSRule:
-          type: array
-          items:
-            type: object
-            required:
-            - AllowedMethods
-            - AllowedOrigins
-            properties:
-              ID:
-                type: string
-              AllowedHeaders:
-                type: array
-                items:
-                  type: string
-              AllowedMethods:
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - GET
-                  - PUT
-                  - HEAD
-                  - POST
-                  - DELETE
-              AllowedOrigins:
-                type: array
-                items:
-                  type: string
-              ExposeHeaders:
-                type: array
-                items:
-                  type: string
-              MaxAgeSeconds:
-                type: integer
-          example: []
     LifecycleRule:
       type: object
       description: A lifecycle rule for individual objects in an Amazon S3 bucket.
@@ -926,6 +772,160 @@ components:
             DaysAfterInitiation:
               type: integer
           example: example_value
+    VersioningConfiguration:
+      type: object
+      description: Container for setting the versioning state.
+      xml:
+        name: VersioningConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Status:
+          type: string
+          description: The versioning state of the bucket.
+          enum:
+          - Enabled
+          - Suspended
+          example: Enabled
+        MFADelete:
+          type: string
+          description: Specifies whether MFA delete is enabled in the bucket versioning configuration.
+          enum:
+          - Enabled
+          - Disabled
+          example: Enabled
+    Tag:
+      type: object
+      description: A container of a key value name pair.
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          description: Name of the object key.
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
+          type: string
+          description: Value of the tag.
+          maxLength: 256
+          example: example_value
+    BucketLifecycleConfiguration:
+      type: object
+      description: Container for lifecycle rules.
+      xml:
+        name: LifecycleConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Rule
+      properties:
+        Rule:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecycleRule'
+          example: []
+    ServerSideEncryptionConfiguration:
+      type: object
+      description: Specifies the default server-side-encryption configuration.
+      xml:
+        name: ServerSideEncryptionConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Rule
+      properties:
+        Rule:
+          type: array
+          items:
+            type: object
+            properties:
+              ApplyServerSideEncryptionByDefault:
+                type: object
+                properties:
+                  SSEAlgorithm:
+                    type: string
+                    description: Server-side encryption algorithm to use for the default encryption.
+                    enum:
+                    - AES256
+                    - aws:kms
+                    - aws:kms:dsse
+                  KMSMasterKeyID:
+                    type: string
+                    description: AWS Key Management Service (KMS) customer managed key ID to use for the default encryption.
+              BucketKeyEnabled:
+                type: boolean
+                description: Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS).
+          example: []
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+    CORSConfiguration:
+      type: object
+      description: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
+      xml:
+        name: CORSConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - CORSRule
+      properties:
+        CORSRule:
+          type: array
+          items:
+            type: object
+            required:
+            - AllowedMethods
+            - AllowedOrigins
+            properties:
+              ID:
+                type: string
+              AllowedHeaders:
+                type: array
+                items:
+                  type: string
+              AllowedMethods:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - GET
+                  - PUT
+                  - HEAD
+                  - POST
+                  - DELETE
+              AllowedOrigins:
+                type: array
+                items:
+                  type: string
+              ExposeHeaders:
+                type: array
+                items:
+                  type: string
+              MaxAgeSeconds:
+                type: integer
+          example: []
   parameters:
     BucketName:
       name: Bucket

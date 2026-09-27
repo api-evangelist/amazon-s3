@@ -185,7 +185,27 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   schemas:
+    ListMultiRegionAccessPointsResult:
+      type: object
+      properties:
+        AccessPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiRegionAccessPointReport'
+          example: []
+        NextToken:
+          type: string
+          example: example_value
     MultiRegionAccessPointReport:
       type: object
       properties:
@@ -248,17 +268,6 @@ components:
           type: boolean
           description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
           example: true
-    ListMultiRegionAccessPointsResult:
-      type: object
-      properties:
-        AccessPoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/MultiRegionAccessPointReport'
-          example: []
-        NextToken:
-          type: string
-          example: example_value
     CreateMultiRegionAccessPointRequest:
       type: object
       xml:
@@ -296,15 +305,6 @@ components:
                   BucketAccountId:
                     type: string
           example: example_value
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey

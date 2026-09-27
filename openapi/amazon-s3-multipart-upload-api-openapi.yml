@@ -496,6 +496,15 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
     BucketName:
       name: Bucket
       in: path
@@ -506,15 +515,6 @@ components:
         minLength: 3
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
-    ObjectKey:
-      name: Key+
-      in: path
-      required: true
-      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 1024
   schemas:
     InitiateMultipartUploadResult:
       type: object
@@ -535,6 +535,41 @@ components:
           type: string
           description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
           example: '500123'
+    CompleteMultipartUploadResult:
+      type: object
+      description: The container for the completed multipart upload response.
+      xml:
+        name: CompleteMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Location:
+          type: string
+          description: The URI that identifies the newly created object.
+          example: example_value
+        Bucket:
+          type: string
+          description: The name of the bucket that contains the newly created object.
+          example: example_value
+        Key:
+          type: string
+          description: The object key of the newly created object.
+          example: example_value
+        ETag:
+          type: string
+          description: Entity tag that identifies the newly created object's data.
+          example: example_value
+        ChecksumCRC32:
+          type: string
+          example: example_value
+        ChecksumCRC32C:
+          type: string
+          example: example_value
+        ChecksumSHA1:
+          type: string
+          example: example_value
+        ChecksumSHA256:
+          type: string
+          example: example_value
     Error:
       type: object
       description: Container for all error elements.
@@ -591,41 +626,6 @@ components:
               ChecksumSHA256:
                 type: string
           example: []
-    CompleteMultipartUploadResult:
-      type: object
-      description: The container for the completed multipart upload response.
-      xml:
-        name: CompleteMultipartUploadResult
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Location:
-          type: string
-          description: The URI that identifies the newly created object.
-          example: example_value
-        Bucket:
-          type: string
-          description: The name of the bucket that contains the newly created object.
-          example: example_value
-        Key:
-          type: string
-          description: The object key of the newly created object.
-          example: example_value
-        ETag:
-          type: string
-          description: Entity tag that identifies the newly created object's data.
-          example: example_value
-        ChecksumCRC32:
-          type: string
-          example: example_value
-        ChecksumCRC32C:
-          type: string
-          example: example_value
-        ChecksumSHA1:
-          type: string
-          example: example_value
-        ChecksumSHA256:
-          type: string
-          example: example_value
   securitySchemes:
     sigv4:
       type: apiKey

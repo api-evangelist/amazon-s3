@@ -218,6 +218,18 @@ components:
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
     Error:
       type: object
       description: Container for all error elements.
@@ -244,18 +256,6 @@ components:
           type: string
           description: A special token to help AWS troubleshoot problems.
           example: '500123'
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
-          type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
-          type: string
-          description: Container for the ID of the owner.
-          example: abc123
     AccessControlPolicy:
       type: object
       description: Contains the elements that set the ACL permissions for an object per grantee.

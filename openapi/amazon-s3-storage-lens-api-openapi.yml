@@ -232,6 +232,26 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ListStorageLensConfigurationsResult:
+      type: object
+      properties:
+        StorageLensConfigurationList:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              StorageLensArn:
+                type: string
+              HomeRegion:
+                type: string
+              IsEnabled:
+                type: boolean
+          example: []
+        NextToken:
+          type: string
+          example: example_value
     StorageLensConfiguration:
       type: object
       description: A container for the Amazon S3 Storage Lens configuration.
@@ -343,26 +363,6 @@ components:
               type: string
           example: example_value
         StorageLensArn:
-          type: string
-          example: example_value
-    ListStorageLensConfigurationsResult:
-      type: object
-      properties:
-        StorageLensConfigurationList:
-          type: array
-          items:
-            type: object
-            properties:
-              Id:
-                type: string
-              StorageLensArn:
-                type: string
-              HomeRegion:
-                type: string
-              IsEnabled:
-                type: boolean
-          example: []
-        NextToken:
           type: string
           example: example_value
   parameters:

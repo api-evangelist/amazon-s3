@@ -803,8 +803,6 @@ apis:
 common:
 - type: Plans
   url: plans/amazon-s3-plans-pricing.yml
-- type: Website
-  url: https://amazon.com
 - type: Overlay
   url: overlays/amazon-s3-tables-api-overlay.yaml
 - type: CapabilityMap
@@ -1015,6 +1013,7 @@ tags:
 - Data Storage
 - Object Storage
 - Scalable Storage
+- Storage
 tags_raw:
 - Archive
 - AWS
@@ -1023,5 +1022,6 @@ tags_raw:
 - Data Storage
 - Object Storage
 - Scalable Storage
-x-parent: aws
+- Storage
+x-parent: amazon-web-services
 x-relationship: product
