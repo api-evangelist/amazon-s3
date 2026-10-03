@@ -185,15 +185,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   schemas:
     ListMultiRegionAccessPointsResult:
       type: object
@@ -206,45 +197,6 @@ components:
         NextToken:
           type: string
           example: example_value
-    MultiRegionAccessPointReport:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: The name of the Multi-Region Access Point.
-          example: Example Title
-        Alias:
-          type: string
-          description: The alias for the Multi-Region Access Point.
-          example: example_value
-        CreatedAt:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        PublicAccessBlock:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-        Status:
-          type: string
-          enum:
-          - READY
-          - INCONSISTENT_ACROSS_REGIONS
-          - CREATING
-          - PARTIALLY_CREATED
-          - PARTIALLY_DELETED
-          - DELETING
-          example: READY
-        Regions:
-          type: array
-          items:
-            type: object
-            properties:
-              Bucket:
-                type: string
-              Region:
-                type: string
-              BucketAccountId:
-                type: string
-          example: []
     PublicAccessBlockConfiguration:
       type: object
       description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
@@ -305,6 +257,54 @@ components:
                   BucketAccountId:
                     type: string
           example: example_value
+    MultiRegionAccessPointReport:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the Multi-Region Access Point.
+          example: Example Title
+        Alias:
+          type: string
+          description: The alias for the Multi-Region Access Point.
+          example: example_value
+        CreatedAt:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        PublicAccessBlock:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        Status:
+          type: string
+          enum:
+          - READY
+          - INCONSISTENT_ACROSS_REGIONS
+          - CREATING
+          - PARTIALLY_CREATED
+          - PARTIALLY_DELETED
+          - DELETING
+          example: READY
+        Regions:
+          type: array
+          items:
+            type: object
+            properties:
+              Bucket:
+                type: string
+              Region:
+                type: string
+              BucketAccountId:
+                type: string
+          example: []
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey

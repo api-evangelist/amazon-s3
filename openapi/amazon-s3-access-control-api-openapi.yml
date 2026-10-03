@@ -218,18 +218,6 @@ components:
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
-          type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
-          type: string
-          description: Container for the ID of the owner.
-          example: abc123
     Error:
       type: object
       description: Container for all error elements.
@@ -256,23 +244,6 @@ components:
           type: string
           description: A special token to help AWS troubleshoot problems.
           example: '500123'
-    AccessControlPolicy:
-      type: object
-      description: Contains the elements that set the ACL permissions for an object per grantee.
-      xml:
-        name: AccessControlPolicy
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Owner:
-          $ref: '#/components/schemas/Owner'
-        AccessControlList:
-          type: object
-          properties:
-            Grant:
-              type: array
-              items:
-                $ref: '#/components/schemas/Grant'
-          example: example_value
     Grant:
       type: object
       description: Container for grant information.
@@ -306,6 +277,35 @@ components:
           - READ
           - READ_ACP
           example: FULL_CONTROL
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
+    AccessControlPolicy:
+      type: object
+      description: Contains the elements that set the ACL permissions for an object per grantee.
+      xml:
+        name: AccessControlPolicy
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        AccessControlList:
+          type: object
+          properties:
+            Grant:
+              type: array
+              items:
+                $ref: '#/components/schemas/Grant'
+          example: example_value
   securitySchemes:
     sigv4:
       type: apiKey

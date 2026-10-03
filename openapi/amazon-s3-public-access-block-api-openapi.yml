@@ -116,15 +116,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   schemas:
     PublicAccessBlockConfiguration:
       type: object
@@ -149,6 +140,15 @@ components:
           type: boolean
           description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
           example: true
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey

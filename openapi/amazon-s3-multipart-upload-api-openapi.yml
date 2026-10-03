@@ -516,25 +516,6 @@ components:
         maxLength: 63
         pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
-    InitiateMultipartUploadResult:
-      type: object
-      description: Container for response to initiate multipart upload.
-      xml:
-        name: InitiateMultipartUploadResult
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Bucket:
-          type: string
-          description: The name of the bucket to which the multipart upload was initiated.
-          example: example_value
-        Key:
-          type: string
-          description: Object key for which the multipart upload was initiated.
-          example: example_value
-        UploadId:
-          type: string
-          description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
-          example: '500123'
     CompleteMultipartUploadResult:
       type: object
       description: The container for the completed multipart upload response.
@@ -595,6 +576,25 @@ components:
         HostId:
           type: string
           description: A special token to help AWS troubleshoot problems.
+          example: '500123'
+    InitiateMultipartUploadResult:
+      type: object
+      description: Container for response to initiate multipart upload.
+      xml:
+        name: InitiateMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket to which the multipart upload was initiated.
+          example: example_value
+        Key:
+          type: string
+          description: Object key for which the multipart upload was initiated.
+          example: example_value
+        UploadId:
+          type: string
+          description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
           example: '500123'
     CompleteMultipartUpload:
       type: object

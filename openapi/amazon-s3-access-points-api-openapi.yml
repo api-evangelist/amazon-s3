@@ -326,48 +326,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   schemas:
-    ListAccessPointsResult:
-      type: object
-      properties:
-        AccessPointList:
-          type: array
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              NetworkOrigin:
-                type: string
-                enum:
-                - Internet
-                - VPC
-              VpcConfiguration:
-                type: object
-                properties:
-                  VpcId:
-                    type: string
-              Bucket:
-                type: string
-              AccessPointArn:
-                type: string
-              Alias:
-                type: string
-              BucketAccountId:
-                type: string
-          example: []
-        NextToken:
-          type: string
-          example: example_value
     PublicAccessBlockConfiguration:
       type: object
       description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
@@ -440,6 +399,38 @@ components:
           type: string
           description: The AWS account ID associated with the S3 bucket.
           example: '500123'
+    ListAccessPointsResult:
+      type: object
+      properties:
+        AccessPointList:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              NetworkOrigin:
+                type: string
+                enum:
+                - Internet
+                - VPC
+              VpcConfiguration:
+                type: object
+                properties:
+                  VpcId:
+                    type: string
+              Bucket:
+                type: string
+              AccessPointArn:
+                type: string
+              Alias:
+                type: string
+              BucketAccountId:
+                type: string
+          example: []
+        NextToken:
+          type: string
+          example: example_value
     CreateAccessPointRequest:
       type: object
       xml:
@@ -465,6 +456,15 @@ components:
           type: string
           description: The AWS account ID associated with the S3 bucket.
           example: '500123'
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey
