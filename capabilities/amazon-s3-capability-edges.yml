@@ -12,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: Access Control
   spec_file: amazon-s3-access-control-api-openapi.yml
@@ -24,6 +24,17 @@ edges:
     Grant
   reason: Operations set and read access control policies/grants on storage resources, which is access
     management tooling.
+- tag: abac
+  spec_file: amazon-s3-abac-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET /{Bucket} GetBucketAbac — "Returns the attribute-based access control (ABAC) property
+    of the general…"
+  reason: Operation reads/sets attribute-based access control properties on buckets, which is access-control
+    configuration — Identity & Access Management. Slight uncertainty as it is resource-level config rather
+    than an IAM platform.
 - tag: Access Grants
   spec_file: amazon-s3-access-grants-api-openapi.yml
   capability_id: BC-620.20
