@@ -668,27 +668,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    VersioningConfiguration:
+    Tag:
       type: object
-      description: Container for setting the versioning state.
-      xml:
-        name: VersioningConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      description: A container of a key value name pair.
+      required:
+      - Key
+      - Value
       properties:
-        Status:
+        Key:
           type: string
-          description: The versioning state of the bucket.
-          enum:
-          - Enabled
-          - Suspended
-          example: Enabled
-        MFADelete:
+          description: Name of the object key.
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
           type: string
-          description: Specifies whether MFA delete is enabled in the bucket versioning configuration.
-          enum:
-          - Enabled
-          - Disabled
-          example: Enabled
+          description: Value of the tag.
+          maxLength: 256
+          example: example_value
     Error:
       type: object
       description: Container for all error elements.
@@ -715,20 +712,6 @@ components:
           type: string
           description: A special token to help AWS troubleshoot problems.
           example: '500123'
-    BucketLifecycleConfiguration:
-      type: object
-      description: Container for lifecycle rules.
-      xml:
-        name: LifecycleConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - Rule
-      properties:
-        Rule:
-          type: array
-          items:
-            $ref: '#/components/schemas/LifecycleRule'
-          example: []
     LifecycleRule:
       type: object
       description: A lifecycle rule for individual objects in an Amazon S3 bucket.
@@ -833,6 +816,72 @@ components:
             DaysAfterInitiation:
               type: integer
           example: example_value
+    VersioningConfiguration:
+      type: object
+      description: Container for setting the versioning state.
+      xml:
+        name: VersioningConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Status:
+          type: string
+          description: The versioning state of the bucket.
+          enum:
+          - Enabled
+          - Suspended
+          example: Enabled
+        MFADelete:
+          type: string
+          description: Specifies whether MFA delete is enabled in the bucket versioning configuration.
+          enum:
+          - Enabled
+          - Disabled
+          example: Enabled
+    ServerSideEncryptionConfiguration:
+      type: object
+      description: Specifies the default server-side-encryption configuration.
+      xml:
+        name: ServerSideEncryptionConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Rule
+      properties:
+        Rule:
+          type: array
+          items:
+            type: object
+            properties:
+              ApplyServerSideEncryptionByDefault:
+                type: object
+                properties:
+                  SSEAlgorithm:
+                    type: string
+                    description: Server-side encryption algorithm to use for the default encryption.
+                    enum:
+                    - AES256
+                    - aws:kms
+                    - aws:kms:dsse
+                  KMSMasterKeyID:
+                    type: string
+                    description: AWS Key Management Service (KMS) customer managed key ID to use for the default encryption.
+              BucketKeyEnabled:
+                type: boolean
+                description: Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS).
+          example: []
+    BucketLifecycleConfiguration:
+      type: object
+      description: Container for lifecycle rules.
+      xml:
+        name: LifecycleConfiguration
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Rule
+      properties:
+        Rule:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecycleRule'
+          example: []
     CORSConfiguration:
       type: object
       description: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
@@ -876,55 +925,6 @@ components:
                   type: string
               MaxAgeSeconds:
                 type: integer
-          example: []
-    Tag:
-      type: object
-      description: A container of a key value name pair.
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          description: Name of the object key.
-          minLength: 1
-          maxLength: 128
-          example: example_value
-        Value:
-          type: string
-          description: Value of the tag.
-          maxLength: 256
-          example: example_value
-    ServerSideEncryptionConfiguration:
-      type: object
-      description: Specifies the default server-side-encryption configuration.
-      xml:
-        name: ServerSideEncryptionConfiguration
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - Rule
-      properties:
-        Rule:
-          type: array
-          items:
-            type: object
-            properties:
-              ApplyServerSideEncryptionByDefault:
-                type: object
-                properties:
-                  SSEAlgorithm:
-                    type: string
-                    description: Server-side encryption algorithm to use for the default encryption.
-                    enum:
-                    - AES256
-                    - aws:kms
-                    - aws:kms:dsse
-                  KMSMasterKeyID:
-                    type: string
-                    description: AWS Key Management Service (KMS) customer managed key ID to use for the default encryption.
-              BucketKeyEnabled:
-                type: boolean
-                description: Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS).
           example: []
   parameters:
     BucketName:

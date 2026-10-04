@@ -223,18 +223,24 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    BucketName:
-      name: Bucket
-      in: path
-      required: true
-      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
-      schema:
-        type: string
-        minLength: 3
-        maxLength: 63
-        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
+    Tagging:
+      type: object
+      description: Container for TagSet elements.
+      xml:
+        name: Tagging
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - TagSet
+      properties:
+        TagSet:
+          type: object
+          properties:
+            Tag:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tag'
+          example: example_value
     Error:
       type: object
       description: Container for all error elements.
@@ -279,23 +285,17 @@ components:
           description: Value of the tag.
           maxLength: 256
           example: example_value
-    Tagging:
-      type: object
-      description: Container for TagSet elements.
-      xml:
-        name: Tagging
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - TagSet
-      properties:
-        TagSet:
-          type: object
-          properties:
-            Tag:
-              type: array
-              items:
-                $ref: '#/components/schemas/Tag'
-          example: example_value
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   securitySchemes:
     sigv4:
       type: apiKey

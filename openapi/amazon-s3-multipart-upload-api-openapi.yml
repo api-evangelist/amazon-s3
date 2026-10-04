@@ -495,62 +495,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    ObjectKey:
-      name: Key+
-      in: path
-      required: true
-      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 1024
-    BucketName:
-      name: Bucket
-      in: path
-      required: true
-      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
-      schema:
-        type: string
-        minLength: 3
-        maxLength: 63
-        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
-    CompleteMultipartUploadResult:
-      type: object
-      description: The container for the completed multipart upload response.
-      xml:
-        name: CompleteMultipartUploadResult
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Location:
-          type: string
-          description: The URI that identifies the newly created object.
-          example: example_value
-        Bucket:
-          type: string
-          description: The name of the bucket that contains the newly created object.
-          example: example_value
-        Key:
-          type: string
-          description: The object key of the newly created object.
-          example: example_value
-        ETag:
-          type: string
-          description: Entity tag that identifies the newly created object's data.
-          example: example_value
-        ChecksumCRC32:
-          type: string
-          example: example_value
-        ChecksumCRC32C:
-          type: string
-          example: example_value
-        ChecksumSHA1:
-          type: string
-          example: example_value
-        ChecksumSHA256:
-          type: string
-          example: example_value
     Error:
       type: object
       description: Container for all error elements.
@@ -596,6 +541,41 @@ components:
           type: string
           description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
           example: '500123'
+    CompleteMultipartUploadResult:
+      type: object
+      description: The container for the completed multipart upload response.
+      xml:
+        name: CompleteMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Location:
+          type: string
+          description: The URI that identifies the newly created object.
+          example: example_value
+        Bucket:
+          type: string
+          description: The name of the bucket that contains the newly created object.
+          example: example_value
+        Key:
+          type: string
+          description: The object key of the newly created object.
+          example: example_value
+        ETag:
+          type: string
+          description: Entity tag that identifies the newly created object's data.
+          example: example_value
+        ChecksumCRC32:
+          type: string
+          example: example_value
+        ChecksumCRC32C:
+          type: string
+          example: example_value
+        ChecksumSHA1:
+          type: string
+          example: example_value
+        ChecksumSHA256:
+          type: string
+          example: example_value
     CompleteMultipartUpload:
       type: object
       description: The container for the completed multipart upload request.
@@ -626,6 +606,26 @@ components:
               ChecksumSHA256:
                 type: string
           example: []
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
   securitySchemes:
     sigv4:
       type: apiKey

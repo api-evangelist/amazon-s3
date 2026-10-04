@@ -350,55 +350,6 @@ components:
           type: boolean
           description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
           example: true
-    GetAccessPointResult:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: The name of the access point.
-          example: Example Title
-        Bucket:
-          type: string
-          description: The name of the bucket associated with the access point.
-          example: example_value
-        NetworkOrigin:
-          type: string
-          description: Indicates whether this access point allows access from the public internet.
-          enum:
-          - Internet
-          - VPC
-          example: Internet
-        VpcConfiguration:
-          type: object
-          properties:
-            VpcId:
-              type: string
-              description: The ID of the VPC.
-          example: example_value
-        PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-        CreationDate:
-          type: string
-          format: date-time
-          description: The date and time when the access point was created.
-          example: '2026-01-15T10:30:00Z'
-        Alias:
-          type: string
-          description: The alias for the access point.
-          example: example_value
-        AccessPointArn:
-          type: string
-          description: The ARN for the access point.
-          example: example_value
-        Endpoints:
-          type: object
-          additionalProperties:
-            type: string
-          example: example_value
-        BucketAccountId:
-          type: string
-          description: The AWS account ID associated with the S3 bucket.
-          example: '500123'
     ListAccessPointsResult:
       type: object
       properties:
@@ -452,6 +403,55 @@ components:
           example: example_value
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        BucketAccountId:
+          type: string
+          description: The AWS account ID associated with the S3 bucket.
+          example: '500123'
+    GetAccessPointResult:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the access point.
+          example: Example Title
+        Bucket:
+          type: string
+          description: The name of the bucket associated with the access point.
+          example: example_value
+        NetworkOrigin:
+          type: string
+          description: Indicates whether this access point allows access from the public internet.
+          enum:
+          - Internet
+          - VPC
+          example: Internet
+        VpcConfiguration:
+          type: object
+          properties:
+            VpcId:
+              type: string
+              description: The ID of the VPC.
+          example: example_value
+        PublicAccessBlockConfiguration:
+          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time when the access point was created.
+          example: '2026-01-15T10:30:00Z'
+        Alias:
+          type: string
+          description: The alias for the access point.
+          example: example_value
+        AccessPointArn:
+          type: string
+          description: The ARN for the access point.
+          example: example_value
+        Endpoints:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
         BucketAccountId:
           type: string
           description: The AWS account ID associated with the S3 bucket.

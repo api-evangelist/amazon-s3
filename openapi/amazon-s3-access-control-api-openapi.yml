@@ -206,17 +206,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    BucketName:
-      name: Bucket
-      in: path
-      required: true
-      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
-      schema:
-        type: string
-        minLength: 3
-        maxLength: 63
-        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
     Error:
       type: object
@@ -244,6 +233,35 @@ components:
           type: string
           description: A special token to help AWS troubleshoot problems.
           example: '500123'
+    AccessControlPolicy:
+      type: object
+      description: Contains the elements that set the ACL permissions for an object per grantee.
+      xml:
+        name: AccessControlPolicy
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        AccessControlList:
+          type: object
+          properties:
+            Grant:
+              type: array
+              items:
+                $ref: '#/components/schemas/Grant'
+          example: example_value
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
     Grant:
       type: object
       description: Container for grant information.
@@ -277,35 +295,17 @@ components:
           - READ
           - READ_ACP
           example: FULL_CONTROL
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
-          type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
-          type: string
-          description: Container for the ID of the owner.
-          example: abc123
-    AccessControlPolicy:
-      type: object
-      description: Contains the elements that set the ACL permissions for an object per grantee.
-      xml:
-        name: AccessControlPolicy
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Owner:
-          $ref: '#/components/schemas/Owner'
-        AccessControlList:
-          type: object
-          properties:
-            Grant:
-              type: array
-              items:
-                $ref: '#/components/schemas/Grant'
-          example: example_value
+  parameters:
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   securitySchemes:
     sigv4:
       type: apiKey

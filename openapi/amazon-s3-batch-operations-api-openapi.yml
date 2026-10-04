@@ -482,91 +482,6 @@ components:
           items:
             $ref: '#/components/schemas/S3Tag'
           example: []
-    S3Tag:
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          minLength: 1
-          maxLength: 128
-          example: example_value
-        Value:
-          type: string
-          maxLength: 256
-          example: example_value
-    ListJobsResult:
-      type: object
-      properties:
-        Jobs:
-          type: array
-          items:
-            type: object
-            properties:
-              JobId:
-                type: string
-              Description:
-                type: string
-              Operation:
-                type: string
-                enum:
-                - LambdaInvoke
-                - S3PutObjectCopy
-                - S3PutObjectAcl
-                - S3PutObjectTagging
-                - S3DeleteObjectTagging
-                - S3InitiateRestoreObject
-                - S3PutObjectLegalHold
-                - S3PutObjectRetention
-                - S3ReplicateObject
-              Priority:
-                type: integer
-              Status:
-                type: string
-                enum:
-                - Active
-                - Cancelled
-                - Cancelling
-                - Complete
-                - Completing
-                - Failed
-                - Failing
-                - New
-                - Paused
-                - Pausing
-                - Preparing
-                - Ready
-                - Suspended
-              CreationTime:
-                type: string
-                format: date-time
-              TerminationDate:
-                type: string
-                format: date-time
-              ProgressSummary:
-                type: object
-                properties:
-                  TotalNumberOfTasks:
-                    type: integer
-                    format: int64
-                  NumberOfTasksSucceeded:
-                    type: integer
-                    format: int64
-                  NumberOfTasksFailed:
-                    type: integer
-                    format: int64
-                  Timers:
-                    type: object
-                    properties:
-                      ElapsedTimeInActiveSeconds:
-                        type: integer
-                        format: int64
-          example: []
-        NextToken:
-          type: string
-          example: example_value
     JobDescriptor:
       type: object
       properties:
@@ -650,6 +565,91 @@ components:
           format: date-time
           example: '2026-01-15T10:30:00Z'
         SuspendedCause:
+          type: string
+          example: example_value
+    S3Tag:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: example_value
+        Value:
+          type: string
+          maxLength: 256
+          example: example_value
+    ListJobsResult:
+      type: object
+      properties:
+        Jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              JobId:
+                type: string
+              Description:
+                type: string
+              Operation:
+                type: string
+                enum:
+                - LambdaInvoke
+                - S3PutObjectCopy
+                - S3PutObjectAcl
+                - S3PutObjectTagging
+                - S3DeleteObjectTagging
+                - S3InitiateRestoreObject
+                - S3PutObjectLegalHold
+                - S3PutObjectRetention
+                - S3ReplicateObject
+              Priority:
+                type: integer
+              Status:
+                type: string
+                enum:
+                - Active
+                - Cancelled
+                - Cancelling
+                - Complete
+                - Completing
+                - Failed
+                - Failing
+                - New
+                - Paused
+                - Pausing
+                - Preparing
+                - Ready
+                - Suspended
+              CreationTime:
+                type: string
+                format: date-time
+              TerminationDate:
+                type: string
+                format: date-time
+              ProgressSummary:
+                type: object
+                properties:
+                  TotalNumberOfTasks:
+                    type: integer
+                    format: int64
+                  NumberOfTasksSucceeded:
+                    type: integer
+                    format: int64
+                  NumberOfTasksFailed:
+                    type: integer
+                    format: int64
+                  Timers:
+                    type: object
+                    properties:
+                      ElapsedTimeInActiveSeconds:
+                        type: integer
+                        format: int64
+          example: []
+        NextToken:
           type: string
           example: example_value
   parameters:

@@ -1267,34 +1267,63 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    ObjectKey:
-      name: Key+
-      in: path
-      required: true
-      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 1024
-    BucketName:
-      name: Bucket
-      in: path
-      required: true
-      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
-      schema:
-        type: string
-        minLength: 3
-        maxLength: 63
-        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   schemas:
-    CommonPrefix:
+    ListBucketResult:
       type: object
-      description: Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.
+      description: Container for the result of the ListObjectsV2 operation.
+      xml:
+        name: ListBucketResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
       properties:
+        IsTruncated:
+          type: boolean
+          description: Set to false if all of the results were returned. Set to true if more keys are available to return.
+          example: true
+        Contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object'
+          example: []
+        Name:
+          type: string
+          description: Bucket name.
+          example: Example Title
         Prefix:
           type: string
-          description: Container for the specified common prefix.
+          description: Keys that begin with the indicated prefix.
+          example: example_value
+        Delimiter:
+          type: string
+          description: Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element.
+          example: example_value
+        MaxKeys:
+          type: integer
+          description: Sets the maximum number of keys returned in the response.
+          example: 10
+        CommonPrefixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonPrefix'
+          example: []
+        EncodingType:
+          type: string
+          description: Encoding type used by Amazon S3 to encode object key names.
+          example: example_value
+        KeyCount:
+          type: integer
+          description: The number of keys returned with this request.
+          example: 10
+        ContinuationToken:
+          type: string
+          description: If ContinuationToken was sent with the request, it is included in the response.
+          example: example_value
+        NextContinuationToken:
+          type: string
+          description: NextContinuationToken is sent when isTruncated is true, which indicates that there are more keys to return.
+          example: example_value
+        StartAfter:
+          type: string
+          description: If StartAfter was sent with the request, it is included in the response.
           example: example_value
     Error:
       type: object
@@ -1322,35 +1351,6 @@ components:
           type: string
           description: A special token to help AWS troubleshoot problems.
           example: '500123'
-    Delete:
-      type: object
-      description: Container for the objects to delete.
-      xml:
-        name: Delete
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - Object
-      properties:
-        Object:
-          type: array
-          description: Container element that describes the delete request for an object.
-          items:
-            type: object
-            required:
-            - Key
-            properties:
-              Key:
-                type: string
-                description: Key name of the object to delete.
-              VersionId:
-                type: string
-                description: VersionId for the specific version of the object to delete.
-          example: []
-        Quiet:
-          type: boolean
-          description: Element to enable quiet mode for the request. When added, it must be set to true.
-          default: false
-          example: true
     DeleteResult:
       type: object
       description: Container for the response of the DeleteObjects operation.
@@ -1386,6 +1386,26 @@ components:
               Message:
                 type: string
           example: []
+    CommonPrefix:
+      type: object
+      description: Container for all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.
+      properties:
+        Prefix:
+          type: string
+          description: Container for the specified common prefix.
+          example: example_value
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
     Object:
       type: object
       description: An object consists of data and its descriptive metadata.
@@ -1445,75 +1465,6 @@ components:
               type: string
               format: date-time
           example: example_value
-    ListBucketResult:
-      type: object
-      description: Container for the result of the ListObjectsV2 operation.
-      xml:
-        name: ListBucketResult
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        IsTruncated:
-          type: boolean
-          description: Set to false if all of the results were returned. Set to true if more keys are available to return.
-          example: true
-        Contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Object'
-          example: []
-        Name:
-          type: string
-          description: Bucket name.
-          example: Example Title
-        Prefix:
-          type: string
-          description: Keys that begin with the indicated prefix.
-          example: example_value
-        Delimiter:
-          type: string
-          description: Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element.
-          example: example_value
-        MaxKeys:
-          type: integer
-          description: Sets the maximum number of keys returned in the response.
-          example: 10
-        CommonPrefixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonPrefix'
-          example: []
-        EncodingType:
-          type: string
-          description: Encoding type used by Amazon S3 to encode object key names.
-          example: example_value
-        KeyCount:
-          type: integer
-          description: The number of keys returned with this request.
-          example: 10
-        ContinuationToken:
-          type: string
-          description: If ContinuationToken was sent with the request, it is included in the response.
-          example: example_value
-        NextContinuationToken:
-          type: string
-          description: NextContinuationToken is sent when isTruncated is true, which indicates that there are more keys to return.
-          example: example_value
-        StartAfter:
-          type: string
-          description: If StartAfter was sent with the request, it is included in the response.
-          example: example_value
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
-          type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
-          type: string
-          description: Container for the ID of the owner.
-          example: abc123
     CopyObjectResult:
       type: object
       description: Container for all response elements.
@@ -1542,6 +1493,55 @@ components:
         ChecksumSHA256:
           type: string
           example: example_value
+    Delete:
+      type: object
+      description: Container for the objects to delete.
+      xml:
+        name: Delete
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - Object
+      properties:
+        Object:
+          type: array
+          description: Container element that describes the delete request for an object.
+          items:
+            type: object
+            required:
+            - Key
+            properties:
+              Key:
+                type: string
+                description: Key name of the object to delete.
+              VersionId:
+                type: string
+                description: VersionId for the specific version of the object to delete.
+          example: []
+        Quiet:
+          type: boolean
+          description: Element to enable quiet mode for the request. When added, it must be set to true.
+          default: false
+          example: true
+  parameters:
+    ObjectKey:
+      name: Key+
+      in: path
+      required: true
+      description: Key name of the object. The object key can be up to 1,024 bytes in length and may contain any UTF-8 characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 1024
+    BucketName:
+      name: Bucket
+      in: path
+      required: true
+      description: The name of the bucket. Bucket names must be between 3 and 63 characters long, consist only of lowercase letters, numbers, hyphens, and periods, and must begin and end with a letter or number.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 63
+        pattern: ^[a-z0-9][a-z0-9.\-]{1,61}[a-z0-9]$
   securitySchemes:
     sigv4:
       type: apiKey

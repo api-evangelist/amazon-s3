@@ -186,17 +186,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListMultiRegionAccessPointsResult:
-      type: object
-      properties:
-        AccessPoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/MultiRegionAccessPointReport'
-          example: []
-        NextToken:
-          type: string
-          example: example_value
     PublicAccessBlockConfiguration:
       type: object
       description: The PublicAccessBlock configuration that you want to apply to this Amazon S3 account.
@@ -220,43 +209,6 @@ components:
           type: boolean
           description: Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account.
           example: true
-    CreateMultiRegionAccessPointRequest:
-      type: object
-      xml:
-        name: CreateMultiRegionAccessPointRequest
-        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
-      required:
-      - Details
-      - ClientToken
-      properties:
-        ClientToken:
-          type: string
-          description: An idempotency token used to identify the request.
-          example: example_value
-        Details:
-          type: object
-          required:
-          - Name
-          - Regions
-          properties:
-            Name:
-              type: string
-              description: The name of the Multi-Region Access Point.
-            PublicAccessBlock:
-              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-            Regions:
-              type: array
-              description: The buckets in different Regions that are associated with the Multi-Region Access Point.
-              items:
-                type: object
-                required:
-                - Bucket
-                properties:
-                  Bucket:
-                    type: string
-                  BucketAccountId:
-                    type: string
-          example: example_value
     MultiRegionAccessPointReport:
       type: object
       properties:
@@ -296,6 +248,54 @@ components:
               BucketAccountId:
                 type: string
           example: []
+    ListMultiRegionAccessPointsResult:
+      type: object
+      properties:
+        AccessPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiRegionAccessPointReport'
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+    CreateMultiRegionAccessPointRequest:
+      type: object
+      xml:
+        name: CreateMultiRegionAccessPointRequest
+        namespace: http://awss3control.amazonaws.com/doc/2018-08-20/
+      required:
+      - Details
+      - ClientToken
+      properties:
+        ClientToken:
+          type: string
+          description: An idempotency token used to identify the request.
+          example: example_value
+        Details:
+          type: object
+          required:
+          - Name
+          - Regions
+          properties:
+            Name:
+              type: string
+              description: The name of the Multi-Region Access Point.
+            PublicAccessBlock:
+              $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            Regions:
+              type: array
+              description: The buckets in different Regions that are associated with the Multi-Region Access Point.
+              items:
+                type: object
+                required:
+                - Bucket
+                properties:
+                  Bucket:
+                    type: string
+                  BucketAccountId:
+                    type: string
+          example: example_value
   parameters:
     AccountId:
       name: x-amz-account-id

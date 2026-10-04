@@ -136,6 +136,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    AccountId:
+      name: x-amz-account-id
+      in: header
+      required: true
+      description: The AWS account ID of the S3 Control API caller.
+      schema:
+        type: string
+        pattern: ^\d{12}$
   schemas:
     AccessGrantsInstance:
       type: object
@@ -172,15 +181,6 @@ components:
           type: string
           maxLength: 256
           example: example_value
-  parameters:
-    AccountId:
-      name: x-amz-account-id
-      in: header
-      required: true
-      description: The AWS account ID of the S3 Control API caller.
-      schema:
-        type: string
-        pattern: ^\d{12}$
   securitySchemes:
     sigv4:
       type: apiKey
