@@ -801,6 +801,10 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 common:
+- type: RateLimits
+  url: rate-limits/amazon-s3-rate-limits.yml
+- type: FinOps
+  url: finops/amazon-s3-finops.yml
 - type: Pricing
   url: https://aws.amazon.com/s3/pricing/
 - type: Plans
