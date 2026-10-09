@@ -85,3 +85,92 @@ plans:
 rate_limit_statements:
 - Each provisioned capacity unit can provide at least three expedited retrievals every five minutes and
   up to 150 MB/s of retrieval throughput.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - data
+  plans:
+  - name: S3 Multi-Region Access Points data routing
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN North America – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN North America – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration BETWEEN North America AND any other location – IN/OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN Asia Pacific – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN Asia Pacific – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN South America – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN South America – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration BETWEEN Asia Pacific/South America AND any other location
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: S3 Files – File reads directly from S3 bucket
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
