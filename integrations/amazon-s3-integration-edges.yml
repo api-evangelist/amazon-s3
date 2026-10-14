@@ -1,0 +1,98 @@
+generated: '2026-10-14'
+edges:
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/amazon-s3
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - amazon-s3
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazons3/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazons3
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/s3
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - s3
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+    source:
+      catalog_entries:
+      - s3-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Census
+  partner: getcensus
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://fivetran.com/docs/activations/destinations/available-destinations/s3
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - s3
+      sync_behaviours:
+      - update or create
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+method: searched
+checked:
+- https://docs.mparticle.com/integrations/amazons3/audience/
+- https://fivetran.com/docs/activations/destinations/available-destinations/s3
+- https://hightouch.com/docs/destinations/s3
+- https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/amazon-s3
+source:
+- https://docs.mparticle.com/integrations/amazons3/audience/
+- https://fivetran.com/docs/activations/destinations/available-destinations/s3
+- https://hightouch.com/docs/destinations/s3
+- https://www.twilio.com/docs/segment/connections/sources/catalog/cloud-apps/amazon-s3
