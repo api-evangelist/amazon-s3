@@ -85,7 +85,7 @@
     app_slug: amazon-s3
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: amazon-s3-n8n
   label: n8n
@@ -110,5 +110,5 @@
     node_path: S3
     trigger: false
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
