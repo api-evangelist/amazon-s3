@@ -224,23 +224,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Tagging:
-      type: object
-      description: Container for TagSet elements.
-      xml:
-        name: Tagging
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      required:
-      - TagSet
-      properties:
-        TagSet:
-          type: object
-          properties:
-            Tag:
-              type: array
-              items:
-                $ref: '#/components/schemas/Tag'
-          example: example_value
     Error:
       type: object
       description: Container for all error elements.
@@ -284,6 +267,23 @@ components:
           type: string
           description: Value of the tag.
           maxLength: 256
+          example: example_value
+    Tagging:
+      type: object
+      description: Container for TagSet elements.
+      xml:
+        name: Tagging
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      required:
+      - TagSet
+      properties:
+        TagSet:
+          type: object
+          properties:
+            Tag:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tag'
           example: example_value
   parameters:
     BucketName:

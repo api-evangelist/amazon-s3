@@ -496,51 +496,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      description: Container for all error elements.
-      xml:
-        name: Error
-      properties:
-        Code:
-          type: string
-          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
-          example: example_value
-        Message:
-          type: string
-          description: A human-readable description of the error.
-          example: example_value
-        Resource:
-          type: string
-          description: The bucket or object that is involved in the error.
-          example: example_value
-        RequestId:
-          type: string
-          description: Unique identifier for the request.
-          example: '500123'
-        HostId:
-          type: string
-          description: A special token to help AWS troubleshoot problems.
-          example: '500123'
-    InitiateMultipartUploadResult:
-      type: object
-      description: Container for response to initiate multipart upload.
-      xml:
-        name: InitiateMultipartUploadResult
-        namespace: http://s3.amazonaws.com/doc/2006-03-01/
-      properties:
-        Bucket:
-          type: string
-          description: The name of the bucket to which the multipart upload was initiated.
-          example: example_value
-        Key:
-          type: string
-          description: Object key for which the multipart upload was initiated.
-          example: example_value
-        UploadId:
-          type: string
-          description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
-          example: '500123'
     CompleteMultipartUploadResult:
       type: object
       description: The container for the completed multipart upload response.
@@ -576,6 +531,51 @@ components:
         ChecksumSHA256:
           type: string
           example: example_value
+    InitiateMultipartUploadResult:
+      type: object
+      description: Container for response to initiate multipart upload.
+      xml:
+        name: InitiateMultipartUploadResult
+        namespace: http://s3.amazonaws.com/doc/2006-03-01/
+      properties:
+        Bucket:
+          type: string
+          description: The name of the bucket to which the multipart upload was initiated.
+          example: example_value
+        Key:
+          type: string
+          description: Object key for which the multipart upload was initiated.
+          example: example_value
+        UploadId:
+          type: string
+          description: ID for the initiated multipart upload. This ID is used in all subsequent multipart upload operations.
+          example: '500123'
+    Error:
+      type: object
+      description: Container for all error elements.
+      xml:
+        name: Error
+      properties:
+        Code:
+          type: string
+          description: The error code is a string that uniquely identifies an error condition. Examples include NoSuchBucket, NoSuchKey, AccessDenied, InvalidBucketName, etc.
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: example_value
+        Resource:
+          type: string
+          description: The bucket or object that is involved in the error.
+          example: example_value
+        RequestId:
+          type: string
+          description: Unique identifier for the request.
+          example: '500123'
+        HostId:
+          type: string
+          description: A special token to help AWS troubleshoot problems.
+          example: '500123'
     CompleteMultipartUpload:
       type: object
       description: The container for the completed multipart upload request.

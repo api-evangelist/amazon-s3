@@ -207,6 +207,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Owner:
+      type: object
+      description: Container for the owner's display name and ID.
+      properties:
+        DisplayName:
+          type: string
+          description: Container for the display name of the owner.
+          example: example_value
+        ID:
+          type: string
+          description: Container for the ID of the owner.
+          example: abc123
     Error:
       type: object
       description: Container for all error elements.
@@ -250,18 +262,6 @@ components:
               items:
                 $ref: '#/components/schemas/Grant'
           example: example_value
-    Owner:
-      type: object
-      description: Container for the owner's display name and ID.
-      properties:
-        DisplayName:
-          type: string
-          description: Container for the display name of the owner.
-          example: example_value
-        ID:
-          type: string
-          description: Container for the ID of the owner.
-          example: abc123
     Grant:
       type: object
       description: Container for grant information.
