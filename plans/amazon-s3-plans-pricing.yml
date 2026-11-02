@@ -86,7 +86,7 @@ rate_limit_statements:
 - Each provisioned capacity unit can provide at least three expedited retrievals every five minutes and
   up to 150 MB/s of retrieval throughput.
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
