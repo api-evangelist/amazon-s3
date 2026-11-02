@@ -1,0 +1,176 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://aws.amazon.com/s3/pricing/
+sources:
+- https://aws.amazon.com/s3/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+published: true
+note: 'Most storage/request price cells are unrendered template tokens ({priceOf!...}) in the captured
+  text, so headline per-GB storage and per-1,000-request rates are not readable. Numeric prices appear
+  in Multi-Region Access Points tables and in worked pricing examples (e.g., S3 Tables $0.0265 per GB,
+  S3 Vectors $0.06/GB storage, $0.20/GB PUT, $2.50/MM queries). Page states ''Pay only for what you use.
+  There is no minimum charge.'' Free allowances noted: first 100GB data transfer out to internet per month;
+  first 512KB of data returned per vector query.'
+plan_count: 10
+currency: USD
+plans:
+- name: S3 Multi-Region Access Points data routing
+  price_text: $0.0033 per GB
+  price: 0.0033
+  currency: USD
+  period: per-use
+  unit: GB processed
+- name: Internet acceleration WITHIN North America – Data transfer IN
+  price_text: $0.0025 per GB
+  price: 0.0025
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN North America – Data transfer OUT
+  price_text: $0.0050 per GB
+  price: 0.005
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration BETWEEN North America AND any other location – IN/OUT
+  price_text: $0.0500 per GB
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN Asia Pacific – Data transfer IN
+  price_text: $0.0100 per GB
+  price: 0.01
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN Asia Pacific – Data transfer OUT
+  price_text: $0.0150 per GB
+  price: 0.015
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN South America – Data transfer IN
+  price_text: $0.0250 per GB
+  price: 0.025
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration WITHIN South America – Data transfer OUT
+  price_text: $0.0400 per GB
+  price: 0.04
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Internet acceleration BETWEEN Asia Pacific/South America AND any other location
+  price_text: $0.0600 per GB
+  price: 0.06
+  currency: USD
+  period: per-use
+  unit: GB
+- name: S3 Files – File reads directly from S3 bucket
+  price_text: FREE
+  period: per-use
+  unit: GB
+rate_limit_statements:
+- Each provisioned capacity unit can provide at least three expedited retrievals every five minutes and
+  up to 150 MB/s of retrieval throughput.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - data
+  plans:
+  - name: S3 Multi-Region Access Points data routing
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN North America – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN North America – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration BETWEEN North America AND any other location – IN/OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN Asia Pacific – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN Asia Pacific – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN South America – Data transfer IN
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration WITHIN South America – Data transfer OUT
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Internet acceleration BETWEEN Asia Pacific/South America AND any other location
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: S3 Files – File reads directly from S3 bucket
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
