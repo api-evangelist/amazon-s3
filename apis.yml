@@ -1,6 +1,6 @@
 name: Amazon S3
-description: Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability,
-  data availability, security, and performance.
+description: Amazon Simple Storage Service (S3) is an object storage service offering industry-leading scalability, data availability, security,
+  and performance.
 deliveryModel:
   model: saas
   open_source: false
@@ -26,12 +26,257 @@ accessModel:
   - plans
   - authentication
   - security
-  generated: '2026-11-06'
+  generated: '2026-11-13'
   method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/s3/
 created: '2024-01-15'
 modified: '2026-09-16'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
+tags:
+- Archives
+- Amazon Web Services
+- Backup
+- Cloud Storage
+- Data Storage
+- Object Storage
+- Scalable Storage
+- Storage
+tags_raw:
+- Archives
+- AWS
+- Backup
+- Cloud Storage
+- Data Storage
+- Object Storage
+- Scalable Storage
+- Storage
+common:
+- type: Spectral
+  url: rules/amazon-s3-spectral-rules.yml
+- type: Spectral
+  url: rules/amazon-s3-rules.yml
+- type: Spectral
+  url: rules/amazon-s3-jsonschema-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/amazon-s3-tables-context.jsonld
+- type: JSONLD
+  url: json-ld/amazon-s3-rest-context.jsonld
+- type: JSONLD
+  url: json-ld/amazon-s3-control-context.jsonld
+- type: Vocabulary
+  url: vocabulary/amazon-s3-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Idempotency
+  url: conventions/amazon-s3-conventions.yml
+- type: Deprecation
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+- type: MCPServer
+  url: mcp/amazon-s3-mcp.yml
+- type: Hosts
+  url: hosts/amazon-s3-hosts.yml
+- type: IntegrationEdges
+  url: integrations/amazon-s3-integration-edges.yml
+- type: Vendors
+  url: vendors/amazon-s3-vendors.yml
+- type: Newsroom
+  url: https://aws.amazon.com/media/?nc2=h_sol_ind_med
+- type: GettingStarted
+  url: https://developer.amazon.com/frustration-free-setup
+- type: RateLimits
+  url: rate-limits/amazon-s3-rate-limits.yml
+- type: FinOps
+  url: finops/amazon-s3-finops.yml
+- type: Pricing
+  url: https://aws.amazon.com/s3/pricing/
+- type: Plans
+  url: plans/amazon-s3-plans-pricing.yml
+- type: Overlay
+  url: overlays/amazon-s3-tables-api-overlay.yaml
+- type: CapabilityMap
+  url: capabilities/amazon-s3-capability-edges.yml
+  name: Amazon S3 Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/amazon-s3-agentic-access.yml
+- type: TrustCenter
+  url: security/amazon-s3-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/amazon-s3-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/amazon-s3-domain-security.yml
+- type: Authentication
+  url: authentication/amazon-s3-authentication.yml
+- type: Packages
+  url: packages/amazon-s3-packages.yml
+- type: WellKnown
+  url: well-known/amazon-s3-well-known.yml
+- type: SecurityTxt
+  url: well-known/amazon-s3-security.txt
+- type: X-MCPServerCandidate
+  url: mcp/amazon-s3-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
+- type: LLMsTxt
+  url: llms/amazon-s3-llms.txt
+- type: Conformance
+  url: conformance/amazon-s3-conformance.yml
+- type: ErrorCatalog
+  url: errors/amazon-s3-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/amazon-s3-lifecycle.yml
+- type: Conventions
+  url: conventions/amazon-s3-conventions.yml
+- type: ChangeLog
+  url: changelog/amazon-s3-changelog.yml
+- type: CLI
+  url: cli/amazon-s3-cli.yml
+- type: DataModel
+  url: data-model/amazon-s3-data-model.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/amazon-s3/overview
+- type: Arazzo
+  url: arazzo/amazon-s3-abort-multipart-upload-workflow.yml
+  name: Amazon S3 Start and Abort a Multipart Upload
+- type: Arazzo
+  url: arazzo/amazon-s3-archive-object-workflow.yml
+  name: Amazon S3 Archive an Object to a Cold Storage Class
+- type: Arazzo
+  url: arazzo/amazon-s3-conditional-download-object-workflow.yml
+  name: Amazon S3 Conditional Download of an Object
+- type: Arazzo
+  url: arazzo/amazon-s3-copy-object-workflow.yml
+  name: Amazon S3 Copy Object Between Keys
+- type: Arazzo
+  url: arazzo/amazon-s3-create-bucket-put-object-workflow.yml
+  name: Amazon S3 Create Bucket and Store an Object
+- type: Arazzo
+  url: arazzo/amazon-s3-delete-object-workflow.yml
+  name: Amazon S3 Delete Object and Confirm Removal
+- type: Arazzo
+  url: arazzo/amazon-s3-empty-and-delete-bucket-workflow.yml
+  name: Amazon S3 Empty and Delete a Bucket
+- type: Arazzo
+  url: arazzo/amazon-s3-enable-versioning-put-object-workflow.yml
+  name: Amazon S3 Enable Versioning Then Store an Object
+- type: Arazzo
+  url: arazzo/amazon-s3-get-or-create-object-workflow.yml
+  name: Amazon S3 Get Object or Create It
+- type: Arazzo
+  url: arazzo/amazon-s3-list-and-batch-delete-objects-workflow.yml
+  name: Amazon S3 List and Batch Delete Objects
+- type: Arazzo
+  url: arazzo/amazon-s3-move-object-workflow.yml
+  name: Amazon S3 Move an Object
+- type: Arazzo
+  url: arazzo/amazon-s3-multipart-upload-workflow.yml
+  name: Amazon S3 Multipart Upload a Large Object
+- type: Arazzo
+  url: arazzo/amazon-s3-paginate-list-objects-workflow.yml
+  name: Amazon S3 Paginate Through Bucket Objects
+- type: Arazzo
+  url: arazzo/amazon-s3-provision-secure-bucket-workflow.yml
+  name: Amazon S3 Provision a Secure Bucket
+- type: Arazzo
+  url: arazzo/amazon-s3-put-object-list-objects-workflow.yml
+  name: Amazon S3 Upload and List Objects
+- type: Arazzo
+  url: arazzo/amazon-s3-set-bucket-acl-workflow.yml
+  name: Amazon S3 Apply and Verify a Bucket ACL
+- type: Arazzo
+  url: arazzo/amazon-s3-set-bucket-cors-workflow.yml
+  name: Amazon S3 Configure and Verify Bucket CORS
+- type: Arazzo
+  url: arazzo/amazon-s3-set-bucket-encryption-workflow.yml
+  name: Amazon S3 Configure and Verify Default Encryption
+- type: Arazzo
+  url: arazzo/amazon-s3-set-bucket-lifecycle-workflow.yml
+  name: Amazon S3 Apply and Verify a Lifecycle Configuration
+- type: Arazzo
+  url: arazzo/amazon-s3-set-bucket-tagging-workflow.yml
+  name: Amazon S3 Set and Verify Bucket Tags
+- type: Portal
+  url: https://aws.amazon.com/
+- type: Documentation
+  url: https://docs.aws.amazon.com/s3/
+- type: TermsOfService
+  url: https://aws.amazon.com/service-terms/
+- type: PrivacyPolicy
+  url: https://aws.amazon.com/privacy/
+- type: Support
+  url: https://aws.amazon.com/premiumsupport/
+- type: Blog
+  url: https://aws.amazon.com/blogs/storage/
+- type: GitHubOrganization
+  url: https://github.com/aws
+- type: Console
+  url: https://console.aws.amazon.com/s3/
+- type: Signup
+  url: https://signin.aws.amazon.com/signup?request_type=register
+- type: Login
+  url: https://aws.amazon.com/console/
+- type: StatusPage
+  url: https://health.aws.amazon.com/health/status
+- type: KnowledgeCenter
+  url: https://repost.aws/knowledge-center
+- type: YouTube
+  url: https://www.youtube.com/user/AmazonWebServices
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/amazon-s3
+- type: Contact
+  url: https://aws.amazon.com/contact-us/
+- type: Security
+  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
+- type: Compliance
+  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-compliance.html
+- type: ChangeLog
+  url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
+- type: Features
+  data:
+  - Industry-leading scalability and 99.999999999% durability
+  - Multiple storage classes for cost optimization
+  - Object versioning and lifecycle management
+  - Server-side encryption and access control
+  - S3 Object Lock for WORM compliance
+  - Cross-region and same-region replication
+  - S3 Tables for Apache Iceberg tabular data
+  - S3 Access Grants for identity-based access
+  - Storage Lens analytics and insights
+  - Batch Operations for large-scale object processing
+- type: UseCases
+  data:
+  - Storing and serving static website content
+  - Data lake foundation for analytics workloads
+  - Backup and disaster recovery storage
+  - Archive storage with Glacier integration
+  - Hosting machine learning training datasets
+  - Storing application logs and audit trails
+- type: Integrations
+  data:
+  - AWS Lambda
+  - Amazon CloudFront
+  - Amazon Athena
+  - AWS Glue
+  - Amazon EMR
+  - Amazon Redshift
+  - AWS CloudTrail
+  - Amazon EventBridge
+- type: Integrations
+  url: https://aws.amazon.com/marketplace/
+- type: Website
+  url: https://aws.amazon.com/s3/
+- type: UsageTerms
+  url: terms/amazon-s3-terms-of-service.yml
+- type: DataProcessing
+  url: privacy/amazon-s3-privacy-policy.yml
+- type: Attestations
+  url: compliance/amazon-s3-compliance.yml
+- type: Eligibility
+  url: eligibility/amazon-s3-eligibility.yml
 apis:
 - aid: amazon-s3:amazon-s3-abac-api
   name: Amazon S3 Abac API
@@ -380,7 +625,8 @@ apis:
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
 - aid: amazon-s3:amazon-s3-bucket-configuration-api
   name: Amazon S3 Bucket Configuration API
-  description: Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption
+  description: >-
+    Operations for managing bucket-level configuration such as versioning, lifecycle, CORS, and encryption
   humanURL: https://aws.amazon.com/s3/
   baseURL: https://s3.amazonaws.com
   tags:
@@ -430,49 +676,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/amazon-s3-buckets-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
-  - type: JSONSchema
-    url: json-schema/amazon-s3-bucket-schema.json
-  - type: JSONSchema
-    url: json-schema/amazon-s3-object-schema.json
-  - type: JSONLD
-    url: json-ld/amazon-s3-context.jsonld
-  - type: Pricing
-    url: https://aws.amazon.com/s3/pricing/
-  - type: GettingStarted
-    url: https://aws.amazon.com/s3/getting-started/
-  - type: Authentication
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - type: SDKs
-    url: https://aws.amazon.com/tools/
-  - type: StatusPage
-    url: https://status.aws.amazon.com/
-  - type: BestPractices
-    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
-  - type: FAQ
-    url: https://aws.amazon.com/s3/faqs/
-  - type: APIReference
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
-  - type: ChangeLog
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - type: CodeExamples
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
-  - type: Security
-    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-- aid: amazon-s3:amazon-s3-delete-api
-  name: Amazon S3 Delete API
-  description: The delete API from Amazon S3 — 1 operation(s) for delete.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags: []
-  tags_raw:
-  - delete
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-delete-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/
   - type: JSONSchema
@@ -557,50 +760,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/amazon-s3-multipart-upload-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/
-  - type: JSONSchema
-    url: json-schema/amazon-s3-bucket-schema.json
-  - type: JSONSchema
-    url: json-schema/amazon-s3-object-schema.json
-  - type: JSONLD
-    url: json-ld/amazon-s3-context.jsonld
-  - type: Pricing
-    url: https://aws.amazon.com/s3/pricing/
-  - type: GettingStarted
-    url: https://aws.amazon.com/s3/getting-started/
-  - type: Authentication
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-  - type: SDKs
-    url: https://aws.amazon.com/tools/
-  - type: StatusPage
-    url: https://status.aws.amazon.com/
-  - type: BestPractices
-    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/best-practices.html
-  - type: FAQ
-    url: https://aws.amazon.com/s3/faqs/
-  - type: APIReference
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html
-  - type: ChangeLog
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-  - type: CodeExamples
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/service_code_examples.html
-  - type: Security
-    url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-  - type: Documentation
-    url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-- aid: amazon-s3:amazon-s3-object-api
-  name: Amazon S3 Object API
-  description: The object API from Amazon S3 — 1 operation(s) for object.
-  humanURL: https://aws.amazon.com/s3/
-  baseURL: https://s3.amazonaws.com
-  tags:
-  - Object
-  tags_raw:
-  - object
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-s3-object-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/
   - type: JSONSchema
@@ -801,202 +960,577 @@ apis:
     url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
   - type: Documentation
     url: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Types_AWS_S3_Control.html
-common:
-- type: RateLimits
-  url: rate-limits/amazon-s3-rate-limits.yml
-- type: FinOps
-  url: finops/amazon-s3-finops.yml
-- type: Pricing
-  url: https://aws.amazon.com/s3/pricing/
-- type: Plans
-  url: plans/amazon-s3-plans-pricing.yml
-- type: Overlay
-  url: overlays/amazon-s3-tables-api-overlay.yaml
-- type: CapabilityMap
-  url: capabilities/amazon-s3-capability-edges.yml
-  name: Amazon S3 Business Capability Map
-- type: AgenticAccess
-  url: agentic-access/amazon-s3-agentic-access.yml
-- type: TrustCenter
-  url: security/amazon-s3-trust-center.yml
-- type: VulnerabilityDisclosure
-  url: security/amazon-s3-vulnerability-disclosure.yml
-- type: DomainSecurity
-  url: security/amazon-s3-domain-security.yml
-- type: Authentication
-  url: authentication/amazon-s3-authentication.yml
-- type: Packages
-  url: packages/amazon-s3-packages.yml
-- type: WellKnown
-  url: well-known/amazon-s3-well-known.yml
-- type: SecurityTxt
-  url: well-known/amazon-s3-security.txt
-- type: X-MCPServerCandidate
-  url: mcp/amazon-s3-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool
-    list derived from the published API contracts, not an existing server. The scorer already read the manifest
-    and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server
-    that does not exist.'
-- type: LLMsTxt
-  url: llms/amazon-s3-llms.txt
-- type: Conformance
-  url: conformance/amazon-s3-conformance.yml
-- type: ErrorCatalog
-  url: errors/amazon-s3-problem-types.yml
-- type: Lifecycle
-  url: lifecycle/amazon-s3-lifecycle.yml
-- type: Conventions
-  url: conventions/amazon-s3-conventions.yml
-- type: ChangeLog
-  url: changelog/amazon-s3-changelog.yml
-- type: CLI
-  url: cli/amazon-s3-cli.yml
-- type: DataModel
-  url: data-model/amazon-s3-data-model.yml
-- type: PostmanWorkspace
-  url: https://www.postman.com/kinlaneapi/amazon-s3/overview
-- type: Arazzo
-  url: arazzo/amazon-s3-abort-multipart-upload-workflow.yml
-  name: Amazon S3 Start and Abort a Multipart Upload
-- type: Arazzo
-  url: arazzo/amazon-s3-archive-object-workflow.yml
-  name: Amazon S3 Archive an Object to a Cold Storage Class
-- type: Arazzo
-  url: arazzo/amazon-s3-conditional-download-object-workflow.yml
-  name: Amazon S3 Conditional Download of an Object
-- type: Arazzo
-  url: arazzo/amazon-s3-copy-object-workflow.yml
-  name: Amazon S3 Copy Object Between Keys
-- type: Arazzo
-  url: arazzo/amazon-s3-create-bucket-put-object-workflow.yml
-  name: Amazon S3 Create Bucket and Store an Object
-- type: Arazzo
-  url: arazzo/amazon-s3-delete-object-workflow.yml
-  name: Amazon S3 Delete Object and Confirm Removal
-- type: Arazzo
-  url: arazzo/amazon-s3-empty-and-delete-bucket-workflow.yml
-  name: Amazon S3 Empty and Delete a Bucket
-- type: Arazzo
-  url: arazzo/amazon-s3-enable-versioning-put-object-workflow.yml
-  name: Amazon S3 Enable Versioning Then Store an Object
-- type: Arazzo
-  url: arazzo/amazon-s3-get-or-create-object-workflow.yml
-  name: Amazon S3 Get Object or Create It
-- type: Arazzo
-  url: arazzo/amazon-s3-list-and-batch-delete-objects-workflow.yml
-  name: Amazon S3 List and Batch Delete Objects
-- type: Arazzo
-  url: arazzo/amazon-s3-move-object-workflow.yml
-  name: Amazon S3 Move an Object
-- type: Arazzo
-  url: arazzo/amazon-s3-multipart-upload-workflow.yml
-  name: Amazon S3 Multipart Upload a Large Object
-- type: Arazzo
-  url: arazzo/amazon-s3-paginate-list-objects-workflow.yml
-  name: Amazon S3 Paginate Through Bucket Objects
-- type: Arazzo
-  url: arazzo/amazon-s3-provision-secure-bucket-workflow.yml
-  name: Amazon S3 Provision a Secure Bucket
-- type: Arazzo
-  url: arazzo/amazon-s3-put-object-list-objects-workflow.yml
-  name: Amazon S3 Upload and List Objects
-- type: Arazzo
-  url: arazzo/amazon-s3-set-bucket-acl-workflow.yml
-  name: Amazon S3 Apply and Verify a Bucket ACL
-- type: Arazzo
-  url: arazzo/amazon-s3-set-bucket-cors-workflow.yml
-  name: Amazon S3 Configure and Verify Bucket CORS
-- type: Arazzo
-  url: arazzo/amazon-s3-set-bucket-encryption-workflow.yml
-  name: Amazon S3 Configure and Verify Default Encryption
-- type: Arazzo
-  url: arazzo/amazon-s3-set-bucket-lifecycle-workflow.yml
-  name: Amazon S3 Apply and Verify a Lifecycle Configuration
-- type: Arazzo
-  url: arazzo/amazon-s3-set-bucket-tagging-workflow.yml
-  name: Amazon S3 Set and Verify Bucket Tags
-- type: Portal
-  url: https://aws.amazon.com/
-- type: Documentation
-  url: https://docs.aws.amazon.com/s3/
-- type: TermsOfService
-  url: https://aws.amazon.com/service-terms/
-- type: PrivacyPolicy
-  url: https://aws.amazon.com/privacy/
-- type: Support
-  url: https://aws.amazon.com/premiumsupport/
-- type: Blog
-  url: https://aws.amazon.com/blogs/storage/
-- type: GitHubOrganization
-  url: https://github.com/aws
-- type: Console
-  url: https://console.aws.amazon.com/s3/
-- type: Signup
-  url: https://signin.aws.amazon.com/signup?request_type=register
-- type: Login
-  url: https://aws.amazon.com/console/
-- type: StatusPage
-  url: https://health.aws.amazon.com/health/status
-- type: KnowledgeCenter
-  url: https://repost.aws/knowledge-center
-- type: YouTube
-  url: https://www.youtube.com/user/AmazonWebServices
-- type: StackOverflow
-  url: https://stackoverflow.com/questions/tagged/amazon-s3
-- type: Contact
-  url: https://aws.amazon.com/contact-us/
-- type: Security
-  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security.html
-- type: Compliance
-  url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-compliance.html
-- type: ChangeLog
-  url: https://docs.aws.amazon.com/AmazonS3/latest/API/WhatsNew.html
-- type: Features
-  data:
-  - Industry-leading scalability and 99.999999999% durability
-  - Multiple storage classes for cost optimization
-  - Object versioning and lifecycle management
-  - Server-side encryption and access control
-  - S3 Object Lock for WORM compliance
-  - Cross-region and same-region replication
-  - S3 Tables for Apache Iceberg tabular data
-  - S3 Access Grants for identity-based access
-  - Storage Lens analytics and insights
-  - Batch Operations for large-scale object processing
-- type: UseCases
-  data:
-  - Storing and serving static website content
-  - Data lake foundation for analytics workloads
-  - Backup and disaster recovery storage
-  - Archive storage with Glacier integration
-  - Hosting machine learning training datasets
-  - Storing application logs and audit trails
-- type: Integrations
-  data:
-  - AWS Lambda
-  - Amazon CloudFront
-  - Amazon Athena
-  - AWS Glue
-  - Amazon EMR
-  - Amazon Redshift
-  - AWS CloudTrail
-  - Amazon EventBridge
-- type: Integrations
-  url: https://aws.amazon.com/marketplace/
-- type: Website
-  url: https://aws.amazon.com/s3/
+- aid: amazon-s3:amazon-s3-accessgrantsinstance-api
+  name: Amazon S3 S3 Accessgrantsinstance API
+  description: >-
+    The S3 Accessgrantsinstance API from Amazon S3 — 13 operation(s) for s3 accessgrantsinstance.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Accessgrantsinstance
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-accessgrantsinstance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-data-access-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-access-grants-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-access-grant-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-access-grants-instance-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-grants-instance-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-access-grant-result-schema.json
+- aid: amazon-s3:amazon-s3-accesspointforobjectlambda-api
+  name: Amazon S3 S3 Accesspointforobjectlambda API
+  description: >-
+    The S3 Accesspointforobjectlambda API from Amazon S3 — 2 operation(s) for s3 accesspointforobjectlambda.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Accesspointforobjectlambda
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-accesspointforobjectlambda-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-access-points-for-object-lambda-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-access-points-for-object-lambda-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-for-object-lambda-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-access-point-for-object-lambda-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-access-point-for-object-lambda-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-for-object-lambda-request-schema.json
+- aid: amazon-s3:amazon-s3-analytics-api
+  name: Amazon S3 S3 Analytics API
+  description: The S3 Analytics API from Amazon S3 — 3 operation(s) for s3 analytics.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-analytics-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-analytics-configurations-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-analytics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-analytics-configurations-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-analytics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-analytics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-analytics-configuration-output-schema.json
+- aid: amazon-s3:amazon-s3-async-requests-api
+  name: Amazon S3 S3 Async Requests API
+  description: The S3 Async Requests API from Amazon S3 — 4 operation(s) for s3 async requests.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Async Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-async-requests-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-multi-region-access-point-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-describe-multi-region-access-point-operation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-multi-region-access-point-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-multi-region-access-point-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-multi-region-access-point-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-multi-region-access-point-result-schema.json
+- aid: amazon-s3:amazon-s3-encryption-api
+  name: Amazon S3 S3 Encryption API
+  description: The S3 Encryption API from Amazon S3 — 2 operation(s) for s3 encryption.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Encryption
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-encryption-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-encryption-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-bucket-encryption-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-table-bucket-encryption-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-encryption-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-encryption-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-encryption-response-schema.json
+- aid: amazon-s3:amazon-s3-intelligent-tiering-api
+  name: Amazon S3 S3 Intelligent Tiering API
+  description: >-
+    The S3 Intelligent Tiering API from Amazon S3 — 3 operation(s) for s3 intelligent tiering.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Intelligent Tiering
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-intelligent-tiering-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-intelligent-tiering-configurations-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-intelligent-tiering-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-intelligent-tiering-configurations-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/amazon-s3-delete-bucket-intelligent-tiering-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-intelligent-tiering-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-intelligent-tiering-configuration-output-schema.json
+- aid: amazon-s3:amazon-s3-inventory-api
+  name: Amazon S3 S3 Inventory API
+  description: The S3 Inventory API from Amazon S3 — 3 operation(s) for s3 inventory.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-inventory-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-inventory-configurations-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-inventory-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-inventory-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-inventory-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-inventory-configurations-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-inventory-configuration-output-schema.json
+- aid: amazon-s3:amazon-s3-maintenance-api
+  name: Amazon S3 S3 Maintenance API
+  description: The S3 Maintenance API from Amazon S3 — 4 operation(s) for s3 maintenance.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-maintenance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-maintenance-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-maintenance-configuration-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-bucket-maintenance-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-maintenance-configuration-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-maintenance-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-maintenance-configuration-request-schema.json
+- aid: amazon-s3:amazon-s3-metadataconfiguration-api
+  name: Amazon S3 S3 Metadataconfiguration API
+  description: >-
+    The S3 Metadataconfiguration API from Amazon S3 — 1 operation(s) for s3 metadataconfiguration.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Metadataconfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-metadataconfiguration-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-bucket-metadata-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-metadata-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-metadata-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-metadata-configuration-output-schema.json
+- aid: amazon-s3:amazon-s3-metadatatable-api
+  name: Amazon S3 S3 Metadatatable API
+  description: The S3 Metadatatable API from Amazon S3 — 1 operation(s) for s3 metadatatable.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Metadatatable
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-metadatatable-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-bucket-metadata-table-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-metadata-table-configuration-request-schema.json
+- aid: amazon-s3:amazon-s3-metrics-api
+  name: Amazon S3 S3 Metrics API
+  description: The S3 Metrics API from Amazon S3 — 4 operation(s) for s3 metrics.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-metrics-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-metrics-configurations-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-metrics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-metrics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-metrics-configuration-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-bucket-metrics-configurations-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-metrics-configuration-response-schema.json
+- aid: amazon-s3:amazon-s3-mount-targets-api
+  name: Amazon S3 S3 Mount Targets API
+  description: The S3 Mount Targets API from Amazon S3 — 2 operation(s) for s3 mount targets.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Mount Targets
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-mount-targets-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-mount-target-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-mount-target-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-update-mount-target-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-mount-target-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-mount-targets-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-update-mount-target-request-schema.json
+- aid: amazon-s3:amazon-s3-namespaces-api
+  name: Amazon S3 S3 Namespaces API
+  description: The S3 Namespaces API from Amazon S3 — 2 operation(s) for s3 namespaces.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Namespaces
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-namespaces-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-namespace-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-namespaces-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-namespace-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-namespace-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-namespaces-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-namespace-request-schema.json
+- aid: amazon-s3:amazon-s3-operations-api
+  name: Amazon S3 S3 Operations API
+  description: The S3 Operations API from Amazon S3 — 70 operation(s) for s3 operations.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-operations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-copy-object-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-object-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-object-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-object-output-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-complete-multipart-upload-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-upload-part-request-schema.json
+- aid: amazon-s3:amazon-s3-ownershipcontrols-api
+  name: Amazon S3 S3 Ownershipcontrols API
+  description: The S3 Ownershipcontrols API from Amazon S3 — 1 operation(s) for s3 ownershipcontrols.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Ownershipcontrols
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-ownershipcontrols-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-ownership-controls-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-ownership-controls-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-ownership-controls-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-ownership-controls-output-schema.json
+- aid: amazon-s3:amazon-s3-policy-api
+  name: Amazon S3 S3 Policy API
+  description: The S3 Policy API from Amazon S3 — 8 operation(s) for s3 policy.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-policy-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-access-point-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-control-put-bucket-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-policy-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-access-point-policy-request-schema.json
+- aid: amazon-s3:amazon-s3-policystatus-api
+  name: Amazon S3 S3 Policystatus API
+  description: The S3 Policystatus API from Amazon S3 — 4 operation(s) for s3 policystatus.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Policystatus
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-policystatus-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-multi-region-access-point-policy-status-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-policy-status-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-policy-status-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/amazon-s3-get-access-point-policy-status-for-object-lambda-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/amazon-s3-get-access-point-policy-status-for-object-lambda-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-policy-status-result-schema.json
+- aid: amazon-s3:amazon-s3-replication-api
+  name: Amazon S3 S3 Replication API
+  description: The S3 Replication API from Amazon S3 — 2 operation(s) for s3 replication.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Replication
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-replication-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-control-put-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-control-delete-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-control-get-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-replication-request-schema.json
+- aid: amazon-s3:amazon-s3-scope-api
+  name: Amazon S3 S3 Scope API
+  description: The S3 Scope API from Amazon S3 — 1 operation(s) for s3 scope.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Scope
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-scope-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-access-point-scope-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-access-point-scope-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-scope-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-access-point-scope-result-schema.json
+- aid: amazon-s3:amazon-s3-storage-class-api
+  name: Amazon S3 S3 Storage Class API
+  description: The S3 Storage Class API from Amazon S3 — 2 operation(s) for s3 storage class.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Storage Class
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-storage-class-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-storage-class-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-bucket-storage-class-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-storage-class-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-storage-class-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-storage-class-response-schema.json
+- aid: amazon-s3:amazon-s3-storagelensgroup-api
+  name: Amazon S3 S3 Storagelensgroup API
+  description: The S3 Storagelensgroup API from Amazon S3 — 2 operation(s) for s3 storagelensgroup.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Storagelensgroup
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-storagelensgroup-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-storage-lens-groups-result-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-storage-lens-group-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-storage-lens-group-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-update-storage-lens-group-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-storage-lens-group-request-schema.json
+- aid: amazon-s3:amazon-s3-table-bucket-replication-api
+  name: Amazon S3 S3 Table Bucket Replication API
+  description: >-
+    The S3 Table Bucket Replication API from Amazon S3 — 1 operation(s) for s3 table bucket replication.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Table Bucket Replication
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-table-bucket-replication-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-table-bucket-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-replication-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-bucket-replication-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-bucket-replication-request-schema.json
+- aid: amazon-s3:amazon-s3-table-replication-api
+  name: Amazon S3 S3 Table Replication API
+  description: The S3 Table Replication API from Amazon S3 — 1 operation(s) for s3 table replication.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Table Replication
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-table-replication-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-replication-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-table-replication-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-table-replication-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-table-replication-request-schema.json
+- aid: amazon-s3:amazon-s3-tables-api
+  name: Amazon S3 S3 Tables API
+  description: The S3 Tables API from Amazon S3 — 3 operation(s) for s3 tables.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Tables
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-tables-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-table-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-tables-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-table-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-tables-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-table-response-schema.json
+- aid: amazon-s3:amazon-s3-tags-api
+  name: Amazon S3 S3 Tags API
+  description: The S3 Tags API from Amazon S3 — 3 operation(s) for s3 tags.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-tags-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-tag-resource-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-untag-resource-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-tables-tag-resource-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-s3-tables-untag-resource-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-tag-resource-input-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-untag-resource-input-schema.json
+- aid: amazon-s3:amazon-s3-website-api
+  name: Amazon S3 S3 Website API
+  description: The S3 Website API from Amazon S3 — 1 operation(s) for s3 website.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - S3 Website
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-website-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-put-bucket-website-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-bucket-website-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-website-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-bucket-website-output-schema.json
+- aid: amazon-s3:amazon-s3-filesystems-api
+  name: Amazon S3 Filesystems API
+  description: The Filesystems API from Amazon S3 — 2 operation(s) for filesystems.
+  humanURL: https://aws.amazon.com/s3/
+  baseURL: https://s3.amazonaws.com
+  tags:
+  - Filesystem
+  tags_raw:
+  - Filesystems
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-s3-filesystems-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-file-system-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-create-file-system-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-get-file-system-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-file-systems-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-delete-file-system-request-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-s3-list-file-systems-response-schema.json
 properties:
-- type: Capabilities
-  url: capabilities/storage-management.yaml
-  title: Storage Management Capability
-- type: Capabilities
-  url: capabilities/shared/s3-rest.yaml
-  title: S3 REST API Shared Definition
-- type: Capabilities
-  url: capabilities/shared/s3-control.yaml
-  title: S3 Control API Shared Definition
-- type: Capabilities
-  url: capabilities/shared/s3-tables.yaml
   title: S3 Tables API Shared Definition
 integrations:
 - name: Sign in
@@ -1008,19 +1542,6 @@ integrations:
 - name: Become a Channel Partner
 - name: Sell in AWS Marketplace
 - name: Manage Your Account
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-  url: https://apievangelist.com
-tags:
-- Archives
-- Amazon Web Services
-- Backup
-- Cloud Storage
-- Data Storage
-- Object Storage
-- Scalable Storage
-- Storage
 tags_raw:
 - Archive
 - AWS
@@ -1032,3 +1553,8 @@ tags_raw:
 - Storage
 x-parent: amazon-web-services
 x-relationship: product
+x-enrichment:
+  date: '2026-11-11'
+  status: enriched
+  artifacts_added: 4
+  pass: local-v6

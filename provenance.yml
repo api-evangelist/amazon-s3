@@ -74,6 +74,12 @@ artifacts:
   capabilities/amazon-s3-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/amazon-s3-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -135,11 +141,11 @@ artifacts:
     method: derived
     evidence: openapi/amazon-s3-multipart-upload-api
   collections/amazon-s3-namespaces-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-namespaces-api
   collections/amazon-s3-namespaces-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-namespaces-api
   collections/amazon-s3-objects-api.opencollection.json:
     method: derived
     evidence: openapi/amazon-s3-objects-api
@@ -183,17 +189,20 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amazon-s3-tables-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-tables-api
   collections/amazon-s3-tables-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-tables-api
   collections/amazon-s3-tagging-api.opencollection.json:
     method: derived
     evidence: openapi/amazon-s3-tagging-api
   collections/amazon-s3-tagging-api.postman_collection.json:
     method: derived
     evidence: openapi/amazon-s3-tagging-api
+  compliance/amazon-s3-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
   conformance/amazon-s3-conformance.yml:
     method: derived
     evidence: declared in the artifact
@@ -202,6 +211,9 @@ artifacts:
     evidence: declared in the artifact
   data-model/amazon-s3-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  eligibility/amazon-s3-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/amazon-s3-problem-types.yml:
     method: derived
@@ -374,12 +386,15 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-s3-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
   integrations/amazon-s3-integration-edges.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: searched
+    evidence: declared in the artifact
   json-ld/amazon-s3-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -393,6 +408,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-s3-bucket-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-complete-multipart-upload-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-s3-control-access-grants-instance-schema.json:
@@ -440,7 +458,397 @@ artifacts:
   json-schema/amazon-s3-control-storage-lens-configuration-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-s3-copy-object-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-access-grant-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-access-grant-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-access-grants-instance-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-access-point-for-object-lambda-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-bucket-metadata-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-bucket-metadata-table-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-file-system-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-file-system-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-mount-target-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-mount-target-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-multi-region-access-point-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-multi-region-access-point-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-namespace-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-namespace-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-storage-lens-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-table-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-create-table-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-access-point-for-object-lambda-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-access-point-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-access-point-scope-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-analytics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-intelligent-tiering-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-inventory-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-metadata-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-metrics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-ownership-controls-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-bucket-website-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-file-system-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-multi-region-access-point-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-multi-region-access-point-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-namespace-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-storage-lens-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-table-bucket-encryption-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-table-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-table-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-delete-table-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-describe-multi-region-access-point-operation-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-grants-instance-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-for-object-lambda-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-for-object-lambda-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-policy-status-for-object-lambda-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-policy-status-for-object-lambda-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-policy-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-policy-status-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-scope-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-access-point-scope-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-analytics-configuration-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-analytics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-intelligent-tiering-configuration-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-intelligent-tiering-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-inventory-configuration-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-inventory-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-metadata-configuration-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-metadata-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-metadata-table-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-metrics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-ownership-controls-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-ownership-controls-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-policy-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-website-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-bucket-website-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-data-access-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-file-system-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-mount-target-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-multi-region-access-point-policy-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-namespace-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-object-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-storage-lens-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-encryption-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-encryption-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-maintenance-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-maintenance-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-metrics-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-replication-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-storage-class-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-bucket-storage-class-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-encryption-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-encryption-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-maintenance-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-maintenance-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-replication-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-storage-class-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-get-table-storage-class-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-access-grants-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-access-points-for-object-lambda-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-access-points-for-object-lambda-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-analytics-configurations-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-analytics-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-intelligent-tiering-configurations-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-intelligent-tiering-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-inventory-configurations-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-inventory-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-metrics-configurations-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-bucket-metrics-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-file-systems-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-file-systems-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-mount-targets-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-namespaces-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-namespaces-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-storage-lens-groups-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-tables-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-list-tables-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-s3-object-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-access-point-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-access-point-scope-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-analytics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-intelligent-tiering-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-inventory-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-metrics-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-ownership-controls-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-bucket-website-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-multi-region-access-point-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-object-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-object-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-bucket-encryption-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-bucket-maintenance-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-bucket-replication-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-bucket-storage-class-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-maintenance-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-put-table-replication-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-s3-rest-access-control-policy-schema.json:
@@ -512,6 +920,24 @@ artifacts:
   json-schema/amazon-s3-rest-versioning-configuration-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-s3-s3-control-delete-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-s3-control-get-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-s3-control-put-bucket-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-s3-control-put-bucket-replication-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-s3-tables-tag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-s3-tables-untag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-s3-tables-create-table-bucket-request-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -558,6 +984,30 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-s3-tables-table-summary-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-tag-resource-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-tag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-untag-resource-input-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-untag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-update-mount-target-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-update-mount-target-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-update-storage-lens-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-s3-upload-part-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-structure/amazon-s3-control-access-grants-instance-structure.json:
@@ -725,7 +1175,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -794,35 +1244,33 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/amazon-s3-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/amazon-s3-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/amazon-s3-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
   mcp/amazon-s3-mcp.yml:
     method: searched
     evidence: declared in the artifact
-  openapi/_original/amazon-s3-control-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/amazon-s3-rest-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
   openapi/amazon-s3-abac-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-access-control-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-access-grants-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-access-points-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-accessgrantsinstance-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -842,24 +1290,30 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-batch-operations-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-bucket-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-bucket-configuration-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-buckets-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amazon-s3-delete-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-encryption-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-filesystems-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-intelligent-tiering-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-inventory-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-maintenance-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-metadataconfiguration-api-openapi.yml:
@@ -871,18 +1325,21 @@ artifacts:
   openapi/amazon-s3-metrics-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
+  openapi/amazon-s3-mount-targets-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-multi-region-access-points-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-multipart-upload-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amazon-s3-object-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-namespaces-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-objects-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-operations-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -896,23 +1353,35 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-public-access-block-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-replication-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-s3-scope-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
+  openapi/amazon-s3-storage-class-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-storage-lens-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-storagelensgroup-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
+  openapi/amazon-s3-table-bucket-replication-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-table-replication-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/amazon-s3-tables-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-tagging-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-s3-tags-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -985,6 +1454,9 @@ artifacts:
   packages/amazon-s3-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/amazon-s3-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/amazon-s3-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -995,12 +1467,21 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   postman/amazon-s3-tables-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amazon-s3-tables-api
+  privacy/amazon-s3-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/amazon-s3-rate-limits.yml:
     method: generated
     evidence: declared in the artifact
+  regulatory/amazon-s3-regulatory-posture.yml:
+    method: searched
+    evidence: declared in the artifact
   rules/amazon-s3-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/amazon-s3-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-s3-spectral-rules.yml:
@@ -1015,15 +1496,38 @@ artifacts:
   security/amazon-s3-vulnerability-disclosure.yml:
     method: searched
     evidence: declared in the artifact
+  skills/_index.yml:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-s3-bucket-object-basics.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/amazon-s3-multipart-upload.md:
+    method: generated
+    evidence: declared in the artifact
   sla/amazon-s3-sla.yml:
     method: generated
     evidence: declared in the artifact
   smithy/s3-2006-03-01.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/s3/service/2006-03-01/s3-2006-03-01.json
+      (sha256 73e4f7574739, fetched 2026-11-11T21:14:47+00:00)
   smithy/s3-control-2018-08-20.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/s3-control/service/2018-08-20/s3-control-2018-08-20.json
+      (sha256 8224b63835b9, fetched 2026-11-11T21:14:48+00:00)
+  smithy/s3files-2025-05-05.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/s3files/service/2025-05-05/s3files-2025-05-05.json
+      (sha256 93636c8ed96c, fetched 2026-11-11T21:14:51+00:00)
+  smithy/s3tables-2018-05-10.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/s3tables/service/2018-05-10/s3tables-2018-05-10.json
+      (sha256 7642f6c8deec, fetched 2026-11-11T21:14:49+00:00)
+  smithy/s3vectors-2025-07-15.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/s3vectors/service/2025-07-15/s3vectors-2025-07-15.json
+      (sha256 79c682ccb510, fetched 2026-11-11T21:14:50+00:00)
   subway/amazon-s3-subway-map.html:
     method: unknown
     evidence: no authorship recorded
@@ -1039,9 +1543,18 @@ artifacts:
   subway/build-map.py:
     method: unknown
     evidence: no authorship recorded
+  terms/amazon-s3-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-s3-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/amazon-s3-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/amazon-s3-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/amazon-s3-security.txt:
     method: unknown
     evidence: no authorship recorded
